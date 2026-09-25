@@ -1268,6 +1268,24 @@ table.lines td:first-child{width:150px}
 /* tools, redrawn: one idea per tool, a lighter stroke, no keyline circle */
 svg.tool,.btn svg.bi{stroke-width:1.5}
 .kg{background:linear-gradient(rgba(47,128,255,.1) 1px,transparent 1px) center/6px 6px,linear-gradient(90deg,rgba(47,128,255,.1) 1px,transparent 1px) center/6px 6px,var(--bg1) !important}
+
+/* diagonal stripes: a 1 px soft edge between colours, so the browser draws a smooth line, not stairs */
+.kerb{background:repeating-linear-gradient(55deg,var(--red) 0 8.5px,#fff 9.5px 17.5px,var(--red) 18.5px)}
+.limit u{background:repeating-linear-gradient(55deg,var(--red) 0 4.5px,#fff 5.5px 9.5px,var(--red) 10.5px)}
+.lin.ind i{background:repeating-linear-gradient(55deg,rgba(var(--t),.1) 0 7.5px,var(--line) 8.5px 13.5px,rgba(var(--t),.1) 14.5px);background-size:200% 100%}
+.spd::before{background:
+  repeating-linear-gradient(55deg,transparent 0 45.5px,rgba(216,35,26,.22) 46.5px 47.5px,transparent 48.5px 131px),
+  repeating-linear-gradient(55deg,transparent 0 82.5px,rgba(255,75,62,.12) 83.5px,transparent 84.5px 177px)}
+
+/* the limit bar: the fill and the kerb zone both end on the 55 cut (height 10, cut 7) */
+.limit i{clip-path:polygon(0 0,calc(100% - 7px) 0,100% 100%,0 100%)}
+.limit u{clip-path:polygon(0 0,100% 0,100% 100%,7px 100%)}
+
+/* the limit bar ends flat where the kerb ends; only the start keeps the cut */
+.limit{clip-path:polygon(0 0,100% 0,100% 100%,7px 100%)}
+
+/* the red lead ends three quarters through the second tick space */
+.hair::before{width:70px}
 </style>
 </head>
 <body>
