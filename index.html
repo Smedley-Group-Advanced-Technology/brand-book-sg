@@ -1249,6 +1249,25 @@ a.dl:hover{background-size:100% 2px}
 .dlrow{display:flex;flex-wrap:wrap;gap:6px 18px}
 @media (max-width:820px){ .bzg{grid-template-columns:minmax(0,1fr)} .bz .plate{min-height:150px} table.vx td:first-child{width:auto} }
 
+/* ================= BRAND SHOWCASE ================= */
+.scg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 28px}
+.sc{margin:0} .sc.wide{grid-column:1/-1}
+.scb{display:block;width:100%;padding:0;border:0;background:#000;cursor:zoom-in;overflow:hidden}
+.scb img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;transition:transform .8s var(--brake)}
+.scb:hover img{transform:scale(1.02)}
+.scb:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.sc figcaption{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.sct{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:14px} .sct b{font-weight:600}
+.sc figcaption > span:last-child{font-size:13px;color:var(--dim)}
+.scnote{margin-top:36px;max-width:80ch}
+dialog.lbx{padding:0;border:0;background:transparent;max-width:min(96vw,1600px);max-height:92vh}
+dialog.lbx::backdrop{background:rgba(0,0,0,.88)}
+dialog.lbx img{display:block;max-width:100%;max-height:86vh;height:auto}
+dialog.lbx p{margin:12px 110px 0 0;color:#fff;font-size:13px}
+dialog.lbx .x{position:absolute;right:0;bottom:-4px}
+@media (max-width:820px){ .scg{grid-template-columns:minmax(0,1fr)} }
+@media print{ .scb img{aspect-ratio:auto} dialog.lbx{display:none} }
+
 /* ================= STRUCTURE: four parts, a lighter rhythm ================= */
 section.s{padding:84px 64px 72px}
 .sh{justify-content:flex-start;align-items:center;gap:16px}
@@ -1465,9 +1484,10 @@ h2 .hlink{width:36px;height:36px} h2 .hlink svg{width:22px;height:22px}
       <div class="grp">In practice</div>
       <a href="#layout-sec"><span>18</span>Layout</a>
       <a href="#application"><span>19</span>In use</a>
-      <a href="#cobrand"><span>20</span>Co-branding</a>
-      <a href="#principles"><span>21</span>Principles</a>
-      <a href="#resources"><span>22</span>Resources</a>
+      <a href="#showcase"><span>20</span>Brand showcase</a>
+      <a href="#cobrand"><span>21</span>Co-branding</a>
+      <a href="#principles"><span>22</span>Principles</a>
+      <a href="#resources"><span>23</span>Resources</a>
     </nav>
   </aside>
 
@@ -2247,7 +2267,7 @@ h2 .hlink{width:36px;height:36px} h2 .hlink svg{width:22px;height:22px}
     </div></section>
 
     <!-- PART 4 IN PRACTICE -->
-    <div class="part" id="part-4"><div class="pn">Part 4 of 4</div><div class="pb"><p class="pt">In practice</p><p class="pl">How it comes together on a real screen and with partners, the rules that keep it together, and the files to build with.</p></div><ol class="pi"><li><a href="#layout-sec"><span>18</span>Layout</a></li><li><a href="#application"><span>19</span>In use</a></li><li><a href="#cobrand"><span>20</span>Co-branding</a></li><li><a href="#principles"><span>21</span>Principles</a></li><li><a href="#resources"><span>22</span>Resources</a></li></ol></div>
+    <div class="part" id="part-4"><div class="pn">Part 4 of 4</div><div class="pb"><p class="pt">In practice</p><p class="pl">How it comes together on screen, on cars and kit, and with partners, the rules that keep it together, and the files to build with.</p></div><ol class="pi"><li><a href="#layout-sec"><span>18</span>Layout</a></li><li><a href="#application"><span>19</span>In use</a></li><li><a href="#showcase"><span>20</span>Brand showcase</a></li><li><a href="#cobrand"><span>21</span>Co-branding</a></li><li><a href="#principles"><span>22</span>Principles</a></li><li><a href="#resources"><span>23</span>Resources</a></li></ol></div>
 
     <!-- 18 LAYOUT -->
     <section class="s" id="layout-sec"><div class="inner">
@@ -2318,9 +2338,19 @@ h2 .hlink{width:36px;height:36px} h2 .hlink svg{width:22px;height:22px}
       <p class="plate-cap">Live sample with placeholder data.</p>
     </div></section>
 
-    <!-- 20 CO-BRANDING -->
-    <section class="s" id="cobrand"><div class="inner">
+    <!-- 20 BRAND SHOWCASE -->
+    <section class="s" id="showcase"><div class="inner">
       <div class="sh"><div class="num">20</div><span class="chap">In practice</span></div>
+      <h2 data-anchor="showcase">Brand showcase<button class="hlink" type="button" aria-label="Copy link to Brand showcase"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
+      <p class="intro">The system away from the screen: on cars, kit, the garage, the track and the office. Each one follows the same few rules: black or white ground, one red lead, blue where something is measured, and every cut at 55°.</p>
+      <div class="hair"></div>
+      <div class="scg"><figure class="sc wide"><button class="scb" type="button" data-full="assets/showcase/car-wrap.jpg" aria-label="Enlarge: Car wrap"><img src="assets/showcase/car-wrap.jpg" alt="Car wrap: A concept supercar in satin black, one red panel cut at 55°, the glyph on the door." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Car wrap</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>A concept supercar in satin black, one red panel cut at 55°, the glyph on the door.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/f4-livery.jpg" aria-label="Enlarge: FAT Racing F4 livery"><img src="assets/showcase/f4-livery.jpg" alt="FAT Racing F4 livery: Black with red panels at the lean, a red number board on the nose." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>FAT Racing F4 livery</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>Black with red panels at the lean, a red number board on the nose.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/race-suit.jpg" aria-label="Enlarge: Race suit and helmet"><img src="assets/showcase/race-suit.jpg" alt="Race suit and helmet: One red band across the chest at 55°, blue piping, the glyph over the heart." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Race suit and helmet</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>One red band across the chest at 55°, blue piping, the glyph over the heart.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/garage.jpg" aria-label="Enlarge: Team garage"><img src="assets/showcase/garage.jpg" alt="Team garage: The lockup on the back wall, a red number board, a blueprint on the screen." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Team garage</b><span class="leadk"><i class="b"></i><i class="r"></i>In balance</span></span><span>The lockup on the back wall, a red number board, a blueprint on the screen.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/trackside.jpg" aria-label="Enlarge: Trackside"><img src="assets/showcase/trackside.jpg" alt="Trackside: Kerbs at 55°, barrier boards alternating the lockup, the glyph and stripes." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Trackside</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>Kerbs at 55°, barrier boards alternating the lockup, the glyph and stripes.</span></figcaption></figure><figure class="sc wide"><button class="scb" type="button" data-full="assets/showcase/transporter.jpg" aria-label="Enlarge: Transporter"><img src="assets/showcase/transporter.jpg" alt="Transporter: A red panel cut at the lean, a blue stripe parallel to it." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Transporter</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>A red panel cut at the lean, a blue stripe parallel to it.</span></figcaption></figure></div>
+      <p class="plate-cap scnote">Concept renders made with AI image generation, for direction and mood. Details such as vehicle shapes are invented, and the artwork is approximate: production work uses the files in <a href="#resources">Resources</a>.</p>
+    </div></section>
+
+    <!-- 21 CO-BRANDING -->
+    <section class="s" id="cobrand"><div class="inner">
+      <div class="sh"><div class="num">21</div><span class="chap">In practice</span></div>
       <h2 data-anchor="cobrand">Co-branding<button class="hlink" type="button" aria-label="Copy link to Co-branding"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">When we work with a partner, both marks share one line, equal in weight and separated by the divider. When a business has its own identity, the group steps back to a quiet endorsement.</p>
       <div class="hair"></div>
@@ -2346,9 +2376,9 @@ h2 .hlink{width:36px;height:36px} h2 .hlink svg{width:22px;height:22px}
       </div>
     </div></section>
 
-    <!-- 21 PRINCIPLES -->
+    <!-- 22 PRINCIPLES -->
     <section class="s" id="principles"><div class="inner">
-      <div class="sh"><div class="num">21</div><span class="chap">In practice</span></div>
+      <div class="sh"><div class="num">22</div><span class="chap">In practice</span></div>
       <h2 data-anchor="principles">Principles<button class="hlink" type="button" aria-label="Copy link to Principles"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">The handful of rules that keep the system coherent when someone new builds the next screen.</p>
       <div class="hair"></div>
@@ -2371,9 +2401,9 @@ h2 .hlink{width:36px;height:36px} h2 .hlink svg{width:22px;height:22px}
       <p class="avoid"><b>Avoid</b> pure white backgrounds on screen, a third typeface, mono set as paragraphs, tools that lean against the glyph, chequers on anything unfinished, drop shadows or bevels, signal colours as fills, red for errors, red as a wash or a ground, red and blue edge to edge, gradients of any kind, a tinted ground, cuts that lean against the glyph, blinking or looping motion, boxed hero elements, dotted meta strings, and a strapline that restates the title.</p>
     </div></section>
 
-    <!-- 22 RESOURCES -->
+    <!-- 23 RESOURCES -->
     <section class="s" id="resources"><div class="inner">
-      <div class="sh"><div class="num">22</div><span class="chap">In practice</span></div>
+      <div class="sh"><div class="num">23</div><span class="chap">In practice</span></div>
       <h2 data-anchor="resources">Resources<button class="hlink" type="button" aria-label="Copy link to Resources"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Everything in this book, ready to build with. Logo files are outlined, so they need no fonts installed.</p>
       <div class="hair"></div>
@@ -2398,6 +2428,7 @@ h2 .hlink{width:36px;height:36px} h2 .hlink svg{width:22px;height:22px}
       <div class="two" style="margin-top:64px" id="versions">
         <div><h3 id="resources-versions" data-anchor="resources-versions">Versions<button class="hlink" type="button" aria-label="Copy link to Versions"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">What changed, newest first</p>
           <table class="spec">
+            <tr><td>2.2<br><span class="dls-m">25 Sep 2026</span></td><td>Brand showcase: concept renders of the system on cars, race kit, the garage, the track, hardware and the office</td></tr>
             <tr><td>2.1<br><span class="dls-m">25 Sep 2026</span></td><td>Business lockups, voice, imagery, co-branding and resources. Mobile version, keyboard focus on cut controls, search and links to any heading, print styles, templates</td></tr>
             <tr><td>2.0<br><span class="dls-m">25 Sep 2026</span></td><td>Racing red and engineering blue on a pure black or white ground, dark and light themes, race engineering, usage context, the reworked hero and the four-part structure</td></tr>
             <tr><td>1.0<br><span class="dls-m">24 Sep 2026</span></td><td>First edition: the logo, colour, type, the 55° cut, motion and the interface kit</td></tr>
@@ -2416,7 +2447,7 @@ h2 .hlink{width:36px;height:36px} h2 .hlink svg{width:22px;height:22px}
     <footer class="colophon">
       <span class="lk" style="--lk:0.3px;color:var(--ink);opacity:.85" role="img" aria-label="Smedley Group, Advanced Technology"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span>
       <span>© 2026 Smedley Group. All rights reserved.</span>
-      <span class="mono">Version 2.1, 25 September 2026. Owned by Smedley Group, Advanced Technology. Questions to <a href="mailto:mateusz.jaskiewicz@smedleygroup.com">mateusz.jaskiewicz@smedleygroup.com</a>. <a href="#versions">Versions</a></span>
+      <span class="mono">Version 2.2, 25 September 2026. Owned by Smedley Group, Advanced Technology. Questions to <a href="mailto:mateusz.jaskiewicz@smedleygroup.com">mateusz.jaskiewicz@smedleygroup.com</a>. <a href="#versions">Versions</a></span>
     </footer>
   </main>
 </div>
@@ -2738,6 +2769,16 @@ h2 .hlink{width:36px;height:36px} h2 .hlink svg{width:22px;height:22px}
       $$('.tprof .bar i',root).forEach(function(b,k){b.style.width=d[7][k]+'%'});$$('.tprof b[data-v]',root).forEach(function(b,k){b.textContent=d[7][k]});
       $$('#tRank button').forEach(function(b){b.setAttribute('aria-pressed',+b.dataset.i===i)})}
     $$('#tRank button').forEach(function(b){b.addEventListener('click',function(){show(+b.dataset.i)})});show(0);
+  })();
+
+
+  // ===== showcase: one image enlarged in a dialog =====
+  (function(){var bs=$$('.scb');if(!bs.length||!window.HTMLDialogElement)return;
+    var d=document.createElement('dialog');d.className='lbx';d.innerHTML='<button class="btn g sm x" type="button">Close</button><img alt=""><p></p>';document.body.appendChild(d);
+    var im=d.querySelector('img'),p=d.querySelector('p');
+    bs.forEach(function(b){b.addEventListener('click',function(){var i=b.querySelector('img');im.src=b.dataset.full;im.alt=i.alt;p.textContent=i.alt;d.showModal()})});
+    d.querySelector('.x').addEventListener('click',function(){d.close()});
+    d.addEventListener('click',function(e){if(e.target===d)d.close()});
   })();
 
 
