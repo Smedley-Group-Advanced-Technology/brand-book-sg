@@ -945,7 +945,7 @@ main figure svg,main [style*="border-radius"]:not(.appicon):not(.av){border-radi
 .ibtn{--h:44px;--c:calc(var(--h) * .7002);height:var(--h);min-height:0;clip-path:polygon(0 0,calc(100% - var(--c)) 0,100% 100%,var(--c) 100%);width:calc(var(--c) + 30px)}
 .chip{--h:34px;--c:calc(var(--h) * .7002);height:var(--h);min-height:0;clip-path:polygon(0 0,calc(100% - var(--c)) 0,100% 100%,var(--c) 100%);padding:0 calc(var(--c) * .5 + 16px)}
 .tag{--h:26px;--c:calc(var(--h) * .7002);height:var(--h);min-height:0;clip-path:polygon(0 0,calc(100% - var(--c)) 0,100% 100%,var(--c) 100%);padding:0 calc(var(--c) * .5 + 12px)}
-.badge{--h:20px;--c:calc(var(--h) * .7002);height:var(--h);min-height:0;clip-path:polygon(0 0,calc(100% - var(--c)) 0,100% 100%,var(--c) 100%);min-width:calc(var(--c) + 14px);padding:0 calc(var(--c) * .5 + 4px)}
+.badge{--h:20px;--c:calc(var(--h) * .7002);height:var(--h);min-height:0;clip-path:polygon(0 0,calc(100% - var(--c)) 0,100% 100%,var(--c) 100%);min-width:calc(var(--c) + 22px);padding:0 calc(var(--c) * .5 + 8px)}
 table.timing .p{--h:22px;--c:calc(var(--h) * .7002);height:var(--h);min-height:0;clip-path:polygon(0 0,calc(100% - var(--c)) 0,100% 100%,var(--c) 100%);width:calc(var(--c) + 22px)}
 .email .cta{--h:42px;--c:calc(var(--h) * .7002);height:var(--h);min-height:0;clip-path:polygon(0 0,calc(100% - var(--c)) 0,100% 100%,var(--c) 100%);display:inline-flex;align-items:center;padding:0 calc(var(--c) * .5 + 14px)}
 /* too narrow to cut: the calendar marks the pick with a skewed board behind the number, and its arrows need no shape */
@@ -1193,7 +1193,7 @@ table.ctx .cb{background:var(--blue)} table.ctx .cr{background:var(--red)} table
 .btn:not(.t):not([disabled]):hover{--nud:0px}
 .btn::after,.btn.g::after,.btn.neg::after{display:none}
 .btn:not(.t){isolation:isolate;--wipe:rgba(var(--t),.12)}
-.btn.p{--wipe:#FF4B3E} .btn.ub{--wipe:#5A9BFF} .btn.neg{--wipe:rgba(255,181,71,.16)} .btn.lights.live{--wipe:#FFFFFF}
+.btn.p{--wipe:#FF4B3E} .btn.ub{--wipe:#5A9BFF} .btn.neg{--wipe:rgba(255,181,71,.16)} .btn.lights.live{--wipe:var(--cloud2)}
 .btn.p:hover,.btn.ub:hover{background:revert-layer}
 .btn:not(.t)::before{content:"";position:absolute;top:0;bottom:0;left:-40px;right:-40px;z-index:-1;pointer-events:none;background:var(--wipe);
   transform:translateX(-102%) skewX(35deg);transition:transform .5s var(--brake)}
