@@ -13,7 +13,9 @@ Edit the file directly and push to `main` to publish.
 
 [`assets/`](assets) holds what the book links to: the hero animation (`mark.html`,
 loaded by the cover and the Motion section), outlined logo SVGs for every business,
-the tool icons, colour tokens (`tokens.css`, `tokens.json`) and a ZIP of all of them.
+the tool icons, colour tokens (`tokens.css`, `tokens.json`), templates for slides,
+documents, email signatures and social posts, the favicon and link-preview image,
+and a ZIP of all of them.
 
 Preview through a local server, for example `python3 -m http.server`, rather than
 opening the file directly: browsers block the page from talking to the animation

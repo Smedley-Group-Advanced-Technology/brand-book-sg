@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>(function(){var t=null;try{t=localStorage.getItem("sg-book-theme")}catch(e){}if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.setAttribute("data-theme",t)})()</script>
 <title>Smedley Group · Brand book</title>
+<meta name="description" content="The Smedley Group visual identity: logo and lockups, racing red and engineering blue, type, voice, the 55° cut, interface components and downloads.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Smedley Group">
+<meta property="og:title" content="Smedley Group · Brand book">
+<meta property="og:description" content="The Smedley Group visual identity: logo and lockups, racing red and engineering blue, type, voice, the 55° cut, interface components and downloads.">
+<meta property="og:url" content="https://smedley-group-advanced-technology.github.io/brand-book-sg/">
+<meta property="og:image" content="https://smedley-group-advanced-technology.github.io/brand-book-sg/assets/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Smedley Group brand book">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -1291,7 +1305,7 @@ section.s{overflow-x:clip}
   .mbtn{display:inline-flex}
   /* the menu: the whole index, grouped by part, with the theme switch */
   html.menu-open{overflow:hidden}
-  .index.open nav{display:flex;flex-direction:column;position:fixed;top:57px;left:0;right:0;bottom:0;margin:0;padding:20px 20px 110px;overflow-y:auto;background:var(--bg1);z-index:59}
+  .index.open nav{display:flex;flex-direction:column;position:fixed;left:0;right:0;bottom:0;margin:0;padding:20px 20px 110px;overflow-y:auto;background:var(--bg1);z-index:59}
   .index.open nav .grp{display:block;margin:22px 0 4px}
   .index.open nav .grp:first-child{margin-top:0}
   .index.open nav a{min-height:46px;padding:0;white-space:normal;font-size:15px;border-top:.75px solid var(--rule)}
@@ -1353,6 +1367,60 @@ section.s{overflow-x:clip}
   .part .pi a{min-height:44px} .crumbs a{display:inline-flex;align-items:center;min-height:44px} .uxl{min-height:44px}
   .btn.t{min-height:44px;height:auto} .email .cta{--h:44px}
 }
+
+/* ================= LINKS TO HEADINGS ================= */
+[data-anchor]{position:relative;scroll-margin-top:24px}
+.hlink{display:inline-grid;place-items:center;width:28px;height:28px;margin-left:6px;vertical-align:middle;border:0;background:transparent;color:var(--dim);cursor:pointer;opacity:0;transition:opacity .15s,color .15s}
+.hlink svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+[data-anchor]:hover .hlink,.hlink:focus-visible{opacity:1} .hlink:hover{color:var(--ink)}
+.hlink:focus-visible{outline:2px solid var(--blue)}
+h2 .hlink{width:36px;height:36px} h2 .hlink svg{width:22px;height:22px}
+.copied{position:fixed;left:50%;bottom:28px;z-index:200;transform:translate(-50%,20px);opacity:0;pointer-events:none;padding:0 26px;height:40px;line-height:40px;background:var(--ink);color:var(--inv);font-weight:600;font-size:13px;clip-path:polygon(0 0,calc(100% - 28px) 0,100% 100%,28px 100%);transition:opacity .2s,transform .35s var(--brake)}
+.copied.on{opacity:1;transform:translate(-50%,0)}
+@media (hover:none){ .hlink{opacity:.6} }
+/* ================= SEARCH ================= */
+.srch{margin-top:22px}
+.srch .inp{min-height:38px;font-size:12.5px;padding:0 12px}
+.srchr{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column}
+.srchr a{display:block;padding:9px 0;text-decoration:none;border-top:.75px solid var(--rule)}
+.srchr li:first-child a{border-top:0}
+.srchr b{display:block;font-weight:600;font-size:13px;color:var(--ink)}
+.srchr span{display:block;margin-top:2px;font-size:11px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srchr a:hover b,.srchr a.sel b{color:var(--flame)} .srchr a.sel{box-shadow:inset 3px 0 0 var(--red);padding-left:10px}
+.srchr .none{padding:10px 0;font-size:12px;color:var(--dim)}
+@media (max-width:820px){
+  .srch{display:none}
+  .index.open .srch{display:block;position:fixed;top:57px;left:0;right:0;z-index:61;margin:0;padding:14px 20px 12px;background:var(--bg1);border-bottom:.75px solid var(--rule)}
+  .index.open .srch .inp{min-height:44px;font-size:15px}
+  .index.open .srchr{max-height:calc(100svh - 230px);overflow-y:auto}
+  .index.open nav{top:131px}
+}
+/* ================= PRINT: a clean light copy ================= */
+@page{size:A4;margin:14mm 14mm 16mm}
+@media print{
+  :root,:root[data-theme]{--ink:#0B0C0E;--inv:#FFFFFF;--dim:#585D65;--faint:#8A8F97;--t:28,30,34;--rule:rgba(28,30,34,.18);--bg1:#FFFFFF;--bg2:#FFFFFF;--surf:#FFFFFF;--pop:#FFFFFF;--flame:#D8231A;--line:#1F66E0;--amber:#B87400;--green:#00A04A;--steel:#C3C7CD;--cloud2:#4A4F57;color-scheme:light}
+  html,body{background:#fff !important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .layout{display:block}
+  .index,.cover iframe,.cover .scroll,.mbtn,.hlink,.skip,.copied,.srch,.finish,.bgroup .btn.flash::after{display:none !important}
+  .cover{height:auto;min-height:0;padding:40mm 0 20mm;border:0;break-after:page}
+  .cover .cap{position:static;padding:0 12mm}
+  .cover .cap h1{font-size:44pt}
+  .cover .cap::after{content:"Smedley Group brand book, printed from smedley-group-advanced-technology.github.io/brand-book-sg";display:block;margin-top:10mm;font-family:var(--mono);font-size:9pt;color:#585D65}
+  .part{break-before:page;background:none;padding:10mm 0;border:0}
+  section.s{padding:8mm 0 10mm;border:0;overflow:visible}
+  section.s h2{font-size:30pt;break-after:avoid}
+  h3,h4,.subhead{break-after:avoid}
+  .plate,.bp,.seam,.paper,.cell,.bz,.phone,.browser,table.spec tr,.two > div,.gaugewrap,.stage,figure{break-inside:avoid}
+  .bp:has(svg.kart){overflow:visible} .bp svg.kart{min-width:0}
+  .cell:has(#chTel),.cell:has(#chFit){overflow:visible} #chTel,#chFit{min-width:0}
+  .stage{display:none} .stage + ol.seq{margin-top:0 !important}
+  .edge::before{display:none !important} .plate.dark,.sig{box-shadow:inset 0 0 0 .75pt #8A8F97 !important}
+  body{font-size:10pt}
+  .intro{font-size:11pt}
+  a{text-decoration:none}
+  .colophon{padding:6mm 0 0}
+}
 </style>
 </head>
 <body>
@@ -1372,6 +1440,7 @@ section.s{overflow-x:clip}
     <div class="t">Brand book</div>
     <div class="themes" role="group" aria-label="Theme"><button type="button" data-t="dark" aria-pressed="false"><span>Dark</span></button><button type="button" data-t="light" aria-pressed="false"><span>Light</span></button></div>
     <div class="lap"><span>Lap <b id="lapN">01</b>/<span id="lapT">16</span></span><span>SG-BB</span></div><div class="lapbar"><i id="lapBar"></i></div>
+    <div class="srch" role="search"><input class="inp" id="srch" type="search" placeholder="Search the book" aria-label="Search the book" autocomplete="off"><ol id="srchr" class="srchr" hidden></ol></div>
     <nav id="toc" aria-label="Sections">
       <div class="grp">Foundations</div>
       <a href="#logo"><span>01</span>Logo</a>
@@ -1416,7 +1485,7 @@ section.s{overflow-x:clip}
     <!-- 01 LOGO -->
     <section class="s" id="logo"><div class="inner">
       <div class="sh"><div class="num">01</div><span class="chap">Foundations</span></div>
-      <h2>The logo</h2>
+      <h2 data-anchor="logo">The logo<button class="hlink" type="button" aria-label="Copy link to The logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">One lockup in one colour. Three bars, a two-line wordmark set in Sora SemiBold, a full-height divider, then the division. Its consistency is what lets everything around it move.</p>
       <div class="hair"></div>
       <div class="two">
@@ -1425,12 +1494,12 @@ section.s{overflow-x:clip}
       </div>
       <div class="two" style="margin-top:64px">
         <div>
-          <h3>Clear space and size</h3><p class="sub">Measured in bars, not millimetres</p>
+          <h3 id="logo-clear-space-and-size" data-anchor="logo-clear-space-and-size">Clear space and size<button class="hlink" type="button" aria-label="Copy link to Clear space and size"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Measured in bars, not millimetres</p>
           <div style="display:inline-block" class="clear"><span class="lk" style="--lk:0.6px;color:var(--ink)" aria-hidden="true"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span></div>
           <p class="body" style="margin-top:18px">Clear space on all four sides equals the width of one glyph bar. Nothing enters it: type, rules, image edges or charts.</p>
         </div>
         <div>
-          <h3>Placement</h3><p class="sub">Starting points, adjust to the layout</p>
+          <h3 id="logo-placement" data-anchor="logo-placement">Placement<button class="hlink" type="button" aria-label="Copy link to Placement"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Starting points, adjust to the layout</p>
           <table class="spec">
             <tr><td>Wordmark</td><td>Sora SemiBold, two lines, leading 0.94, tracking −0.025 em. Divider 4.6 units wide, 62 tall</td></tr>
             <tr><td>Interface</td><td>Usually top-left of the header, around 150 px wide</td></tr>
@@ -1441,7 +1510,7 @@ section.s{overflow-x:clip}
         </div>
       </div>
       <div class="two" style="margin-top:64px;align-items:center">
-        <div><h3>Construction</h3><p class="sub">Drawn in glyph units, the 56 × 86 artboard</p><div class="bp crop" style="padding:20px 26px"><svg class="dwg" viewBox="34 16 370 427" role="img" aria-label="Construction drawing of the glyph: three bars at 55 degrees, 14.2 units wide on a 17.9 unit pitch; the long bar is three modules of 23.8, the short bars two, offset by one"><rect class="cn" x="69.0" y="72.9" width="187.0" height="295.8"/><line class="cx" x1="68.9" y1="138.3" x2="162.4" y2="72.7"/><line class="cn" x1="166.6" y1="69.8" x2="207.0" y2="41.5"/><line class="cx" x1="65.4" y1="239.4" x2="208.7" y2="138.9"/><line class="cn" x1="212.9" y1="136.0" x2="253.3" y2="107.6"/><line class="cx" x1="111.7" y1="305.6" x2="255.0" y2="205.0"/><line class="cn" x1="259.2" y1="202.1" x2="299.6" y2="173.8"/><line class="cx" x1="157.9" y1="371.7" x2="251.5" y2="306.1"/><line class="cn" x1="255.7" y1="303.2" x2="345.9" y2="240.0"/><line class="dm" x1="198.6" y1="47.4" x2="337.5" y2="245.8"/><line class="tk" x1="196.0" y1="43.6" x2="201.3" y2="51.1"/><line class="tk" x1="242.3" y1="109.7" x2="247.6" y2="117.3"/><line class="tk" x1="288.6" y1="175.9" x2="293.9" y2="183.4"/><line class="tk" x1="334.9" y1="242.0" x2="340.1" y2="249.6"/><text x="239.3" y="73.0" text-anchor="middle">23.75</text><text x="285.6" y="139.2" text-anchor="middle">23.75</text><text x="331.9" y="205.3" text-anchor="middle">23.75</text><line class="cl" x1="73.5" y1="200.5" x2="215.1" y2="402.2"/><line class="cl" x1="59.7" y1="74.2" x2="264.9" y2="367.3"/><line class="cl" x1="126.8" y1="64.5" x2="268.8" y2="266.0"/><polygon class="ob" points="69.0,236.0 162.1,368.7 201.6,340.9 108.5,208.3"/><polygon class="ob" points="73.0,135.3 212.0,334.0 251.6,306.3 112.6,107.6"/><polygon class="ob" points="122.7,100.7 216.5,233.7 256.0,205.9 162.2,72.9"/><line class="dm" x1="69.5" y1="88.1" x2="125.5" y2="88.1"/><path class="dm" d="M99.5 88.1 A30 30 0 0 1 86.7 112.7"/><text x="103.5" y="76.1" class="tw" text-anchor="start">55°</text><line class="cn" x1="219.4" y1="237.9" x2="239.9" y2="267.1"/><line class="cn" x1="258.9" y1="210.1" x2="279.4" y2="239.3"/><line class="dm" x1="234.1" y1="258.8" x2="273.5" y2="231.0"/><line class="tk" x1="231.4" y1="255.0" x2="236.7" y2="262.5"/><line class="tk" x1="270.9" y1="227.2" x2="276.2" y2="234.7"/><text x="243.1" y="253.8" text-anchor="start">14.2</text><line class="dm" x1="251.2" y1="347.8" x2="201.4" y2="382.7"/><line class="tk" x1="248.6" y1="344.1" x2="253.9" y2="351.6"/><line class="tk" x1="198.8" y1="379.0" x2="204.1" y2="386.5"/><text x="261.2" y="351.8" text-anchor="start">17.9</text><circle class="bl" cx="222.6" cy="412.9" r="13"/><text x="222.6" y="416.5" class="tw" text-anchor="middle">FKL</text><circle class="bl" cx="272.3" cy="378.0" r="13"/><text x="272.3" y="381.6" class="tw" text-anchor="middle">F4</text><circle class="bl" cx="276.3" cy="276.6" r="13"/><text x="276.3" y="280.2" class="tw" text-anchor="middle">F1</text></svg></div></div>
+        <div><h3 id="logo-construction" data-anchor="logo-construction">Construction<button class="hlink" type="button" aria-label="Copy link to Construction"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Drawn in glyph units, the 56 × 86 artboard</p><div class="bp crop" style="padding:20px 26px"><svg class="dwg" viewBox="34 16 370 427" role="img" aria-label="Construction drawing of the glyph: three bars at 55 degrees, 14.2 units wide on a 17.9 unit pitch; the long bar is three modules of 23.8, the short bars two, offset by one"><rect class="cn" x="69.0" y="72.9" width="187.0" height="295.8"/><line class="cx" x1="68.9" y1="138.3" x2="162.4" y2="72.7"/><line class="cn" x1="166.6" y1="69.8" x2="207.0" y2="41.5"/><line class="cx" x1="65.4" y1="239.4" x2="208.7" y2="138.9"/><line class="cn" x1="212.9" y1="136.0" x2="253.3" y2="107.6"/><line class="cx" x1="111.7" y1="305.6" x2="255.0" y2="205.0"/><line class="cn" x1="259.2" y1="202.1" x2="299.6" y2="173.8"/><line class="cx" x1="157.9" y1="371.7" x2="251.5" y2="306.1"/><line class="cn" x1="255.7" y1="303.2" x2="345.9" y2="240.0"/><line class="dm" x1="198.6" y1="47.4" x2="337.5" y2="245.8"/><line class="tk" x1="196.0" y1="43.6" x2="201.3" y2="51.1"/><line class="tk" x1="242.3" y1="109.7" x2="247.6" y2="117.3"/><line class="tk" x1="288.6" y1="175.9" x2="293.9" y2="183.4"/><line class="tk" x1="334.9" y1="242.0" x2="340.1" y2="249.6"/><text x="239.3" y="73.0" text-anchor="middle">23.75</text><text x="285.6" y="139.2" text-anchor="middle">23.75</text><text x="331.9" y="205.3" text-anchor="middle">23.75</text><line class="cl" x1="73.5" y1="200.5" x2="215.1" y2="402.2"/><line class="cl" x1="59.7" y1="74.2" x2="264.9" y2="367.3"/><line class="cl" x1="126.8" y1="64.5" x2="268.8" y2="266.0"/><polygon class="ob" points="69.0,236.0 162.1,368.7 201.6,340.9 108.5,208.3"/><polygon class="ob" points="73.0,135.3 212.0,334.0 251.6,306.3 112.6,107.6"/><polygon class="ob" points="122.7,100.7 216.5,233.7 256.0,205.9 162.2,72.9"/><line class="dm" x1="69.5" y1="88.1" x2="125.5" y2="88.1"/><path class="dm" d="M99.5 88.1 A30 30 0 0 1 86.7 112.7"/><text x="103.5" y="76.1" class="tw" text-anchor="start">55°</text><line class="cn" x1="219.4" y1="237.9" x2="239.9" y2="267.1"/><line class="cn" x1="258.9" y1="210.1" x2="279.4" y2="239.3"/><line class="dm" x1="234.1" y1="258.8" x2="273.5" y2="231.0"/><line class="tk" x1="231.4" y1="255.0" x2="236.7" y2="262.5"/><line class="tk" x1="270.9" y1="227.2" x2="276.2" y2="234.7"/><text x="243.1" y="253.8" text-anchor="start">14.2</text><line class="dm" x1="251.2" y1="347.8" x2="201.4" y2="382.7"/><line class="tk" x1="248.6" y1="344.1" x2="253.9" y2="351.6"/><line class="tk" x1="198.8" y1="379.0" x2="204.1" y2="386.5"/><text x="261.2" y="351.8" text-anchor="start">17.9</text><circle class="bl" cx="222.6" cy="412.9" r="13"/><text x="222.6" y="416.5" class="tw" text-anchor="middle">FKL</text><circle class="bl" cx="272.3" cy="378.0" r="13"/><text x="272.3" y="381.6" class="tw" text-anchor="middle">F4</text><circle class="bl" cx="276.3" cy="276.6" r="13"/><text x="276.3" y="280.2" class="tw" text-anchor="middle">F1</text></svg></div></div>
         <div>
           <p class="body">The glyph is built on one module. The long bar is three modules, the short bars two, each offset by one: the F1 bar sits on the first two thirds, the FKL bar on the last two. All three share one width, one pitch and one lean.</p>
           <table class="spec" style="margin-top:22px">
@@ -1455,7 +1524,7 @@ section.s{overflow-x:clip}
         </div>
       </div>
       <div style="margin-top:64px">
-        <h3>The glyph on its own</h3><p class="sub">The three bars can leave the wordmark. They always lean the same way</p>
+        <h3 id="logo-the-glyph-on-its-own" data-anchor="logo-the-glyph-on-its-own">The glyph on its own<button class="hlink" type="button" aria-label="Copy link to The glyph on its own"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">The three bars can leave the wordmark. They always lean the same way</p>
         <div class="glyphs" style="color:var(--ink)">
           <svg viewBox="0 0 56 86" width="112" height="172" aria-hidden="true"><use href="#glyph"/></svg>
           <svg viewBox="0 0 56 86" width="56" height="86" aria-hidden="true"><use href="#glyph"/></svg>
@@ -1464,7 +1533,7 @@ section.s{overflow-x:clip}
         </div>
       </div>
       <div style="margin-top:56px">
-        <h3>Never</h3><p class="sub">Build it from the kit, never by eye</p>
+        <h3 id="logo-never" data-anchor="logo-never">Never<button class="hlink" type="button" aria-label="Copy link to Never"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Build it from the kit, never by eye</p>
         <div class="never">
           <div><b>Recolour it</b>White or Ink only. It carries no colour of its own.</div>
           <div><b>Add effects</b>No shadow, glow, outline or bevel.</div>
@@ -1481,7 +1550,7 @@ section.s{overflow-x:clip}
     <!-- 02 BUSINESS LOCKUPS -->
     <section class="s" id="lockups"><div class="inner">
       <div class="sh"><div class="num">02</div><span class="chap">Foundations</span></div>
-      <h2>Business lockups</h2>
+      <h2 data-anchor="lockups">Business lockups<button class="hlink" type="button" aria-label="Copy link to Business lockups"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">One mark for the group and one lockup per business. The glyph, the wordmark and the divider never change; only the name after the divider does. Each business leans to the world it works in.</p>
       <div class="hair"></div>
       <div class="bzg"><div class="bz"><div class="plate dark edge"><span class="lk" style="--lk:.5px;color:#fff" role="img" aria-label="Smedley Group"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span></span></span></div><div class="bzt"><b>Smedley Group</b><span class="leadk"><i class="b"></i><i class="r"></i>In balance</span></div><p>The group itself: corporate, investor and group-wide material.</p></div><div class="bz"><div class="plate dark edge"><span class="lk" style="--lk:.5px;color:#fff" role="img" aria-label="Smedley Group, Advanced Technology"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span></div><div class="bzt"><b>Advanced Technology</b><span class="leadk"><i class="b"></i>Blue leads</span></div><p>Hardware and software engineering, for the group and for clients in motorsport, sport and automotive.</p></div><div class="bz"><div class="plate dark edge"><span class="lk" style="--lk:.5px;color:#fff" role="img" aria-label="Smedley Group, Insight Labs"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span><i></i><span>Insight<br>Labs</span></span></span></div><div class="bzt"><b>Insight Labs</b><span class="leadk"><i class="b"></i>Blue leads</span></div><p>Sports data, simulation and modelling for fan engagement.</p></div><div class="bz"><div class="plate dark edge"><span class="lk" style="--lk:.5px;color:#fff" role="img" aria-label="Smedley Group, FAT Racing"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span><i></i><span>FAT<br>Racing</span></span></span></div><div class="bzt"><b>FAT Racing</b><span class="leadk"><i class="r"></i>Red leads</span></div><p>Driver development: funding drivers promoted from the league into Formula 4.</p></div><div class="bz"><div class="plate dark edge"><span class="lk" style="--lk:.5px;color:#fff" role="img" aria-label="Smedley Group, FAT Karting League"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span><i></i><span>FAT Karting<br>League</span></span></span></div><div class="bzt"><b>FAT Karting League</b><span class="leadk"><i class="r"></i>Red leads</span></div><p>The global karting series, run by hubs and overseen from the UK.</p></div></div>
@@ -1494,7 +1563,7 @@ section.s{overflow-x:clip}
           <tr><td>Files</td><td>Every lockup in white and ink, outlined, in <a href="#resources">Resources</a></td></tr>
         </table>
         <div class="fklnote">
-          <h3>FAT Karting League has its own brand</h3>
+          <h3 id="lockups-fat-karting-league-has-its-own-brand" data-anchor="lockups-fat-karting-league-has-its-own-brand">FAT Karting League has its own brand<button class="hlink" type="button" aria-label="Copy link to FAT Karting League has its own brand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
           <p class="body">Fans, drivers and hubs meet FKL through its own identity: the FAT Pill logo, FKL Blue #0000FF and ST Rapid Black Extended, as set out in the FKL brand guidelines. Use the lockup above only where the group speaks about the league: investor and corporate material, TalentID and internal tools. On FKL's own material the group appears, if at all, as an endorsement. See <a href="#cobrand">Co-branding</a>.</p>
         </div>
       </div>
@@ -1503,15 +1572,15 @@ section.s{overflow-x:clip}
     <!-- 03 COLOUR -->
     <section class="s" id="colour"><div class="inner">
       <div class="sh"><div class="num">03</div><span class="chap">Foundations</span></div>
-      <h2>Colour</h2>
+      <h2 data-anchor="colour">Colour<button class="hlink" type="button" aria-label="Copy link to Colour"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Two worlds, one car. Red is the track: speed, heat, the driver and whoever leads. Blue is the garage: the blueprint, the data and the model. They stand on a pure ground, black or white, that belongs to neither. Blue measures, red leads.</p>
       <div class="hair"></div>
       <div class="two">
-        <div class="group"><h3>Racing red</h3><p class="sub">Speed and heat. A fill, a line and a depth</p><div class="sw three" id="sw-race"></div></div>
-        <div class="group"><h3>Engineering blue</h3><p class="sub">Blueprints and data. The same three roles</p><div class="sw three" id="sw-eng"></div></div>
+        <div class="group"><h3 id="colour-racing-red" data-anchor="colour-racing-red">Racing red<button class="hlink" type="button" aria-label="Copy link to Racing red"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Speed and heat. A fill, a line and a depth</p><div class="sw three" id="sw-race"></div></div>
+        <div class="group"><h3 id="colour-engineering-blue" data-anchor="colour-engineering-blue">Engineering blue<button class="hlink" type="button" aria-label="Copy link to Engineering blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Blueprints and data. The same three roles</p><div class="sw three" id="sw-eng"></div></div>
       </div>
       <div class="group">
-        <h3>The seam</h3><p class="sub">Red and blue meet only across the 55° cut</p>
+        <h3 id="colour-the-seam" data-anchor="colour-the-seam">The seam<button class="hlink" type="button" aria-label="Copy link to The seam"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Red and blue meet only across the 55° cut</p>
         <div class="seam"><div class="rd"></div>
           <div class="side l"><span>engineering</span><b>Blue measures</b><em>The grid, the drawing, dimensions, references, the model and its uncertainty, focus.</em></div>
           <div class="side r"><span>racing</span><b>Red leads</b><em>The driver, the leader, the primary action, the current selection, speed and heat.</em></div>
@@ -1520,7 +1589,7 @@ section.s{overflow-x:clip}
       </div>
       <div class="two group" style="align-items:start">
         <div>
-          <h3>Share of a screen</h3><p class="sub">Roughly, by context</p>
+          <h3 id="colour-share-of-a-screen" data-anchor="colour-share-of-a-screen">Share of a screen<button class="hlink" type="button" aria-label="Copy link to Share of a screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Roughly, by context</p>
           <div class="shr"><div class="shh"><b>Engineering</b><span>Advanced Technology, Insight Labs</span></div><div class="share2" role="img" aria-label="Engineering: ground 64 %, type 16 %, blue 17 %, red 3 %"><i class="ground" style="flex:64"></i><i class="type" style="flex:16"></i><i class="blue" style="flex:17"></i><i class="red" style="flex:3"></i></div><div class="sharek2"><span><i class="ground"></i><b>64</b> ground</span><span><i class="type"></i><b>16</b> type</span><span><i class="blue"></i><b>17</b> blue</span><span><i class="red"></i><b>3</b> red</span></div></div><div class="shr"><div class="shh"><b>Racing</b><span>FAT Karting League, FAT Racing</span></div><div class="share2" role="img" aria-label="Racing: ground 64 %, type 16 %, blue 5 %, red 15 %"><i class="ground" style="flex:64"></i><i class="type" style="flex:16"></i><i class="blue" style="flex:5"></i><i class="red" style="flex:15"></i></div><div class="sharek2"><span><i class="ground"></i><b>64</b> ground</span><span><i class="type"></i><b>16</b> type</span><span><i class="blue"></i><b>5</b> blue</span><span><i class="red"></i><b>15</b> red</span></div></div><div class="shr"><div class="shh"><b>Group</b><span>Smedley Group, this book</span></div><div class="share2" role="img" aria-label="Group: ground 72 %, type 18 %, blue 6 %, red 4 %"><i class="ground" style="flex:72"></i><i class="type" style="flex:18"></i><i class="blue" style="flex:6"></i><i class="red" style="flex:4"></i></div><div class="sharek2"><span><i class="ground"></i><b>72</b> ground</span><span><i class="type"></i><b>18</b> type</span><span><i class="blue"></i><b>6</b> blue</span><span><i class="red"></i><b>4</b> red</span></div></div>
           <p class="body" style="margin-top:22px">The ground and the type stay the same everywhere; only the lead changes. Blue can cover ground as line work: a grid, a whole drawing. Red never does. Even on track it stays in marks: boards, the leader, one action, which is why it is always noticed.</p>
         </div>
@@ -1533,19 +1602,19 @@ section.s{overflow-x:clip}
           <tr><td>Never</td><td>Red type on blue, blue type on red, red for an error</td></tr>
         </table>
       </div>
-      <div class="group"><h3>The temperature ramp</h3><p class="sub">The one scale that runs from one world to the other</p>
+      <div class="group"><h3 id="colour-the-temperature-ramp" data-anchor="colour-the-temperature-ramp">The temperature ramp<button class="hlink" type="button" aria-label="Copy link to The temperature ramp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">The one scale that runs from one world to the other</p>
         <div class="ramp"></div><div class="rampk"><span>cold, slow, modelled</span><span>carbon</span><span>hot, fast, raced</span></div>
         <p class="body" style="margin-top:18px">Engineering Blue through Steel to Flame. Use it for anything with a temperature or a speed: track maps, tyre and brake heat, pace against the model. Gains and losses still take the flags.</p></div>
-      <div class="group"><h3>Neutrals</h3><p class="sub">Black, white and the greys between, no hue</p><div class="sw" id="sw-core"></div>
+      <div class="group"><h3 id="colour-neutrals" data-anchor="colour-neutrals">Neutrals<button class="hlink" type="button" aria-label="Copy link to Neutrals"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Black, white and the greys between, no hue</p><div class="sw" id="sw-core"></div>
         <p class="body" style="margin-top:18px">The structure has no hue of its own: black on dark, white on light, and neutral greys between. Navy leaned blue and made red a guest; on a pure ground red reads as heat and blue as engineering, equally. Grey tints are Silver, never tinted blue.</p></div>
-      <div class="group"><h3>Surface and neutral</h3><p class="sub">Grounds and quiet text</p><div class="sw" id="sw-surf"></div></div>
-      <div class="group"><h3>Signal</h3><p class="sub">Flag colours. Text on its own tint or on carbon, never a fill</p><div class="sw five" id="sw-sig"></div><p class="body" style="margin-top:18px">Green flag for gains, yellow flag for losses, warnings and errors. Red already means the driver, so it never means something went wrong.</p></div>
+      <div class="group"><h3 id="colour-surface-and-neutral" data-anchor="colour-surface-and-neutral">Surface and neutral<button class="hlink" type="button" aria-label="Copy link to Surface and neutral"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Grounds and quiet text</p><div class="sw" id="sw-surf"></div></div>
+      <div class="group"><h3 id="colour-signal" data-anchor="colour-signal">Signal<button class="hlink" type="button" aria-label="Copy link to Signal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Flag colours. Text on its own tint or on carbon, never a fill</p><div class="sw five" id="sw-sig"></div><p class="body" style="margin-top:18px">Green flag for gains, yellow flag for losses, warnings and errors. Red already means the driver, so it never means something went wrong.</p></div>
     </div></section>
 
     <!-- 04 TYPOGRAPHY -->
     <section class="s" id="type"><div class="inner">
       <div class="sh"><div class="num">04</div><span class="chap">Foundations</span></div>
-      <h2>Typography</h2>
+      <h2 data-anchor="type">Typography<button class="hlink" type="button" aria-label="Copy link to Typography"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Sora in three weights for everything we say, set tight at display sizes. IBM Plex Mono for everything we measure. Weight and size do the work. No italics, no capitals for labels, no third family.</p>
       <div class="hair"></div>
       <div class="two">
@@ -1572,7 +1641,7 @@ section.s{overflow-x:clip}
       </div>
       <div class="two" style="margin-top:64px">
         <div>
-          <h3>Interface scale</h3><p class="sub">From the TalentID dashboard, px</p>
+          <h3 id="type-interface-scale" data-anchor="type-interface-scale">Interface scale<button class="hlink" type="button" aria-label="Copy link to Interface scale"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">From the TalentID dashboard, px</p>
           <table class="spec">
             <tr><th>Role</th><th>Weight · size · tracking</th></tr>
             <tr><td>Hero number</td><td>SemiBold 84, −0.05 em</td></tr>
@@ -1587,7 +1656,7 @@ section.s{overflow-x:clip}
           </table>
         </div>
         <div>
-          <h3>Slide scale</h3><p class="sub">On a 10 × 5.625 in canvas, pt</p>
+          <h3 id="type-slide-scale" data-anchor="type-slide-scale">Slide scale<button class="hlink" type="button" aria-label="Copy link to Slide scale"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">On a 10 × 5.625 in canvas, pt</p>
           <table class="spec">
             <tr><th>Role</th><th>Weight · size · tracking</th></tr>
             <tr><td>Cover headline</td><td>SemiBold 34.2, −0.68 pt</td></tr>
@@ -1605,13 +1674,13 @@ section.s{overflow-x:clip}
     <!-- 05 VOICE -->
     <section class="s" id="voice"><div class="inner">
       <div class="sh"><div class="num">05</div><span class="chap">Foundations</span></div>
-      <h2>Voice</h2>
+      <h2 data-anchor="voice">Voice<button class="hlink" type="button" aria-label="Copy link to Voice"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">We write the way a good race engineer talks on the radio: the point first, specific, calm under pressure. Plain words, full sentences, and numbers that mean something.</p>
       <div class="hair"></div>
       <div class="kit">
-        <div class="cell"><h4>Point first</h4><p class="note" style="margin-top:0">Lead with the conclusion. The reader should be able to stop after the first sentence and still act.</p></div>
-        <div class="cell"><h4>Specific</h4><p class="note" style="margin-top:0">Numbers with units, names with places. 0.18 s, not nearly there. FKL Łódź, not a hub.</p></div>
-        <div class="cell"><h4>Calm</h4><p class="note" style="margin-top:0">Confidence comes from facts, not volume. No exclamation marks, no capitals for emphasis, no hype words.</p></div>
+        <div class="cell"><h4 id="voice-point-first" data-anchor="voice-point-first">Point first<button class="hlink" type="button" aria-label="Copy link to Point first"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p class="note" style="margin-top:0">Lead with the conclusion. The reader should be able to stop after the first sentence and still act.</p></div>
+        <div class="cell"><h4 id="voice-specific" data-anchor="voice-specific">Specific<button class="hlink" type="button" aria-label="Copy link to Specific"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p class="note" style="margin-top:0">Numbers with units, names with places. 0.18 s, not nearly there. FKL Łódź, not a hub.</p></div>
+        <div class="cell"><h4 id="voice-calm" data-anchor="voice-calm">Calm<button class="hlink" type="button" aria-label="Copy link to Calm"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p class="note" style="margin-top:0">Confidence comes from facts, not volume. No exclamation marks, no capitals for emphasis, no hype words.</p></div>
       </div>
       <table class="spec vx" style="margin-top:48px">
         <tr><th>Moment</th><th>Write</th><th>Not</th></tr>
@@ -1633,41 +1702,41 @@ section.s{overflow-x:clip}
     <!-- 06 SURFACES -->
     <section class="s" id="surfaces"><div class="inner">
       <div class="sh"><div class="num">06</div><span class="chap">Foundations</span></div>
-      <h2>Surfaces</h2>
+      <h2 data-anchor="surfaces">Surfaces<button class="hlink" type="button" aria-label="Copy link to Surfaces"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">The ground is flat: pure black in the dark theme, pure white in the light one. No gradients and no tint, so red and blue are the only colour on the page. Sections are separated by hairlines and space, not boxes.</p>
       <div class="hair"></div>
       <div class="two">
         <div>
-          <h3>The ground</h3><p class="sub">#000000 on dark, #FFFFFF on light</p>
+          <h3 id="surfaces-the-ground" data-anchor="surfaces-the-ground">The ground<button class="hlink" type="button" aria-label="Copy link to The ground"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">#000000 on dark, #FFFFFF on light</p>
           <div class="sig edge"></div>
           <p class="body" style="margin-top:18px">Page background on every screen and slide. Flat and untinted, so nothing competes with the red and the blue. Raised things are separated by a hairline, not a shade.</p>
         </div>
         <div>
-          <h3>Stage light</h3><p class="sub">Silver at 9 %, behind the one hero element</p>
+          <h3 id="surfaces-stage-light" data-anchor="surfaces-stage-light">Stage light<button class="hlink" type="button" aria-label="Copy link to Stage light"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Silver at 9 %, behind the one hero element</p>
           <div class="glowdemo"><svg viewBox="0 0 56 86" width="70" height="108" style="color:var(--ink)" aria-hidden="true"><use href="#glyph"/></svg></div>
           <p class="body" style="margin-top:18px">A soft pool of light replaces the box. The hero sits on the page, lit, not framed. One per view.</p>
         </div>
       </div>
       <div class="two" style="margin-top:64px">
         <div>
-          <h3>Blueprint grid</h3><p class="sub">Blueprint #0B2D63, ruled in white at 8 px and 40 px</p>
+          <h3 id="surfaces-blueprint-grid" data-anchor="surfaces-blueprint-grid">Blueprint grid<button class="hlink" type="button" aria-label="Copy link to Blueprint grid"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Blueprint #0B2D63, ruled in white at 8 px and 40 px</p>
           <div class="paper crop"></div>
           <p class="body" style="margin-top:18px">The engineering plate. Drawings, setup sheets, simulations and anything built to a dimension sit on Blueprint blue, ruled in white, in the dark theme and the light one alike. It is the one coloured ground in the system.</p>
         </div>
         <div>
-          <h3>Colour in the lines</h3><p class="sub">Red and blue are marks, never washes</p>
+          <h3 id="surfaces-colour-in-the-lines" data-anchor="surfaces-colour-in-the-lines">Colour in the lines<button class="hlink" type="button" aria-label="Copy link to Colour in the lines"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Red and blue are marks, never washes</p>
           <div class="hair" style="margin:26px 0 30px"></div>
           <p class="body">With a flat ground, the two worlds show up only as line work and marks: the red lead and blue scale above, a red board, a blue grid, a Flame trace against a blue reference. No red or blue glow, tint or gradient sits behind anything.</p>
         </div>
       </div>
       <div class="three" style="margin-top:64px">
-        <div><h3>Knock-out</h3><p class="sub">Labels in drawings sit on a patch of the ground</p><p class="body">No line ever strikes through a label. Where a centre or dimension line meets text, the text wins.</p></div>
-        <div><h3>Hairline</h3><p class="sub">Silver, solid to 83 %, then fades</p><div style="height:1px;margin:14px 0 18px;background:linear-gradient(90deg,#C9CCD1 0%,#C9CCD1 83%,transparent)"></div><p class="body">Interface dividers, at 14 %. Section openers use the red and blue scale rule instead.</p></div>
-        <div><h3>Tread</h3><p class="sub">F1 full-wet print, 24 % Silver</p><svg class="tread" viewBox="0 0 300 34" preserveAspectRatio="none" style="width:100%;display:block;margin:10px 0 14px" aria-hidden="true"><rect width="300" height="34" style="fill:rgba(var(--t),.06)"/><rect width="300" height="34" fill="url(#treadP)"/></svg><p class="body">Marks what is not yet done: the empty part of a progress glyph and running progress. Never decoration.</p></div>
+        <div><h3 id="surfaces-knock-out" data-anchor="surfaces-knock-out">Knock-out<button class="hlink" type="button" aria-label="Copy link to Knock-out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Labels in drawings sit on a patch of the ground</p><p class="body">No line ever strikes through a label. Where a centre or dimension line meets text, the text wins.</p></div>
+        <div><h3 id="surfaces-hairline" data-anchor="surfaces-hairline">Hairline<button class="hlink" type="button" aria-label="Copy link to Hairline"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Silver, solid to 83 %, then fades</p><div style="height:1px;margin:14px 0 18px;background:linear-gradient(90deg,#C9CCD1 0%,#C9CCD1 83%,transparent)"></div><p class="body">Interface dividers, at 14 %. Section openers use the red and blue scale rule instead.</p></div>
+        <div><h3 id="surfaces-tread" data-anchor="surfaces-tread">Tread<button class="hlink" type="button" aria-label="Copy link to Tread"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">F1 full-wet print, 24 % Silver</p><svg class="tread" viewBox="0 0 300 34" preserveAspectRatio="none" style="width:100%;display:block;margin:10px 0 14px" aria-hidden="true"><rect width="300" height="34" style="fill:rgba(var(--t),.06)"/><rect width="300" height="34" fill="url(#treadP)"/></svg><p class="body">Marks what is not yet done: the empty part of a progress glyph and running progress. Never decoration.</p></div>
       </div>
       <div class="two" style="margin-top:64px;align-items:center">
         <div>
-          <h3>The wet-weather tread</h3><p class="sub">Inspired by Pirelli's F1 full wet tyres</p>
+          <h3 id="surfaces-the-wet-weather-tread" data-anchor="surfaces-the-wet-weather-tread">The wet-weather tread<button class="hlink" type="button" aria-label="Copy link to The wet-weather tread"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Inspired by Pirelli's F1 full wet tyres</p>
           <p class="body">Every tyre in the system wears the same tread, drawn after the Pirelli Cinturato full wet used in Formula 1: shoulder blocks split by lateral grooves and fine sipes, two channels running round the tyre, and deep swept grooves that curve back from the centre to pump water out to the sides. The two halves are staggered by half a pitch, as on the real tyre. It is the pattern a car needs when grip is hardest to find, which is the point.</p>
           <p class="body" style="margin-top:14px">The tyre carries the tread and the ground carries its print, and both point the same way: the tip of the V leads, in the direction of travel, so it cuts into the water first. The same print fills the unfinished part of the pathway glyph.</p>
         </div>
@@ -1677,7 +1746,7 @@ section.s{overflow-x:clip}
         </div>
       </div>
       <div style="margin-top:64px">
-        <h3>Strapline band</h3><p class="sub">An optional closing line. When used, it states the conclusion rather than a caption</p>
+        <h3 id="surfaces-strapline-band" data-anchor="surfaces-strapline-band">Strapline band<button class="hlink" type="button" aria-label="Copy link to Strapline band"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">An optional closing line. When used, it states the conclusion rather than a caption</p>
         <div class="band"><svg viewBox="0 0 56 86" style="color:var(--ink)" aria-hidden="true"><use href="#glyph"/></svg>Maja: ready for an F4 test day this winter</div>
         <div class="band light" style="margin-top:12px">Our model isolates performance from contextual factors</div>
       </div>
@@ -1686,7 +1755,7 @@ section.s{overflow-x:clip}
     <!-- 07 IMAGERY -->
     <section class="s" id="imagery"><div class="inner">
       <div class="sh"><div class="num">07</div><span class="chap">Foundations</span></div>
-      <h2>Imagery</h2>
+      <h2 data-anchor="imagery">Imagery<button class="hlink" type="button" aria-label="Copy link to Imagery"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Pictures show real people and real machines doing real work. Documentary, not staged. The colour comes from the brand's marks, never from a grade laid over the picture.</p>
       <div class="hair"></div>
       <div class="two" style="align-items:center">
@@ -1712,7 +1781,7 @@ section.s{overflow-x:clip}
     <!-- 08 THE 55° CUT -->
     <section class="s" id="slant"><div class="inner">
       <div class="sh"><div class="num">08</div><span class="chap">Foundations</span></div>
-      <h2>The 55° cut</h2>
+      <h2 data-anchor="slant">The 55° cut<button class="hlink" type="button" aria-label="Copy link to The 55° cut"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Every accent is cut at the glyph's own lean and leans the same way, top-left to bottom-right. If it marks, selects or measures, it carries the cut.</p>
       <div class="hair"></div>
       <div class="two" style="align-items:center">
@@ -1745,25 +1814,25 @@ section.s{overflow-x:clip}
     <!-- 09 RACE ENGINEERING -->
     <section class="s" id="engineering"><div class="inner">
       <div class="sh"><div class="num">09</div><span class="chap">Two worlds</span></div>
-      <h2>Race engineering</h2>
+      <h2 data-anchor="engineering">Race engineering<button class="hlink" type="button" aria-label="Copy link to Race engineering"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">The mark is earned on track and proven in the garage. Under the core identity sits a technical layer taken from four places we work: the drawing office, the workshop, the pit wall and the track. Use each where something is being measured, built, read or raced. Never as wallpaper.</p>
       <div class="hair"></div>
 
-      <h3 class="subhead">The drawing office</h3>
+      <h3 class="subhead" id="engineering-the-drawing-office" data-anchor="engineering-the-drawing-office">The drawing office<button class="hlink" type="button" aria-label="Copy link to The drawing office"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
       <div class="two">
         <div>
-          <h3>Blueprint grid</h3><p class="sub">Blueprint ground, white grid at 3 % and 7.5 %</p>
+          <h3 id="engineering-blueprint-grid" data-anchor="engineering-blueprint-grid">Blueprint grid<button class="hlink" type="button" aria-label="Copy link to Blueprint grid"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Blueprint ground, white grid at 3 % and 7.5 %</p>
           <p class="body">The grid lives on drawings, not pages: drawings sit on Blueprint blue, ruled in white on the 8 px module and heavier every 40 px, so parts can be read off it. Everywhere else the ground stays clear. The grid is paper, not pattern.</p>
           <p class="body" style="margin-top:14px">Drawings carry a <b>title block</b>: sheet, subject and date, in mono, in ruled cells. The rule under each introduction is a <b>scale</b>, ticked every 40 px.</p>
         </div>
         <table class="spec lines"><tr><th>Sample</th><th>Line</th><th>Use</th></tr><tr><td><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="ob" x1="0" y1="9" x2="110" y2="9"/></svg></td><td>Object line</td><td>White, 1.25 px. What exists: the outline of the part.</td></tr><tr><td><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="cn" x1="0" y1="9" x2="110" y2="9"/></svg></td><td>Construction line</td><td>Line Blue at 50 %, 0.75 px. How it was set out: modules, envelopes, extensions.</td></tr><tr><td><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="cl" x1="0" y1="9" x2="110" y2="9"/></svg></td><td>Centre line</td><td>Line Blue, long and short dash. Axes and symmetry.</td></tr><tr><td><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="hd" x1="0" y1="9" x2="110" y2="9"/></svg></td><td>Hidden or planned</td><td>White at 50 %, dashed. What is out of sight or not built yet.</td></tr><tr><td><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="dm" x1="6" y1="11" x2="104" y2="11"/><line class="tk" x1="3.4" y1="7.2" x2="8.6" y2="14.8"/><line class="tk" x1="101.4" y1="7.2" x2="106.6" y2="14.8"/><text x="55" y="6" text-anchor="middle">1040</text></svg></td><td>Dimension</td><td>Line Blue, ticks at 55° that always lean with the glyph, never arrowheads. Value in mono above the line.</td></tr><tr><td><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><circle class="dot" cx="4" cy="12" r="2.6"/><line class="dm" x1="4" y1="12" x2="104" y2="12"/><text class="tw" x="104" y="7" text-anchor="end">motor</text></svg></td><td>Callout</td><td>A dot on the part, a shelf to the label. Balloons name items in a set.</td></tr></table>
       </div>
 
-      <h3 class="subhead">The workshop</h3>
+      <h3 class="subhead" id="engineering-the-workshop" data-anchor="engineering-the-workshop">The workshop<button class="hlink" type="button" aria-label="Copy link to The workshop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
       <div class="two" style="align-items:start">
         <div><div class="tools"><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true"><g transform="rotate(55 12 12)"><path d="M8.77 10.7H16.43A2.7 2.7 0 1 1 16.43 13.3H8.77A3.8 3.8 0 0 1 1.67 13.4H5.2V10.6H1.67A3.8 3.8 0 0 1 8.77 10.7Z"/><circle cx="18.8" cy="12" r="1"/></g></svg></div><figcaption>Spanner</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true"><g transform="rotate(55 12 12)"><path d="M13.5 10.6H3.9A1.4 1.4 0 0 0 3.9 13.4H13.5"/><circle cx="16.9" cy="12" r="3.4"/><rect x="16" y="11.1" width="1.8" height="1.8" rx=".3"/></g></svg></div><figcaption>Ratchet</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true"><g transform="rotate(55 12 12)"><rect x="2" y="10.4" width="6.5" height="3.2" rx="1.6"/><path d="M8.5 11.1H15.9M8.5 12.9H15.9"/><circle cx="18.3" cy="12" r="2.5"/></g></svg></div><figcaption>Torque wrench</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true"><g transform="rotate(55 12 12)"><path d="M3.5 10.5H16.5A2 2 0 0 1 18.5 12.5V17"/></g></svg></div><figcaption>Hex key</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true"><path d="M3.5 7.5H11.5M15.5 7.5H21.5"/><path d="M3.5 7.5V20.5H6.5"/><rect x="11.5" y="5.5" width="4" height="4" rx=".6"/><path d="M12.5 9.5V20.5H9.5"/><path d="M13.5 5.5V3.5"/></svg></div><figcaption>Calliper</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true"><circle cx="12" cy="10" r="6.5"/><path d="M12 10L9.2 7.2"/><path d="M12 16.5V21M9.5 21H14.5"/></svg></div><figcaption>Tyre gauge</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.5"/><path d="M12 6.5V3.5M10 3.5H14"/></svg></div><figcaption>Stopwatch</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="1.5"/><path d="M6.5 13L9.5 10L11.5 11.5L14.5 8L17.5 10"/><path d="M12 16.5V19.5M9 19.5H15"/></svg></div><figcaption>Data logger</figcaption></figure></div><div class="toolrow"><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><g transform="rotate(55 12 12)"><path d="M8.77 10.7H16.43A2.7 2.7 0 1 1 16.43 13.3H8.77A3.8 3.8 0 0 1 1.67 13.4H5.2V10.6H1.67A3.8 3.8 0 0 1 8.77 10.7Z"/><circle cx="18.8" cy="12" r="1"/></g></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><g transform="rotate(55 12 12)"><path d="M13.5 10.6H3.9A1.4 1.4 0 0 0 3.9 13.4H13.5"/><circle cx="16.9" cy="12" r="3.4"/><rect x="16" y="11.1" width="1.8" height="1.8" rx=".3"/></g></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><g transform="rotate(55 12 12)"><rect x="2" y="10.4" width="6.5" height="3.2" rx="1.6"/><path d="M8.5 11.1H15.9M8.5 12.9H15.9"/><circle cx="18.3" cy="12" r="2.5"/></g></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><g transform="rotate(55 12 12)"><path d="M3.5 10.5H16.5A2 2 0 0 1 18.5 12.5V17"/></g></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3.5 7.5H11.5M15.5 7.5H21.5"/><path d="M3.5 7.5V20.5H6.5"/><rect x="11.5" y="5.5" width="4" height="4" rx=".6"/><path d="M12.5 9.5V20.5H9.5"/><path d="M13.5 5.5V3.5"/></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><circle cx="12" cy="10" r="6.5"/><path d="M12 10L9.2 7.2"/><path d="M12 16.5V21M9.5 21H14.5"/></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.5"/><path d="M12 6.5V3.5M10 3.5H14"/></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="1.5"/><path d="M6.5 13L9.5 10L11.5 11.5L14.5 8L17.5 10"/><path d="M12 16.5V19.5M9 19.5H15"/></svg></div></div>
         <div>
-          <h3>Tools</h3><p class="sub">24 px grid, 1.5 px stroke, round ends</p>
+          <h3 id="engineering-tools" data-anchor="engineering-tools">Tools<button class="hlink" type="button" aria-label="Copy link to Tools"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">24 px grid, 1.5 px stroke, round ends</p>
           <p class="body">Drawn like the interface icons, on the same keylines. One rule gives them the brand: <b>hand tools lean with the glyph</b>, at 55°, top-left to bottom-right. <b>Instruments sit level</b>, because they read true. Tool icons mark engineering work: setup, service, hardware and data. They are not general-purpose symbols.</p>
           <table class="spec" style="margin-top:22px">
             <tr><td>Lean</td><td><code>rotate(55deg)</code> about the centre, hand tools only</td></tr>
@@ -1773,17 +1842,17 @@ section.s{overflow-x:clip}
         </div>
       </div>
       <div style="margin-top:56px">
-        <h3>Setup sheet</h3><p class="sub">The kart in plan view, front at the top, dimensions in mm</p>
+        <h3 id="engineering-setup-sheet" data-anchor="engineering-setup-sheet">Setup sheet<button class="hlink" type="button" aria-label="Copy link to Setup sheet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">The kart in plan view, front at the top, dimensions in mm</p>
         <div class="bp crop"><svg class="dwg kart" viewBox="0 0 1000 604" role="img" aria-label="Kart setup sheet in plan view, front at the top. Wheelbase 1040 mm, front track 1120 mm, rear track 1360 mm. Front left 0.72 bar, camber minus 1.50 degrees, toe 1.0 mm out. Front right 0.72 bar, camber minus 1.25 degrees, toe 1.0 mm out. Rear left 0.80 bar, surface 51 degrees. Rear right 0.82 bar, surface 54 degrees."><line class="kcl" x1="272" y1="160" x2="298" y2="160"/><line class="kcl" x1="702" y1="160" x2="728" y2="160"/><line class="kcl" x1="236" y1="470" x2="262" y2="470"/><line class="kcl" x1="738" y1="470" x2="764" y2="470"/><line class="kcl" x1="500" y1="18" x2="500" y2="52"/><line class="kcl" x1="500" y1="566" x2="500" y2="598"/><rect class="kty" x="312" y="122" width="40" height="76" rx="8"/><line class="ktr" x1="318" y1="132.857" x2="346" y2="132.857"/><line class="ktr" x1="318" y1="143.714" x2="346" y2="143.714"/><line class="ktr" x1="318" y1="154.571" x2="346" y2="154.571"/><line class="ktr" x1="318" y1="165.429" x2="346" y2="165.429"/><line class="ktr" x1="318" y1="176.286" x2="346" y2="176.286"/><line class="ktr" x1="318" y1="187.143" x2="346" y2="187.143"/><rect class="khb" x="349" y="138.72" width="3" height="42.56" rx="1"/><rect class="kty" x="648" y="122" width="40" height="76" rx="8"/><line class="ktr" x1="654" y1="132.857" x2="682" y2="132.857"/><line class="ktr" x1="654" y1="143.714" x2="682" y2="143.714"/><line class="ktr" x1="654" y1="154.571" x2="682" y2="154.571"/><line class="ktr" x1="654" y1="165.429" x2="682" y2="165.429"/><line class="ktr" x1="654" y1="176.286" x2="682" y2="176.286"/><line class="ktr" x1="654" y1="187.143" x2="682" y2="187.143"/><rect class="khb" x="648" y="138.72" width="3" height="42.56" rx="1"/><rect class="kty" x="268" y="426" width="56" height="88" rx="8"/><line class="ktr" x1="274" y1="438.571" x2="318" y2="438.571"/><line class="ktr" x1="274" y1="451.143" x2="318" y2="451.143"/><line class="ktr" x1="274" y1="463.714" x2="318" y2="463.714"/><line class="ktr" x1="274" y1="476.286" x2="318" y2="476.286"/><line class="ktr" x1="274" y1="488.857" x2="318" y2="488.857"/><line class="ktr" x1="274" y1="501.429" x2="318" y2="501.429"/><rect class="khb" x="321" y="445.36" width="3" height="49.28" rx="1"/><rect class="kty" x="676" y="426" width="56" height="88" rx="8"/><line class="ktr" x1="682" y1="438.571" x2="726" y2="438.571"/><line class="ktr" x1="682" y1="451.143" x2="726" y2="451.143"/><line class="ktr" x1="682" y1="463.714" x2="726" y2="463.714"/><line class="ktr" x1="682" y1="476.286" x2="726" y2="476.286"/><line class="ktr" x1="682" y1="488.857" x2="726" y2="488.857"/><line class="ktr" x1="682" y1="501.429" x2="726" y2="501.429"/><rect class="khb" x="676" y="445.36" width="3" height="49.28" rx="1"/><path class="kob" d="M374 124 C380 102 432 86 500 84 C568 86 620 102 626 124 C628 134 618 140 604 140 H396 C382 140 372 134 374 124 Z"/><path class="ksd" d="M410 128 C446 118 554 118 590 128"/><path class="ktb" d="M452 138 C446 190 428 250 426 320 L428 520 M548 138 C554 190 572 250 574 320 L572 520"/><path class="ktb" d="M452 150 H548 M427 330 H573 M428 505 H572"/><line class="kob" x1="352" y1="160" x2="363" y2="160"/><circle class="kob" cx="363" cy="160" r="5.5"/><line class="kob" x1="363" y1="160" x2="375" y2="182"/><line class="kth" x1="375" y1="182" x2="490" y2="194"/><line class="kob" x1="648" y1="160" x2="637" y2="160"/><circle class="kob" cx="637" cy="160" r="5.5"/><line class="kob" x1="637" y1="160" x2="625" y2="182"/><line class="kth" x1="625" y1="182" x2="510" y2="194"/><path class="kwb" d="M368 160 L448 143"/><circle class="kob" cx="448" cy="143" r="2.6"/><path class="kwb" d="M368 160 L448 177"/><circle class="kob" cx="448" cy="177" r="2.6"/><path class="kwb" d="M632 160 L552 143"/><circle class="kob" cx="552" cy="143" r="2.6"/><path class="kwb" d="M632 160 L552 177"/><circle class="kob" cx="552" cy="177" r="2.6"/><path class="kfp" d="M456 206 C476 198 524 198 544 206"/><rect class="kob" x="474" y="224" width="12" height="24" rx="2"/><rect class="kob" x="514" y="224" width="12" height="24" rx="2"/><rect class="kob" x="454" y="262" width="92" height="54" rx="5"/><text class="klb" x="500" y="293" text-anchor="middle">battery</text><path class="kob" d="M398 228 L370 236 C336 248 318 274 314 310 L310 384 C309 396 316 402 330 402 L398 402 Z"/><path class="kob" d="M602 228 L630 236 C664 248 682 274 686 310 L690 384 C691 396 684 402 670 402 L602 402 Z"/><path class="ksd" d="M380 252 C350 268 336 294 332 330 M620 252 C650 268 664 294 668 330"/><path class="kob" d="M462 346 C462 336 472 330 484 330 H516 C528 330 538 336 538 346 L542 424 C542 446 524 456 500 456 C476 456 458 446 458 424 Z"/><path class="ksd" d="M472 356 C472 348 480 344 490 344 H510 C520 344 528 348 528 356 L530 418 C530 432 518 440 500 440 C482 440 470 432 470 418 Z"/><text class="klb" x="500" y="398" text-anchor="middle">seat</text><rect class="kob" x="324" y="466" width="352" height="8" rx="4"/><rect class="kob" x="420" y="460" width="16" height="20" rx="2"/><rect class="kob" x="564" y="460" width="16" height="20" rx="2"/><rect class="kob" x="612" y="445" width="7" height="50" rx="2"/><path class="khd" d="M619 451 L624 450 M619 489 L640 450"/><rect class="kob" x="588" y="412" width="64" height="38" rx="7"/><text class="klb" x="620" y="435" text-anchor="middle">motor</text><rect class="kob" x="488" y="189" width="24" height="11" rx="2"/><circle class="kob" cx="500" cy="194.5" r="3"/><rect class="kob" x="478" y="452" width="6" height="40" rx="1"/><rect class="kob" x="474" y="484" width="14" height="12" rx="2"/><rect class="kob" x="324" y="461" width="12" height="18" rx="2"/><rect class="kob" x="664" y="461" width="12" height="18" rx="2"/><line class="kbr" x1="398" y1="262" x2="427" y2="262"/><line class="kbr" x1="602" y1="262" x2="573" y2="262"/><line class="kbr" x1="398" y1="372" x2="427" y2="372"/><line class="kbr" x1="602" y1="372" x2="573" y2="372"/><line class="kbr" x1="458" y1="392" x2="428" y2="392"/><line class="kbr" x1="542" y1="392" x2="572" y2="392"/><path class="kob" d="M300 532 C300 524 306 520 316 520 H684 C694 520 700 524 700 532 V548 C700 556 694 560 684 560 H316 C306 560 300 556 300 548 Z"/><line class="ktb" x1="440" y1="505" x2="440" y2="520"/><line class="ktb" x1="560" y1="505" x2="560" y2="520"/><line class="kex" x1="332" y1="116" x2="332" y2="30"/><line class="kex" x1="668" y1="116" x2="668" y2="30"/><line class="kdm" x1="332" y1="36" x2="668" y2="36"/><line class="ktk" x1="328.8" y1="31.4" x2="335.2" y2="40.6"/><line class="ktk" x1="664.8" y1="31.4" x2="671.2" y2="40.6"/><text class="kdv" x="510" y="30" text-anchor="start">1120</text><line class="kex" x1="296" y1="520" x2="296" y2="518"/><line class="kex" x1="296" y1="562" x2="296" y2="592"/><line class="kex" x1="704" y1="520" x2="704" y2="518"/><line class="kex" x1="704" y1="562" x2="704" y2="592"/><line class="kdm" x1="296" y1="586" x2="704" y2="586"/><line class="ktk" x1="292.8" y1="581.4" x2="299.2" y2="590.6"/><line class="ktk" x1="700.8" y1="581.4" x2="707.2" y2="590.6"/><text class="kdv" x="510" y="580" text-anchor="start">1360</text><line class="kdm" x1="250" y1="160" x2="250" y2="470"/><line class="ktk" x1="246.8" y1="155.4" x2="253.2" y2="164.6"/><line class="ktk" x1="246.8" y1="465.4" x2="253.2" y2="474.6"/><line class="kex" x1="244" y1="160" x2="272" y2="160"/><line class="kex" x1="244" y1="470" x2="236" y2="470"/><text class="kdv" x="242" y="345" text-anchor="middle" transform="rotate(-90 242 345)">1040</text><text class="klb" x="500" y="12" text-anchor="middle">front</text><text class="kct" x="24" y="116" text-anchor="start">Front left</text><text class="kk" x="24" y="138" text-anchor="start">pressure</text><text class="kbig" x="24" y="172">0.72<tspan class="kun" dx="6">bar</tspan></text><line class="krl" x1="24" y1="187" x2="200" y2="187"/><text class="kk" x="24" y="202" text-anchor="start">camber</text><text class="kv" x="200" y="202" text-anchor="end">−1.50°</text><line class="krl" x1="24" y1="211" x2="200" y2="211"/><text class="kk" x="24" y="226" text-anchor="start">toe</text><text class="kv" x="200" y="226" text-anchor="end">1.0 mm out</text><line class="kld" x1="212" y1="160" x2="313" y2="160"/><circle class="kdot" cx="313" cy="160" r="3"/><text class="kct" x="800" y="116" text-anchor="start">Front right</text><text class="kk" x="800" y="138" text-anchor="start">pressure</text><text class="kbig" x="800" y="172">0.72<tspan class="kun" dx="6">bar</tspan></text><line class="krl" x1="800" y1="187" x2="976" y2="187"/><text class="kk" x="800" y="202" text-anchor="start">camber</text><text class="kv" x="976" y="202" text-anchor="end">−1.25°</text><line class="krl" x1="800" y1="211" x2="976" y2="211"/><text class="kk" x="800" y="226" text-anchor="start">toe</text><text class="kv" x="976" y="226" text-anchor="end">1.0 mm out</text><line class="kld" x1="687" y1="160" x2="788" y2="160"/><circle class="kdot" cx="687" cy="160" r="3"/><text class="kct" x="24" y="426" text-anchor="start">Rear left</text><text class="kk" x="24" y="448" text-anchor="start">pressure</text><text class="kbig" x="24" y="482">0.80<tspan class="kun" dx="6">bar</tspan></text><line class="krl" x1="24" y1="497" x2="200" y2="497"/><text class="kk" x="24" y="512" text-anchor="start">surface</text><text class="kv hot" x="200" y="512" text-anchor="end">51 °C</text><line class="krl" x1="24" y1="521" x2="200" y2="521"/><text class="kk" x="24" y="536" text-anchor="start">hub</text><text class="kv" x="200" y="536" text-anchor="end">95 mm</text><line class="kld" x1="212" y1="470" x2="269" y2="470"/><circle class="kdot" cx="269" cy="470" r="3"/><text class="kct" x="800" y="426" text-anchor="start">Rear right</text><text class="kk" x="800" y="448" text-anchor="start">pressure</text><text class="kbig" x="800" y="482">0.82<tspan class="kun" dx="6">bar</tspan></text><line class="krl" x1="800" y1="497" x2="976" y2="497"/><text class="kk" x="800" y="512" text-anchor="start">surface</text><text class="kv hot" x="976" y="512" text-anchor="end">54 °C</text><line class="krl" x1="800" y1="521" x2="976" y2="521"/><text class="kk" x="800" y="536" text-anchor="start">hub</text><text class="kv" x="976" y="536" text-anchor="end">95 mm</text><line class="kld" x1="731" y1="470" x2="788" y2="470"/><circle class="kdot" cx="731" cy="470" r="3"/></svg>
           <dl class="tb"><div><dt>Sheet</dt><dd>Setup</dd></div><div><dt>Hub</dt><dd>FKL Łódź</dd></div><div><dt>Class</dt><dd>Cadet</dd></div><div><dt>Driver</dt><dd>Maja Kowalczyk</dd></div><div><dt>Session</dt><dd>Qualifying</dd></div><div><dt>Date</dt><dd>24 Sep 2026</dd></div></dl>
         </div>
         <p class="plate-cap">Object lines for the kart, centre and dimension lines outside it, one big figure per corner on a leader to its tyre. The same drawing works for a chassis, a sensor housing or a simulator rig.</p>
       </div>
 
-      <h3 class="subhead">The pit wall</h3>
+      <h3 class="subhead" id="engineering-the-pit-wall" data-anchor="engineering-the-pit-wall">The pit wall<button class="hlink" type="button" aria-label="Copy link to The pit wall"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
       <div class="two" style="align-items:start">
         <div>
-          <h3>Timing screen</h3><p class="sub">Qualifying, FKL Łódź, cadet</p>
+          <h3 id="engineering-timing-screen" data-anchor="engineering-timing-screen">Timing screen<button class="hlink" type="button" aria-label="Copy link to Timing screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Qualifying, FKL Łódź, cadet</p>
           <table class="timing">
             <tr><th>Pos</th><th>Driver</th><th>Best</th><th>Gap</th><th>S1</th><th>S2</th><th>S3</th></tr>
             <tr class="lead"><td><span class="p">1</span></td><td><b>KOW</b>Maja Kowalczyk</td><td>1:02.418</td><td>Leader</td><td>20.904</td><td class="pb">20.771</td><td>20.743</td></tr>
@@ -1793,7 +1862,7 @@ section.s{overflow-x:clip}
           <p class="note" style="margin-top:14px;font-size:12px;color:var(--dim)">The leader's position board goes red. The fastest time in each sector is the only green on the screen.</p>
         </div>
         <div>
-          <h3>Readouts</h3><p class="sub">Value, then unit, in IBM Plex Mono</p>
+          <h3 id="engineering-readouts" data-anchor="engineering-readouts">Readouts<button class="hlink" type="button" aria-label="Copy link to Readouts"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Value, then unit, in IBM Plex Mono</p>
           <div class="readouts">
             <div><span>speed</span><b>87.4</b><em>km/h</em></div>
             <div><span>throttle</span><b>100</b><em>%</em></div>
@@ -1804,16 +1873,16 @@ section.s{overflow-x:clip}
         </div>
       </div>
 
-      <h3 class="subhead">The track</h3>
+      <h3 class="subhead" id="engineering-the-track" data-anchor="engineering-the-track">The track<button class="hlink" type="button" aria-label="Copy link to The track"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
       <div class="kit">
-        <div class="cell"><h4>Number board</h4>
+        <div class="cell"><h4 id="engineering-number-board" data-anchor="engineering-number-board">Number board<button class="hlink" type="button" aria-label="Copy link to Number board"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4>
           <div class="row" style="gap:14px;align-items:flex-end"><span class="board" style="height:56px;padding:0 34px;font-size:32px;clip-path:polygon(0 0,calc(100% - 39px) 0,100% 100%,39px 100%)">06</span><span class="board" style="height:34px;padding:0 22px;font-size:19px;clip-path:polygon(0 0,calc(100% - 24px) 0,100% 100%,24px 100%)">P1</span></div>
           <p class="note">Marks a place: a sheet, a grid slot, a position. White board, Ink number, cut at 55° both ends.</p></div>
-        <div class="cell"><h4>Kerb</h4>
+        <div class="cell"><h4 id="engineering-kerb" data-anchor="engineering-kerb">Kerb<button class="hlink" type="button" aria-label="Copy link to Kerb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4>
           <div class="kerb"></div>
           <div style="margin-top:22px"><div class="row" style="justify-content:space-between;font-size:12px;color:var(--dim);margin-bottom:8px"><span>Index against F4 entry</span><b class="mono" style="color:var(--ink)">82.6</b></div><div class="limit"><i style="width:73%"></i><u style="width:18%"></u></div></div>
           <p class="note">Marks a limit coming up: the F4 entry band, a budget cap, a track limit. Race Red and white at 55°, as painted at the apex.</p></div>
-        <div class="cell"><h4>Chequer</h4>
+        <div class="cell"><h4 id="engineering-chequer" data-anchor="engineering-chequer">Chequer<button class="hlink" type="button" aria-label="Copy link to Chequer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4>
           <div class="chq"></div>
           <div class="steps" style="margin-top:22px"><div class="done">Hub trial</div><div class="done">FKL season</div><div class="done">F4 test day</div><div class="done">F4 seat</div></div>
           <p class="note">Marks a finish, and only a finish: the last sheet, a completed flow, a final result. Chequers lean at 55°.</p></div>
@@ -1823,7 +1892,7 @@ section.s{overflow-x:clip}
     <!-- 10 USAGE CONTEXT -->
     <section class="s" id="context"><div class="inner">
       <div class="sh"><div class="num">10</div><span class="chap">Two worlds</span></div>
-      <h2>Usage context</h2>
+      <h2 data-anchor="context">Usage context<button class="hlink" type="button" aria-label="Copy link to Usage context"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Both worlds are always present; the context decides which one leads. In the garage blue leads and red is the single mark of intent. On track red leads and blue is the single line of reference. Neither ever disappears, and neither ever shares the lead.</p>
       <div class="hair"></div>
       <table class="spec ctx">
@@ -1832,7 +1901,7 @@ section.s{overflow-x:clip}
         <tr><td><i class="cr"></i>Racing</td><td>Race Red fills, red number boards, kerbs, chequers, speed streaks, the leader</td><td>Blue as the reference line: the pace to beat, the model, focus</td><td>FAT Karting League, FAT Racing, events, results, fan and driver content</td></tr>
         <tr><td><i class="cg"></i>Group</td><td>Neither: the ground, white and the logo</td><td>Red and blue in balance, meeting at the seam</td><td>Smedley Group, investor and corporate material, this book</td></tr>
       </table>
-      <div class="ctxh"><h3>Engineering, blue leads</h3><p class="sub">An Advanced Technology product page</p></div>
+      <div class="ctxh"><h3 id="context-engineering-blue-leads" data-anchor="context-engineering-blue-leads">Engineering, blue leads<button class="hlink" type="button" aria-label="Copy link to Engineering, blue leads"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">An Advanced Technology product page</p></div>
       <div class="browser ux"><div class="addr"><span>smedley.group/advanced-technology</span></div>
 <div class="uxp eng">
   <header class="uxn"><span class="lk" style="--lk:.3px;color:#fff" aria-hidden="true"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span><nav><a>Services</a><a class="on">Hardware</a><a>Software</a><a>Case studies</a></nav><button class="btn sm ub" type="button">Start a project</button></header>
@@ -1856,7 +1925,7 @@ section.s{overflow-x:clip}
   </div>
 </div></div>
       <p class="plate-cap">The hero sits on the blueprint grid with its drawing. Blue carries the actions and the numbering, readouts are mono. The only red is the lead of the scale rule.</p>
-      <div class="ctxh"><h3>Racing, red leads</h3><p class="sub">A FAT Karting League championship page</p></div>
+      <div class="ctxh"><h3 id="context-racing-red-leads" data-anchor="context-racing-red-leads">Racing, red leads<button class="hlink" type="button" aria-label="Copy link to Racing, red leads"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">A FAT Karting League championship page</p></div>
       <div class="browser ux"><div class="addr"><span>fatkartingleague.com/championship</span></div>
 <div class="uxp race">
   <header class="uxn"><span class="lk" style="--lk:.3px;color:#fff" aria-hidden="true"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w"><span>Smedley<br>Group</span><i></i><span>FAT Karting<br>League</span></span></span><nav><a class="on">Championship</a><a>Hubs</a><a>Drivers</a><a>Results</a></nav><button class="btn sm p" type="button">Book a race</button></header>
@@ -1883,7 +1952,7 @@ section.s{overflow-x:clip}
     <!-- 11 MOTION -->
     <section class="s" id="motion"><div class="inner">
       <div class="sh"><div class="num">11</div><span class="chap">Two worlds</span></div>
-      <h2>Motion</h2>
+      <h2 data-anchor="motion">Motion<button class="hlink" type="button" aria-label="Copy link to Motion"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">The mark is made on track and measured in the garage. Three tyres brake, their skids burn red and cool into the bars, and blue construction lines set the glyph at its lean. Motion always decelerates like a car on the brakes.</p>
       <div class="hair"></div>
       <div class="stage"><iframe title="Logo animation, full sequence" src="assets/mark.html"></iframe></div>
@@ -1915,7 +1984,7 @@ section.s{overflow-x:clip}
     <!-- 12 GLYPH AS PROGRESS -->
     <section class="s" id="progress"><div class="inner">
       <div class="sh"><div class="num">12</div><span class="chap">Two worlds</span></div>
-      <h2>The glyph as progress</h2>
+      <h2 data-anchor="progress">The glyph as progress<button class="hlink" type="button" aria-label="Copy link to The glyph as progress"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">The three bars are the three rungs of the ladder. One value runs through them in order, so a driver becomes the whole logo only on reaching F1.</p>
       <div class="hair"></div>
       <div class="gaugewrap">
@@ -1939,21 +2008,21 @@ section.s{overflow-x:clip}
     <!-- 13 CONTROLS -->
     <section class="s" id="components"><div class="inner">
       <div class="sh"><div class="num">13</div><span class="chap">Interface</span></div>
-      <h2>Controls</h2>
+      <h2 data-anchor="components">Controls<button class="hlink" type="button" aria-label="Copy link to Controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Everything a person presses, types into or chooses. Red means active, the 55° cut marks the choice, and nothing hides in a box it does not need.</p>
       <div class="hair"></div>
 
-      <h3 class="subhead">Actions</h3>
+      <h3 class="subhead" id="components-actions" data-anchor="components-actions">Actions<button class="hlink" type="button" aria-label="Copy link to Actions"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
       <div class="kit">
-        <div class="cell"><h4>Buttons</h4><div class="row"><button class="btn p" type="button">Save session</button><button class="btn g" type="button">Cancel</button><button class="btn t" type="button">Learn more</button></div><p class="note">One Race Red primary per view. Secondary is a 10 % tint of the ink. Text buttons for low-weight actions.</p></div>
-        <div class="cell"><h4>States and sizes</h4><div class="row"><button class="btn p sm" type="button">Small</button><button class="btn p" type="button" disabled>Disabled</button><button class="btn neg" type="button">Remove driver</button></div><p class="note">Destructive actions use the yellow flag as text on its tint. Red is never a warning.</p></div>
-        <div class="cell"><h4>Icon buttons and loading</h4><div class="row">
+        <div class="cell"><h4 id="components-buttons" data-anchor="components-buttons">Buttons<button class="hlink" type="button" aria-label="Copy link to Buttons"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="row"><button class="btn p" type="button">Save session</button><button class="btn g" type="button">Cancel</button><button class="btn t" type="button">Learn more</button></div><p class="note">One Race Red primary per view. Secondary is a 10 % tint of the ink. Text buttons for low-weight actions.</p></div>
+        <div class="cell"><h4 id="components-states-and-sizes" data-anchor="components-states-and-sizes">States and sizes<button class="hlink" type="button" aria-label="Copy link to States and sizes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="row"><button class="btn p sm" type="button">Small</button><button class="btn p" type="button" disabled>Disabled</button><button class="btn neg" type="button">Remove driver</button></div><p class="note">Destructive actions use the yellow flag as text on its tint. Red is never a warning.</p></div>
+        <div class="cell"><h4 id="components-icon-buttons-and-loading" data-anchor="components-icon-buttons-and-loading">Icon buttons and loading<button class="hlink" type="button" aria-label="Copy link to Icon buttons and loading"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="row">
           <div class="bgroup" role="group" aria-label="Session tools"><button class="ibtn on" type="button" aria-label="Filter" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button>
           <button class="ibtn dl" type="button" aria-label="Download"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></button>
           <button class="ibtn" type="button" aria-label="More"><svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="18" cy="12" r="1"/></svg></button></div>
           <button class="btn g" type="button" aria-busy="true"><svg class="loader" viewBox="-0.9 -1 56 86" aria-hidden="true"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></svg>&nbsp; Syncing</button>
         </div><p class="note">Icon buttons take the button's cut, with the icon kept upright; a pressed one goes red. Buttons that belong together touch: their cuts run parallel 3 px apart, so the group reads as one bar. The loader is the glyph, its bars lighting Flame in turn. The only looping motion in the system.</p></div>
-        <div class="cell full"><h4>Buttons with icons</h4><div class="row" style="gap:12px">
+        <div class="cell full"><h4 id="components-buttons-with-icons" data-anchor="components-buttons-with-icons">Buttons with icons<button class="hlink" type="button" aria-label="Copy link to Buttons with icons"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="row" style="gap:12px">
           <button class="btn p lg tool tool tool dl add" type="button"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.5"/><path d="M12 6.5V3.5M10 3.5H14"/></svg>Start session</button>
           <button class="btn p" type="button"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Export lap <span class="kbd">⌘E</span></button>
           <button class="btn g" type="button"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><g transform="rotate(55 12 12)"><path d="M8.77 10.7H16.43A2.7 2.7 0 1 1 16.43 13.3H8.77A3.8 3.8 0 0 1 1.67 13.4H5.2V10.6H1.67A3.8 3.8 0 0 1 8.77 10.7Z"/><circle cx="18.8" cy="12" r="1"/></g></svg>Open setup sheet</button>
@@ -1964,7 +2033,7 @@ section.s{overflow-x:clip}
         </div><p class="note">The icon leads the label, 16 px, 8 px gap, in the button's own colour. Workshop tools for engineering actions, plain strokes for everything else. A trailing arrow only ever means go on.</p></div>
       </div>
 
-      <h3 class="subhead">Inputs</h3>
+      <h3 class="subhead" id="components-inputs" data-anchor="components-inputs">Inputs<button class="hlink" type="button" aria-label="Copy link to Inputs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
       <div class="kit">
         <div class="cell"><div class="col">
           <div class="field"><label for="k1">Driver name</label><input class="inp" id="k1" placeholder="Maja Kowalczyk"></div>
@@ -1981,36 +2050,36 @@ section.s{overflow-x:clip}
         </div></div>
       </div>
 
-      <h3 class="subhead">Selection</h3>
+      <h3 class="subhead" id="components-selection" data-anchor="components-selection">Selection<button class="hlink" type="button" aria-label="Copy link to Selection"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
       <div class="kit">
-        <div class="cell"><h4>Checkboxes</h4><div class="col" style="gap:4px">
+        <div class="cell"><h4 id="components-checkboxes" data-anchor="components-checkboxes">Checkboxes<button class="hlink" type="button" aria-label="Copy link to Checkboxes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="col" style="gap:4px">
           <label class="check"><input type="checkbox" checked> Dry sessions</label>
           <label class="check"><input type="checkbox"> Wet sessions</label>
           <label class="check"><input type="checkbox" id="indet"> All conditions</label>
           <label class="check" style="color:var(--dim)"><input type="checkbox" disabled> Night sessions</label>
         </div></div>
-        <div class="cell"><h4>Radio buttons</h4><div class="col" style="gap:4px" role="radiogroup" aria-label="Class">
+        <div class="cell"><h4 id="components-radio-buttons" data-anchor="components-radio-buttons">Radio buttons<button class="hlink" type="button" aria-label="Copy link to Radio buttons"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="col" style="gap:4px" role="radiogroup" aria-label="Class">
           <label class="radio"><input type="radio" name="cls" checked> Cadet</label>
           <label class="radio"><input type="radio" name="cls"> Junior</label>
           <label class="radio"><input type="radio" name="cls"> Senior</label>
         </div><p class="note">The selected radio carries one bar of the glyph.</p></div>
-        <div class="cell"><h4>Toggles</h4><div class="col" style="gap:0">
+        <div class="cell"><h4 id="components-toggles" data-anchor="components-toggles">Toggles<button class="hlink" type="button" aria-label="Copy link to Toggles"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="col" style="gap:0">
           <label class="toggle"><input type="checkbox" checked><span class="tr"></span>Live timing</label>
           <label class="toggle"><input type="checkbox"><span class="tr"></span>Email me new F4 candidates</label>
         </div></div>
-        <div class="cell"><h4>Segmented control</h4><div class="seg" role="radiogroup" aria-label="Period">
+        <div class="cell"><h4 id="components-segmented-control" data-anchor="components-segmented-control">Segmented control<button class="hlink" type="button" aria-label="Copy link to Segmented control"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="seg" role="radiogroup" aria-label="Period">
           <label><input type="radio" name="per"><span><i>Week</i></span></label><label><input type="radio" name="per" checked><span><i>Month</i></span></label><label><input type="radio" name="per"><span><i>Season</i></span></label>
         </div></div>
-        <div class="cell"><h4>Filter chips and tags</h4><div class="row" id="chips"><button class="chip" type="button" aria-pressed="true">Cadet</button><button class="chip" type="button" aria-pressed="false">Junior</button><button class="chip" type="button" aria-pressed="true">Rising</button></div>
+        <div class="cell"><h4 id="components-filter-chips-and-tags" data-anchor="components-filter-chips-and-tags">Filter chips and tags<button class="hlink" type="button" aria-label="Copy link to Filter chips and tags"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="row" id="chips"><button class="chip" type="button" aria-pressed="true">Cadet</button><button class="chip" type="button" aria-pressed="false">Junior</button><button class="chip" type="button" aria-pressed="true">Rising</button></div>
           <div class="row" style="margin-top:14px"><span class="tag pos">Ready for F4</span><span class="tag neu">In FKL</span><span class="tag neg">Injury hold</span></div></div>
-        <div class="cell"><h4>Slider</h4><label class="lab" for="k7" style="font-size:12px;color:var(--dim)">Minimum index <b id="k7v" style="color:var(--ink)">70</b></label><input class="range" id="k7" type="range" min="50" max="100" value="70" style="--v:40%"></div>
+        <div class="cell"><h4 id="components-slider" data-anchor="components-slider">Slider<button class="hlink" type="button" aria-label="Copy link to Slider"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><label class="lab" for="k7" style="font-size:12px;color:var(--dim)">Minimum index <b id="k7v" style="color:var(--ink)">70</b></label><input class="range" id="k7" type="range" min="50" max="100" value="70" style="--v:40%"></div>
       </div>
 
-      <h3 class="subhead">Interaction</h3>
+      <h3 class="subhead" id="components-interaction" data-anchor="components-interaction">Interaction<button class="hlink" type="button" aria-label="Copy link to Interaction"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
       <div class="kit">
-        <div class="cell"><h4>Lights out</h4><div class="row"><button class="btn p lg lights" type="button" id="lightsBtn"><span class="lb">Start session</span><span class="lt" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button></div><p class="note">A start that matters gets start lights: five reds, one every 250 ms, then lights out and the button reads live.</p></div>
-        <div class="cell"><h4>Hold to confirm</h4><div class="row"><button class="btn neg hold" type="button" id="holdBtn"><span class="pr"></span><span class="hl">Hold to remove driver</span></button></div><p class="note">Irreversible actions build pressure like a brake pedal: hold for one second. Let go early and nothing happens.</p></div>
-        <div class="cell"><h4>Try them</h4><div class="row"><button class="btn p" type="button">Hover me</button><button class="btn t" type="button">Next lap<svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div><p class="note">Hover sends one light pass across at 55°, text links draw the seam, arrows drive on. Press dips like a car on the brakes.</p></div>
+        <div class="cell"><h4 id="components-lights-out" data-anchor="components-lights-out">Lights out<button class="hlink" type="button" aria-label="Copy link to Lights out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="row"><button class="btn p lg lights" type="button" id="lightsBtn"><span class="lb">Start session</span><span class="lt" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button></div><p class="note">A start that matters gets start lights: five reds, one every 250 ms, then lights out and the button reads live.</p></div>
+        <div class="cell"><h4 id="components-hold-to-confirm" data-anchor="components-hold-to-confirm">Hold to confirm<button class="hlink" type="button" aria-label="Copy link to Hold to confirm"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="row"><button class="btn neg hold" type="button" id="holdBtn"><span class="pr"></span><span class="hl">Hold to remove driver</span></button></div><p class="note">Irreversible actions build pressure like a brake pedal: hold for one second. Let go early and nothing happens.</p></div>
+        <div class="cell"><h4 id="components-try-them" data-anchor="components-try-them">Try them<button class="hlink" type="button" aria-label="Copy link to Try them"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="row"><button class="btn p" type="button">Hover me</button><button class="btn t" type="button">Next lap<svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div><p class="note">Hover sends one light pass across at 55°, text links draw the seam, arrows drive on. Press dips like a car on the brakes.</p></div>
         <div class="cell full"><table class="spec">
           <tr><th>Moment</th><th>Motion</th></tr>
           <tr><td>Hover</td><td>One light pass at 55°, 700 ms brake. Icons answer for their tool: spanners turn, downloads drop, arrows drive on</td></tr>
@@ -2026,32 +2095,32 @@ section.s{overflow-x:clip}
     <!-- 14 NAVIGATION -->
     <section class="s" id="nav-sec"><div class="inner">
       <div class="sh"><div class="num">14</div><span class="chap">Interface</span></div>
-      <h2>Navigation and feedback</h2>
+      <h2 data-anchor="nav-sec">Navigation and feedback<button class="hlink" type="button" aria-label="Copy link to Navigation and feedback"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Where you are, where you can go, and what just happened. The current place is always marked by one bar at the glyph's lean.</p>
       <div class="hair"></div>
       <div class="kit">
-        <div class="cell wide"><h4>Tabs</h4><div class="tabs" role="tablist" id="tabs"><button role="tab" aria-selected="true">Overview</button><button role="tab" aria-selected="false">Sessions</button><button role="tab" aria-selected="false">Telemetry</button><button role="tab" aria-selected="false">Notes</button></div>
+        <div class="cell wide"><h4 id="nav-sec-tabs" data-anchor="nav-sec-tabs">Tabs<button class="hlink" type="button" aria-label="Copy link to Tabs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="tabs" role="tablist" id="tabs"><button role="tab" aria-selected="true">Overview</button><button role="tab" aria-selected="false">Sessions</button><button role="tab" aria-selected="false">Telemetry</button><button role="tab" aria-selected="false">Notes</button></div>
           <div class="row" style="margin-top:28px;justify-content:space-between">
             <nav class="crumbs" aria-label="Breadcrumb"><a href="#">Drivers</a><i></i><a href="#">FKL Łódź</a><i></i><b aria-current="page">Maja Kowalczyk</b></nav>
             <nav class="pager" aria-label="Pages" id="pager"><button type="button" aria-label="Previous page">‹</button><button type="button">1</button><button type="button" aria-current="page">2</button><button type="button">3</button><span style="color:var(--dim);padding:0 6px">…</span><button type="button">12</button><button type="button" aria-label="Next page">›</button></nav>
           </div></div>
-        <div class="cell" style="grid-row:span 2"><h4>Side navigation</h4><nav class="sidenav" aria-label="App"><a href="#" class="on">Dashboard</a><a href="#">Drivers <span>248</span></a><a href="#">Sessions</a><a href="#">Hubs</a><a href="#">Shortlists <span>3</span></a><a href="#">Settings</a></nav></div>
-        <div class="cell wide"><h4>Stepper</h4><div class="steps"><div class="done">Hub trial</div><div class="done">FKL season</div><div class="now">F4 test day</div><div>F4 seat</div></div><p class="note">Steps use the same slanted bars as progress, so a flow reads like a pathway.</p></div>
-        <div class="cell wide"><h4>Alerts</h4><div class="col">
+        <div class="cell" style="grid-row:span 2"><h4 id="nav-sec-side-navigation" data-anchor="nav-sec-side-navigation">Side navigation<button class="hlink" type="button" aria-label="Copy link to Side navigation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><nav class="sidenav" aria-label="App"><a href="#" class="on">Dashboard</a><a href="#">Drivers <span>248</span></a><a href="#">Sessions</a><a href="#">Hubs</a><a href="#">Shortlists <span>3</span></a><a href="#">Settings</a></nav></div>
+        <div class="cell wide"><h4 id="nav-sec-stepper" data-anchor="nav-sec-stepper">Stepper<button class="hlink" type="button" aria-label="Copy link to Stepper"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="steps"><div class="done">Hub trial</div><div class="done">FKL season</div><div class="now">F4 test day</div><div>F4 seat</div></div><p class="note">Steps use the same slanted bars as progress, so a flow reads like a pathway.</p></div>
+        <div class="cell wide"><h4 id="nav-sec-alerts" data-anchor="nav-sec-alerts">Alerts<button class="hlink" type="button" aria-label="Copy link to Alerts"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="col">
           <div class="alert info" role="status"><i></i><div><b>Timing feed paused</b><p>FKL Dubai is offline. Sessions will sync when it reconnects.</p></div><button class="x" type="button" aria-label="Dismiss">×</button></div>
           <div class="alert ok" role="status"><i></i><div><b>Added to shortlist</b><p>Maja Kowalczyk is on the F4 winter shortlist.</p></div><button class="x" type="button" aria-label="Dismiss">×</button></div>
           <div class="alert bad" role="alert"><i></i><div><b>Session could not be saved</b><p>The transponder ID is missing. Add it and save again.</p></div><button class="x" type="button" aria-label="Dismiss">×</button></div>
         </div></div>
-        <div class="cell"><h4>Toast, tooltip, badge</h4><div class="col" style="gap:22px">
+        <div class="cell"><h4 id="nav-sec-toast-tooltip-badge" data-anchor="nav-sec-toast-tooltip-badge">Toast, tooltip, badge<button class="hlink" type="button" aria-label="Copy link to Toast, tooltip, badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="col" style="gap:22px">
           <div class="toast edge"><span class="grow">Session archived</span><button class="btn t sm" type="button">Undo</button></div>
           <div class="row" style="gap:22px"><span class="tip">Index 91.4, ranked 1 of 248</span></div>
           <div class="row" style="gap:18px"><span class="row" style="gap:8px;font-size:13px">Shortlists <span class="badge">3</span></span><span class="status"><i style="background:#3DDC84"></i>Online</span><span class="status"><i style="background:#8A9099"></i>Idle</span><span class="status"><i style="background:#FFB547"></i>Offline</span></div>
         </div></div>
-        <div class="cell"><h4>Progress</h4><div class="col" style="gap:18px">
+        <div class="cell"><h4 id="nav-sec-progress" data-anchor="nav-sec-progress">Progress<button class="hlink" type="button" aria-label="Copy link to Progress"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="col" style="gap:18px">
           <div><div class="row" style="justify-content:space-between;font-size:12px;color:var(--dim);margin-bottom:8px"><span>Uploading telemetry</span><b style="color:var(--ink)">64%</b></div><div class="lin"><i style="width:64%"></i></div></div>
           <div><div style="font-size:12px;color:var(--dim);margin-bottom:8px">Processing sessions</div><div class="lin ind" role="progressbar" aria-label="Processing"><i></i></div></div>
         </div><p class="note">Indeterminate progress runs the tread print, cut at 55°.</p></div>
-        <div class="cell"><h4>Loading and empty</h4><div class="col" style="gap:8px"><div class="skel" style="width:70%"></div><div class="skel" style="width:90%"></div><div class="skel" style="width:40%"></div></div>
+        <div class="cell"><h4 id="nav-sec-loading-and-empty" data-anchor="nav-sec-loading-and-empty">Loading and empty<button class="hlink" type="button" aria-label="Copy link to Loading and empty"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="col" style="gap:8px"><div class="skel" style="width:70%"></div><div class="skel" style="width:90%"></div><div class="skel" style="width:40%"></div></div>
           <div class="empty"><svg viewBox="-0.9 -1 56 86" width="30" height="46" aria-hidden="true"><g stroke-width="14.2" style="stroke:rgba(var(--t),.22)"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><b style="font-weight:600;font-size:13px">No sessions yet</b><p>Sessions appear here after the first timed lap at a hub.</p><button class="btn g sm" type="button">Add a session</button></div></div>
       </div>
     </div></section>
@@ -2059,69 +2128,69 @@ section.s{overflow-x:clip}
     <!-- 15 DATA AND CHARTS -->
     <section class="s" id="charts-sec"><div class="inner">
       <div class="sh"><div class="num">15</div><span class="chap">Interface</span></div>
-      <h2>Data and charts</h2>
+      <h2 data-anchor="charts-sec">Data and charts<button class="hlink" type="button" aria-label="Copy link to Data and charts"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Red is the driver, blue is the engineering: the reference, the line to beat and the model's uncertainty. Alloy and Steel are the field. Bars end in the 55° cut and points are small glyph bars. Ticks and readouts are in mono. No gradient washes, no rainbow series.</p>
       <div class="hair"></div>
       <div class="kit">
-        <div class="cell wide"><h4>Telemetry, one lap against the reference</h4>
+        <div class="cell wide"><h4 id="charts-sec-telemetry-one-lap-against-the-reference" data-anchor="charts-sec-telemetry-one-lap-against-the-reference">Telemetry, one lap against the reference<button class="hlink" type="button" aria-label="Copy link to Telemetry, one lap against the reference"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4>
           <div class="telhead"><span>Maja Kowalczyk, FKL Łódź, <b id="telLap"></b></span><span>Cursor <b id="telAt"></b></span></div>
           <svg class="ch tel" id="chTel" viewBox="0 0 720 372" tabindex="0" role="slider" aria-label="Telemetry cursor, distance around the lap in metres" aria-valuemin="0" aria-valuemax="1100"></svg>
           <div class="legend"><span><i style="background:#FF4B3E"></i>Maja Kowalczyk</span><span><i style="background:#2F80FF"></i>Class reference</span><span><i style="background:var(--ink)"></i>Delta, below zero is time gained</span></div>
           <p class="note">Four channels on one distance axis, sectors as centre lines. Move along the trace, or along the track, and every channel reads out at once.</p></div>
-        <div class="cell"><h4>Track map</h4><svg class="ch" id="chTrack" viewBox="20 20 360 270" role="img" aria-label="FKL Łódź circuit, shaded by speed, with sector lines and the cursor position"></svg>
+        <div class="cell"><h4 id="charts-sec-track-map" data-anchor="charts-sec-track-map">Track map<button class="hlink" type="button" aria-label="Copy link to Track map"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><svg class="ch" id="chTrack" viewBox="20 20 360 270" role="img" aria-label="FKL Łódź circuit, shaded by speed, with sector lines and the cursor position"></svg>
           <div style="margin-top:14px;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;color:var(--dim)"><span>slow</span><i style="flex:1;height:4px;background:linear-gradient(90deg,#2F80FF,#4A4F57,#FF4B3E)"></i><span>fast</span></div>
           <p class="note">The lap is simulated from the circuit's own curvature, so braking zones fall where the corners are.</p></div>
-        <div class="cell wide"><h4>Model fit, pace against track temperature</h4><div class="telhead"><span>Best lap, s, every driver in class</span><b id="fitStats"></b></div><svg class="ch" id="chFit" viewBox="0 0 560 240" role="img" aria-label="Scatter of best lap against track temperature with a fitted line and a confidence band. Maja Kowalczyk's laps sit below the band."></svg>
+        <div class="cell wide"><h4 id="charts-sec-model-fit-pace-against-track-temperature" data-anchor="charts-sec-model-fit-pace-against-track-temperature">Model fit, pace against track temperature<button class="hlink" type="button" aria-label="Copy link to Model fit, pace against track temperature"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="telhead"><span>Best lap, s, every driver in class</span><b id="fitStats"></b></div><svg class="ch" id="chFit" viewBox="0 0 560 240" role="img" aria-label="Scatter of best lap against track temperature with a fitted line and a confidence band. Maja Kowalczyk's laps sit below the band."></svg>
           <p class="note">The model takes out the conditions. What is left, below the band, is the driver.</p></div>
-        <div class="cell"><h4>Distribution</h4><div class="telhead"><span>Index across the pool, n 248</span></div><svg class="ch" id="chDist" viewBox="0 0 300 200" role="img" aria-label="Histogram of the pool's index with a density curve, the F4 entry line at 85 and Maja Kowalczyk at 91.4"></svg></div>
-        <div class="cell wide"><h4>Line, subject against reference</h4><svg class="ch" id="chLine" viewBox="0 0 560 200" role="img" aria-label="Pace trend against class average"></svg><div class="legend"><span><i style="background:#FF4B3E"></i>Maja Kowalczyk</span><span><i style="background:#8A9099"></i>Class average</span><span><i style="background:#2F80FF;width:3px"></i>F4 entry</span></div></div>
-        <div class="cell"><h4>Ring</h4><svg class="ch" id="chRing" viewBox="0 0 200 200" role="img" aria-label="Session conditions split" style="max-width:200px;margin:0 auto"></svg><div class="legend" style="justify-content:center"><span><i style="background:var(--ink)"></i>Dry 62%</span><span><i style="background:#2F80FF"></i>Damp 24%</span><span><i style="background:#4A4F57"></i>Wet 14%</span></div></div>
-        <div class="cell"><h4>Bars</h4><svg class="ch" id="chBar" viewBox="0 0 300 180" role="img" aria-label="Sessions per month"></svg></div>
-        <div class="cell"><h4>Diverging</h4><svg class="ch" id="chDiv" viewBox="0 0 300 180" role="img" aria-label="Sector delta to reference"></svg><p class="note">Gains and losses differ by shade, and the numbers carry the signal colour.</p></div>
-        <div class="cell"><h4>Radar</h4><svg class="ch" id="chRadar" viewBox="0 0 240 220" role="img" aria-label="Skill profile" style="max-width:260px;margin:0 auto"></svg></div>
-        <div class="cell wide"><h4>Activity</h4>
+        <div class="cell"><h4 id="charts-sec-distribution" data-anchor="charts-sec-distribution">Distribution<button class="hlink" type="button" aria-label="Copy link to Distribution"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="telhead"><span>Index across the pool, n 248</span></div><svg class="ch" id="chDist" viewBox="0 0 300 200" role="img" aria-label="Histogram of the pool's index with a density curve, the F4 entry line at 85 and Maja Kowalczyk at 91.4"></svg></div>
+        <div class="cell wide"><h4 id="charts-sec-line-subject-against-reference" data-anchor="charts-sec-line-subject-against-reference">Line, subject against reference<button class="hlink" type="button" aria-label="Copy link to Line, subject against reference"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><svg class="ch" id="chLine" viewBox="0 0 560 200" role="img" aria-label="Pace trend against class average"></svg><div class="legend"><span><i style="background:#FF4B3E"></i>Maja Kowalczyk</span><span><i style="background:#8A9099"></i>Class average</span><span><i style="background:#2F80FF;width:3px"></i>F4 entry</span></div></div>
+        <div class="cell"><h4 id="charts-sec-ring" data-anchor="charts-sec-ring">Ring<button class="hlink" type="button" aria-label="Copy link to Ring"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><svg class="ch" id="chRing" viewBox="0 0 200 200" role="img" aria-label="Session conditions split" style="max-width:200px;margin:0 auto"></svg><div class="legend" style="justify-content:center"><span><i style="background:var(--ink)"></i>Dry 62%</span><span><i style="background:#2F80FF"></i>Damp 24%</span><span><i style="background:#4A4F57"></i>Wet 14%</span></div></div>
+        <div class="cell"><h4 id="charts-sec-bars" data-anchor="charts-sec-bars">Bars<button class="hlink" type="button" aria-label="Copy link to Bars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><svg class="ch" id="chBar" viewBox="0 0 300 180" role="img" aria-label="Sessions per month"></svg></div>
+        <div class="cell"><h4 id="charts-sec-diverging" data-anchor="charts-sec-diverging">Diverging<button class="hlink" type="button" aria-label="Copy link to Diverging"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><svg class="ch" id="chDiv" viewBox="0 0 300 180" role="img" aria-label="Sector delta to reference"></svg><p class="note">Gains and losses differ by shade, and the numbers carry the signal colour.</p></div>
+        <div class="cell"><h4 id="charts-sec-radar" data-anchor="charts-sec-radar">Radar<button class="hlink" type="button" aria-label="Copy link to Radar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><svg class="ch" id="chRadar" viewBox="0 0 240 220" role="img" aria-label="Skill profile" style="max-width:260px;margin:0 auto"></svg></div>
+        <div class="cell wide"><h4 id="charts-sec-activity" data-anchor="charts-sec-activity">Activity<button class="hlink" type="button" aria-label="Copy link to Activity"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4>
           <div style="display:grid;grid-template-columns:minmax(0,2.1fr) minmax(0,1fr);gap:32px;align-items:end">
             <div><div style="font-size:12px;color:var(--dim);margin-bottom:10px">Sessions per week, last 26 weeks</div><svg class="ch" id="chWeeks" viewBox="0 0 400 170" role="img" aria-label="Sessions per week over the last 26 weeks, rising from about 10 to 24"></svg></div>
             <div><div style="font-size:12px;color:var(--dim);margin-bottom:10px">Busiest days</div><div id="chDays" class="col" style="gap:9px"></div></div>
           </div>
           <p class="note">Totals as bars, the pattern as a ranked list. Two plain answers instead of one dense grid.</p></div>
-        <div class="cell"><h4>Figures with sparklines</h4><div class="col" style="gap:18px">
+        <div class="cell"><h4 id="charts-sec-figures-with-sparklines" data-anchor="charts-sec-figures-with-sparklines">Figures with sparklines<button class="hlink" type="button" aria-label="Copy link to Figures with sparklines"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="col" style="gap:18px">
           <div class="kpi"><div class="k">Average index</div><div class="v"><b>71.8</b><span class="up">+1.2</span></div><svg class="ch spark" data-s="68,68.5,69,69,69.6,70,70.2,70.8,71,71.1,71.5,71.8" viewBox="0 0 200 28" preserveAspectRatio="none" style="height:28px;margin-top:8px"></svg></div>
           <div class="kpi"><div class="k">Sessions this week</div><div class="v"><b>1,406</b><span class="down">−4%</span></div><svg class="ch spark" data-s="12,13,14,12,15,14,16,15,14,15,13,13" viewBox="0 0 200 28" preserveAspectRatio="none" style="height:28px;margin-top:8px"></svg></div>
         </div></div>
-        <div class="cell"><h4>List</h4><div class="list">
+        <div class="cell"><h4 id="charts-sec-list" data-anchor="charts-sec-list">List<button class="hlink" type="button" aria-label="Copy link to List"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="list">
           <div class="li"><span class="av">MK</span><span>Maja Kowalczyk<small>FKL Łódź, cadet</small></span><b>91.4</b></div>
           <div class="li"><span class="av">LH</span><span>Leo Hartmann<small>FKL Milton Keynes, junior</small></span><b>88.9</b></div>
           <div class="li"><span class="av">AM</span><span>Aarav Mehta<small>FKL Dubai, cadet</small></span><b>86.2</b></div>
         </div></div>
-        <div class="cell"><h4>Timeline</h4><ol class="tl">
+        <div class="cell"><h4 id="charts-sec-timeline" data-anchor="charts-sec-timeline">Timeline<button class="hlink" type="button" aria-label="Copy link to Timeline"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><ol class="tl">
           <li>First hub session<small>March 2025, FKL Łódź</small></li>
           <li>FKL cadet champion<small>October 2025</small></li>
           <li>Index passes 90<small>June 2026</small></li>
           <li class="todo">F4 test day<small>Planned, December 2026</small></li>
         </ol></div>
-        <div class="cell"><h4>Podium</h4><svg class="ch" id="chPod" viewBox="0 0 300 210" role="img" aria-label="Podium: Maja Kowalczyk first on 91.4, Leo Hartmann second on 88.9, Aarav Mehta third on 86.2"></svg><p class="note">Three bars at the glyph's 55° lean. Only the length changes.</p></div>
+        <div class="cell"><h4 id="charts-sec-podium" data-anchor="charts-sec-podium">Podium<button class="hlink" type="button" aria-label="Copy link to Podium"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><svg class="ch" id="chPod" viewBox="0 0 300 210" role="img" aria-label="Podium: Maja Kowalczyk first on 91.4, Leo Hartmann second on 88.9, Aarav Mehta third on 86.2"></svg><p class="note">Three bars at the glyph's 55° lean. Only the length changes.</p></div>
       </div>
     </div></section>
 
     <!-- 16 CALENDAR -->
     <section class="s" id="calendar-sec"><div class="inner">
       <div class="sh"><div class="num">16</div><span class="chap">Interface</span></div>
-      <h2>Calendar and scheduling</h2>
+      <h2 data-anchor="calendar-sec">Calendar and scheduling<button class="hlink" type="button" aria-label="Copy link to Calendar and scheduling"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Dates are chosen the way everything else is: a red cut marks the pick, blue marks today, and a small bar under a day means something is booked.</p>
       <div class="hair"></div>
       <div class="kit">
-        <div class="cell"><h4>Date picker</h4><div class="cal" id="cal">
+        <div class="cell"><h4 id="calendar-sec-date-picker" data-anchor="calendar-sec-date-picker">Date picker<button class="hlink" type="button" aria-label="Copy link to Date picker"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="cal" id="cal">
           <div class="ch2"><button type="button" id="calPrev" aria-label="Previous month">‹</button><b id="calTitle"></b><button type="button" id="calNext" aria-label="Next month">›</button></div>
           <div class="dow"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
           <div class="days" id="calDays"></div>
         </div><p class="note" id="calNote">Pick a start and an end day to select a range.</p></div>
-        <div class="cell wide"><h4>Week schedule</h4><div class="week" id="week"></div><p class="note">Booked sessions are tinted blocks. The one that needs attention goes red.</p></div>
-        <div class="cell"><h4>Date field</h4><div class="col">
+        <div class="cell wide"><h4 id="calendar-sec-week-schedule" data-anchor="calendar-sec-week-schedule">Week schedule<button class="hlink" type="button" aria-label="Copy link to Week schedule"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="week" id="week"></div><p class="note">Booked sessions are tinted blocks. The one that needs attention goes red.</p></div>
+        <div class="cell"><h4 id="calendar-sec-date-field" data-anchor="calendar-sec-date-field">Date field<button class="hlink" type="button" aria-label="Copy link to Date field"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="col">
           <div class="field"><label for="k8">Test day</label><input class="inp" id="k8" type="date" value="2026-12-04" style="color-scheme:dark"></div>
           <div class="field"><label for="k9">Start time</label><input class="inp" id="k9" type="time" value="09:30" style="color-scheme:dark"></div>
         </div></div>
-        <div class="cell wide"><h4>Agenda</h4><div class="list">
+        <div class="cell wide"><h4 id="calendar-sec-agenda" data-anchor="calendar-sec-agenda">Agenda<button class="hlink" type="button" aria-label="Copy link to Agenda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="list">
           <div class="li" style="grid-template-columns:64px minmax(0,1fr) auto"><span><b style="display:block;font-size:18px">24</b><small>Thu</small></span><span>FKL Łódź, cadet qualifying<small>16:00 to 17:30, 18 drivers</small></span><span class="tag neu">Live</span></div>
           <div class="li" style="grid-template-columns:64px minmax(0,1fr) auto"><span><b style="display:block;font-size:18px">26</b><small>Sat</small></span><span>FKL Milton Keynes, junior final<small>11:00 to 13:00, 22 drivers</small></span><span class="tag pos">Scout attending</span></div>
           <div class="li" style="grid-template-columns:64px minmax(0,1fr) auto"><span><b style="display:block;font-size:18px">04</b><small>Dec</small></span><span>F4 test day, Maja Kowalczyk<small>09:30, FAT Racing</small></span><span class="tag neu">Planned</span></div>
@@ -2132,16 +2201,16 @@ section.s{overflow-x:clip}
     <!-- 17 OVERLAYS AND APPS -->
     <section class="s" id="apps-sec"><div class="inner">
       <div class="sh"><div class="num">17</div><span class="chap">Interface</span></div>
-      <h2>Overlays and apps</h2>
+      <h2 data-anchor="apps-sec">Overlays and apps<button class="hlink" type="button" aria-label="Copy link to Overlays and apps"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Layers that sit above the page, and the system carried into a phone app, an app icon, a browser tab and an email.</p>
       <div class="hair"></div>
       <div class="kit">
-        <div class="cell wide"><h4>Dialog</h4><div class="scrim"><div class="modal edge" role="dialog" aria-modal="false" aria-labelledby="mh"><h5 id="mh">Remove from shortlist?</h5><p>Maja Kowalczyk will leave the F4 winter shortlist. Her sessions and notes stay in TalentID.</p><div class="bgroup" role="group" aria-label="Confirm"><button class="btn neg" type="button">Remove</button><button class="btn g" type="button">Keep on shortlist</button></div></div></div></div>
-        <div class="cell"><h4>Menu and popover</h4><div class="col" style="gap:18px">
+        <div class="cell wide"><h4 id="apps-sec-dialog" data-anchor="apps-sec-dialog">Dialog<button class="hlink" type="button" aria-label="Copy link to Dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="scrim"><div class="modal edge" role="dialog" aria-modal="false" aria-labelledby="mh"><h5 id="mh">Remove from shortlist?</h5><p>Maja Kowalczyk will leave the F4 winter shortlist. Her sessions and notes stay in TalentID.</p><div class="bgroup" role="group" aria-label="Confirm"><button class="btn neg" type="button">Remove</button><button class="btn g" type="button">Keep on shortlist</button></div></div></div></div>
+        <div class="cell"><h4 id="apps-sec-menu-and-popover" data-anchor="apps-sec-menu-and-popover">Menu and popover<button class="hlink" type="button" aria-label="Copy link to Menu and popover"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="col" style="gap:18px">
           <div class="menu" role="menu"><button role="menuitemradio" aria-checked="true">Sort by index</button><button role="menuitemradio" aria-checked="false">Sort by trend</button><button role="menuitemradio" aria-checked="false">Sort by age</button><hr><button role="menuitem">Export CSV <kbd>⌘E</kbd></button><button role="menuitem" class="neg">Clear filters</button></div>
           <div class="pop"><b>What is the index?</b><p>A 0 to 100 score of performance with kart, weather and track effects removed.</p></div>
         </div></div>
-        <div class="cell"><h4>Phone app</h4><div class="phone"><div class="screen">
+        <div class="cell"><h4 id="apps-sec-phone-app" data-anchor="apps-sec-phone-app">Phone app<button class="hlink" type="button" aria-label="Copy link to Phone app"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="phone"><div class="screen">
           <div class="appbar"><b>My pathway</b><span class="badge">2</span></div>
           <div class="appbody">
             <div style="font-size:11px;color:var(--dim)">Maja Kowalczyk, FKL Łódź</div>
@@ -2156,7 +2225,7 @@ section.s{overflow-x:clip}
             <button type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profile</button>
           </nav>
         </div></div></div>
-        <div class="cell"><h4>App icons</h4><div class="appicons">
+        <div class="cell"><h4 id="apps-sec-app-icons" data-anchor="apps-sec-app-icons">App icons<button class="hlink" type="button" aria-label="Copy link to App icons"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="appicons">
           <figure><div class="appicon edge" style="width:96px;height:96px;border-radius:22px"><svg viewBox="-0.9 -1 56 86" width="34" height="52" aria-hidden="true"><g stroke-width="14.2" style="stroke:var(--ink)"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg></div><figcaption>iOS, 1024 px</figcaption></figure>
           <figure><div class="appicon" style="width:64px;height:64px;border-radius:50%"><svg viewBox="-0.9 -1 56 86" width="22" height="34" aria-hidden="true"><g stroke-width="14.2" style="stroke:var(--ink)"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg></div><figcaption>Android</figcaption></figure>
           <figure><div class="appicon light" style="width:40px;height:40px;border-radius:9px"><svg viewBox="-0.9 -1 56 86" width="14" height="22" aria-hidden="true"><g stroke="#000" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg></div><figcaption>Favicon</figcaption></figure>
@@ -2169,7 +2238,7 @@ section.s{overflow-x:clip}
             <div class="addr"><span>talentid.smedley.group/drivers</span></div>
           </div>
         </div>
-        <div class="cell wide"><h4>Email</h4><div class="browser"><div class="email">
+        <div class="cell wide"><h4 id="apps-sec-email" data-anchor="apps-sec-email">Email<button class="hlink" type="button" aria-label="Copy link to Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="browser"><div class="email">
           <div class="eh"><span class="lk" style="--lk:.3px;color:var(--ink)" role="img" aria-label="Smedley Group, Advanced Technology"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span></div>
           <div class="eb"><h6>New F4 candidate in your pool</h6><p>Maja Kowalczyk from FKL Łódź passed an index of 90 this week and is now 57 % of the way to F1.</p><a class="cta" href="#">Open her profile</a></div>
           <div class="ef">You get this email because you follow FKL Łódź. Manage alerts in TalentID settings.</div>
@@ -2183,12 +2252,12 @@ section.s{overflow-x:clip}
     <!-- 18 LAYOUT -->
     <section class="s" id="layout-sec"><div class="inner">
       <div class="sh"><div class="num">18</div><span class="chap">In practice</span></div>
-      <h2>Layout</h2>
+      <h2 data-anchor="layout-sec">Layout<button class="hlink" type="button" aria-label="Copy link to Layout"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">These layouts are examples, not a grid to obey. They show one way the system comes together: a hero with quieter content around it, and a conclusion at the end. Rearrange columns, margins and proportions to suit the content and the screen.</p>
       <div class="hair"></div>
       <div class="two">
         <div>
-          <h3>Dashboard, an example</h3><p class="sub">As built for TalentID at 1440 px</p>
+          <h3 id="layout-sec-dashboard-an-example" data-anchor="layout-sec-dashboard-an-example">Dashboard, an example<button class="hlink" type="button" aria-label="Copy link to Dashboard, an example"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">As built for TalentID at 1440 px</p>
           <svg class="gridsvg" viewBox="0 0 480 330" aria-label="Dashboard grid">
             <rect x="0" y="0" width="480" height="330" style="fill:rgba(var(--t),.03);stroke:rgba(var(--t),.2)"/>
             <rect x="10" y="10" width="460" height="16" style="fill:rgba(var(--t),.10)"/><text x="16" y="22" fill="#9DA1A8">Header</text>
@@ -2202,7 +2271,7 @@ section.s{overflow-x:clip}
           </svg>
         </div>
         <div>
-          <h3>Slides, an example</h3><p class="sub">As used in the TalentID deck, 10 × 5.625 in</p>
+          <h3 id="layout-sec-slides-an-example" data-anchor="layout-sec-slides-an-example">Slides, an example<button class="hlink" type="button" aria-label="Copy link to Slides, an example"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">As used in the TalentID deck, 10 × 5.625 in</p>
           <table class="spec">
             <tr><td>Side margin</td><td>0.46 in</td></tr>
             <tr><td>Title</td><td>y 0.44 in, one per slide, sentence case</td></tr>
@@ -2219,7 +2288,7 @@ section.s{overflow-x:clip}
     <!-- 19 IN USE -->
     <section class="s" id="application"><div class="inner">
       <div class="sh"><div class="num">19</div><span class="chap">In practice</span></div>
-      <h2>In use</h2>
+      <h2 data-anchor="application">In use<button class="hlink" type="button" aria-label="Copy link to In use"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">TalentID, the Advanced Technology scouting dashboard, built from the components in this book: timing-screen ranking, mono readouts, the glyph as progress, the reference line to beat and one red action. Pick a driver in the ranking.</p>
       <div class="hair"></div>
       <div class="browser ux tidw"><div class="addr"><span>talentid.smedley.group/pathway</span></div>
@@ -2252,12 +2321,12 @@ section.s{overflow-x:clip}
     <!-- 20 CO-BRANDING -->
     <section class="s" id="cobrand"><div class="inner">
       <div class="sh"><div class="num">20</div><span class="chap">In practice</span></div>
-      <h2>Co-branding</h2>
+      <h2 data-anchor="cobrand">Co-branding<button class="hlink" type="button" aria-label="Copy link to Co-branding"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">When we work with a partner, both marks share one line, equal in weight and separated by the divider. When a business has its own identity, the group steps back to a quiet endorsement.</p>
       <div class="hair"></div>
       <div class="two">
         <div>
-          <h3>Partner lockup</h3><p class="sub">Group first, divider, partner</p>
+          <h3 id="cobrand-partner-lockup" data-anchor="cobrand-partner-lockup">Partner lockup<button class="hlink" type="button" aria-label="Copy link to Partner lockup"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Group first, divider, partner</p>
           <div class="plate dark edge cbp"><span class="lk" style="--lk:.5px;color:#fff" role="img" aria-label="Smedley Group with a partner"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span><i></i><span class="pbox" aria-hidden="true">Partner</span></span></span></div>
           <table class="spec" style="margin-top:22px">
             <tr><td>Height</td><td>The partner mark matches the divider: 62 units tall at most, optically equal to the wordmark</td></tr>
@@ -2266,7 +2335,7 @@ section.s{overflow-x:clip}
           </table>
         </div>
         <div>
-          <h3>Endorsement</h3><p class="sub">For businesses with their own identity, such as FKL</p>
+          <h3 id="cobrand-endorsement" data-anchor="cobrand-endorsement">Endorsement<button class="hlink" type="button" aria-label="Copy link to Endorsement"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">For businesses with their own identity, such as FKL</p>
           <div class="plate light cbe"><div class="endo" role="img" aria-label="Part of Smedley Group endorsement"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span>Part of Smedley Group</span></div></div>
           <table class="spec" style="margin-top:22px">
             <tr><td>Form</td><td>The glyph and one line, Part of Smedley Group, in Sora Regular</td></tr>
@@ -2280,7 +2349,7 @@ section.s{overflow-x:clip}
     <!-- 21 PRINCIPLES -->
     <section class="s" id="principles"><div class="inner">
       <div class="sh"><div class="num">21</div><span class="chap">In practice</span></div>
-      <h2>Principles</h2>
+      <h2 data-anchor="principles">Principles<button class="hlink" type="button" aria-label="Copy link to Principles"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">The handful of rules that keep the system coherent when someone new builds the next screen.</p>
       <div class="hair"></div>
       <div class="rules">
@@ -2305,20 +2374,41 @@ section.s{overflow-x:clip}
     <!-- 22 RESOURCES -->
     <section class="s" id="resources"><div class="inner">
       <div class="sh"><div class="num">22</div><span class="chap">In practice</span></div>
-      <h2>Resources</h2>
+      <h2 data-anchor="resources">Resources<button class="hlink" type="button" aria-label="Copy link to Resources"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Everything in this book, ready to build with. Logo files are outlined, so they need no fonts installed.</p>
       <div class="hair"></div>
-      <div class="dlall"><a class="btn p lg" href="assets/smedley-group-brand-assets.zip" download><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download everything</a><span>ZIP, 66 KB, logos, icons and colour tokens</span></div>
+      <div class="dlall"><a class="btn p lg" href="assets/smedley-group-brand-assets.zip" download><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download everything</a><span>ZIP, 541 KB, logos, icons, colour tokens and templates</span></div>
       <div class="two" style="margin-top:48px">
-        <div><h3>Logos</h3><p class="sub">SVG, outlined, white and ink</p><table class="spec dls"><tr><td>Smedley Group</td><td><a class="dl" href="assets/logo/smedley-group-white.svg" download>White SVG</a><a class="dl" href="assets/logo/smedley-group-ink.svg" download>Ink SVG</a></td></tr><tr><td>Advanced Technology</td><td><a class="dl" href="assets/logo/advanced-technology-white.svg" download>White SVG</a><a class="dl" href="assets/logo/advanced-technology-ink.svg" download>Ink SVG</a></td></tr><tr><td>Insight Labs</td><td><a class="dl" href="assets/logo/insight-labs-white.svg" download>White SVG</a><a class="dl" href="assets/logo/insight-labs-ink.svg" download>Ink SVG</a></td></tr><tr><td>FAT Racing</td><td><a class="dl" href="assets/logo/fat-racing-white.svg" download>White SVG</a><a class="dl" href="assets/logo/fat-racing-ink.svg" download>Ink SVG</a></td></tr><tr><td>FAT Karting League</td><td><a class="dl" href="assets/logo/fat-karting-league-white.svg" download>White SVG</a><a class="dl" href="assets/logo/fat-karting-league-ink.svg" download>Ink SVG</a></td></tr><tr><td>Glyph</td><td><a class="dl" href="assets/logo/glyph-white.svg" download>White SVG</a><a class="dl" href="assets/logo/glyph-ink.svg" download>Ink SVG</a></td></tr><tr><td>App icon</td><td><a class="dl" href="assets/logo/app-icon-dark.svg" download>Dark SVG</a><a class="dl" href="assets/logo/app-icon-light.svg" download>Light SVG</a></td></tr></table></div>
+        <div><h3 id="resources-logos" data-anchor="resources-logos">Logos<button class="hlink" type="button" aria-label="Copy link to Logos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">SVG, outlined, white and ink</p><table class="spec dls"><tr><td>Smedley Group</td><td><a class="dl" href="assets/logo/smedley-group-white.svg" download>White SVG</a><a class="dl" href="assets/logo/smedley-group-ink.svg" download>Ink SVG</a></td></tr><tr><td>Advanced Technology</td><td><a class="dl" href="assets/logo/advanced-technology-white.svg" download>White SVG</a><a class="dl" href="assets/logo/advanced-technology-ink.svg" download>Ink SVG</a></td></tr><tr><td>Insight Labs</td><td><a class="dl" href="assets/logo/insight-labs-white.svg" download>White SVG</a><a class="dl" href="assets/logo/insight-labs-ink.svg" download>Ink SVG</a></td></tr><tr><td>FAT Racing</td><td><a class="dl" href="assets/logo/fat-racing-white.svg" download>White SVG</a><a class="dl" href="assets/logo/fat-racing-ink.svg" download>Ink SVG</a></td></tr><tr><td>FAT Karting League</td><td><a class="dl" href="assets/logo/fat-karting-league-white.svg" download>White SVG</a><a class="dl" href="assets/logo/fat-karting-league-ink.svg" download>Ink SVG</a></td></tr><tr><td>Glyph</td><td><a class="dl" href="assets/logo/glyph-white.svg" download>White SVG</a><a class="dl" href="assets/logo/glyph-ink.svg" download>Ink SVG</a></td></tr><tr><td>App icon</td><td><a class="dl" href="assets/logo/app-icon-dark.svg" download>Dark SVG</a><a class="dl" href="assets/logo/app-icon-light.svg" download>Light SVG</a></td></tr></table></div>
         <div>
-          <h3>Colour tokens</h3><p class="sub">Both themes, the fixed colours and the cut</p>
+          <h3 id="resources-colour-tokens" data-anchor="resources-colour-tokens">Colour tokens<button class="hlink" type="button" aria-label="Copy link to Colour tokens"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Both themes, the fixed colours and the cut</p>
           <table class="spec dls"><tr><td>CSS</td><td><a class="dl" href="assets/tokens.css" download>tokens.css</a><span class="dls-m">custom properties, 1 KB</span></td></tr><tr><td>JSON</td><td><a class="dl" href="assets/tokens.json" download>tokens.json</a><span class="dls-m">for design tools and code, 1 KB</span></td></tr></table>
-          <h3 style="margin-top:40px">Typefaces</h3><p class="sub">Open licence, from Google Fonts</p>
+          <h3 style="margin-top:40px" id="resources-typefaces" data-anchor="resources-typefaces">Typefaces<button class="hlink" type="button" aria-label="Copy link to Typefaces"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Open licence, from Google Fonts</p>
           <table class="spec dls"><tr><td>Sora</td><td><a class="dl" href="https://fonts.google.com/specimen/Sora" target="_blank" rel="noopener">Google Fonts</a><span class="dls-m">Light 300, Regular 400, SemiBold 600</span></td></tr><tr><td>IBM Plex Mono</td><td><a class="dl" href="https://fonts.google.com/specimen/IBM+Plex+Mono" target="_blank" rel="noopener">Google Fonts</a><span class="dls-m">Regular 400, Medium 500</span></td></tr></table>
-          <h3 style="margin-top:40px">Tool icons</h3><p class="sub">SVG, 24 px, 1.5 px stroke</p>
+          <h3 style="margin-top:40px" id="resources-templates" data-anchor="resources-templates">Templates<button class="hlink" type="button" aria-label="Copy link to Templates"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Set in Sora and IBM Plex Mono: install both first</p>
+          <table class="spec dls"><tr><td>Slides</td><td><a class="dl" href="assets/templates/smedley-group-slides.pptx" download>PowerPoint</a><span class="dls-m">16:9, six layouts on the book's grid, 674 KB</span></td></tr>
+            <tr><td>Documents</td><td><a class="dl" href="assets/templates/smedley-group-document.docx" download>Word</a><span class="dls-m">A4, title, heading, body, caption and strapline styles, 48 KB</span></td></tr>
+            <tr><td>Email signature</td><td><a class="dl" href="assets/templates/email-signature.html" download>HTML</a><span class="dls-m">replace the words in brackets, paste into your mail settings</span></td></tr>
+            <tr><td>Social posts</td><td><a class="dl" href="assets/templates/social-square.svg" download>Square</a><a class="dl" href="assets/templates/social-story.svg" download>Story</a><span class="dls-m">SVG, 1080 px, with safe-area guides</span></td></tr></table>
+          <h3 style="margin-top:40px" id="resources-tool-icons" data-anchor="resources-tool-icons">Tool icons<button class="hlink" type="button" aria-label="Copy link to Tool icons"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">SVG, 24 px, 1.5 px stroke</p>
           <div class="dlrow"><a class="dl" href="assets/icons/calliper.svg" download>Calliper</a><a class="dl" href="assets/icons/data-logger.svg" download>Data logger</a><a class="dl" href="assets/icons/hex-key.svg" download>Hex key</a><a class="dl" href="assets/icons/ratchet.svg" download>Ratchet</a><a class="dl" href="assets/icons/spanner.svg" download>Spanner</a><a class="dl" href="assets/icons/stopwatch.svg" download>Stopwatch</a><a class="dl" href="assets/icons/torque-wrench.svg" download>Torque wrench</a><a class="dl" href="assets/icons/tyre-gauge.svg" download>Tyre gauge</a></div>
         </div>
+      </div>
+
+      <div class="two" style="margin-top:64px" id="versions">
+        <div><h3 id="resources-versions" data-anchor="resources-versions">Versions<button class="hlink" type="button" aria-label="Copy link to Versions"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">What changed, newest first</p>
+          <table class="spec">
+            <tr><td>2.1<br><span class="dls-m">25 Sep 2026</span></td><td>Business lockups, voice, imagery, co-branding and resources. Mobile version, keyboard focus on cut controls, search and links to any heading, print styles, templates</td></tr>
+            <tr><td>2.0<br><span class="dls-m">25 Sep 2026</span></td><td>Racing red and engineering blue on a pure black or white ground, dark and light themes, race engineering, usage context, the reworked hero and the four-part structure</td></tr>
+            <tr><td>1.0<br><span class="dls-m">24 Sep 2026</span></td><td>First edition: the logo, colour, type, the 55° cut, motion and the interface kit</td></tr>
+          </table></div>
+        <div><h3 id="resources-ownership" data-anchor="resources-ownership">Ownership<button class="hlink" type="button" aria-label="Copy link to Ownership"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Who keeps this book</p>
+          <table class="spec">
+            <tr><td>Owner</td><td>Smedley Group, Advanced Technology</td></tr>
+            <tr><td>Contact</td><td><a href="mailto:mateusz.jaskiewicz@smedleygroup.com">mateusz.jaskiewicz@smedleygroup.com</a></td></tr>
+            <tr><td>Changes</td><td>Proposed as a pull request against the brand book repository, reviewed before they are published</td></tr>
+            <tr><td>Source</td><td><a href="https://github.com/Smedley-Group-Advanced-Technology/brand-book-sg" target="_blank" rel="noopener">github.com/Smedley-Group-Advanced-Technology/brand-book-sg</a></td></tr>
+          </table></div>
       </div>
     </div></section>
 
@@ -2326,7 +2416,7 @@ section.s{overflow-x:clip}
     <footer class="colophon">
       <span class="lk" style="--lk:0.3px;color:var(--ink);opacity:.85" role="img" aria-label="Smedley Group, Advanced Technology"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span>
       <span>© 2026 Smedley Group. All rights reserved.</span>
-      <span class="mono">End of drawing set SG-BB, sheets 00 to 22</span>
+      <span class="mono">Version 2.1, 25 September 2026. Owned by Smedley Group, Advanced Technology. Questions to <a href="mailto:mateusz.jaskiewicz@smedleygroup.com">mateusz.jaskiewicz@smedleygroup.com</a>. <a href="#versions">Versions</a></span>
     </footer>
   </main>
 </div>
@@ -2672,6 +2762,36 @@ section.s{overflow-x:clip}
       if(ln)ln.textContent=String(n).padStart(2,'0');if(lb)lb.style.width='100%';
       if(mc&&a)mc.innerHTML='<b>'+a.querySelector('span').textContent+'</b> '+a.lastChild.textContent}
     addEventListener('scroll',function(){requestAnimationFrame(foot)},{passive:true});
+  })();
+
+
+  // ===== copy a link to any heading =====
+  (function(){var t=document.createElement('div');t.className='copied';t.setAttribute('role','status');document.body.appendChild(t);var tm;
+    function say(s){t.textContent=s;t.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){t.classList.remove('on')},1600)}
+    document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.hlink');if(!b)return;var hd=b.parentNode,id=hd.getAttribute('data-anchor');
+      var u=location.href.split('#')[0]+'#'+id;history.replaceState(null,'','#'+id);
+      (navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(function(){say('Link copied')},function(){say('Link in the address bar')})});
+  })();
+  // ===== search: headings, rules and colours, ranked by where the words match =====
+  (function(){var q=$('#srch'),ol=$('#srchr'),toc=$('#toc');if(!q)return;var idx=[],sel=-1;
+    function sec(el){var s=el.closest('section.s');if(!s)return null;var a=document.querySelector('#toc a[href="#'+s.id+'"]');return {id:s.id,name:a?a.lastChild.textContent:''}}
+    function near(el){var n=el;while(n&&n!==document.body){var p=n.previousElementSibling;while(p){if(p.id&&p.matches('[data-anchor]'))return p.id;var f=p.querySelector&&p.querySelector('[data-anchor][id]');if(f)return f.id;p=p.previousElementSibling}n=n.parentElement;if(n&&n.matches&&n.matches('section.s'))return n.id}return null}
+    function txt(el){if(!el)return '';var c=el.cloneNode(true);[].forEach.call(c.querySelectorAll('.hlink'),function(x){x.remove()});[].forEach.call(c.querySelectorAll('br,div,span,b'),function(x){x.before(' ');x.after(' ')});return c.textContent.replace(/\s+/g,' ').trim()}
+    function build(){$$('section.s h2,section.s [data-anchor][id]').forEach(function(hd){var s=sec(hd);if(!s)return;idx.push({t:txt(hd),id:hd.id||s.id,s:s.name,c:'',w:hd.tagName==='H2'?3:2})});
+      $$('section.s table.spec tr').forEach(function(tr){var c=tr.cells;if(!c||c.length<2||tr.querySelector('th'))return;var s=sec(tr);if(!s)return;idx.push({t:txt(c[0]),id:near(tr.closest('table'))||s.id,s:s.name,c:txt(c[1]),w:1})});
+      $$('section.s .chipc').forEach(function(ch){var s=sec(ch);idx.push({t:txt(ch.querySelector('b')),id:near(ch.closest('.group'))||s.id,s:s.name,c:txt(ch.querySelector('.h'))+' '+txt(ch.querySelector('.u')),w:1})})}
+    function run(){var v=q.value.trim().toLowerCase();if(!idx.length)build();sel=-1;
+      if(!v){ol.hidden=true;toc.hidden=false;return}
+      var ws=v.split(/\s+/),res=idx.map(function(r){var T=r.t.toLowerCase(),A=(r.t+' '+r.s+' '+r.c).toLowerCase(),sc=0;
+        for(var i=0;i<ws.length;i++){if(A.indexOf(ws[i])<0)return null;sc+=T.indexOf(ws[i])>=0?3:1}return {r:r,sc:sc*r.w}}).filter(Boolean).sort(function(a,b){return b.sc-a.sc}).slice(0,12);
+      ol.innerHTML=res.length?res.map(function(x){return '<li><a href="#'+x.r.id+'"><b>'+x.r.t.replace(/</g,'&lt;')+'</b><span>'+x.r.s+(x.r.c?' \u00b7 '+x.r.c.slice(0,70).replace(/</g,'&lt;'):'')+'</span></a></li>'}).join(''):'<li class="none">Nothing matches. Try a colour, a control or a rule.</li>';
+      ol.hidden=false;toc.hidden=true}
+    function mark(){var a=[].slice.call(ol.querySelectorAll('a'));a.forEach(function(x,i){x.classList.toggle('sel',i===sel)});if(a[sel])a[sel].scrollIntoView({block:'nearest'})}
+    q.addEventListener('input',run);
+    q.addEventListener('keydown',function(e){var a=ol.querySelectorAll('a');if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(a.length-1,sel+1);mark()}else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(0,sel-1);mark()}
+      else if(e.key==='Enter'&&a.length){e.preventDefault();(a[sel]||a[0]).click()}else if(e.key==='Escape'){q.value='';run()}});
+    ol.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;setTimeout(function(){q.value='';run();var m=$('#mbtn');if(m&&document.querySelector('.index.open'))m.click()},0)});
+    document.addEventListener('keydown',function(e){if(e.key==='/'&&!/input|textarea|select/i.test(document.activeElement.tagName)){e.preventDefault();var m=$('#mbtn');if(m&&getComputedStyle(m).display!=='none'&&!document.querySelector('.index.open'))m.click();q.focus()}});
   })();
 
   // calendar with range selection
