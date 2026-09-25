@@ -1289,6 +1289,104 @@ svg.tool,.btn svg.bi{stroke-width:1.5}
 
 /* selection is red: the reader marking something is the lead */
 ::selection{background:#D8231A;color:#fff;-webkit-text-fill-color:#fff}
+
+/* ================= TALENTID, BUILT FROM THE BOOK ================= */
+.tid .tprod{font-weight:600;font-size:14px;padding-left:22px;border-left:.75px solid var(--rule)}
+.tid .uxn nav{margin-left:14px}
+.tid .uxn nav a.on::after{background:var(--red)}
+.tid .ttools{display:flex;align-items:center;gap:18px;margin-left:auto}
+.tid .ttools .inp{width:210px;min-height:36px;font-size:12px}
+.tid .thd{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:28px 28px 22px}
+.tid .thd h5{margin:0;font-weight:600;font-size:30px;letter-spacing:-.04em;line-height:1}
+.tid .thd p{margin:8px 0 0;color:var(--dim);font-size:13px}
+.tid .uxs em.up{color:var(--green)} .tid .uxs em.down{color:var(--amber)}
+.tid .tmain{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,.95fr);border-bottom:.75px solid var(--rule)}
+.tid .tmain > section{padding:24px 26px 28px;border-left:.75px solid var(--rule);min-width:0} .tid .tmain > section:first-child{border-left:0}
+.tid .tt{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.tid .tt h6{margin:0;font-weight:600;font-size:14px} .tid .tt span{font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+.tid .trank ol{list-style:none;margin:0 -10px;padding:0}
+.tid .trank button{position:relative;display:grid;grid-template-columns:40px minmax(0,1fr) 44px 40px;align-items:center;gap:8px;width:100%;min-height:46px;padding:0 10px;border:0;border-top:.75px solid var(--rule);background:transparent;color:#fff;text-align:left;cursor:pointer;transition:background .2s}
+.tid .trank li:first-child button{border-top:0}
+.tid .trank button:hover{background:rgba(205,207,212,.05)}
+.tid .trank button[aria-pressed="true"]{background:rgba(205,207,212,.08)}
+.tid .trank button[aria-pressed="true"]::before{content:"";position:absolute;left:0;top:50%;width:4px;height:18px;margin-top:-9px;background:var(--red);transform:skewX(35deg)}
+.tid .trank .p{--h:20px;display:inline-grid;place-items:center;width:34px;height:20px;font-family:var(--mono);font-size:11px;font-weight:500;background:rgba(205,207,212,.1);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 100%,14px 100%)}
+.tid .trank li:first-child .p{background:var(--red)}
+.tid .trank .nm b{display:block;font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .tid .trank .nm small{display:block;font-size:10.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tid .trank .ix{font-family:var(--mono);font-weight:500;font-size:13px;text-align:right}
+.tid .trank .dl{font-family:var(--mono);font-size:11px;text-align:right} .tid .dl.up{color:var(--green)} .tid .dl.down{color:var(--amber)}
+.tid .thero{display:flex;flex-direction:column;align-items:flex-start;position:relative}
+.tid .thero::before{content:"";position:absolute;inset:10% 5% 10%;background:radial-gradient(closest-side,rgba(205,207,212,.07),transparent);pointer-events:none}
+.tid .tk{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+.tid .tnm{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;width:100%;margin-top:14px}
+.tid .tnm h5{margin:0;font-weight:600;font-size:clamp(24px,3cqi,34px);letter-spacing:-.04em;line-height:1}
+.tid .tpc{display:flex;align-items:flex-start;gap:4px;line-height:.8}
+.tid .tpc b{font-weight:600;font-size:64px;letter-spacing:-.06em} .tid .tpc sup{color:var(--flame);font-weight:600;font-size:22px}
+.tid .tpc span{align-self:flex-end;margin-left:8px;font-size:11px;line-height:1.3;color:var(--dim)}
+.tid #tGauge{width:min(100%,250px);height:auto;margin:18px auto 22px;overflow:visible;position:relative}
+.tid .thero .bgroup{align-self:center}
+.tid .tm{display:grid;grid-template-columns:86px minmax(0,1fr) 28px;gap:12px;align-items:center;min-height:30px;font-size:12px;color:var(--dim)}
+.tid .tm b{font-family:var(--mono);font-weight:500;color:#fff;text-align:right}
+.tid .tm .bar i{background:#fff}
+.tid svg.ch{margin-top:4px}
+.tid .thubs{padding:24px 28px 26px}
+.tid .tlg{margin-left:auto;display:flex;align-items:center;gap:8px}
+.tid .tlg i{display:inline-block;width:10px;height:6px;background:var(--steel);transform:skewX(35deg)} .tid .tlg i.c{background:var(--alloy)} .tid .tlg i.r{background:#fff}
+.tid .thg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 28px}
+.tid .thh{display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px} .tid .thh b{font-family:var(--mono);font-weight:500}
+.tid .thb{display:flex;gap:2px;height:6px;clip-path:polygon(0 0,calc(100% - 4.2px) 0,100% 100%,4.2px 100%)}
+.tid .thb i{background:var(--steel)} .tid .thb i.c{background:var(--alloy)} .tid .thb i.r{background:#fff}
+.tid .band{border-bottom:0}
+@container (max-width:980px){
+  .tid .tmain{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} .tid .thero{grid-column:1/-1;order:-1;border-left:0;border-bottom:.75px solid var(--rule)} .tid .trank{border-left:0}
+  .tid .thg{grid-template-columns:repeat(2,minmax(0,1fr))} .tid .ttools .inp{width:160px}
+}
+@container (max-width:640px){
+  .tid .tmain{grid-template-columns:minmax(0,1fr)} .tid .tmain > section{border-left:0;border-top:.75px solid var(--rule)} .tid .thero{border-top:0}
+  .tid .ttools{display:none} .tid .thd{flex-direction:column;align-items:flex-start;padding:22px 20px} .tid .thubs{padding:22px 20px}
+  .tid .tpc b{font-size:48px} .tid .thg{grid-template-columns:minmax(0,1fr)}
+}
+
+/* ================= STRUCTURE: four parts, a lighter rhythm ================= */
+section.s{padding:84px 64px 72px}
+.sh{justify-content:flex-start;align-items:center;gap:16px}
+.chap{font-family:var(--mono);font-size:11px;color:var(--dim)}
+section.s h2{margin-top:22px}
+.intro{max-width:64ch}
+.subhead{margin:64px 0 20px}
+.index nav .grp{margin:18px 0 6px;font-family:var(--mono);font-size:10px;color:var(--faint)}
+.index nav .grp:first-child{margin-top:0}
+.index nav a{min-height:28px}
+.part{display:grid;grid-template-columns:minmax(0,160px) minmax(0,1fr) minmax(0,280px);gap:32px;align-items:start;padding:64px 64px 60px;border-bottom:.75px solid var(--rule);background:rgba(var(--t),.025)}
+.part .pn{font-family:var(--mono);font-size:11px;color:var(--dim);padding-top:10px}
+.part .pt{margin:0;font-weight:600;font-size:clamp(28px,3.2vw,40px);letter-spacing:-.04em;line-height:1}
+.part .pl{margin:12px 0 0;max-width:48ch;color:var(--dim);font-size:15px}
+.part .pi{list-style:none;margin:0;padding:6px 0 0;display:flex;flex-direction:column}
+.part .pi a{display:flex;gap:12px;align-items:center;min-height:30px;text-decoration:none;font-size:13px;color:var(--dim);border-top:.75px solid var(--rule)}
+.part .pi li:first-child a{border-top:0}
+.part .pi a:hover{color:var(--ink)}
+.part .pi span{font-family:var(--mono);font-size:10.5px;color:var(--faint);width:20px}
+@media (max-width:1100px){ .part{grid-template-columns:minmax(0,1fr) minmax(0,240px)} .part .pn{grid-column:1/-1;padding:0} }
+@media (max-width:820px){
+  section.s{padding:56px 20px 52px}
+  .part{grid-template-columns:minmax(0,1fr);gap:16px;padding:44px 20px 40px}
+  .index nav .grp{display:none}
+}
+
+/* share of a screen, by context: the parts touch along the cut, 3 px apart */
+.shr + .shr{margin-top:22px}
+.shh{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;font-size:13px} .shh b{font-weight:600} .shh span{font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+.share2{display:flex;height:22px}
+.share2 i{--c:15.4px;display:block;min-width:24px;clip-path:polygon(0 0,calc(100% - var(--c)) 0,100% 100%,var(--c) 100%)}
+.share2 i + i{margin-left:calc(3px - var(--c))}
+.share2 i:first-child{clip-path:polygon(0 0,calc(100% - var(--c)) 0,100% 100%,0 100%)}
+.share2 i:last-child{clip-path:polygon(0 0,100% 0,100% 100%,var(--c) 100%)}
+.share2 .ground{background:repeating-linear-gradient(55deg,rgba(var(--t),.14) 0 1px,transparent 1.5px 7px),rgba(var(--t),.06)}
+.share2 .type{background:var(--ink)} .share2 .blue{background:var(--blue)} .share2 .red{background:var(--red)}
+.sharek2{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--dim)}
+.sharek2 i{display:inline-block;width:9px;height:9px;margin-right:6px;vertical-align:-1px;transform:skewX(35deg)}
+.sharek2 i.ground{background:rgba(var(--t),.18)} .sharek2 i.type{background:var(--ink)} .sharek2 i.blue{background:var(--blue)} .sharek2 i.red{background:var(--red)}
+.sharek2 b{color:var(--ink);font-weight:500;margin-right:3px}
 </style>
 </head>
 <body>
@@ -1307,22 +1405,26 @@ svg.tool,.btn svg.bi{stroke-width:1.5}
     <div class="themes" role="group" aria-label="Theme"><button type="button" data-t="dark" aria-pressed="false"><span>Dark</span></button><button type="button" data-t="light" aria-pressed="false"><span>Light</span></button></div>
     <div class="lap"><span>Lap <b id="lapN">01</b>/<span id="lapT">16</span></span><span>SG-BB</span></div><div class="lapbar"><i id="lapBar"></i></div>
     <nav id="toc" aria-label="Sections">
+      <div class="grp">Foundations</div>
       <a href="#logo"><span>01</span>Logo</a>
       <a href="#colour"><span>02</span>Colour</a>
-      <a href="#surfaces"><span>03</span>Surfaces</a>
-      <a href="#type"><span>04</span>Typography</a>
+      <a href="#type"><span>03</span>Typography</a>
+      <a href="#surfaces"><span>04</span>Surfaces</a>
       <a href="#slant"><span>05</span>The 55° cut</a>
+      <div class="grp">Two worlds</div>
       <a href="#engineering"><span>06</span>Race engineering</a>
-      <a href="#motion"><span>07</span>Motion</a>
-      <a href="#progress"><span>08</span>Glyph as progress</a>
-      <a href="#components"><span>09</span>Controls</a>
-      <a href="#nav-sec"><span>10</span>Navigation</a>
-      <a href="#charts-sec"><span>11</span>Data and charts</a>
-      <a href="#calendar-sec"><span>12</span>Calendar</a>
-      <a href="#apps-sec"><span>13</span>Overlays and apps</a>
-      <a href="#layout-sec"><span>14</span>Layout</a>
-      <a href="#application"><span>15</span>In use</a>
-      <a href="#context"><span>16</span>Usage context</a>
+      <a href="#context"><span>07</span>Usage context</a>
+      <a href="#motion"><span>08</span>Motion</a>
+      <a href="#progress"><span>09</span>Glyph as progress</a>
+      <div class="grp">Interface</div>
+      <a href="#components"><span>10</span>Controls</a>
+      <a href="#nav-sec"><span>11</span>Navigation</a>
+      <a href="#charts-sec"><span>12</span>Data and charts</a>
+      <a href="#calendar-sec"><span>13</span>Calendar</a>
+      <a href="#apps-sec"><span>14</span>Overlays and apps</a>
+      <div class="grp">In practice</div>
+      <a href="#layout-sec"><span>15</span>Layout</a>
+      <a href="#application"><span>16</span>In use</a>
       <a href="#principles"><span>17</span>Principles</a>
     </nav>
   </aside>
@@ -1787,9 +1889,12 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       <a class="scroll" href="#logo"><i></i>Start with the logo</a>
     </header>
 
+    <!-- PART 1 FOUNDATIONS -->
+    <div class="part" id="part-1"><div class="pn">Part 1 of 4</div><div class="pb"><p class="pt">Foundations</p><p class="pl">The mark, its colours, its type and the one angle everything shares.</p></div><ol class="pi"><li><a href="#logo"><span>01</span>Logo</a></li><li><a href="#colour"><span>02</span>Colour</a></li><li><a href="#type"><span>03</span>Typography</a></li><li><a href="#surfaces"><span>04</span>Surfaces</a></li><li><a href="#slant"><span>05</span>The 55° cut</a></li></ol></div>
+
     <!-- 01 LOGO -->
     <section class="s" id="logo"><div class="inner">
-      <div class="sh"><div class="num">01</div></div>
+      <div class="sh"><div class="num">01</div><span class="chap">Foundations</span></div>
       <h2>The logo</h2>
       <p class="intro">One lockup in one colour. Three bars, a two-line wordmark set in Sora SemiBold, a full-height divider, then the division. Its consistency is what lets everything around it move.</p>
       <div class="hair"></div>
@@ -1854,7 +1959,7 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
 
     <!-- 02 COLOUR -->
     <section class="s" id="colour"><div class="inner">
-      <div class="sh"><div class="num">02</div></div>
+      <div class="sh"><div class="num">02</div><span class="chap">Foundations</span></div>
       <h2>Colour</h2>
       <p class="intro">Two worlds, one car. Red is the track: speed, heat, the driver and whoever leads. Blue is the garage: the blueprint, the data and the model. They stand on a pure ground, black or white, that belongs to neither. Blue measures, red leads.</p>
       <div class="hair"></div>
@@ -1872,10 +1977,9 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       </div>
       <div class="two group" style="align-items:start">
         <div>
-          <h3>Share of a screen</h3><p class="sub">Roughly, on a typical view</p>
-          <div class="share" aria-label="Structure 70 %, blue 18 %, white 9 %, red 3 %"><i style="flex:70;background:var(--bg1);box-shadow:inset 0 0 0 1px rgba(var(--t),.2)"></i><i style="flex:18;background:#2F80FF"></i><i style="flex:9;background:var(--ink)"></i><i style="flex:3;min-width:26px;background:#D8231A"></i></div>
-          <div class="sharek"><span><b>70</b> structure</span><span><b>18</b> blue</span><span><b>9</b> white</span><span><b>3</b> red</span></div>
-          <p class="body" style="margin-top:18px">Blue can cover ground as line work: a grid, a whole drawing. Red never does. It marks the one thing that leads each view, which is why it is always noticed.</p>
+          <h3>Share of a screen</h3><p class="sub">Roughly, by context</p>
+          <div class="shr"><div class="shh"><b>Engineering</b><span>Advanced Technology, Insight Labs</span></div><div class="share2" role="img" aria-label="Engineering: ground 64 %, type 16 %, blue 17 %, red 3 %"><i class="ground" style="flex:64"></i><i class="type" style="flex:16"></i><i class="blue" style="flex:17"></i><i class="red" style="flex:3"></i></div><div class="sharek2"><span><i class="ground"></i><b>64</b> ground</span><span><i class="type"></i><b>16</b> type</span><span><i class="blue"></i><b>17</b> blue</span><span><i class="red"></i><b>3</b> red</span></div></div><div class="shr"><div class="shh"><b>Racing</b><span>FAT Karting League, FAT Racing</span></div><div class="share2" role="img" aria-label="Racing: ground 64 %, type 16 %, blue 5 %, red 15 %"><i class="ground" style="flex:64"></i><i class="type" style="flex:16"></i><i class="blue" style="flex:5"></i><i class="red" style="flex:15"></i></div><div class="sharek2"><span><i class="ground"></i><b>64</b> ground</span><span><i class="type"></i><b>16</b> type</span><span><i class="blue"></i><b>5</b> blue</span><span><i class="red"></i><b>15</b> red</span></div></div><div class="shr"><div class="shh"><b>Group</b><span>Smedley Group, this book</span></div><div class="share2" role="img" aria-label="Group: ground 72 %, type 18 %, blue 6 %, red 4 %"><i class="ground" style="flex:72"></i><i class="type" style="flex:18"></i><i class="blue" style="flex:6"></i><i class="red" style="flex:4"></i></div><div class="sharek2"><span><i class="ground"></i><b>72</b> ground</span><span><i class="type"></i><b>18</b> type</span><span><i class="blue"></i><b>6</b> blue</span><span><i class="red"></i><b>4</b> red</span></div></div>
+          <p class="body" style="margin-top:22px">The ground and the type stay the same everywhere; only the lead changes. Blue can cover ground as line work: a grid, a whole drawing. Red never does. Even on track it stays in marks: boards, the leader, one action, which is why it is always noticed.</p>
         </div>
         <table class="spec">
           <tr><th>Pairing</th><th>Use, contrast</th></tr>
@@ -1895,62 +1999,9 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       <div class="group"><h3>Signal</h3><p class="sub">Flag colours. Text on its own tint or on carbon, never a fill</p><div class="sw five" id="sw-sig"></div><p class="body" style="margin-top:18px">Green flag for gains, yellow flag for losses, warnings and errors. Red already means the driver, so it never means something went wrong.</p></div>
     </div></section>
 
-    <!-- 03 SURFACES -->
-    <section class="s" id="surfaces"><div class="inner">
-      <div class="sh"><div class="num">03</div></div>
-      <h2>Surfaces</h2>
-      <p class="intro">The ground is flat: pure black in the dark theme, pure white in the light one. No gradients and no tint, so red and blue are the only colour on the page. Sections are separated by hairlines and space, not boxes.</p>
-      <div class="hair"></div>
-      <div class="two">
-        <div>
-          <h3>The ground</h3><p class="sub">#000000 on dark, #FFFFFF on light</p>
-          <div class="sig edge"></div>
-          <p class="body" style="margin-top:18px">Page background on every screen and slide. Flat and untinted, so nothing competes with the red and the blue. Raised things are separated by a hairline, not a shade.</p>
-        </div>
-        <div>
-          <h3>Stage light</h3><p class="sub">Silver at 9 %, behind the one hero element</p>
-          <div class="glowdemo"><svg viewBox="0 0 56 86" width="70" height="108" style="color:var(--ink)" aria-hidden="true"><use href="#glyph"/></svg></div>
-          <p class="body" style="margin-top:18px">A soft pool of light replaces the box. The hero sits on the page, lit, not framed. One per view.</p>
-        </div>
-      </div>
-      <div class="two" style="margin-top:64px">
-        <div>
-          <h3>Blueprint grid</h3><p class="sub">Blueprint #0B2D63, ruled in white at 8 px and 40 px</p>
-          <div class="paper crop"></div>
-          <p class="body" style="margin-top:18px">The engineering plate. Drawings, setup sheets, simulations and anything built to a dimension sit on Blueprint blue, ruled in white, in the dark theme and the light one alike. It is the one coloured ground in the system.</p>
-        </div>
-        <div>
-          <h3>Colour in the lines</h3><p class="sub">Red and blue are marks, never washes</p>
-          <div class="hair" style="margin:26px 0 30px"></div>
-          <p class="body">With a flat ground, the two worlds show up only as line work and marks: the red lead and blue scale above, a red board, a blue grid, a Flame trace against a blue reference. No red or blue glow, tint or gradient sits behind anything.</p>
-        </div>
-      </div>
-      <div class="three" style="margin-top:64px">
-        <div><h3>Edge light</h3><p class="sub">0.75 px, Alloy → Silver at 53 % → Gunmetal</p><p class="body">One light source above everything. Used on plates and slide cards, not on interface sections.</p></div>
-        <div><h3>Hairline</h3><p class="sub">Silver, solid to 83 %, then fades</p><div style="height:1px;margin:14px 0 18px;background:linear-gradient(90deg,#C9CCD1 0%,#C9CCD1 83%,transparent)"></div><p class="body">Interface dividers, at 14 %. Section openers use the red and blue scale rule instead.</p></div>
-        <div><h3>Tread</h3><p class="sub">F1 full-wet print, 24 % Silver</p><svg class="tread" viewBox="0 0 300 34" preserveAspectRatio="none" style="width:100%;display:block;margin:10px 0 14px" aria-hidden="true"><rect width="300" height="34" style="fill:rgba(var(--t),.06)"/><rect width="300" height="34" fill="url(#treadP)"/></svg><p class="body">Marks what is not yet done: the empty part of a progress glyph and running progress. Never decoration.</p></div>
-      </div>
-      <div class="two" style="margin-top:64px;align-items:center">
-        <div>
-          <h3>The wet-weather tread</h3><p class="sub">Inspired by Pirelli's F1 full wet tyres</p>
-          <p class="body">Every tyre in the system wears the same tread, drawn after the Pirelli Cinturato full wet used in Formula 1: shoulder blocks split by lateral grooves and fine sipes, two channels running round the tyre, and deep swept grooves that curve back from the centre to pump water out to the sides. The two halves are staggered by half a pitch, as on the real tyre. It is the pattern a car needs when grip is hardest to find, which is the point.</p>
-          <p class="body" style="margin-top:14px">The tyre carries the tread and the ground carries its print, and both point the same way: the tip of the V leads, in the direction of travel, so it cuts into the water first. The same print fills the unfinished part of the pathway glyph.</p>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px">
-          <figure style="margin:0"><svg viewBox="0 0 125 190" style="width:100%;display:block;border-radius:14px;overflow:hidden" aria-label="Tyre tread from above"><rect width="125" height="190" fill="#0B0C0E"/><g transform="translate(31 0) rotate(90 0 0) translate(0 -62.4)"><rect x="0" y="0" width="190" height="62.4" fill="url(#wetTyre)"/></g><rect width="125" height="190" fill="url(#bkCurve)"/></svg><figcaption class="plate-cap">On the tyre</figcaption></figure>
-          <figure style="margin:0"><svg viewBox="0 0 125 190" style="width:100%;display:block;border-radius:14px;overflow:hidden" aria-label="Tread print on the ground"><rect width="125" height="190" style="fill:rgba(var(--t),.03)"/><g transform="translate(94 0) rotate(90 0 0)"><rect x="0" y="0" width="190" height="62.4" fill="url(#wetPrint)"/></g></svg><figcaption class="plate-cap">On the ground</figcaption></figure>
-        </div>
-      </div>
-      <div style="margin-top:64px">
-        <h3>Strapline band</h3><p class="sub">An optional closing line. When used, it states the conclusion rather than a caption</p>
-        <div class="band"><svg viewBox="0 0 56 86" style="color:var(--ink)" aria-hidden="true"><use href="#glyph"/></svg>Maja: ready for an F4 test day this winter</div>
-        <div class="band light" style="margin-top:12px">Our model isolates performance from contextual factors</div>
-      </div>
-    </div></section>
-
-    <!-- 04 TYPE -->
+    <!-- 03 TYPOGRAPHY -->
     <section class="s" id="type"><div class="inner">
-      <div class="sh"><div class="num">04</div></div>
+      <div class="sh"><div class="num">03</div><span class="chap">Foundations</span></div>
       <h2>Typography</h2>
       <p class="intro">Sora in three weights for everything we say, set tight at display sizes. IBM Plex Mono for everything we measure. Weight and size do the work. No italics, no capitals for labels, no third family.</p>
       <div class="hair"></div>
@@ -2008,9 +2059,62 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       </div>
     </div></section>
 
-    <!-- 05 SLANT -->
+    <!-- 04 SURFACES -->
+    <section class="s" id="surfaces"><div class="inner">
+      <div class="sh"><div class="num">04</div><span class="chap">Foundations</span></div>
+      <h2>Surfaces</h2>
+      <p class="intro">The ground is flat: pure black in the dark theme, pure white in the light one. No gradients and no tint, so red and blue are the only colour on the page. Sections are separated by hairlines and space, not boxes.</p>
+      <div class="hair"></div>
+      <div class="two">
+        <div>
+          <h3>The ground</h3><p class="sub">#000000 on dark, #FFFFFF on light</p>
+          <div class="sig edge"></div>
+          <p class="body" style="margin-top:18px">Page background on every screen and slide. Flat and untinted, so nothing competes with the red and the blue. Raised things are separated by a hairline, not a shade.</p>
+        </div>
+        <div>
+          <h3>Stage light</h3><p class="sub">Silver at 9 %, behind the one hero element</p>
+          <div class="glowdemo"><svg viewBox="0 0 56 86" width="70" height="108" style="color:var(--ink)" aria-hidden="true"><use href="#glyph"/></svg></div>
+          <p class="body" style="margin-top:18px">A soft pool of light replaces the box. The hero sits on the page, lit, not framed. One per view.</p>
+        </div>
+      </div>
+      <div class="two" style="margin-top:64px">
+        <div>
+          <h3>Blueprint grid</h3><p class="sub">Blueprint #0B2D63, ruled in white at 8 px and 40 px</p>
+          <div class="paper crop"></div>
+          <p class="body" style="margin-top:18px">The engineering plate. Drawings, setup sheets, simulations and anything built to a dimension sit on Blueprint blue, ruled in white, in the dark theme and the light one alike. It is the one coloured ground in the system.</p>
+        </div>
+        <div>
+          <h3>Colour in the lines</h3><p class="sub">Red and blue are marks, never washes</p>
+          <div class="hair" style="margin:26px 0 30px"></div>
+          <p class="body">With a flat ground, the two worlds show up only as line work and marks: the red lead and blue scale above, a red board, a blue grid, a Flame trace against a blue reference. No red or blue glow, tint or gradient sits behind anything.</p>
+        </div>
+      </div>
+      <div class="three" style="margin-top:64px">
+        <div><h3>Edge light</h3><p class="sub">0.75 px, Alloy → Silver at 53 % → Gunmetal</p><p class="body">One light source above everything. Used on plates and slide cards, not on interface sections.</p></div>
+        <div><h3>Hairline</h3><p class="sub">Silver, solid to 83 %, then fades</p><div style="height:1px;margin:14px 0 18px;background:linear-gradient(90deg,#C9CCD1 0%,#C9CCD1 83%,transparent)"></div><p class="body">Interface dividers, at 14 %. Section openers use the red and blue scale rule instead.</p></div>
+        <div><h3>Tread</h3><p class="sub">F1 full-wet print, 24 % Silver</p><svg class="tread" viewBox="0 0 300 34" preserveAspectRatio="none" style="width:100%;display:block;margin:10px 0 14px" aria-hidden="true"><rect width="300" height="34" style="fill:rgba(var(--t),.06)"/><rect width="300" height="34" fill="url(#treadP)"/></svg><p class="body">Marks what is not yet done: the empty part of a progress glyph and running progress. Never decoration.</p></div>
+      </div>
+      <div class="two" style="margin-top:64px;align-items:center">
+        <div>
+          <h3>The wet-weather tread</h3><p class="sub">Inspired by Pirelli's F1 full wet tyres</p>
+          <p class="body">Every tyre in the system wears the same tread, drawn after the Pirelli Cinturato full wet used in Formula 1: shoulder blocks split by lateral grooves and fine sipes, two channels running round the tyre, and deep swept grooves that curve back from the centre to pump water out to the sides. The two halves are staggered by half a pitch, as on the real tyre. It is the pattern a car needs when grip is hardest to find, which is the point.</p>
+          <p class="body" style="margin-top:14px">The tyre carries the tread and the ground carries its print, and both point the same way: the tip of the V leads, in the direction of travel, so it cuts into the water first. The same print fills the unfinished part of the pathway glyph.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px">
+          <figure style="margin:0"><svg viewBox="0 0 125 190" style="width:100%;display:block;border-radius:14px;overflow:hidden" aria-label="Tyre tread from above"><rect width="125" height="190" fill="#0B0C0E"/><g transform="translate(31 0) rotate(90 0 0) translate(0 -62.4)"><rect x="0" y="0" width="190" height="62.4" fill="url(#wetTyre)"/></g><rect width="125" height="190" fill="url(#bkCurve)"/></svg><figcaption class="plate-cap">On the tyre</figcaption></figure>
+          <figure style="margin:0"><svg viewBox="0 0 125 190" style="width:100%;display:block;border-radius:14px;overflow:hidden" aria-label="Tread print on the ground"><rect width="125" height="190" style="fill:rgba(var(--t),.03)"/><g transform="translate(94 0) rotate(90 0 0)"><rect x="0" y="0" width="190" height="62.4" fill="url(#wetPrint)"/></g></svg><figcaption class="plate-cap">On the ground</figcaption></figure>
+        </div>
+      </div>
+      <div style="margin-top:64px">
+        <h3>Strapline band</h3><p class="sub">An optional closing line. When used, it states the conclusion rather than a caption</p>
+        <div class="band"><svg viewBox="0 0 56 86" style="color:var(--ink)" aria-hidden="true"><use href="#glyph"/></svg>Maja: ready for an F4 test day this winter</div>
+        <div class="band light" style="margin-top:12px">Our model isolates performance from contextual factors</div>
+      </div>
+    </div></section>
+
+    <!-- 05 THE 55° CUT -->
     <section class="s" id="slant"><div class="inner">
-      <div class="sh"><div class="num">05</div></div>
+      <div class="sh"><div class="num">05</div><span class="chap">Foundations</span></div>
       <h2>The 55° cut</h2>
       <p class="intro">Every accent is cut at the glyph's own lean and leans the same way, top-left to bottom-right. If it marks, selects or measures, it carries the cut.</p>
       <div class="hair"></div>
@@ -2038,9 +2142,12 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       </div>
     </div></section>
 
+    <!-- PART 2 TWO WORLDS -->
+    <div class="part" id="part-2"><div class="pn">Part 2 of 4</div><div class="pb"><p class="pt">Two worlds</p><p class="pl">Racing and engineering: what each brings, where each leads, and how the mark moves between them.</p></div><ol class="pi"><li><a href="#engineering"><span>06</span>Race engineering</a></li><li><a href="#context"><span>07</span>Usage context</a></li><li><a href="#motion"><span>08</span>Motion</a></li><li><a href="#progress"><span>09</span>Glyph as progress</a></li></ol></div>
+
     <!-- 06 RACE ENGINEERING -->
     <section class="s" id="engineering"><div class="inner">
-      <div class="sh"><div class="num">06</div></div>
+      <div class="sh"><div class="num">06</div><span class="chap">Two worlds</span></div>
       <h2>Race engineering</h2>
       <p class="intro">The mark is earned on track and proven in the garage. Under the core identity sits a technical layer taken from four places we work: the drawing office, the workshop, the pit wall and the track. Use each where something is being measured, built, read or raced. Never as wallpaper.</p>
       <div class="hair"></div>
@@ -2116,9 +2223,69 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       </div>
     </div></section>
 
-    <!-- 07 MOTION -->
+    <!-- 07 USAGE CONTEXT -->
+    <section class="s" id="context"><div class="inner">
+      <div class="sh"><div class="num">07</div><span class="chap">Two worlds</span></div>
+      <h2>Usage context</h2>
+      <p class="intro">Both worlds are always present; the context decides which one leads. In the garage blue leads and red is the single mark of intent. On track red leads and blue is the single line of reference. Neither ever disappears, and neither ever shares the lead.</p>
+      <div class="hair"></div>
+      <table class="spec ctx">
+        <tr><th>Context</th><th>Leads</th><th>Supports, once per view</th><th>Where</th></tr>
+        <tr><td><i class="cb"></i>Engineering</td><td>Engineering Blue fills, the blueprint grid, construction and dimension lines, blue number boards</td><td>Red as the lead of the scale rule, or the one live value</td><td>Advanced Technology, Insight Labs, technical documents, specs, product pages</td></tr>
+        <tr><td><i class="cr"></i>Racing</td><td>Race Red fills, red number boards, kerbs, chequers, speed streaks, the leader</td><td>Blue as the reference line: the pace to beat, the model, focus</td><td>FAT Karting League, FAT Racing, events, results, fan and driver content</td></tr>
+        <tr><td><i class="cg"></i>Group</td><td>Neither: the ground, white and the logo</td><td>Red and blue in balance, meeting at the seam</td><td>Smedley Group, investor and corporate material, this book</td></tr>
+      </table>
+      <div class="ctxh"><h3>Engineering, blue leads</h3><p class="sub">An Advanced Technology product page</p></div>
+      <div class="browser ux"><div class="addr"><span>smedley.group/advanced-technology</span></div>
+<div class="uxp eng">
+  <header class="uxn"><span class="lk" style="--lk:.3px;color:#fff" aria-hidden="true"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span><nav><a>Services</a><a class="on">Hardware</a><a>Software</a><a>Case studies</a></nav><button class="btn sm ub" type="button">Start a project</button></header>
+  <section class="uxh bpg">
+    <div class="uxc">
+      <div class="uxk"><span class="board bb">AT</span><span>Advanced Technology, hardware</span></div>
+      <h5>Engineered for the last tenth.</h5>
+      <p>Sensors, loggers and simulation built for motorsport, then proven for clients in sport and automotive. Every part is drawn, measured and tested before it reaches a car.</p>
+      <div class="uxb"><button class="btn ub" type="button">See the hardware</button><button class="btn g" type="button">Read the specs</button></div>
+      <div class="hair" style="margin:34px 0 0"></div>
+    </div>
+    <div class="uxd"><svg class="dwg" viewBox="34 16 370 427" aria-hidden="true"><rect class="cn" x="69.0" y="72.9" width="187.0" height="295.8"/><line class="cx" x1="68.9" y1="138.3" x2="162.4" y2="72.7"/><line class="cn" x1="166.6" y1="69.8" x2="207.0" y2="41.5"/><line class="cx" x1="65.4" y1="239.4" x2="208.7" y2="138.9"/><line class="cn" x1="212.9" y1="136.0" x2="253.3" y2="107.6"/><line class="cx" x1="111.7" y1="305.6" x2="255.0" y2="205.0"/><line class="cn" x1="259.2" y1="202.1" x2="299.6" y2="173.8"/><line class="cx" x1="157.9" y1="371.7" x2="251.5" y2="306.1"/><line class="cn" x1="255.7" y1="303.2" x2="345.9" y2="240.0"/><line class="dm" x1="198.6" y1="47.4" x2="337.5" y2="245.8"/><line class="tk" x1="196.0" y1="43.6" x2="201.3" y2="51.1"/><line class="tk" x1="242.3" y1="109.7" x2="247.6" y2="117.3"/><line class="tk" x1="288.6" y1="175.9" x2="293.9" y2="183.4"/><line class="tk" x1="334.9" y1="242.0" x2="340.1" y2="249.6"/><text x="239.3" y="73.0" text-anchor="middle">23.75</text><text x="285.6" y="139.2" text-anchor="middle">23.75</text><text x="331.9" y="205.3" text-anchor="middle">23.75</text><line class="cl" x1="73.5" y1="200.5" x2="215.1" y2="402.2"/><line class="cl" x1="59.7" y1="74.2" x2="264.9" y2="367.3"/><line class="cl" x1="126.8" y1="64.5" x2="268.8" y2="266.0"/><polygon class="ob" points="69.0,236.0 162.1,368.7 201.6,340.9 108.5,208.3"/><polygon class="ob" points="73.0,135.3 212.0,334.0 251.6,306.3 112.6,107.6"/><polygon class="ob" points="122.7,100.7 216.5,233.7 256.0,205.9 162.2,72.9"/><line class="dm" x1="69.5" y1="88.1" x2="125.5" y2="88.1"/><path class="dm" d="M99.5 88.1 A30 30 0 0 1 86.7 112.7"/><text x="103.5" y="76.1" class="tw" text-anchor="start">55°</text><line class="cn" x1="219.4" y1="237.9" x2="239.9" y2="267.1"/><line class="cn" x1="258.9" y1="210.1" x2="279.4" y2="239.3"/><line class="dm" x1="234.1" y1="258.8" x2="273.5" y2="231.0"/><line class="tk" x1="231.4" y1="255.0" x2="236.7" y2="262.5"/><line class="tk" x1="270.9" y1="227.2" x2="276.2" y2="234.7"/><text x="243.1" y="253.8" text-anchor="start">14.2</text><line class="dm" x1="251.2" y1="347.8" x2="201.4" y2="382.7"/><line class="tk" x1="248.6" y1="344.1" x2="253.9" y2="351.6"/><line class="tk" x1="198.8" y1="379.0" x2="204.1" y2="386.5"/><text x="261.2" y="351.8" text-anchor="start">17.9</text><circle class="bl" cx="222.6" cy="412.9" r="13"/><text x="222.6" y="416.5" class="tw" text-anchor="middle">FKL</text><circle class="bl" cx="272.3" cy="378.0" r="13"/><text x="272.3" y="381.6" class="tw" text-anchor="middle">F4</text><circle class="bl" cx="276.3" cy="276.6" r="13"/><text x="276.3" y="280.2" class="tw" text-anchor="middle">F1</text></svg></div>
+  </section>
+  <div class="uxs">
+    <div><span>latency</span><b>4.2</b><em>ms</em></div><div><span>sampling</span><b>1000</b><em>Hz</em></div><div><span>channels</span><b>240</b></div><div><span>tolerance</span><b>±0.01</b><em>mm</em></div>
+  </div>
+  <div class="uxg">
+    <article><span class="board bb sm">01</span><svg class="tool" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="1.5"/><path d="M6.5 13L9.5 10L11.5 11.5L14.5 8L17.5 10"/><path d="M12 16.5V19.5M9 19.5H15"/></svg><h6>Data logging</h6><p>Lap-synchronised telemetry from any kart, car or rig, on one timebase.</p><a class="uxl">Loggers<svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+    <article><span class="board bb sm">02</span><svg class="tool" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3.5 7.5H11.5M15.5 7.5H21.5"/><path d="M3.5 7.5V20.5H6.5"/><rect x="11.5" y="5.5" width="4" height="4" rx=".6"/><path d="M12.5 9.5V20.5H9.5"/><path d="M13.5 5.5V3.5"/></svg><h6>Chassis and parts</h6><p>Setup hardware machined and checked to a hundredth of a millimetre.</p><a class="uxl">Parts<svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+    <article><span class="board bb sm">03</span><svg class="tool" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="10" r="6.5"/><path d="M12 10L9.2 7.2"/><path d="M12 16.5V21M9.5 21H14.5"/></svg><h6>Simulation</h6><p>Models that separate the car, the weather and the track from the driver.</p><a class="uxl">Models<svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
+  </div>
+</div></div>
+      <p class="plate-cap">The hero sits on the blueprint grid with its drawing. Blue carries the actions and the numbering, readouts are mono. The only red is the lead of the scale rule.</p>
+      <div class="ctxh"><h3>Racing, red leads</h3><p class="sub">A FAT Karting League championship page</p></div>
+      <div class="browser ux"><div class="addr"><span>fatkartingleague.com/championship</span></div>
+<div class="uxp race">
+  <header class="uxn"><span class="lk" style="--lk:.3px;color:#fff" aria-hidden="true"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w"><span>Smedley<br>Group</span><i></i><span>FAT Karting<br>League</span></span></span><nav><a class="on">Championship</a><a>Hubs</a><a>Drivers</a><a>Results</a></nav><button class="btn sm p" type="button">Book a race</button></header>
+  <section class="uxh spd">
+    <div class="uxc">
+      <div class="uxk"><span class="board">R07</span><span>FKL 2026, round 7 of 10</span></div>
+      <h5>Round seven.<br>Łódź, under lights.</h5>
+      <p>Eighteen cadets, one electric grid, and a championship three points wide. Qualifying runs Thursday at 16:00.</p>
+      <div class="uxcd"><div><b>04</b><span>days</span></div><div><b>11</b><span>hours</span></div><div><b>32</b><span>min</span></div><div><b>08</b><span>sec</span></div></div>
+      <div class="uxb"><button class="btn p lg" type="button">Get tickets</button><button class="btn g" type="button">Watch live</button></div>
+    </div>
+    <div class="uxt"><div class="uxtt"><span>Championship</span><b>Cadet</b></div><ol><li class="lead"><span class="p">1</span><b>KOW</b><span>1:02.418</span></li><li><span class="p">2</span><b>HAR</b><span>+0.103</span></li><li><span class="p">3</span><b>MEH</b><span>+0.559</span></li><li><span class="p">4</span><b>LIS</b><span>+0.781</span></li><li><span class="p">5</span><b>OKA</b><span>+0.902</span></li></ol><div class="uxref"><i></i>F4 entry pace, 1:02.900</div></div>
+  </section>
+  <div class="chq"></div>
+  <div class="uxg">
+    <article><span class="board sm">R08</span><h6>FKL Milton Keynes</h6><p>Sat 17 Oct, junior final, 22 drivers</p><button class="btn sm g" type="button">Enter</button></article>
+    <article><span class="board sm">R09</span><h6>FKL Dubai</h6><p>Fri 6 Nov, night race, 20 drivers</p><button class="btn sm g" type="button">Enter</button></article>
+    <article><span class="board sm">R10</span><h6>Grand final, Łódź</h6><p>Sat 5 Dec, all classes, title decider</p><button class="btn sm p" type="button">Enter</button></article>
+  </div>
+</div></div>
+      <p class="plate-cap">Speed streaks behind the hero, red boards for rounds, the leader in red and a chequer to close the fold. The only blue is the reference pace under the tower.</p>
+    </div></section>
+
+    <!-- 08 MOTION -->
     <section class="s" id="motion"><div class="inner">
-      <div class="sh"><div class="num">07</div></div>
+      <div class="sh"><div class="num">08</div><span class="chap">Two worlds</span></div>
       <h2>Motion</h2>
       <p class="intro">The mark is made on track and measured in the garage. Three tyres brake, their skids burn red and cool into the bars, and blue construction lines set the glyph at its lean. Motion always decelerates like a car on the brakes.</p>
       <div class="hair"></div>
@@ -2588,9 +2755,9 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       </div>
     </div></section>
 
-    <!-- 08 PROGRESS -->
+    <!-- 09 GLYPH AS PROGRESS -->
     <section class="s" id="progress"><div class="inner">
-      <div class="sh"><div class="num">08</div></div>
+      <div class="sh"><div class="num">09</div><span class="chap">Two worlds</span></div>
       <h2>The glyph as progress</h2>
       <p class="intro">The three bars are the three rungs of the ladder. One value runs through them in order, so a driver becomes the whole logo only on reaching F1.</p>
       <div class="hair"></div>
@@ -2609,9 +2776,12 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       </div>
     </div></section>
 
-    <!-- 09 CONTROLS -->
+    <!-- PART 3 INTERFACE -->
+    <div class="part" id="part-3"><div class="pn">Part 3 of 4</div><div class="pb"><p class="pt">Interface</p><p class="pl">Every control, screen and chart, built from the foundations.</p></div><ol class="pi"><li><a href="#components"><span>10</span>Controls</a></li><li><a href="#nav-sec"><span>11</span>Navigation</a></li><li><a href="#charts-sec"><span>12</span>Data and charts</a></li><li><a href="#calendar-sec"><span>13</span>Calendar</a></li><li><a href="#apps-sec"><span>14</span>Overlays and apps</a></li></ol></div>
+
+    <!-- 10 CONTROLS -->
     <section class="s" id="components"><div class="inner">
-      <div class="sh"><div class="num">09</div></div>
+      <div class="sh"><div class="num">10</div><span class="chap">Interface</span></div>
       <h2>Controls</h2>
       <p class="intro">Everything a person presses, types into or chooses. Red means active, the 55° cut marks the choice, and nothing hides in a box it does not need.</p>
       <div class="hair"></div>
@@ -2696,9 +2866,9 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       </div>
     </div></section>
 
-    <!-- 10 NAVIGATION AND FEEDBACK -->
+    <!-- 11 NAVIGATION -->
     <section class="s" id="nav-sec"><div class="inner">
-      <div class="sh"><div class="num">10</div></div>
+      <div class="sh"><div class="num">11</div><span class="chap">Interface</span></div>
       <h2>Navigation and feedback</h2>
       <p class="intro">Where you are, where you can go, and what just happened. The current place is always marked by one bar at the glyph's lean.</p>
       <div class="hair"></div>
@@ -2729,9 +2899,9 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       </div>
     </div></section>
 
-    <!-- 11 DATA AND CHARTS -->
+    <!-- 12 DATA AND CHARTS -->
     <section class="s" id="charts-sec"><div class="inner">
-      <div class="sh"><div class="num">11</div></div>
+      <div class="sh"><div class="num">12</div><span class="chap">Interface</span></div>
       <h2>Data and charts</h2>
       <p class="intro">Red is the driver, blue is the engineering: the reference, the line to beat and the model's uncertainty. Alloy and Steel are the field. Bars end in the 55° cut and points are small glyph bars. Ticks and readouts are in mono. No gradient washes, no rainbow series.</p>
       <div class="hair"></div>
@@ -2777,9 +2947,9 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       </div>
     </div></section>
 
-    <!-- 12 CALENDAR -->
+    <!-- 13 CALENDAR -->
     <section class="s" id="calendar-sec"><div class="inner">
-      <div class="sh"><div class="num">12</div></div>
+      <div class="sh"><div class="num">13</div><span class="chap">Interface</span></div>
       <h2>Calendar and scheduling</h2>
       <p class="intro">Dates are chosen the way everything else is: a red cut marks the pick, blue marks today, and a small bar under a day means something is booked.</p>
       <div class="hair"></div>
@@ -2802,9 +2972,9 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       </div>
     </div></section>
 
-    <!-- 13 OVERLAYS AND APPS -->
+    <!-- 14 OVERLAYS AND APPS -->
     <section class="s" id="apps-sec"><div class="inner">
-      <div class="sh"><div class="num">13</div></div>
+      <div class="sh"><div class="num">14</div><span class="chap">Interface</span></div>
       <h2>Overlays and apps</h2>
       <p class="intro">Layers that sit above the page, and the system carried into a phone app, an app icon, a browser tab and an email.</p>
       <div class="hair"></div>
@@ -2850,9 +3020,12 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       </div>
     </div></section>
 
-    <!-- 14 LAYOUT -->
+    <!-- PART 4 IN PRACTICE -->
+    <div class="part" id="part-4"><div class="pn">Part 4 of 4</div><div class="pb"><p class="pt">In practice</p><p class="pl">How it comes together on a real screen, and the rules that keep it together.</p></div><ol class="pi"><li><a href="#layout-sec"><span>15</span>Layout</a></li><li><a href="#application"><span>16</span>In use</a></li><li><a href="#principles"><span>17</span>Principles</a></li></ol></div>
+
+    <!-- 15 LAYOUT -->
     <section class="s" id="layout-sec"><div class="inner">
-      <div class="sh"><div class="num">14</div></div>
+      <div class="sh"><div class="num">15</div><span class="chap">In practice</span></div>
       <h2>Layout</h2>
       <p class="intro">These layouts are examples, not a grid to obey. They show one way the system comes together: a hero with quieter content around it, and a conclusion at the end. Rearrange columns, margins and proportions to suit the content and the screen.</p>
       <div class="hair"></div>
@@ -2886,449 +3059,42 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       <p class="plate-cap" style="margin-top:28px">Measurements above describe the examples as built. Keep the logo's clear space, the type, the colour and the 55° cut; everything about placement is open.</p>
     </div></section>
 
-    <!-- 15 APPLICATION -->
+    <!-- 16 IN USE -->
     <section class="s" id="application"><div class="inner">
-      <div class="sh"><div class="num">15</div></div>
+      <div class="sh"><div class="num">16</div><span class="chap">In practice</span></div>
       <h2>In use</h2>
-      <p class="intro">TalentID, the Advanced Technology scouting dashboard. Everything in this book, working together. Pick a driver or drag the preview.</p>
+      <p class="intro">TalentID, the Advanced Technology scouting dashboard, built from the components in this book: timing-screen ranking, mono readouts, the glyph as progress, the reference line to beat and one red action. Pick a driver in the ranking.</p>
       <div class="hair"></div>
-      <div class="frame" id="frame"><div class="scaler" id="scaler"><iframe title="TalentID dashboard sample" srcdoc="&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-&lt;meta charset=&quot;utf-8&quot;&gt;
-&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
-&lt;title&gt;TalentID · Dashboard&lt;/title&gt;
-&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
-&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
-&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
-&lt;style&gt;
-:root{
-  --ink:#FFFFFF; --dim:#9DA1A8; --faint:#63676F; --rule:rgba(205,207,212,.14); --panel:rgba(205,207,212,.035);
-  --pale:#7FB2FF; --product:#B6B9BF; --track:rgba(205,207,212,.10); --pos:#3DDC84; --neg:#FFB547;
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
-}
-@media (prefers-color-scheme: dark){ :root:not([data-theme=&quot;light&quot;]){ --panel:rgba(205,207,212,.035); } }
-:root[data-theme=&quot;dark&quot;]{ --panel:rgba(205,207,212,.035); }
-*,*::before,*::after{box-sizing:border-box}
-html{min-height:100%;background:#000000;background-color:#000000;scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;min-height:100%;background:transparent;color:var(--ink);font-family:&quot;Sora&quot;,system-ui,-apple-system,&quot;Segoe UI&quot;,sans-serif;font-size:13px;-webkit-font-smoothing:antialiased}
-button,input,select{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--pale);outline-offset:2px}
-a{color:inherit;text-decoration:none}
-
-header{display:flex;align-items:center;gap:20px;padding:20px 28px;border-bottom:0.75px solid var(--rule)}
-.lockup{width:150px;height:auto;display:block}
-.product{font-weight:600;font-size:16px;letter-spacing:-0.02em;color:var(--product);padding-left:20px;border-left:0.75px solid var(--faint);line-height:30px}
-header nav{display:flex;gap:2px;margin-left:24px}
-header nav a{padding:0 14px;min-height:44px;display:flex;align-items:center;color:var(--dim);position:relative}
-header nav a:hover{color:#fff}
-header nav a[aria-current=&quot;page&quot;]{color:#fff;font-weight:600}
-header nav a[aria-current=&quot;page&quot;]::after{content:&quot;&quot;;position:absolute;left:14px;right:14px;bottom:4px;height:3px;background:#D8231A;transform:skewX(35deg)}
-.tools{margin-left:auto;display:flex;gap:10px;align-items:center}
-.search{display:flex;align-items:center;gap:8px;border:0.75px solid var(--rule);border-radius:8px;padding:0 12px;min-height:40px;width:240px}
-.search input{border:0;outline:0;background:transparent;width:100%;font-size:12px}
-.search svg{flex:none;color:var(--dim)}
-.season{display:flex;align-items:center;gap:8px;border:0.75px solid var(--rule);border-radius:8px;padding:0 12px;min-height:40px;font-size:12px;color:var(--dim)}
-.season b{color:#fff;font-weight:600}
-.live{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--dim)}
-.live i{width:6px;height:10px;background:var(--pos);transform:skewX(35deg);}
-@keyframes blink{50%{opacity:.25}}
-
-.wrap{padding:22px 28px 0}
-.title{display:flex;align-items:baseline;gap:18px;margin-bottom:22px}
-.title h1{margin:0;font-weight:600;font-size:34px;letter-spacing:-0.68px;line-height:1}
-.title p{margin:0 0 3px;color:var(--dim);font-weight:300}
-
-/* panels */
-.panel{position:relative;min-width:0;padding:18px 0 0;border-top:0.75px solid var(--rule)}
-.ph{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}
-.ph b{font-weight:600;font-size:14px;letter-spacing:-0.01em}
-.ph span{font-size:11px;color:var(--dim);font-weight:300}
-.ph .more{margin-left:auto;font-size:11px;color:var(--dim)}
-.ph .more:hover{color:#fff}
-
-.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-bottom:28px;border-top:0.75px solid var(--rule);border-bottom:0.75px solid var(--rule)}
-.kpis .kpi{border-top:0;padding:16px 22px 14px}
-.kpis .kpi + .kpi{border-left:0.75px solid var(--rule)}
-.kpis .kpi:first-child{padding-left:0}
-.kpi .k{font-size:12px;color:var(--dim)}
-.kpi .v{display:flex;align-items:baseline;gap:10px;margin-top:8px}
-.kpi .v b{font-weight:600;font-size:28px;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums}
-.kpi .d{font-size:11px;font-weight:600}
-.up{color:var(--pos)} .down{color:var(--neg)}
-.kpi svg.spark{display:block;width:100%;height:28px;margin-top:10px}
-
-.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,.95fr);gap:40px;align-items:stretch}
-.col{display:flex;flex-direction:column;gap:28px;min-width:0}
-
-/* ranking */
-table{width:100%;border-collapse:collapse}
-th{font-size:11px;font-weight:400;color:var(--dim);text-align:left;padding:0 8px 8px}
-th.r,td.r{text-align:right}
-tbody tr{cursor:pointer}
-tbody tr:focus-visible{outline:2px solid var(--pale);outline-offset:-2px}
-td{padding:0 8px;height:48px;border-top:0.75px solid var(--rule);white-space:nowrap}
-tbody tr:hover td{background:rgba(205,207,212,.04)}
-tbody tr[aria-selected=&quot;true&quot;] td{background:rgba(205,207,212,.08)}
-
-td.rk{width:30px;color:var(--dim);font-weight:600;font-variant-numeric:tabular-nums}
-tr[aria-selected=&quot;true&quot;] td.rk{color:#fff}
-td .n{font-weight:600}
-td .h{display:block;font-size:10px;color:var(--dim);margin-top:2px;font-weight:300}
-td.ix{font-weight:600;font-size:14px;font-variant-numeric:tabular-nums}
-td svg{width:22px;height:30px;display:block}
-.tr{font-size:11px;font-weight:600}
-
-/* gauge */
-.gauge{display:flex;flex-direction:column;flex:1;border-top:0;padding:0;background:none}
-/* no container: the glyph sits on the page, lit from above like the rest of the system */
-.gbody{position:relative;flex:1;display:grid;place-items:center;padding:0;margin:-8px -16px 0}
-.gbody::before{content:&quot;&quot;;position:absolute;inset:-6% -10%;background:radial-gradient(ellipse 55% 50% at 50% 52%,rgba(205,207,212,.09) 0%,rgba(205,207,212,.03) 45%,transparent 72%);pointer-events:none;z-index:-1}
-.gtop{display:flex;align-items:flex-start;gap:12px;padding-top:18px;border-top:0.75px solid var(--rule)}
-.gtop h2{margin:0;font-weight:600;font-size:34px;letter-spacing:-0.03em;line-height:1.05}
-.gtop .meta{font-size:12px;color:var(--dim);margin-top:6px;font-weight:300}
-.gtop .pc{margin-left:auto;text-align:right}
-.gtop .pc b{display:block;font-weight:600;font-size:84px;line-height:.85;letter-spacing:-0.05em;font-variant-numeric:tabular-nums}
-.gtop .pc b sup{font-size:.4em;color:#FF4B3E;vertical-align:top;margin-left:2px}
-.gtop .pc .cap{font-size:12px;color:var(--dim);font-weight:400}
-.gbody svg{width:min(100%,470px);height:auto;display:block;overflow:visible}
-.lbl{font-family:inherit;font-weight:600;fill:#fff}
-.lbl.off{fill:#70757D}
-.pct{font-family:inherit;font-weight:300;fill:var(--dim)}
-.scrub{max-width:420px;width:100%;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1fr) 36px;gap:12px;align-items:center;font-size:11px;color:var(--dim)}
-.scrub input{-webkit-appearance:none;appearance:none;width:100%;height:36px;background:transparent;cursor:pointer}
-.scrub input::-webkit-slider-runnable-track{height:2px;background:var(--rule)}
-.scrub input::-moz-range-track{height:2px;background:var(--rule)}
-.scrub input::-webkit-slider-thumb{-webkit-appearance:none;width:8px;height:18px;margin-top:-8px;background:#fff;border:0;transform:skewX(35deg)}
-.scrub input::-moz-range-thumb{width:8px;height:18px;background:#fff;border:0;border-radius:0;transform:skewX(35deg)}
-.scrub span:last-child{text-align:right;color:#fff;font-weight:600;font-variant-numeric:tabular-nums}
-.gact{display:flex;gap:8px;margin-top:10px;justify-content:center}
-.btn{border:0;min-height:40px;height:40px;padding:0 28px;font-weight:600;font-size:12px;cursor:pointer;clip-path:polygon(0 0,calc(100% - 28.1px) 0,100% 100%,28.1px 100%)}
-.btn.p{background:#D8231A;color:#fff} .btn.p:hover{background:#E8342A}
-.btn.g{background:rgba(205,207,212,.1);color:#fff} .btn.g:hover{background:rgba(205,207,212,.18)}
-
-/* metrics */
-.mrow{display:grid;grid-template-columns:96px minmax(0,1fr) 30px;align-items:center;gap:12px;height:30px}
-.mrow .k{color:var(--dim);font-size:12px}
-.mrow b{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
-.slant{height:6px;background:var(--track);clip-path:polygon(0 0,calc(100% - 4.2px) 0,100% 100%,4.2px 100%);position:relative}
-.slant i{display:block;height:100%;background:#fff;clip-path:polygon(0 0,calc(100% - 4.2px) 0,100% 100%,4.2px 100%);transition:width .8s cubic-bezier(.16,1,.3,1)}
-.slant em{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--pale);transform:skewX(35deg)}
-.legend{display:flex;gap:16px;margin-top:12px;font-size:11px;color:var(--dim)}
-.legend i{display:inline-block;width:10px;height:6px;margin-right:6px;vertical-align:middle;transform:skewX(35deg)}
-
-svg.chart{width:100%;height:auto;display:block}
-svg.chart text{font-size:10px;fill:var(--dim);font-family:inherit}
-
-/* hubs */
-.hubs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px 32px}
-.hub{display:grid;grid-template-columns:minmax(0,1fr) 34px;gap:4px 10px;align-items:center;padding:6px 0}
-.hub .k{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hub b{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
-.stack{grid-column:1/3;display:flex;gap:2px;height:6px}
-.stack i{display:block;height:100%;clip-path:polygon(0 0,calc(100% - 4.2px) 0,100% 100%,4.2px 100%)}
-
-.band{margin:32px -28px 0;border-top:0.75px solid var(--rule);background:#000;min-height:56px;display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 28px;font-weight:600;font-size:15px;text-align:center}
-.band svg{width:18px;height:26px;flex:none}
-
-@media (max-width:1280px){ .grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} .col.c3{grid-column:1/3;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px} .hubs{grid-template-columns:repeat(2,minmax(0,1fr))} }
-@media (max-width:860px){
-  header{flex-wrap:wrap;padding:16px 18px;gap:12px}
-  header nav{margin-left:0;width:100%;overflow-x:auto}
-  .tools{margin-left:0;width:100%}
-  .search{flex:1;width:auto}
-  .wrap{padding:18px 18px 0}
-  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .kpis .kpi:nth-child(3){padding-left:0;border-left:0}
-  .kpis .kpi:nth-child(n+3){border-top:0.75px solid var(--rule)}
-  .hubs{grid-template-columns:minmax(0,1fr)}
-  .grid,.col.c3{grid-template-columns:minmax(0,1fr)}
-  .col.c3{grid-column:auto}
-  .band{margin:14px -18px 0}
-  .hide-s{display:none}
-}
-@media (prefers-reduced-motion: reduce){ *{transition:none !important;animation:none !important} }
-
-/* lockup, set in type: glyph + Sora SemiBold, sized by --lk (one glyph unit) */
-.lk{--lk:.36px;display:inline-flex;align-items:center;gap:calc(var(--lk)*16);color:inherit;font-family:&quot;Sora&quot;,system-ui,-apple-system,&quot;Segoe UI&quot;,sans-serif;vertical-align:middle}
-.lk svg{width:calc(var(--lk)*56);height:calc(var(--lk)*86);flex:none;overflow:visible;display:block}
-.lk .w{display:flex;align-items:center;gap:calc(var(--lk)*17)}
-.lk .w span{display:block;font-weight:600;font-size:calc(var(--lk)*30);line-height:.94;letter-spacing:-0.025em;white-space:nowrap}
-.lk .w i{display:block;width:calc(var(--lk)*4.6);height:calc(var(--lk)*62);background:currentColor;border-radius:calc(var(--lk)*2.3)}
-
-/* selection is red: the reader marking something is the lead */
-::selection{background:#D8231A;color:#fff;-webkit-text-fill-color:#fff}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;header&gt;
-  &lt;span class=&quot;lk&quot; style=&quot;--lk:0.35px;color:#fff&quot; role=&quot;img&quot; aria-label=&quot;Smedley Group, Advanced Technology&quot;&gt;&lt;svg viewBox=&quot;-0.9 -1 56 86&quot; aria-hidden=&quot;true&quot;&gt;&lt;g stroke=&quot;currentColor&quot; stroke-width=&quot;14.2&quot;&gt;&lt;line x1=&quot;21.31&quot; y1=&quot;2.59&quot; x2=&quot;48.89&quot; y2=&quot;41.71&quot;/&gt;&lt;line x1=&quot;6.71&quot; y1=&quot;12.79&quot; x2=&quot;47.59&quot; y2=&quot;71.21&quot;/&gt;&lt;line x1=&quot;5.51&quot; y1=&quot;42.39&quot; x2=&quot;32.89&quot; y2=&quot;81.41&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;span class=&quot;w&quot; aria-hidden=&quot;true&quot;&gt;&lt;span&gt;Smedley&lt;br&gt;Group&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;Advanced&lt;br&gt;Technology&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
-  &lt;span class=&quot;product&quot;&gt;TalentID&lt;/span&gt;
-  &lt;nav aria-label=&quot;Main&quot;&gt;
-    &lt;a href=&quot;#&quot; aria-current=&quot;page&quot;&gt;Dashboard&lt;/a&gt;
-    &lt;a href=&quot;#&quot;&gt;Drivers&lt;/a&gt;
-    &lt;a href=&quot;#&quot;&gt;Sessions&lt;/a&gt;
-    &lt;a href=&quot;#&quot;&gt;Hubs&lt;/a&gt;
-    &lt;a href=&quot;#&quot;&gt;Shortlists&lt;/a&gt;
-  &lt;/nav&gt;
-  &lt;div class=&quot;tools&quot;&gt;
-    &lt;span class=&quot;live&quot;&gt;&lt;i&gt;&lt;/i&gt;Timing feed connected&lt;/span&gt;
-    &lt;label class=&quot;search&quot;&gt;&lt;svg width=&quot;15&quot; height=&quot;15&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot;&gt;&lt;circle cx=&quot;11&quot; cy=&quot;11&quot; r=&quot;6.5&quot;/&gt;&lt;path d=&quot;M16 16l4.5 4.5&quot;/&gt;&lt;/svg&gt;&lt;input id=&quot;q&quot; type=&quot;search&quot; placeholder=&quot;Search drivers or hubs&quot; aria-label=&quot;Search drivers or hubs&quot;&gt;&lt;/label&gt;
-    &lt;span class=&quot;season&quot;&gt;Season &lt;b&gt;2026&lt;/b&gt;&lt;/span&gt;
-  &lt;/div&gt;
-&lt;/header&gt;
-
-&lt;div class=&quot;wrap&quot;&gt;
-  &lt;div class=&quot;title&quot;&gt;&lt;h1&gt;Pathway&lt;/h1&gt;&lt;p&gt;Every FKL driver, with kart, weather and track effects taken out.&lt;/p&gt;&lt;/div&gt;
-
-  &lt;section class=&quot;kpis&quot; aria-label=&quot;Key figures&quot;&gt;
-    &lt;div class=&quot;panel kpi&quot;&gt;&lt;div class=&quot;k&quot;&gt;Drivers tracked&lt;/div&gt;&lt;div class=&quot;v&quot;&gt;&lt;b&gt;248&lt;/b&gt;&lt;span class=&quot;d up&quot;&gt;+14&lt;/span&gt;&lt;/div&gt;&lt;svg class=&quot;spark&quot; data-s=&quot;10,12,13,13,15,16,18,19,21,22,24,25&quot; viewBox=&quot;0 0 200 28&quot; preserveAspectRatio=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/div&gt;
-    &lt;div class=&quot;panel kpi&quot;&gt;&lt;div class=&quot;k&quot;&gt;F4 ready&lt;/div&gt;&lt;div class=&quot;v&quot;&gt;&lt;b&gt;12&lt;/b&gt;&lt;span class=&quot;d up&quot;&gt;+3&lt;/span&gt;&lt;/div&gt;&lt;svg class=&quot;spark&quot; data-s=&quot;4,4,5,5,6,7,7,8,9,10,11,12&quot; viewBox=&quot;0 0 200 28&quot; preserveAspectRatio=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/div&gt;
-    &lt;div class=&quot;panel kpi&quot;&gt;&lt;div class=&quot;k&quot;&gt;Average index&lt;/div&gt;&lt;div class=&quot;v&quot;&gt;&lt;b&gt;71.8&lt;/b&gt;&lt;span class=&quot;d up&quot;&gt;+1.2&lt;/span&gt;&lt;/div&gt;&lt;svg class=&quot;spark&quot; data-s=&quot;68,68.5,69,69,69.6,70,70.2,70.8,71,71.1,71.5,71.8&quot; viewBox=&quot;0 0 200 28&quot; preserveAspectRatio=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/div&gt;
-    &lt;div class=&quot;panel kpi&quot;&gt;&lt;div class=&quot;k&quot;&gt;Sessions this week&lt;/div&gt;&lt;div class=&quot;v&quot;&gt;&lt;b&gt;1,406&lt;/b&gt;&lt;span class=&quot;d down&quot;&gt;−4%&lt;/span&gt;&lt;/div&gt;&lt;svg class=&quot;spark&quot; data-s=&quot;12,13,14,12,15,14,16,15,14,15,13,13&quot; viewBox=&quot;0 0 200 28&quot; preserveAspectRatio=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;/svg&gt;&lt;/div&gt;
-  &lt;/section&gt;
-
-  &lt;div class=&quot;grid&quot;&gt;
-    &lt;div class=&quot;col&quot;&gt;
-      &lt;section class=&quot;panel&quot;&gt;
-        &lt;div class=&quot;ph&quot;&gt;&lt;b&gt;Ranking&lt;/b&gt;&lt;span&gt;By TalentID index&lt;/span&gt;&lt;a class=&quot;more&quot; href=&quot;#&quot;&gt;See all 248&lt;/a&gt;&lt;/div&gt;
-        &lt;table&gt;
-          &lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;span style=&quot;position:absolute;left:-9999px&quot;&gt;Rank&lt;/span&gt;&lt;/th&gt;&lt;th&gt;Driver&lt;/th&gt;&lt;th&gt;Pathway&lt;/th&gt;&lt;th class=&quot;r&quot;&gt;Index&lt;/th&gt;&lt;th class=&quot;r hide-s&quot;&gt;Change&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-          &lt;tbody id=&quot;rows&quot;&gt;&lt;/tbody&gt;
-        &lt;/table&gt;
-      &lt;/section&gt;
-    &lt;/div&gt;
-
-    &lt;div class=&quot;col&quot;&gt;
-      &lt;section class=&quot;panel gauge&quot; aria-live=&quot;polite&quot;&gt;
-        &lt;div class=&quot;gtop&quot;&gt;
-          &lt;div&gt;&lt;h2 id=&quot;name&quot;&gt;&lt;/h2&gt;&lt;div class=&quot;meta&quot; id=&quot;meta&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-          &lt;div class=&quot;pc&quot;&gt;&lt;b&gt;&lt;span id=&quot;overall&quot;&gt;0&lt;/span&gt;&lt;sup&gt;%&lt;/sup&gt;&lt;/b&gt;&lt;span class=&quot;cap&quot;&gt;of the way to F1&lt;/span&gt;&lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;gbody&quot;&gt;&lt;svg id=&quot;g&quot; viewBox=&quot;-4 -6 84 96&quot; role=&quot;progressbar&quot; aria-label=&quot;Pathway progress&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot; aria-valuenow=&quot;0&quot;&gt;&lt;/svg&gt;&lt;/div&gt;
-        &lt;div class=&quot;scrub&quot;&gt;&lt;label for=&quot;scrub&quot;&gt;Preview&lt;/label&gt;&lt;input id=&quot;scrub&quot; type=&quot;range&quot; min=&quot;0&quot; max=&quot;100&quot; step=&quot;0.1&quot; value=&quot;0&quot;&gt;&lt;span id=&quot;scrubv&quot;&gt;0%&lt;/span&gt;&lt;/div&gt;
-        &lt;div class=&quot;gact&quot;&gt;&lt;button class=&quot;btn p&quot; type=&quot;button&quot; id=&quot;sl&quot;&gt;Add to F4 shortlist&lt;/button&gt;&lt;button class=&quot;btn g&quot; type=&quot;button&quot;&gt;Open sessions&lt;/button&gt;&lt;/div&gt;
-      &lt;/section&gt;
-    &lt;/div&gt;
-
-    &lt;div class=&quot;col c3&quot;&gt;
-      &lt;section class=&quot;panel&quot;&gt;
-        &lt;div class=&quot;ph&quot;&gt;&lt;b&gt;Profile&lt;/b&gt;&lt;span&gt;Against the F4 entry line&lt;/span&gt;&lt;/div&gt;
-        &lt;div id=&quot;metrics&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;legend&quot;&gt;&lt;span&gt;&lt;i style=&quot;background:#fff&quot;&gt;&lt;/i&gt;Driver&lt;/span&gt;&lt;span&gt;&lt;i style=&quot;background:var(--pale);width:3px&quot;&gt;&lt;/i&gt;F4 entry&lt;/span&gt;&lt;/div&gt;
-      &lt;/section&gt;
-      &lt;section class=&quot;panel&quot;&gt;
-        &lt;div class=&quot;ph&quot;&gt;&lt;b&gt;Pace&lt;/b&gt;&lt;span&gt;Gap to the class reference, last 12 sessions&lt;/span&gt;&lt;/div&gt;
-        &lt;svg class=&quot;chart&quot; id=&quot;chart&quot; viewBox=&quot;0 0 360 150&quot; role=&quot;img&quot; aria-label=&quot;Pace trend&quot;&gt;&lt;/svg&gt;
-      &lt;/section&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;section class=&quot;panel&quot; style=&quot;margin-top:32px&quot;&gt;
-    &lt;div class=&quot;ph&quot;&gt;&lt;b&gt;Hubs&lt;/b&gt;&lt;span&gt;Where the next F4 drivers are coming from&lt;/span&gt;
-      &lt;div class=&quot;legend&quot; style=&quot;margin:0 0 0 auto&quot;&gt;&lt;span&gt;&lt;i style=&quot;background:#4A4F57&quot;&gt;&lt;/i&gt;FKL&lt;/span&gt;&lt;span&gt;&lt;i style=&quot;background:#C9CCD1&quot;&gt;&lt;/i&gt;F4 candidate&lt;/span&gt;&lt;span&gt;&lt;i style=&quot;background:#fff&quot;&gt;&lt;/i&gt;F4 ready&lt;/span&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;hubs&quot; id=&quot;hubs&quot;&gt;&lt;/div&gt;
-  &lt;/section&gt;
-
-  &lt;div class=&quot;band&quot;&gt;&lt;svg viewBox=&quot;0 0 56 86&quot; aria-hidden=&quot;true&quot;&gt;&lt;g class=&quot;glyph&quot; stroke=&quot;#fff&quot; stroke-width=&quot;14.2&quot;&gt;&lt;/g&gt;&lt;/svg&gt;&lt;span id=&quot;band&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;script&gt;
-(function(){
-  var NS=&quot;http://www.w3.org/2000/svg&quot;;
-  var d=[0.5746,0.8184], ANG=Math.atan2(d[1],d[0])*180/Math.PI;
-  // glyph bars from the lockup asset, in pathway order: FKL, F4, F1
-  var BARS=[[[5.8,42.8],[32.6,81.0]],[[7.0,13.2],[47.3,70.8]],[[21.6,3.0],[48.6,41.3]]].map(function(b){
-    return [[b[0][0]-d[0]*.5,b[0][1]-d[1]*.5],[b[1][0]+d[0]*.5,b[1][1]+d[1]*.5]];
-  });
-  var STAGES=[&#x27;FKL&#x27;,&#x27;F4&#x27;,&#x27;F1&#x27;];
-  function mk(tag,a,p){var e=document.createElementNS(NS,tag);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
-  function at(b,f){return [b[0][0]+(b[1][0]-b[0][0])*f,b[0][1]+(b[1][1]-b[0][1])*f]}
-  function fr(p,i){return Math.max(0,Math.min(1,p*3-i))}
-  document.querySelectorAll(&#x27;g.glyph&#x27;).forEach(function(g){BARS.forEach(function(b){mk(&#x27;line&#x27;,{x1:b[0][0],y1:b[0][1],x2:b[1][0],y2:b[1][1]},g)})});
-
-  // sparklines: small, flat, ending on a glyph bar
-  document.querySelectorAll(&#x27;svg.spark&#x27;).forEach(function(s){
-    var v=s.dataset.s.split(&#x27;,&#x27;).map(Number), mn=Math.min.apply(0,v), mx=Math.max.apply(0,v);
-    var pts=v.map(function(y,i){return (i*200/(v.length-1)).toFixed(1)+&#x27;,&#x27;+(24-(y-mn)/(mx-mn||1)*20).toFixed(1)});
-    mk(&#x27;polyline&#x27;,{points:pts.join(&#x27; &#x27;),fill:&#x27;none&#x27;,stroke:&#x27;#8A9099&#x27;,&#x27;stroke-width&#x27;:1.5,&#x27;vector-effect&#x27;:&#x27;non-scaling-stroke&#x27;},s);
-  });
-
-  // ---- gauge: the logo is the progress bar ----
-  var g=document.getElementById(&#x27;g&#x27;), defs=mk(&#x27;defs&#x27;,{},g);
-  // one tread pattern per bar, lined up across its width, running along it
-  var NRM=[-d[1],d[0]];
-  BARS.forEach(function(b,i){var c=b[0][0]*NRM[0]+b[0][1]*NRM[1];
-    var pat=mk(&#x27;pattern&#x27;,{id:&#x27;tread&#x27;+i,patternUnits:&#x27;userSpaceOnUse&#x27;,width:6.5,height:14.2,y:(c-7.1).toFixed(3),patternTransform:&#x27;rotate(&#x27;+ANG+&#x27;)&#x27;},defs);
-    pat.innerHTML=&#x27;&lt;g transform=&quot;scale(1.0000 0.9103)&quot;&gt;&lt;mask id=&quot;&#x27;+&#x27;tm&#x27;+i+&#x27;&quot; maskUnits=&quot;userSpaceOnUse&quot; x=&quot;-20&quot; y=&quot;-5&quot; width=&quot;60&quot; height=&quot;30&quot;&gt;&lt;rect x=&quot;-20&quot; y=&quot;-5&quot; width=&quot;60&quot; height=&quot;30&quot; fill=&quot;#fff&quot;/&gt;&lt;path d=&quot;M-5.50 -0.2 L-5.00 3.3&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.8&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M-2.25 15.80 L-1.75 12.30&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.8&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M-2.25 0.9 L-1.95 2.6&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.26&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M1.00 14.70 L1.30 13.00&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.26&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M-2.90 7.55 Q-4.20 5.3 -6.30 3.6&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.72&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M0.35 8.05 Q-0.95 10.30 -3.05 12.00&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.72&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M-1.50 6.3 Q-2.30 5.0 -3.30 3.9&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.3&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M1.75 9.30 Q0.95 10.60 -0.05 11.70&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.3&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M1.00 -0.2 L1.50 3.3&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.8&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M4.25 15.80 L4.75 12.30&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.8&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M4.25 0.9 L4.55 2.6&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.26&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M7.50 14.70 L7.80 13.00&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.26&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M3.60 7.55 Q2.30 5.3 0.20 3.6&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.72&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M6.85 8.05 Q5.55 10.30 3.45 12.00&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.72&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M5.00 6.3 Q4.20 5.0 3.20 3.9&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.3&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M8.25 9.30 Q7.45 10.60 6.45 11.70&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.3&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M7.50 -0.2 L8.00 3.3&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.8&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M10.75 15.80 L11.25 12.30&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.8&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M10.75 0.9 L11.05 2.6&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.26&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M14.00 14.70 L14.30 13.00&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.26&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M10.10 7.55 Q8.80 5.3 6.70 3.6&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.72&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M13.35 8.05 Q12.05 10.30 9.95 12.00&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.72&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M11.50 6.3 Q10.70 5.0 9.70 3.9&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.3&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M14.75 9.30 Q13.95 10.60 12.95 11.70&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.3&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M14.00 -0.2 L14.50 3.3&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.8&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M17.25 15.80 L17.75 12.30&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.8&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M17.25 0.9 L17.55 2.6&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.26&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M20.50 14.70 L20.80 13.00&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.26&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M16.60 7.55 Q15.30 5.3 13.20 3.6&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.72&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M19.85 8.05 Q18.55 10.30 16.45 12.00&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.72&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M18.00 6.3 Q17.20 5.0 16.20 3.9&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.3&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;path d=&quot;M21.25 9.30 Q20.45 10.60 19.45 11.70&quot; fill=&quot;none&quot; stroke=&quot;#000&quot; stroke-width=&quot;0.3&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;rect x=&quot;-20&quot; y=&quot;3.19&quot; width=&quot;60&quot; height=&quot;0.72&quot; fill=&quot;#000&quot;/&gt;&lt;rect x=&quot;-20&quot; y=&quot;11.69&quot; width=&quot;60&quot; height=&quot;0.72&quot; fill=&quot;#000&quot;/&gt;&lt;rect x=&quot;-20&quot; y=&quot;7.58&quot; width=&quot;60&quot; height=&quot;0.45&quot; fill=&quot;#000&quot;/&gt;&lt;/mask&gt;&lt;rect x=&quot;0&quot; y=&quot;0.35&quot; width=&quot;6.5&quot; height=&quot;14.9&quot; fill=&quot;rgba(205,207,212,.14)&quot; mask=&quot;url(#&#x27;+&#x27;tm&#x27;+i+&#x27;)&quot;/&gt;&lt;/g&gt;&#x27;;});
-  var parts=BARS.map(function(b,i){
-    mk(&#x27;line&#x27;,{x1:b[0][0],y1:b[0][1],x2:b[1][0],y2:b[1][1],stroke:&#x27;rgba(205,207,212,.06)&#x27;,&#x27;stroke-width&#x27;:14.2},g);
-    mk(&#x27;line&#x27;,{x1:b[0][0],y1:b[0][1],x2:b[1][0],y2:b[1][1],stroke:&#x27;url(#tread&#x27;+i+&#x27;)&#x27;,&#x27;stroke-width&#x27;:14.2},g);
-    var fill=mk(&#x27;line&#x27;,{x1:b[0][0],y1:b[0][1],x2:b[0][0],y2:b[0][1],stroke:&#x27;#fff&#x27;,&#x27;stroke-width&#x27;:14.2},g);
-    var halo=mk(&#x27;line&#x27;,{stroke:&#x27;#FF4B3E&#x27;,&#x27;stroke-width&#x27;:18,&#x27;stroke-opacity&#x27;:.16,opacity:0},g);
-    var edge=mk(&#x27;line&#x27;,{stroke:&#x27;#FF4B3E&#x27;,&#x27;stroke-width&#x27;:14.2,opacity:0},g);
-    var e=b[1];
-    var lbl=mk(&#x27;text&#x27;,{x:(e[0]+4.2).toFixed(2),y:(e[1]+1.4).toFixed(2),class:&#x27;lbl&#x27;,&#x27;font-size&#x27;:4.4},g); lbl.textContent=STAGES[i];
-    var pct=mk(&#x27;text&#x27;,{x:(e[0]+4.2).toFixed(2),y:(e[1]+6.6).toFixed(2),class:&#x27;pct&#x27;,&#x27;font-size&#x27;:3.4},g);
-    return {b:b,fill:fill,halo:halo,edge:edge,lbl:lbl,pct:pct};
-  });
-  function setGauge(p){
-    p=Math.max(0,Math.min(1,p));
-    parts.forEach(function(o,i){
-      var f=fr(p,i), hd=at(o.b,f), tl=at(o.b,Math.max(0,f-0.06)), live=f&gt;0&amp;&amp;f&lt;1;
-      o.fill.setAttribute(&#x27;x2&#x27;,hd[0].toFixed(3)); o.fill.setAttribute(&#x27;y2&#x27;,hd[1].toFixed(3));
-      [o.halo,o.edge].forEach(function(l){l.setAttribute(&#x27;x1&#x27;,tl[0].toFixed(3));l.setAttribute(&#x27;y1&#x27;,tl[1].toFixed(3));l.setAttribute(&#x27;x2&#x27;,hd[0].toFixed(3));l.setAttribute(&#x27;y2&#x27;,hd[1].toFixed(3));l.setAttribute(&#x27;opacity&#x27;,live?1:0)});
-      o.lbl.setAttribute(&#x27;class&#x27;,&#x27;lbl&#x27;+(f&gt;0?&#x27;&#x27;:&#x27; off&#x27;));
-      o.pct.textContent=Math.round(f*100)+&#x27;%&#x27;;
-    });
-    g.setAttribute(&#x27;aria-valuenow&#x27;,Math.round(p*100));
-    document.getElementById(&#x27;scrub&#x27;).value=(p*100).toFixed(1);
-    document.getElementById(&#x27;scrubv&#x27;).textContent=Math.round(p*100)+&#x27;%&#x27;;
-    document.getElementById(&#x27;overall&#x27;).textContent=Math.round(p*100);
-  }
-  function mini(p,col){
-    var s=&#x27;&lt;svg viewBox=&quot;-2 -2 60 90&quot; aria-hidden=&quot;true&quot;&gt;&#x27;;
-    BARS.forEach(function(b,i){var f=fr(p,i),h=at(b,f);
-      s+=&#x27;&lt;line x1=&quot;&#x27;+b[0][0]+&#x27;&quot; y1=&quot;&#x27;+b[0][1]+&#x27;&quot; x2=&quot;&#x27;+b[1][0]+&#x27;&quot; y2=&quot;&#x27;+b[1][1]+&#x27;&quot; stroke=&quot;rgba(205,207,212,.14)&quot; stroke-width=&quot;14.2&quot;/&gt;&#x27;;
-      if(f&gt;0)s+=&#x27;&lt;line x1=&quot;&#x27;+b[0][0]+&#x27;&quot; y1=&quot;&#x27;+b[0][1]+&#x27;&quot; x2=&quot;&#x27;+h[0].toFixed(2)+&#x27;&quot; y2=&quot;&#x27;+h[1].toFixed(2)+&#x27;&quot; stroke=&quot;&#x27;+col+&#x27;&quot; stroke-width=&quot;14.2&quot;/&gt;&#x27;;});
-    return s+&#x27;&lt;/svg&gt;&#x27;;
-  }
-
-  // ---- sample data ----
-  var D=[
-    {n:&#x27;Maja Kowalczyk&#x27;,hub:&#x27;FKL Łódź&#x27;,age:14,idx:91.4,tr:3.2,p:.573,m:[94,88,90,86],pace:[.62,.55,.51,.44,.47,.38,.35,.31,.28,.24,.22,.18]},
-    {n:&#x27;Leo Hartmann&#x27;,hub:&#x27;FKL Milton Keynes&#x27;,age:15,idx:88.9,tr:1.1,p:.527,m:[91,84,86,80],pace:[.5,.49,.45,.44,.41,.4,.38,.36,.35,.33,.31,.3]},
-    {n:&#x27;Aarav Mehta&#x27;,hub:&#x27;FKL Dubai&#x27;,age:13,idx:86.2,tr:4.6,p:.47,m:[88,79,84,90],pace:[.8,.74,.66,.61,.55,.5,.47,.42,.4,.36,.33,.3]},
-    {n:&#x27;Sofia Marín&#x27;,hub:&#x27;FKL Valencia&#x27;,age:15,idx:84.7,tr:-0.8,p:.453,m:[86,90,78,77],pace:[.36,.34,.35,.33,.34,.33,.35,.34,.36,.35,.37,.36]},
-    {n:&#x27;Kai Tanaka&#x27;,hub:&#x27;FKL Kuala Lumpur&#x27;,age:12,idx:82.3,tr:2.4,p:.287,m:[84,76,80,83],pace:[.9,.84,.8,.73,.7,.66,.6,.58,.55,.52,.5,.47]},
-    {n:&#x27;Noah Okafor&#x27;,hub:&#x27;FKL Lagos&#x27;,age:14,idx:80.9,tr:0.4,p:.26,m:[83,80,78,76],pace:[.55,.53,.54,.5,.5,.49,.48,.47,.47,.46,.45,.45]},
-    {n:&#x27;Elin Berg&#x27;,hub:&#x27;FKL Gothenburg&#x27;,age:13,idx:79.6,tr:-1.9,p:.233,m:[80,82,74,79],pace:[.42,.44,.43,.46,.45,.47,.46,.48,.5,.49,.51,.52]},
-    {n:&#x27;Tomás Duarte&#x27;,hub:&#x27;FKL Lisbon&#x27;,age:15,idx:78.2,tr:1.7,p:.213,m:[79,75,83,74],pace:[.66,.63,.6,.6,.57,.55,.54,.52,.5,.49,.48,.46]}
-  ];
-  var ENTRY=[85,82,80,78], MN=[&#x27;Pace&#x27;,&#x27;Consistency&#x27;,&#x27;Racecraft&#x27;,&#x27;Adaptability&#x27;];
-  var HUBS=[[&#x27;FKL Łódź&#x27;,31,4,2],[&#x27;FKL Milton Keynes&#x27;,38,3,2],[&#x27;FKL Dubai&#x27;,27,3,1],[&#x27;FKL Valencia&#x27;,24,2,1],[&#x27;FKL Kuala Lumpur&#x27;,29,2,1],[&#x27;FKL Lagos&#x27;,22,1,0],[&#x27;FKL Gothenburg&#x27;,19,1,0],[&#x27;FKL Lisbon&#x27;,21,2,1]];
-  document.getElementById(&#x27;hubs&#x27;).innerHTML=HUBS.map(function(h){var t=h[1]+h[2]+h[3];
-    return &#x27;&lt;div class=&quot;hub&quot;&gt;&lt;span class=&quot;k&quot;&gt;&#x27;+h[0]+&#x27;&lt;/span&gt;&lt;b&gt;&#x27;+t+&#x27;&lt;/b&gt;&lt;div class=&quot;stack&quot;&gt;&lt;i style=&quot;flex:&#x27;+h[1]+&#x27;;background:#4A4F57&quot;&gt;&lt;/i&gt;&lt;i style=&quot;flex:&#x27;+Math.max(h[2],.001)+&#x27;;background:#C9CCD1&quot;&gt;&lt;/i&gt;&lt;i style=&quot;flex:&#x27;+Math.max(h[3],.001)+&#x27;;background:#fff&quot;&gt;&lt;/i&gt;&lt;i style=&quot;flex:&#x27;+(45-t)+&#x27;;background:rgba(205,207,212,.06)&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/div&gt;&#x27;}).join(&#x27;&#x27;);
-
-  var sel=0, shown=0, raf=null;
-  var rows=document.getElementById(&#x27;rows&#x27;);
-  function renderRows(){
-    var q=document.getElementById(&#x27;q&#x27;).value.trim().toLowerCase();
-    var html=D.map(function(x,i){ if(q&amp;&amp;(x.n+&#x27; &#x27;+x.hub).toLowerCase().indexOf(q)&lt;0) return &#x27;&#x27;;
-      return &#x27;&lt;tr data-i=&quot;&#x27;+i+&#x27;&quot; tabindex=&quot;0&quot; aria-selected=&quot;&#x27;+(i===sel)+&#x27;&quot;&gt;&lt;td class=&quot;rk&quot;&gt;&#x27;+String(i+1).padStart(2,&#x27;0&#x27;)+&#x27;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;n&quot;&gt;&#x27;+x.n+&#x27;&lt;/span&gt;&lt;span class=&quot;h&quot;&gt;&#x27;+x.hub+&#x27;&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&#x27;+mini(x.p,i===sel?&#x27;#fff&#x27;:&#x27;#8A9099&#x27;)+&#x27;&lt;/td&gt;&lt;td class=&quot;r ix&quot;&gt;&#x27;+x.idx.toFixed(1)+&#x27;&lt;/td&gt;&lt;td class=&quot;r hide-s&quot;&gt;&lt;span class=&quot;tr &#x27;+(x.tr&gt;=0?&#x27;up&#x27;:&#x27;down&#x27;)+&#x27;&quot;&gt;&#x27;+(x.tr&gt;=0?&#x27;+&#x27;:&#x27;−&#x27;)+Math.abs(x.tr).toFixed(1)+&#x27;&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&#x27;}).join(&#x27;&#x27;);
-    rows.innerHTML=html||&#x27;&lt;tr&gt;&lt;td colspan=&quot;5&quot; style=&quot;color:var(--dim);cursor:default&quot;&gt;No drivers match. Clear the search to see the full ranking.&lt;/td&gt;&lt;/tr&gt;&#x27;;
-  }
-  function tween(to){
-    cancelAnimationFrame(raf);
-    var from=shown,t0=null,dur=matchMedia(&#x27;(prefers-reduced-motion: reduce)&#x27;).matches?1:1000;
-    function f(ts){if(t0===null)t0=ts;var k=Math.min(1,(ts-t0)/dur),e=1-Math.pow(1-k,5);shown=from+(to-from)*e;setGauge(shown);if(k&lt;1)raf=requestAnimationFrame(f)}
-    raf=requestAnimationFrame(f);
-  }
-  function chart(x){
-    var c=document.getElementById(&#x27;chart&#x27;),W=360,H=150,L=40,R=10,T=12,B=22,v=x.pace,n=v.length;
-    var px=function(i){return L+(W-L-R)*i/(n-1)},py=function(y){return T+(H-T-B)*y};
-    var s=&#x27;&#x27;;
-    [0,.5,1].forEach(function(gv){s+=&#x27;&lt;line x1=&quot;&#x27;+L+&#x27;&quot; x2=&quot;&#x27;+(W-R)+&#x27;&quot; y1=&quot;&#x27;+py(gv)+&#x27;&quot; y2=&quot;&#x27;+py(gv)+&#x27;&quot; stroke=&quot;rgba(205,207,212,.12)&quot;/&gt;&lt;text x=&quot;&#x27;+(L-8)+&#x27;&quot; y=&quot;&#x27;+(py(gv)+3)+&#x27;&quot; text-anchor=&quot;end&quot;&gt;+&#x27;+gv.toFixed(1)+&#x27;s&lt;/text&gt;&#x27;});
-    [0,5,11].forEach(function(i){s+=&#x27;&lt;text x=&quot;&#x27;+px(i)+&#x27;&quot; y=&quot;&#x27;+(H-6)+&#x27;&quot; text-anchor=&quot;middle&quot;&gt;S&#x27;+(i+1)+&#x27;&lt;/text&gt;&#x27;});
-    s+=&#x27;&lt;polyline points=&quot;&#x27;+v.map(function(y,i){return px(i).toFixed(1)+&#x27;,&#x27;+py(y).toFixed(1)}).join(&#x27; &#x27;)+&#x27;&quot; fill=&quot;none&quot; stroke=&quot;#fff&quot; stroke-width=&quot;1.8&quot; stroke-linejoin=&quot;round&quot;/&gt;&#x27;;
-    v.forEach(function(y,i){var X=px(i),Y=py(y);s+=&#x27;&lt;line x1=&quot;&#x27;+(X-2.3)+&#x27;&quot; y1=&quot;&#x27;+(Y-3.3)+&#x27;&quot; x2=&quot;&#x27;+(X+2.3)+&#x27;&quot; y2=&quot;&#x27;+(Y+3.3)+&#x27;&quot; stroke=&quot;&#x27;+(i===n-1?&#x27;#fff&#x27;:&#x27;#8A9099&#x27;)+&#x27;&quot; stroke-width=&quot;2.6&quot;/&gt;&#x27;});
-    s+=&#x27;&lt;text x=&quot;&#x27;+(px(n-1)-6)+&#x27;&quot; y=&quot;&#x27;+(py(v[n-1])-8)+&#x27;&quot; text-anchor=&quot;end&quot; style=&quot;fill:#fff;font-weight:600&quot;&gt;+&#x27;+v[n-1].toFixed(2)+&#x27;s&lt;/text&gt;&#x27;;
-    c.innerHTML=s;
-  }
-  function verdict(x){ if(x.p&gt;=.52) return &#x27;Ready for an F4 test day this winter&#x27;; if(x.p&gt;=.4) return &#x27;F4 candidate after one more FKL season&#x27;; return &#x27;Building inside FKL, keep watching&#x27;; }
-  function select(i){
-    sel=i; var x=D[i];
-    renderRows();
-    document.getElementById(&#x27;name&#x27;).textContent=x.n;
-    document.getElementById(&#x27;meta&#x27;).textContent=x.hub+&#x27;, age &#x27;+x.age+&#x27;. Index &#x27;+x.idx.toFixed(1)+&#x27;, ranked &#x27;+(i+1)+&#x27; of 248.&#x27;;
-    document.getElementById(&#x27;metrics&#x27;).innerHTML=MN.map(function(k,j){return &#x27;&lt;div class=&quot;mrow&quot;&gt;&lt;span class=&quot;k&quot;&gt;&#x27;+k+&#x27;&lt;/span&gt;&lt;div class=&quot;slant&quot;&gt;&lt;i style=&quot;width:0&quot;&gt;&lt;/i&gt;&lt;em style=&quot;left:&#x27;+ENTRY[j]+&#x27;%&quot;&gt;&lt;/em&gt;&lt;/div&gt;&lt;b&gt;&#x27;+x.m[j]+&#x27;&lt;/b&gt;&lt;/div&gt;&#x27;}).join(&#x27;&#x27;);
-    requestAnimationFrame(function(){document.querySelectorAll(&#x27;#metrics .slant i&#x27;).forEach(function(el,j){el.style.width=x.m[j]+&#x27;%&#x27;})});
-    chart(x);
-    document.getElementById(&#x27;band&#x27;).textContent=x.n.split(&#x27; &#x27;)[0]+&#x27;: &#x27;+verdict(x).charAt(0).toLowerCase()+verdict(x).slice(1);
-    document.getElementById(&#x27;sl&#x27;).textContent=x.p&gt;=.4?&#x27;Add to F4 shortlist&#x27;:&#x27;Watch this driver&#x27;;
-    tween(x.p);
-  }
-  rows.addEventListener(&#x27;click&#x27;,function(e){var t=e.target.closest(&#x27;tr[data-i]&#x27;);if(t)select(+t.dataset.i)});
-  rows.addEventListener(&#x27;keydown&#x27;,function(e){if(e.key===&#x27;Enter&#x27;||e.key===&#x27; &#x27;){var t=e.target.closest(&#x27;tr[data-i]&#x27;);if(t){e.preventDefault();select(+t.dataset.i)}}});
-  document.getElementById(&#x27;q&#x27;).addEventListener(&#x27;input&#x27;,renderRows);
-  var sc=document.getElementById(&#x27;scrub&#x27;);
-  sc.addEventListener(&#x27;input&#x27;,function(){cancelAnimationFrame(raf);shown=sc.value/100;setGauge(shown)});
-  sc.addEventListener(&#x27;change&#x27;,function(){tween(D[sel].p)});
-  document.getElementById(&#x27;sl&#x27;).addEventListener(&#x27;click&#x27;,function(){this.textContent=&#x27;Shortlisted&#x27;});
-  setGauge(0); select(0);
-})();
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-" scrolling="no"></iframe></div></div>
+      <div class="browser ux tidw"><div class="addr"><span>talentid.smedley.group/pathway</span></div>
+<div class="uxp tid" id="tid">
+  <header class="uxn"><span class="lk" style="--lk:.3px;color:#fff" aria-hidden="true"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span><span class="tprod">TalentID</span><nav><a class="on">Pathway</a><a>Drivers</a><a>Sessions</a><a>Hubs</a><a>Shortlists</a></nav>
+    <div class="ttools"><span class="status"><i style="background:var(--green)"></i>Timing feed live</span><div class="inpicon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input class="inp" type="search" placeholder="Drivers or hubs" aria-label="Search drivers or hubs"></div></div></header>
+  <div class="thd"><div><h5>Pathway</h5><p>Every FKL driver, with kart, weather and track taken out.</p></div>
+    <div class="seg" role="radiogroup" aria-label="Period"><label><input type="radio" name="tper"><span><i>Month</i></span></label><label><input type="radio" name="tper" checked><span><i>Season</i></span></label><label><input type="radio" name="tper"><span><i>All time</i></span></label></div></div>
+  <div class="uxs"><div><span>drivers tracked</span><b>248</b><em class="up">+14</em></div><div><span>F4 ready</span><b>12</b><em class="up">+3</em></div><div><span>average index</span><b>71.8</b><em class="up">+1.2</em></div><div><span>sessions this week</span><b>1,406</b><em class="down">−4 %</em></div></div>
+  <div class="tmain">
+    <section class="trank"><div class="tt"><h6>Ranking</h6><span>TalentID index</span></div><ol id="tRank"><li><button type="button" data-i="0" aria-pressed="true"><span class="p">1</span><span class="nm"><b>Maja Kowalczyk</b><small>FKL Łódź</small></span><span class="ix">91.4</span><span class="dl up">+3.2</span></button></li><li><button type="button" data-i="1" aria-pressed="false"><span class="p">2</span><span class="nm"><b>Leo Hartmann</b><small>FKL Milton Keynes</small></span><span class="ix">88.9</span><span class="dl up">+1.1</span></button></li><li><button type="button" data-i="2" aria-pressed="false"><span class="p">3</span><span class="nm"><b>Aarav Mehta</b><small>FKL Dubai</small></span><span class="ix">86.2</span><span class="dl up">+4.6</span></button></li><li><button type="button" data-i="3" aria-pressed="false"><span class="p">4</span><span class="nm"><b>Sofia Marín</b><small>FKL Valencia</small></span><span class="ix">84.7</span><span class="dl down">−0.8</span></button></li><li><button type="button" data-i="4" aria-pressed="false"><span class="p">5</span><span class="nm"><b>Kai Tanaka</b><small>FKL Kuala Lumpur</small></span><span class="ix">82.3</span><span class="dl up">+2.4</span></button></li><li><button type="button" data-i="5" aria-pressed="false"><span class="p">6</span><span class="nm"><b>Noah Okafor</b><small>FKL Lagos</small></span><span class="ix">80.9</span><span class="dl up">+0.4</span></button></li><li><button type="button" data-i="6" aria-pressed="false"><span class="p">7</span><span class="nm"><b>Elin Berg</b><small>FKL Gothenburg</small></span><span class="ix">79.6</span><span class="dl down">−1.9</span></button></li><li><button type="button" data-i="7" aria-pressed="false"><span class="p">8</span><span class="nm"><b>Tomás Duarte</b><small>FKL Lisbon</small></span><span class="ix">78.2</span><span class="dl up">+1.7</span></button></li></ol></section>
+    <section class="thero">
+      <div class="tk"><span class="board">01</span><span id="tMeta"></span></div>
+      <div class="tnm"><h5 id="tName"></h5><div class="tpc"><b id="tPct"></b><sup>%</sup><span>of the way<br>to F1</span></div></div>
+      <svg id="tGauge" viewBox="-4 -6 96 96" aria-hidden="true"></svg>
+      <div class="bgroup" role="group" aria-label="Driver actions"><button class="btn p" type="button">Add to F4 shortlist</button><button class="btn g" type="button">Open sessions</button></div>
+    </section>
+    <section class="tprof"><div class="tt"><h6>Profile</h6><span>against the F4 entry line</span></div><div class="tm"><span>Pace</span><div class="bar"><i data-k="0"></i><em style="left:85%"></em></div><b data-v="0"></b></div><div class="tm"><span>Consistency</span><div class="bar"><i data-k="1"></i><em style="left:82%"></em></div><b data-v="1"></b></div><div class="tm"><span>Racecraft</span><div class="bar"><i data-k="2"></i><em style="left:80%"></em></div><b data-v="2"></b></div><div class="tm"><span>Adaptability</span><div class="bar"><i data-k="3"></i><em style="left:78%"></em></div><b data-v="3"></b></div>
+      <div class="tt" style="margin-top:26px"><h6>Pace</h6><span>gap to class reference, 12 sessions</span></div>
+      <svg class="ch" id="tPace" viewBox="0 0 300 150" aria-hidden="true"></svg>
+      <div class="legend"><span><i style="background:var(--flame)"></i>Driver</span><span><i style="background:var(--blue);width:3px"></i>F4 entry</span></div>
+    </section>
+  </div>
+  <div class="thubs"><div class="tt"><h6>Hubs</h6><span>where the next F4 drivers are coming from</span><span class="tlg"><i></i>FKL <i class="c"></i>F4 candidate <i class="r"></i>F4 ready</span></div><div class="thg"><div class="th"><div class="thh"><span>FKL Łódź</span><b>37</b></div><div class="thb"><i style="flex:30"></i><i class="c" style="flex:5"></i><i class="r" style="flex:2"></i></div></div><div class="th"><div class="thh"><span>FKL Milton Keynes</span><b>43</b></div><div class="thb"><i style="flex:36"></i><i class="c" style="flex:4"></i><i class="r" style="flex:3"></i></div></div><div class="th"><div class="thh"><span>FKL Dubai</span><b>31</b></div><div class="thb"><i style="flex:27"></i><i class="c" style="flex:3"></i><i class="r" style="flex:1"></i></div></div><div class="th"><div class="thh"><span>FKL Valencia</span><b>27</b></div><div class="thb"><i style="flex:23"></i><i class="c" style="flex:2"></i><i class="r" style="flex:2"></i></div></div><div class="th"><div class="thh"><span>FKL Kuala Lumpur</span><b>32</b></div><div class="thb"><i style="flex:28"></i><i class="c" style="flex:3"></i><i class="r" style="flex:1"></i></div></div><div class="th"><div class="thh"><span>FKL Lagos</span><b>23</b></div><div class="thb"><i style="flex:21"></i><i class="c" style="flex:1"></i><i class="r" style="flex:1"></i></div></div><div class="th"><div class="thh"><span>FKL Gothenburg</span><b>20</b></div><div class="thb"><i style="flex:18"></i><i class="c" style="flex:2"></i><i class="r" style="flex:0"></i></div></div><div class="th"><div class="thh"><span>FKL Lisbon</span><b>24</b></div><div class="thb"><i style="flex:20"></i><i class="c" style="flex:2"></i><i class="r" style="flex:2"></i></div></div></div></div>
+  <div class="band"><svg viewBox="0 0 56 86" style="color:#fff" aria-hidden="true"><use href="#glyph"/></svg><span id="tBand"></span></div>
+</div></div>
       <p class="plate-cap">Live sample with placeholder data.</p>
-    </div></section>
-
-    <!-- 16 USAGE CONTEXT -->
-    <section class="s" id="context"><div class="inner">
-      <div class="sh"><div class="num">16</div></div>
-      <h2>Usage context</h2>
-      <p class="intro">Both worlds are always present; the context decides which one leads. In the garage blue leads and red is the single mark of intent. On track red leads and blue is the single line of reference. Neither ever disappears, and neither ever shares the lead.</p>
-      <div class="hair"></div>
-      <table class="spec ctx">
-        <tr><th>Context</th><th>Leads</th><th>Supports, once per view</th><th>Where</th></tr>
-        <tr><td><i class="cb"></i>Engineering</td><td>Engineering Blue fills, the blueprint grid, construction and dimension lines, blue number boards</td><td>Red as the lead of the scale rule, or the one live value</td><td>Advanced Technology, Insight Labs, technical documents, specs, product pages</td></tr>
-        <tr><td><i class="cr"></i>Racing</td><td>Race Red fills, red number boards, kerbs, chequers, speed streaks, the leader</td><td>Blue as the reference line: the pace to beat, the model, focus</td><td>FAT Karting League, FAT Racing, events, results, fan and driver content</td></tr>
-        <tr><td><i class="cg"></i>Group</td><td>Neither: the ground, white and the logo</td><td>Red and blue in balance, meeting at the seam</td><td>Smedley Group, investor and corporate material, this book</td></tr>
-      </table>
-      <div class="ctxh"><h3>Engineering, blue leads</h3><p class="sub">An Advanced Technology product page</p></div>
-      <div class="browser ux"><div class="addr"><span>smedley.group/advanced-technology</span></div>
-<div class="uxp eng">
-  <header class="uxn"><span class="lk" style="--lk:.3px;color:#fff" aria-hidden="true"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span><nav><a>Services</a><a class="on">Hardware</a><a>Software</a><a>Case studies</a></nav><button class="btn sm ub" type="button">Start a project</button></header>
-  <section class="uxh bpg">
-    <div class="uxc">
-      <div class="uxk"><span class="board bb">AT</span><span>Advanced Technology, hardware</span></div>
-      <h5>Engineered for the last tenth.</h5>
-      <p>Sensors, loggers and simulation built for motorsport, then proven for clients in sport and automotive. Every part is drawn, measured and tested before it reaches a car.</p>
-      <div class="uxb"><button class="btn ub" type="button">See the hardware</button><button class="btn g" type="button">Read the specs</button></div>
-      <div class="hair" style="margin:34px 0 0"></div>
-    </div>
-    <div class="uxd"><svg class="dwg" viewBox="34 16 370 427" aria-hidden="true"><rect class="cn" x="69.0" y="72.9" width="187.0" height="295.8"/><line class="cx" x1="68.9" y1="138.3" x2="162.4" y2="72.7"/><line class="cn" x1="166.6" y1="69.8" x2="207.0" y2="41.5"/><line class="cx" x1="65.4" y1="239.4" x2="208.7" y2="138.9"/><line class="cn" x1="212.9" y1="136.0" x2="253.3" y2="107.6"/><line class="cx" x1="111.7" y1="305.6" x2="255.0" y2="205.0"/><line class="cn" x1="259.2" y1="202.1" x2="299.6" y2="173.8"/><line class="cx" x1="157.9" y1="371.7" x2="251.5" y2="306.1"/><line class="cn" x1="255.7" y1="303.2" x2="345.9" y2="240.0"/><line class="dm" x1="198.6" y1="47.4" x2="337.5" y2="245.8"/><line class="tk" x1="196.0" y1="43.6" x2="201.3" y2="51.1"/><line class="tk" x1="242.3" y1="109.7" x2="247.6" y2="117.3"/><line class="tk" x1="288.6" y1="175.9" x2="293.9" y2="183.4"/><line class="tk" x1="334.9" y1="242.0" x2="340.1" y2="249.6"/><text x="239.3" y="73.0" text-anchor="middle">23.75</text><text x="285.6" y="139.2" text-anchor="middle">23.75</text><text x="331.9" y="205.3" text-anchor="middle">23.75</text><line class="cl" x1="73.5" y1="200.5" x2="215.1" y2="402.2"/><line class="cl" x1="59.7" y1="74.2" x2="264.9" y2="367.3"/><line class="cl" x1="126.8" y1="64.5" x2="268.8" y2="266.0"/><polygon class="ob" points="69.0,236.0 162.1,368.7 201.6,340.9 108.5,208.3"/><polygon class="ob" points="73.0,135.3 212.0,334.0 251.6,306.3 112.6,107.6"/><polygon class="ob" points="122.7,100.7 216.5,233.7 256.0,205.9 162.2,72.9"/><line class="dm" x1="69.5" y1="88.1" x2="125.5" y2="88.1"/><path class="dm" d="M99.5 88.1 A30 30 0 0 1 86.7 112.7"/><text x="103.5" y="76.1" class="tw" text-anchor="start">55°</text><line class="cn" x1="219.4" y1="237.9" x2="239.9" y2="267.1"/><line class="cn" x1="258.9" y1="210.1" x2="279.4" y2="239.3"/><line class="dm" x1="234.1" y1="258.8" x2="273.5" y2="231.0"/><line class="tk" x1="231.4" y1="255.0" x2="236.7" y2="262.5"/><line class="tk" x1="270.9" y1="227.2" x2="276.2" y2="234.7"/><text x="243.1" y="253.8" text-anchor="start">14.2</text><line class="dm" x1="251.2" y1="347.8" x2="201.4" y2="382.7"/><line class="tk" x1="248.6" y1="344.1" x2="253.9" y2="351.6"/><line class="tk" x1="198.8" y1="379.0" x2="204.1" y2="386.5"/><text x="261.2" y="351.8" text-anchor="start">17.9</text><circle class="bl" cx="222.6" cy="412.9" r="13"/><text x="222.6" y="416.5" class="tw" text-anchor="middle">FKL</text><circle class="bl" cx="272.3" cy="378.0" r="13"/><text x="272.3" y="381.6" class="tw" text-anchor="middle">F4</text><circle class="bl" cx="276.3" cy="276.6" r="13"/><text x="276.3" y="280.2" class="tw" text-anchor="middle">F1</text></svg></div>
-  </section>
-  <div class="uxs">
-    <div><span>latency</span><b>4.2</b><em>ms</em></div><div><span>sampling</span><b>1000</b><em>Hz</em></div><div><span>channels</span><b>240</b></div><div><span>tolerance</span><b>±0.01</b><em>mm</em></div>
-  </div>
-  <div class="uxg">
-    <article><span class="board bb sm">01</span><svg class="tool" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="1.5"/><path d="M6.5 13L9.5 10L11.5 11.5L14.5 8L17.5 10"/><path d="M12 16.5V19.5M9 19.5H15"/></svg><h6>Data logging</h6><p>Lap-synchronised telemetry from any kart, car or rig, on one timebase.</p><a class="uxl">Loggers<svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
-    <article><span class="board bb sm">02</span><svg class="tool" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3.5 7.5H11.5M15.5 7.5H21.5"/><path d="M3.5 7.5V20.5H6.5"/><rect x="11.5" y="5.5" width="4" height="4" rx=".6"/><path d="M12.5 9.5V20.5H9.5"/><path d="M13.5 5.5V3.5"/></svg><h6>Chassis and parts</h6><p>Setup hardware machined and checked to a hundredth of a millimetre.</p><a class="uxl">Parts<svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
-    <article><span class="board bb sm">03</span><svg class="tool" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="10" r="6.5"/><path d="M12 10L9.2 7.2"/><path d="M12 16.5V21M9.5 21H14.5"/></svg><h6>Simulation</h6><p>Models that separate the car, the weather and the track from the driver.</p><a class="uxl">Models<svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>
-  </div>
-</div></div>
-      <p class="plate-cap">The hero sits on the blueprint grid with its drawing. Blue carries the actions and the numbering, readouts are mono. The only red is the lead of the scale rule.</p>
-      <div class="ctxh"><h3>Racing, red leads</h3><p class="sub">A FAT Karting League championship page</p></div>
-      <div class="browser ux"><div class="addr"><span>fatkartingleague.com/championship</span></div>
-<div class="uxp race">
-  <header class="uxn"><span class="lk" style="--lk:.3px;color:#fff" aria-hidden="true"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w"><span>Smedley<br>Group</span><i></i><span>FAT Karting<br>League</span></span></span><nav><a class="on">Championship</a><a>Hubs</a><a>Drivers</a><a>Results</a></nav><button class="btn sm p" type="button">Book a race</button></header>
-  <section class="uxh spd">
-    <div class="uxc">
-      <div class="uxk"><span class="board">R07</span><span>FKL 2026, round 7 of 10</span></div>
-      <h5>Round seven.<br>Łódź, under lights.</h5>
-      <p>Eighteen cadets, one electric grid, and a championship three points wide. Qualifying runs Thursday at 16:00.</p>
-      <div class="uxcd"><div><b>04</b><span>days</span></div><div><b>11</b><span>hours</span></div><div><b>32</b><span>min</span></div><div><b>08</b><span>sec</span></div></div>
-      <div class="uxb"><button class="btn p lg" type="button">Get tickets</button><button class="btn g" type="button">Watch live</button></div>
-    </div>
-    <div class="uxt"><div class="uxtt"><span>Championship</span><b>Cadet</b></div><ol><li class="lead"><span class="p">1</span><b>KOW</b><span>1:02.418</span></li><li><span class="p">2</span><b>HAR</b><span>+0.103</span></li><li><span class="p">3</span><b>MEH</b><span>+0.559</span></li><li><span class="p">4</span><b>LIS</b><span>+0.781</span></li><li><span class="p">5</span><b>OKA</b><span>+0.902</span></li></ol><div class="uxref"><i></i>F4 entry pace, 1:02.900</div></div>
-  </section>
-  <div class="chq"></div>
-  <div class="uxg">
-    <article><span class="board sm">R08</span><h6>FKL Milton Keynes</h6><p>Sat 17 Oct, junior final, 22 drivers</p><button class="btn sm g" type="button">Enter</button></article>
-    <article><span class="board sm">R09</span><h6>FKL Dubai</h6><p>Fri 6 Nov, night race, 20 drivers</p><button class="btn sm g" type="button">Enter</button></article>
-    <article><span class="board sm">R10</span><h6>Grand final, Łódź</h6><p>Sat 5 Dec, all classes, title decider</p><button class="btn sm p" type="button">Enter</button></article>
-  </div>
-</div></div>
-      <p class="plate-cap">Speed streaks behind the hero, red boards for rounds, the leader in red and a chequer to close the fold. The only blue is the reference pace under the tower.</p>
     </div></section>
 
     <!-- 17 PRINCIPLES -->
     <section class="s" id="principles"><div class="inner">
-      <div class="sh"><div class="num">17</div></div>
+      <div class="sh"><div class="num">17</div><span class="chap">In practice</span></div>
       <h2>Principles</h2>
       <p class="intro">The handful of rules that keep the system coherent when someone new builds the next screen.</p>
       <div class="hair"></div>
@@ -3425,9 +3191,7 @@ svg.chart text{font-size:10px;fill:var(--dim);font-family:inherit}
   BARS.forEach(function(b,i){var f=fr(.573,i),h=at(b,f);mk('line',{x1:b[0][0],y1:b[0][1],x2:b[1][0],y2:b[1][1],stroke:'rgba(205,207,212,.14)','stroke-width':14.2},mini);if(f>0)mk('line',{x1:b[0][0],y1:b[0][1],x2:h[0],y2:h[1],stroke:'#fff','stroke-width':14.2},mini)});
 
   // dashboard sample scaled to the column
-  var frame=document.getElementById('frame'), scaler=document.getElementById('scaler');
-  function fit(){var k=frame.clientWidth/1440;scaler.style.transform='scale('+k+')';frame.style.height=(1290*k)+'px'}
-  fit(); addEventListener('resize',fit);
+
 
   // ================= UI KIT =================
   var $=function(q,r){return (r||document).querySelector(q)}, $$=function(q,r){return [].slice.call((r||document).querySelectorAll(q))};
@@ -3658,6 +3422,28 @@ svg.chart text{font-size:10px;fill:var(--dim);font-family:inherit}
   document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.btn:not(.t)');if(!b||b.disabled)return;
     b.style.setProperty('--bw',(b.offsetWidth+20)+'px');b.classList.remove('flash');void b.offsetWidth;b.classList.add('flash')});
   document.addEventListener('animationend',function(e){if(e.animationName==='streak'&&e.target.classList)e.target.classList.remove('flash')});
+
+
+  // ===== TalentID sample =====
+  (function(){var D=[["Maja Kowalczyk", "KOW", "FKL Łódź", "cadet, 14", 91.4, 3.2, 57, [94, 88, 90, 86], [0.62, 0.55, 0.51, 0.44, 0.47, 0.38, 0.35, 0.31, 0.28, 0.24, 0.22, 0.18], "Maja: ready for an F4 test day this winter"], ["Leo Hartmann", "HAR", "FKL Milton Keynes", "junior, 15", 88.9, 1.1, 52, [90, 91, 84, 82], [0.58, 0.56, 0.52, 0.5, 0.47, 0.45, 0.43, 0.4, 0.36, 0.35, 0.33, 0.3], "Leo: one season from the F4 entry line"], ["Aarav Mehta", "MEH", "FKL Dubai", "cadet, 13", 86.2, 4.6, 46, [88, 80, 86, 89], [0.7, 0.66, 0.6, 0.57, 0.52, 0.5, 0.46, 0.44, 0.41, 0.38, 0.36, 0.33], "Aarav: fastest riser in the pool this month"], ["Sofia Marín", "MAR", "FKL Valencia", "junior, 15", 84.7, -0.8, 44, [85, 86, 82, 80], [0.5, 0.49, 0.47, 0.46, 0.46, 0.45, 0.45, 0.44, 0.45, 0.44, 0.44, 0.45], "Sofia: pace holding, consistency to find"], ["Kai Tanaka", "TAN", "FKL Kuala Lumpur", "cadet, 14", 82.3, 2.4, 40, [84, 78, 83, 81], [0.66, 0.63, 0.6, 0.58, 0.56, 0.53, 0.52, 0.5, 0.49, 0.47, 0.46, 0.44], "Kai: strong in the wet, building elsewhere"], ["Noah Okafor", "OKA", "FKL Lagos", "cadet, 13", 80.9, 0.4, 37, [80, 82, 79, 78], [0.6, 0.6, 0.58, 0.58, 0.57, 0.56, 0.56, 0.55, 0.55, 0.54, 0.54, 0.53], "Noah: steady, one step at a time"], ["Elin Berg", "BER", "FKL Gothenburg", "junior, 16", 79.6, -1.9, 35, [81, 77, 80, 76], [0.52, 0.53, 0.54, 0.55, 0.55, 0.56, 0.57, 0.57, 0.58, 0.58, 0.59, 0.6], "Elin: a hard month, the model sees it"], ["Tomás Duarte", "DUA", "FKL Lisbon", "cadet, 14", 78.2, 1.7, 33, [78, 79, 76, 80], [0.68, 0.66, 0.65, 0.63, 0.62, 0.6, 0.59, 0.58, 0.57, 0.56, 0.55, 0.54], "Tomás: adaptable, pace still to come"]],root=$('#tid');if(!root)return;
+    var g=$('#tGauge'),pc=$('#tPace'),ST=['FKL','F4','F1'];
+    function gauge(p){g.innerHTML='';BARS.forEach(function(b,i){var f=fr(p,i),hd=at(b,f),e=b[1];
+      mk('line',{x1:b[0][0],y1:b[0][1],x2:b[1][0],y2:b[1][1],stroke:'rgba(205,207,212,.1)','stroke-width':14.2},g);
+      if(f>0)mk('line',{x1:b[0][0],y1:b[0][1],x2:hd[0],y2:hd[1],stroke:'#fff','stroke-width':14.2},g);
+      if(f>0&&f<1){var t=at(b,Math.max(0,f-.07));mk('line',{x1:t[0],y1:t[1],x2:hd[0],y2:hd[1],stroke:'#FF4B3E','stroke-width':14.2},g)}
+      var l=mk('text',{x:(e[0]+4.2).toFixed(1),y:(e[1]+1.4).toFixed(1),class:'lbl'+(f>0?'':' off'),'font-size':4.4},g);l.textContent=ST[i];
+      var q=mk('text',{x:(e[0]+4.2).toFixed(1),y:(e[1]+6.6).toFixed(1),class:'pct','font-size':3.4},g);q.textContent=Math.round(f*100)+' %'})}
+    function pace(a){pc.innerHTML='';var W=300,H=150,L=34,R=8,T=12,B=20,n=a.length,px=function(i){return L+(W-L-R)*i/(n-1)},py=function(v){return T+(H-T-B)*v/.75};
+      [0,.35,.7].forEach(function(v){mk('line',{x1:L,x2:W-R,y1:py(v),y2:py(v),stroke:'rgba(205,207,212,.12)'},pc);var t=mk('text',{x:L-6,y:py(v)+3,'text-anchor':'end'},pc);t.textContent='+'+v.toFixed(1)+'s'});
+      mk('line',{x1:L,x2:W-R,y1:py(.3),y2:py(.3),stroke:'#2F80FF','stroke-width':1.2,'stroke-dasharray':'3 4'},pc);
+      mk('polyline',{points:a.map(function(v,i){return px(i)+','+py(v)}).join(' '),fill:'none',stroke:'#FF4B3E','stroke-width':1.8},pc);
+      var t=mk('text',{x:px(n-1)-4,y:py(a[n-1])-8,'text-anchor':'end',style:'fill:#fff;font-weight:600'},pc);t.textContent='+'+a[n-1].toFixed(2)+'s'}
+    function show(i){var d=D[i];$('#tName').textContent=d[0];$('#tMeta').textContent=d[2]+', '+d[3]+', index '+d[4].toFixed(1)+', '+(i+1)+' of 248';
+      $('#tPct').textContent=d[6];gauge(d[6]/100);pace(d[8]);$('#tBand').textContent=d[9];root.querySelector('.thero .board').textContent=String(i+1).padStart(2,'0');
+      $$('.tprof .bar i',root).forEach(function(b,k){b.style.width=d[7][k]+'%'});$$('.tprof b[data-v]',root).forEach(function(b,k){b.textContent=d[7][k]});
+      $$('#tRank button').forEach(function(b){b.setAttribute('aria-pressed',+b.dataset.i===i)})}
+    $$('#tRank button').forEach(function(b){b.addEventListener('click',function(){show(+b.dataset.i)})});show(0);
+  })();
 
   // calendar with range selection
   (function(){var y=2026,m=8,today=new Date(2026,8,24),a=new Date(2026,8,24),b=null,ev={4:1,11:1,12:1,18:1,24:1,26:1};
