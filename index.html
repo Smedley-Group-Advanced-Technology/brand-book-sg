@@ -1387,6 +1387,65 @@ section.s h2{margin-top:22px}
 .sharek2 i{display:inline-block;width:9px;height:9px;margin-right:6px;vertical-align:-1px;transform:skewX(35deg)}
 .sharek2 i.ground{background:rgba(var(--t),.18)} .sharek2 i.type{background:var(--ink)} .sharek2 i.blue{background:var(--blue)} .sharek2 i.red{background:var(--red)}
 .sharek2 b{color:var(--ink);font-weight:500;margin-right:3px}
+
+/* ================= MOBILE ================= */
+.mcur,.mbtn{display:none}
+.btn{white-space:nowrap}
+section.s{overflow-x:clip}
+@media (max-width:820px){
+  /* the header: lockup, where you are, menu; the lap runs under it */
+  .index{position:sticky;top:0;z-index:60;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;padding:10px 16px;background:var(--bg1);border-bottom:.75px solid var(--rule)}
+  .index > .lk{--lk:.28px !important}
+  .index .t,.index .themes,.index .lap,.index nav{display:none}
+  .index .lapbar{display:block;position:absolute;left:0;right:0;bottom:-1px;height:2px;margin:0;clip-path:none}
+  .mcur{display:block;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-family:var(--mono);font-size:11px;color:var(--dim);padding-left:12px;border-left:.75px solid var(--rule)}
+  .mcur b{color:var(--ink);font-weight:500;margin-right:4px}
+  .mbtn{display:inline-flex}
+  /* the menu: the whole index, grouped by part, with the theme switch */
+  html.menu-open{overflow:hidden}
+  .index.open nav{display:flex;flex-direction:column;position:fixed;top:57px;left:0;right:0;bottom:0;margin:0;padding:20px 20px 110px;overflow-y:auto;background:var(--bg1);z-index:59}
+  .index.open nav .grp{display:block;margin:22px 0 4px}
+  .index.open nav .grp:first-child{margin-top:0}
+  .index.open nav a{min-height:46px;padding:0;white-space:normal;font-size:15px;border-top:.75px solid var(--rule)}
+  .index.open nav .grp + a{border-top:0}
+  .index.open::after{content:"";position:fixed;left:0;right:0;bottom:0;height:84px;background:var(--bg1);border-top:.75px solid var(--rule);z-index:60}
+  .index.open .themes{display:inline-flex;position:fixed;left:28px;bottom:24px;z-index:61;margin:0}
+  html{scroll-padding-top:72px}
+  .index.open .themes button{line-height:34px;padding:0 16px;font-size:12px}
+  .cover{height:calc(100svh - 57px);min-height:560px}
+  /* content that was cramped */
+  .plate{padding:28px 16px;container-type:inline-size} .plate .lk{--lk:min(.78px,calc(100cqi / 470)) !important} .clear .lk{--lk:.4px !important}
+  .weights div{flex-direction:column;align-items:flex-start;gap:2px}
+  .slantdemo > div{min-height:0;padding-bottom:18px}
+  .part .pi a{min-height:40px}
+  table.ctx,table.ctx tbody,table.ctx tr,table.ctx td{display:block;width:auto !important}
+  table.ctx tr:first-child{display:none}
+  table.ctx tr{padding:14px 0;border-top:.75px solid var(--rule)}
+  table.ctx td{border:0;padding:3px 0}
+  table.ctx td:first-child{font-size:15px;padding-bottom:8px}
+  table.ctx td:not(:first-child)::before{display:block;font-family:var(--mono);font-size:10px;color:var(--faint);margin-bottom:2px}
+  table.ctx td:nth-child(2)::before{content:"Leads"} table.ctx td:nth-child(3)::before{content:"Supports, once per view"} table.ctx td:nth-child(4)::before{content:"Where"}
+  /* drawings and dense charts keep their size and scroll sideways */
+  :root[data-theme] .bp:has(svg.kart){overflow-x:auto;-webkit-overflow-scrolling:touch;padding:16px}
+  .bp svg.kart{min-width:760px}
+  .bp:has(svg.kart)::before{content:"Swipe to see the whole sheet";display:block;position:sticky;left:0;font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.6);margin-bottom:12px}
+  .cell:has(#chTel),.cell:has(#chFit){overflow-x:auto}
+  #chTel{min-width:640px} #chFit{min-width:520px}
+  .kit .cell{min-width:0}
+  /* narrow phones: nothing pokes past its container */
+  .kit .row,.uxb{padding-right:26px}
+  .pager{flex-wrap:wrap} .pager button{min-width:36px}
+  .tabs{overflow-x:auto;scrollbar-width:none;padding-bottom:2px} .tabs::-webkit-scrollbar{display:none} .tabs button{flex:none;white-space:nowrap} .tabind{bottom:0}
+  .scrim{padding:24px 12px} .modal{padding:20px 18px}
+  .modal .btn{--h:36px;--px:12px;font-size:12px}
+  .phone{width:min(300px,100%)}
+  .uxcd div{padding-right:14px;margin-right:14px}
+  .tid .seg span{padding:0 12px}
+}
+@media (max-width:420px){
+  table.timing th:nth-child(n+4),table.timing td:nth-child(n+4){display:none}
+  .uxcd b{font-size:24px}
+}
 </style>
 </head>
 <body>
@@ -1401,6 +1460,7 @@ section.s h2{margin-top:22px}
 <div class="layout">
   <aside class="index">
     <span class="lk" style="--lk:0.37px;color:var(--ink)" role="img" aria-label="Smedley Group, Advanced Technology"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span>
+    <span class="mcur" id="mcur" aria-live="polite"></span><button class="btn g sm mbtn" type="button" id="mbtn" aria-expanded="false" aria-controls="toc">Menu</button>
     <div class="t">Brand book</div>
     <div class="themes" role="group" aria-label="Theme"><button type="button" data-t="dark" aria-pressed="false"><span>Dark</span></button><button type="button" data-t="light" aria-pressed="false"><span>Light</span></button></div>
     <div class="lap"><span>Lap <b id="lapN">01</b>/<span id="lapT">16</span></span><span>SG-BB</span></div><div class="lapbar"><i id="lapBar"></i></div>
@@ -3443,6 +3503,19 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
       $$('.tprof .bar i',root).forEach(function(b,k){b.style.width=d[7][k]+'%'});$$('.tprof b[data-v]',root).forEach(function(b,k){b.textContent=d[7][k]});
       $$('#tRank button').forEach(function(b){b.setAttribute('aria-pressed',+b.dataset.i===i)})}
     $$('#tRank button').forEach(function(b){b.addEventListener('click',function(){show(+b.dataset.i)})});show(0);
+  })();
+
+
+  // ===== mobile: the header names where you are, and the menu opens the index =====
+  (function(){var ix=document.querySelector('.index'),mb=$('#mbtn'),mc=$('#mcur');if(!mb)return;
+    var secs=[].slice.call(document.querySelectorAll('section.s')),links={};$$('#toc a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+    function name(id){var a=links[id];if(!a)return;mc.innerHTML='<b>'+a.querySelector('span').textContent+'</b> '+a.lastChild.textContent}
+    var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)name(e.target.id)})},{rootMargin:'-30% 0px -65% 0px'});secs.forEach(function(s){io2.observe(s)});
+    function set(o){ix.classList.toggle('open',o);document.documentElement.classList.toggle('menu-open',o);mb.setAttribute('aria-expanded',o);mb.textContent=o?'Close':'Menu'}
+    mb.addEventListener('click',function(){set(!ix.classList.contains('open'))});
+    $$('#toc a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&ix.classList.contains('open')){set(false);mb.focus()}});
+    name(secs[0].id);
   })();
 
   // calendar with range selection
