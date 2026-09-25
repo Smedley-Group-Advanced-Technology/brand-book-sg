@@ -390,7 +390,7 @@ svg.ch text{font-family:inherit;fill:var(--dim)}
 .cal .days button.out{color:#50545C}
 .cal .days button.today{font-weight:700}
 .cal .days button.sel{font-weight:700}
-.cal .days button.ev::after{content:"";position:absolute;left:50%;bottom:5px;width:3px;height:6px;margin-left:-1.5px;transform:skewX(35deg)}
+.cal .days button.ev::after{content:"";position:absolute;left:50%;width:3px;height:6px;margin-left:-1.5px;transform:skewX(35deg)}
 .week{display:grid;grid-template-columns:44px repeat(5,minmax(0,1fr));gap:0;font-size:11px}
 .week .hd{padding:0 6px 10px;color:var(--dim)} .week .hd b{display:block;color:var(--ink);font-size:14px;font-weight:600}
 .week .hr{height:44px;color:#70757D;border-top:0.75px solid var(--rule);padding-top:3px}
@@ -656,8 +656,7 @@ table.lines .dwg .cn,table.lines .dwg .cl,table.lines .dwg .dm{stroke-width:1}
 
 /* calendar */
 .cal .days button.today{color:var(--line)}
-.cal .days button.inr{background:rgba(216,35,26,.16)}
-.cal .days button.ev::after{background:var(--line)} .cal .days button.sel.ev::after{background:var(--ink)}
+.cal .days button.ev::after{background:var(--line)}
 .week .hd.now b{color:var(--line)}
 .ev2{background:rgba(47,128,255,.14)} .ev2::before{background:var(--line)}
 .ev2.hot{background:var(--red);color:var(--ink)} .ev2.hot::before{background:var(--ink)} .ev2.hot span{color:rgba(255,255,255,.8)}
@@ -852,9 +851,8 @@ select.inp option{background:var(--pop);color:var(--ink)}
 table.timing .p{--h:22px;--c:calc(var(--h) * .7002);height:var(--h);min-height:0;clip-path:polygon(0 0,calc(100% - var(--c)) 0,100% 100%,var(--c) 100%);width:calc(var(--c) + 22px)}
 .email .cta{--h:42px;--c:calc(var(--h) * .7002);height:var(--h);min-height:0;clip-path:polygon(0 0,calc(100% - var(--c)) 0,100% 100%,var(--c) 100%);display:inline-flex;align-items:center;padding:0 calc(var(--c) * .5 + 14px)}
 /* too narrow to cut: the calendar marks the pick with a skewed board behind the number, and its arrows need no shape */
-.cal .days button{isolation:isolate}
 .cal .days button.sel{background:transparent;clip-path:none;color:#fff}
-.cal .days button.sel::before{content:"";position:absolute;inset:5px 11px;background:var(--red);transform:skewX(35deg);z-index:-1}
+.cal .days button.sel::before{content:"";position:absolute;background:var(--red);transform:skewX(35deg)}
 .cal .ch2 button{clip-path:none}
 /* stripes run with the glyph: 55deg, never -55deg */
 .share i{clip-path:polygon(0 0,calc(100% - 15.5px) 0,100% 100%,15.5px 100%)}
@@ -1440,6 +1438,15 @@ h2 .hlink{width:36px;height:36px} h2 .hlink svg{width:22px;height:22px}
   a{text-decoration:none}
   .colophon{padding:6mm 0 0}
 }
+
+/* ================= DATE PICKER: board under the number, mark under the board ================= */
+.cal .days button{padding:0 0 9px;isolation:auto}
+.cal .days button .dn{position:relative;z-index:1}
+.cal .days button.sel::before{inset:4px 10px 12px;z-index:0}
+.cal .days button.sel .dn{color:#fff}
+.cal .days button.ev::after{bottom:3px;z-index:1}
+.cal .days button.sel.ev::after{background:var(--line)}
+.cal .days button.inr{background:rgba(216,35,26,.2)}
 </style>
 </head>
 <body>
@@ -2342,9 +2349,9 @@ h2 .hlink{width:36px;height:36px} h2 .hlink svg{width:22px;height:22px}
     <section class="s" id="showcase"><div class="inner">
       <div class="sh"><div class="num">20</div><span class="chap">In practice</span></div>
       <h2 data-anchor="showcase">Brand showcase<button class="hlink" type="button" aria-label="Copy link to Brand showcase"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
-      <p class="intro">The system away from the screen: on cars, kit, the garage, the track and the office. Each one follows the same few rules: black or white ground, one red lead, blue where something is measured, and every cut at 55°.</p>
+      <p class="intro">The system away from the screen: on cars, race kit, the track and the paddock. Each one follows the same few rules: black or white ground, one red lead, blue where something is measured, and every cut at 55°.</p>
       <div class="hair"></div>
-      <div class="scg"><figure class="sc wide"><button class="scb" type="button" data-full="assets/showcase/car-wrap.jpg" aria-label="Enlarge: Car wrap"><img src="assets/showcase/car-wrap.jpg" alt="Car wrap: A concept supercar in satin black, one red panel cut at 55°, the glyph on the door." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Car wrap</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>A concept supercar in satin black, one red panel cut at 55°, the glyph on the door.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/f4-livery.jpg" aria-label="Enlarge: FAT Racing F4 livery"><img src="assets/showcase/f4-livery.jpg" alt="FAT Racing F4 livery: Black with red panels at the lean, a red number board on the nose." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>FAT Racing F4 livery</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>Black with red panels at the lean, a red number board on the nose.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/race-suit.jpg" aria-label="Enlarge: Race suit and helmet"><img src="assets/showcase/race-suit.jpg" alt="Race suit and helmet: One red band across the chest at 55°, blue piping, the glyph over the heart." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Race suit and helmet</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>One red band across the chest at 55°, blue piping, the glyph over the heart.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/garage.jpg" aria-label="Enlarge: Team garage"><img src="assets/showcase/garage.jpg" alt="Team garage: The lockup on the back wall, a red number board, a blueprint on the screen." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Team garage</b><span class="leadk"><i class="b"></i><i class="r"></i>In balance</span></span><span>The lockup on the back wall, a red number board, a blueprint on the screen.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/trackside.jpg" aria-label="Enlarge: Trackside"><img src="assets/showcase/trackside.jpg" alt="Trackside: Kerbs at 55°, barrier boards alternating the lockup, the glyph and stripes." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Trackside</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>Kerbs at 55°, barrier boards alternating the lockup, the glyph and stripes.</span></figcaption></figure><figure class="sc wide"><button class="scb" type="button" data-full="assets/showcase/transporter.jpg" aria-label="Enlarge: Transporter"><img src="assets/showcase/transporter.jpg" alt="Transporter: A red panel cut at the lean, a blue stripe parallel to it." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Transporter</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>A red panel cut at the lean, a blue stripe parallel to it.</span></figcaption></figure></div>
+      <div class="scg"><figure class="sc wide"><button class="scb" type="button" data-full="assets/showcase/car-wrap.jpg" aria-label="Enlarge: Car wrap"><img src="assets/showcase/car-wrap.jpg" alt="Car wrap: A concept supercar in satin black, one red panel cut at 55°, the glyph on the door." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Car wrap</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>A concept supercar in satin black, one red panel cut at 55°, the glyph on the door.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/f4-livery.jpg" aria-label="Enlarge: FAT Racing F4 livery"><img src="assets/showcase/f4-livery.jpg" alt="FAT Racing F4 livery: Black with red panels at the lean, a red number board on the nose." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>FAT Racing F4 livery</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>Black with red panels at the lean, a red number board on the nose.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/race-suit.jpg" aria-label="Enlarge: Race suit and helmet"><img src="assets/showcase/race-suit.jpg" alt="Race suit and helmet: One red band across the chest at 55°, blue piping, the glyph over the heart." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Race suit and helmet</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>One red band across the chest at 55°, blue piping, the glyph over the heart.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/trackside.jpg" aria-label="Enlarge: Trackside"><img src="assets/showcase/trackside.jpg" alt="Trackside: Kerbs at 55°, barrier boards alternating the lockup, the glyph and stripes." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Trackside</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>Kerbs at 55°, barrier boards alternating the lockup, the glyph and stripes.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/transporter.jpg" aria-label="Enlarge: Transporter"><img src="assets/showcase/transporter.jpg" alt="Transporter: A red panel cut at the lean, a blue stripe parallel to it." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Transporter</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>A red panel cut at the lean, a blue stripe parallel to it.</span></figcaption></figure></div>
       <p class="plate-cap scnote">Concept renders made with AI image generation, for direction and mood. Details such as vehicle shapes are invented, and the artwork is approximate: production work uses the files in <a href="#resources">Resources</a>.</p>
     </div></section>
 
@@ -2428,7 +2435,7 @@ h2 .hlink{width:36px;height:36px} h2 .hlink svg{width:22px;height:22px}
       <div class="two" style="margin-top:64px" id="versions">
         <div><h3 id="resources-versions" data-anchor="resources-versions">Versions<button class="hlink" type="button" aria-label="Copy link to Versions"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">What changed, newest first</p>
           <table class="spec">
-            <tr><td>2.2<br><span class="dls-m">25 Sep 2026</span></td><td>Brand showcase: concept renders of the system on cars, race kit, the garage, the track, hardware and the office</td></tr>
+            <tr><td>2.2<br><span class="dls-m">25 Sep 2026</span></td><td>Brand showcase: concept renders of the system on cars, race kit, the track and the paddock</td></tr>
             <tr><td>2.1<br><span class="dls-m">25 Sep 2026</span></td><td>Business lockups, voice, imagery, co-branding and resources. Mobile version, keyboard focus on cut controls, search and links to any heading, print styles, templates</td></tr>
             <tr><td>2.0<br><span class="dls-m">25 Sep 2026</span></td><td>Racing red and engineering blue on a pure black or white ground, dark and light themes, race engineering, usage context, the reworked hero and the four-part structure</td></tr>
             <tr><td>1.0<br><span class="dls-m">24 Sep 2026</span></td><td>First edition: the logo, colour, type, the 55° cut, motion and the interface kit</td></tr>
@@ -2840,7 +2847,7 @@ h2 .hlink{width:36px;height:36px} h2 .hlink svg{width:22px;height:22px}
     var names=['January','February','March','April','May','June','July','August','September','October','November','December'];
     function same(p,q){return p&&q&&p.getTime()===q.getTime()}
     function draw(){$('#calTitle').textContent=names[m]+' '+y;var first=new Date(y,m,1),start=(first.getDay()+6)%7,days=$('#calDays');days.innerHTML='';
-      for(var i=0;i<42;i++){var dt=new Date(y,m,1-start+i),bt=document.createElement('button');bt.type='button';bt.textContent=dt.getDate();
+      for(var i=0;i<42;i++){var dt=new Date(y,m,1-start+i),bt=document.createElement('button');bt.type='button';bt.innerHTML='<span class="dn">'+dt.getDate()+'</span>';
         var cls=[];if(dt.getMonth()!==m)cls.push('out');if(same(dt,today))cls.push('today');if(dt.getMonth()===m&&ev[dt.getDate()]&&m===8)cls.push('ev');
         var lo=b?(a<b?a:b):a,hi=b?(a<b?b:a):a;if(same(dt,a)||same(dt,b))cls.push('sel');else if(b&&dt>lo&&dt<hi)cls.push('inr');
         bt.className=cls.join(' ');bt.setAttribute('aria-label',dt.toDateString());if(same(dt,a)||same(dt,b))bt.setAttribute('aria-pressed','true');
