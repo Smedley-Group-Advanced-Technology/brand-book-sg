@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Smedley Group · Tyre tracks to mark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --bg2:#FFFFFF; --ink:#000000; --tread:#000000; --smear:.1; --grit:.62; --tyre:#000000; --groove:#2E3137;
+  --smoke:#9AA0A8; --quiet:#8A9099; --edgeBtn:#DCDDE0; --btnText:#1C1E22; --btnBg:rgba(28,30,34,.07); --btnEdge:#BFBFBF; --glow:rgba(255,255,255,.35); --spot:rgba(255,255,255,.8); --sheen:#8A9099; --grain:.035;
+  /* one unit = one unit of the glyph drawing; the whole lockup is 434 units wide */
+  --u:min(0.15vw, 0.27vh, 2.3px);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --bg2:#000000; --ink:#FFFFFF; --tread:#DCDDE0; --smear:.08; --grit:.5; --tyre:#1C1E22; --groove:#4A4F57;
+    --smoke:#DCDDE0; --edgeBtn:#4A4F57; --btnText:#DCDDE0; --btnBg:rgba(205,207,212,.12); --btnEdge:rgba(205,207,212,.3); --btnText:#DCDDE0; --btnBg:rgba(205,207,212,.12); --btnEdge:rgba(205,207,212,.3); --glow:rgba(220,221,224,.035); --spot:rgba(226,227,230,.13); --sheen:#C9CCD1; --grain:.06;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --bg2:#000000; --ink:#FFFFFF; --tread:#DCDDE0; --smear:.08; --grit:.5; --tyre:#1C1E22; --groove:#4A4F57;
+  --smoke:#DCDDE0; --edgeBtn:#4A4F57; --btnText:#DCDDE0; --btnBg:rgba(205,207,212,.12); --btnEdge:rgba(205,207,212,.3); --btnText:#DCDDE0; --btnBg:rgba(205,207,212,.12); --btnEdge:rgba(205,207,212,.3); --glow:rgba(220,221,224,.035); --spot:rgba(226,227,230,.13); --sheen:#C9CCD1; --grain:.06;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;height:100%;overflow:hidden;color:var(--ink);
+  background:radial-gradient(ellipse 70% 55% at 50% 42%,var(--glow) 0%,transparent 70%),linear-gradient(135deg,var(--bg) 0%,var(--bg2) 100%);
+  background-color:var(--bg);font-family:"Sora",system-ui,-apple-system,"Segoe UI",sans-serif}
+.grain{position:fixed;inset:0;width:100%;height:100%;opacity:var(--grain);pointer-events:none;mix-blend-mode:overlay}
+.stage{position:relative;height:100%;display:grid;place-items:center;overflow:hidden}
+
+/* ---------- the lockup, set in type ---------- */
+.lock{display:flex;align-items:center;gap:calc(var(--u)*16);color:var(--ink)}
+.mark{width:calc(var(--u)*56);height:calc(var(--u)*86);flex:none;overflow:visible}
+.words{display:flex;align-items:center;gap:calc(var(--u)*17)}
+.words span{display:block;font-weight:600;font-size:calc(var(--u)*30);line-height:.94;padding:.06em 0 .16em;margin:-.06em 0 -.16em;letter-spacing:-0.025em;white-space:nowrap}
+.words i{display:block;width:calc(var(--u)*4.6);height:calc(var(--u)*62);background:currentColor;border-radius:calc(var(--u)*2.3)}
+
+/* ---------- spotlight: one stationary pool of light, centred on the screen for the whole sequence ---------- */
+.rig{position:relative;display:flex}
+.spot{position:absolute;inset:0;pointer-events:none;z-index:-1;transform:translateX(calc(50% - var(--u)*79))}
+.spot i{position:absolute;left:calc(var(--u)*28);top:50%;width:calc(var(--u)*760);height:calc(var(--u)*560);margin:calc(var(--u)*-280) 0 0 calc(var(--u)*-380);background:radial-gradient(closest-side,var(--spot) 0%,transparent 100%)}
+/* ---------- the drawing inside the mark ---------- */
+.spin{transform:rotate(90deg) scale(1.4167)}
+.bar{stroke:var(--ink);stroke-width:14.2;opacity:0}
+.puffw{opacity:0;transform-box:fill-box;transform-origin:center}
+.puff{fill:url(#puffG);filter:url(#smokeF)}
+.rv{transform-box:fill-box;transform-origin:left center;transform:scaleX(0)}
+.lift{transform-box:fill-box;transform-origin:right center}
+
+.controls{position:absolute;right:max(20px,4vw);bottom:max(20px,4vh);display:flex;gap:0;z-index:2}
+.controls button{display:inline-flex;align-items:center;gap:8px}
+.controls button + button{margin-left:-27.9px}
+.controls .ic{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.controls .moon{display:none} :root[data-theme="light"] .controls .sun{display:none} :root[data-theme="light"] .controls .moon{display:block}
+#replay:hover .ic{transform:rotate(-120deg)} #theme:hover .ic{transform:rotate(25deg)}
+button{font:600 12px/1 "Sora",system-ui,sans-serif;color:var(--btnText);background:var(--btnBg);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:0;border-radius:0;height:44px;min-height:0;padding:0 29.5px;clip-path:polygon(0 0,calc(100% - 30.9px) 0,100% 100%,30.9px 100%);min-height:44px;cursor:pointer;transition:color .3s ease,border-color .3s ease}
+button:hover{color:var(--ink);background:rgba(128,128,128,.2)}
+button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
+
+/* ---------- the sequence ---------- */
+/* 1-3. brake in, lock, drive off. per-tyre timing below */
+@keyframes reveal{to{transform:scaleX(1)}}
+/* the top of a rolling tyre moves forward over the axle, so its tread runs with the direction of travel */
+@keyframes roll{to{transform:translateX(600px)}}
+@keyframes off{to{transform:translateX(900px)}}
+@keyframes sho{to{transform:translateX(45px)}}
+.tyrelit{isolation:isolate}
+@keyframes lift{to{transform:scaleX(0)}}
+@keyframes cure{0%{opacity:0;stroke:#FF4B3E}12%{opacity:1;stroke:#FF4B3E}45%{stroke:#FF4B3E}100%{opacity:1;stroke:var(--ink)}}
+@keyframes fade{to{opacity:0}}
+/* smoke: blooms fast, then drifts back off the shoulders, spreading, thinning and turning */
+@keyframes puff{0%{opacity:0;transform:translate(0,0) scale(.3) rotate(0)}10%{opacity:var(--pk)}45%{opacity:calc(var(--pk)*.7)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(2.1) rotate(var(--rot))}}
+.play .puffw{animation-name:puff;animation-timing-function:cubic-bezier(.2,.8,.3,1);animation-fill-mode:both}
+.play .rv0{animation:reveal 1.95s cubic-bezier(.25,1,.5,1) 0.31s both}
+.play .run0{animation:run0 1.95s cubic-bezier(.25,1,.5,1) 0.31s both}
+.play .roll0{animation:roll 1.95s cubic-bezier(.25,1,.5,1) 0.31s both}
+.play .off0{animation:off .6s cubic-bezier(.55,0,1,.45) 2.51s both}
+.sh1_0{transform:translate(-4.85px,-0.09px)}
+.sh2_0{transform:translate(-14.83px,-0.58px) scale(1.2,1.06)}
+.sh3_0{transform:translate(-26.96px,-1.15px) scale(1.35,1.08)}
+.play .sh1_0{animation:sh1_0 1.95s cubic-bezier(.25,1,.5,1) 0.31s both}
+.play .sh2_0{animation:sh2_0 1.95s cubic-bezier(.25,1,.5,1) 0.31s both}
+.play .sh3_0{animation:sh3_0 1.95s cubic-bezier(.25,1,.5,1) 0.31s both}
+@keyframes sh1_0{from{transform:translate(-4.85px,-0.09px)}to{transform:translate(0.06px,-0.09px)}}
+@keyframes sh2_0{from{transform:translate(-14.83px,-0.58px) scale(1.2,1.06)}to{transform:translate(0.18px,-0.58px) scale(1.04,1.01)}}
+@keyframes sh3_0{from{transform:translate(-26.96px,-1.15px) scale(1.35,1.08)}to{transform:translate(0.33px,-1.15px) scale(1.06,1.02)}}
+.play .sho0{animation:sho .6s cubic-bezier(.55,0,1,.45) 2.51s both}
+.kf0{opacity:1} .kb0{opacity:0}
+.play .kf0{animation:kf0 1.95s cubic-bezier(.25,1,.5,1) 0.31s both}
+.play .kb0{animation:kb0 1.95s cubic-bezier(.25,1,.5,1) 0.31s both}
+@keyframes kf0{to{opacity:.05}}
+@keyframes kb0{to{opacity:.8}}
+.play .lift0{animation:lift .8s cubic-bezier(.65,0,.35,1) 2.71s both}
+.play .bar0{animation:cure 1.3s cubic-bezier(.33,0,.2,1) 3.21s both}
+.play .trk0{animation:fade .4s ease 3.41s both}
+@keyframes run0{from{transform:translate(-620px,-17.91px)}to{transform:translate(12.28px,-17.91px)}}
+.run0{transform:translate(-620px,-17.91px)}
+.play .rv1{animation:reveal 1.95s cubic-bezier(.25,1,.5,1) 0.15s both}
+.play .run1{animation:run1 1.95s cubic-bezier(.25,1,.5,1) 0.15s both}
+.play .roll1{animation:roll 1.95s cubic-bezier(.25,1,.5,1) 0.15s both}
+.play .off1{animation:off .6s cubic-bezier(.55,0,1,.45) 2.35s both}
+.sh1_1{transform:translate(-4.85px,0.30px)}
+.sh2_1{transform:translate(-14.83px,0.59px) scale(1.2,1.06)}
+.sh3_1{transform:translate(-26.96px,0.99px) scale(1.35,1.08)}
+.play .sh1_1{animation:sh1_1 1.95s cubic-bezier(.25,1,.5,1) 0.15s both}
+.play .sh2_1{animation:sh2_1 1.95s cubic-bezier(.25,1,.5,1) 0.15s both}
+.play .sh3_1{animation:sh3_1 1.95s cubic-bezier(.25,1,.5,1) 0.15s both}
+@keyframes sh1_1{from{transform:translate(-4.85px,0.30px)}to{transform:translate(0.57px,0.30px)}}
+@keyframes sh2_1{from{transform:translate(-14.83px,0.59px) scale(1.2,1.06)}to{transform:translate(1.73px,0.59px) scale(1.04,1.01)}}
+@keyframes sh3_1{from{transform:translate(-26.96px,0.99px) scale(1.35,1.08)}to{transform:translate(3.14px,0.99px) scale(1.06,1.02)}}
+.play .sho1{animation:sho .6s cubic-bezier(.55,0,1,.45) 2.35s both}
+.kf1{opacity:1} .kb1{opacity:0}
+.play .kf1{animation:kf1 1.95s cubic-bezier(.25,1,.5,1) 0.15s both}
+.play .kb1{animation:kb1 1.95s cubic-bezier(.25,1,.5,1) 0.15s both}
+@keyframes kf1{to{opacity:.05}}
+@keyframes kb1{to{opacity:.8}}
+.play .lift1{animation:lift .8s cubic-bezier(.65,0,.35,1) 2.55s both}
+.play .bar1{animation:cure 1.3s cubic-bezier(.33,0,.2,1) 3.05s both}
+.play .trk1{animation:fade .4s ease 3.25s both}
+@keyframes run1{from{transform:translate(-620px,-0.10px)}to{transform:translate(35.68px,-0.10px)}}
+.run1{transform:translate(-620px,-0.10px)}
+.play .rv2{animation:reveal 1.95s cubic-bezier(.25,1,.5,1) 0.45s both}
+.play .run2{animation:run2 1.95s cubic-bezier(.25,1,.5,1) 0.45s both}
+.play .roll2{animation:roll 1.95s cubic-bezier(.25,1,.5,1) 0.45s both}
+.play .off2{animation:off .6s cubic-bezier(.55,0,1,.45) 2.65s both}
+.sh1_2{transform:translate(-4.85px,0.69px)}
+.sh2_2{transform:translate(-14.83px,1.78px) scale(1.2,1.06)}
+.sh3_2{transform:translate(-26.96px,3.15px) scale(1.35,1.08)}
+.play .sh1_2{animation:sh1_2 1.95s cubic-bezier(.25,1,.5,1) 0.45s both}
+.play .sh2_2{animation:sh2_2 1.95s cubic-bezier(.25,1,.5,1) 0.45s both}
+.play .sh3_2{animation:sh3_2 1.95s cubic-bezier(.25,1,.5,1) 0.45s both}
+@keyframes sh1_2{from{transform:translate(-4.85px,0.69px)}to{transform:translate(0.56px,0.69px)}}
+@keyframes sh2_2{from{transform:translate(-14.83px,1.78px) scale(1.2,1.06)}to{transform:translate(1.72px,1.78px) scale(1.04,1.01)}}
+@keyframes sh3_2{from{transform:translate(-26.96px,3.15px) scale(1.35,1.08)}to{transform:translate(3.13px,3.15px) scale(1.06,1.02)}}
+.play .sho2{animation:sho .6s cubic-bezier(.55,0,1,.45) 2.65s both}
+.kf2{opacity:1} .kb2{opacity:0}
+.play .kf2{animation:kf2 1.95s cubic-bezier(.25,1,.5,1) 0.45s both}
+.play .kb2{animation:kb2 1.95s cubic-bezier(.25,1,.5,1) 0.45s both}
+@keyframes kf2{to{opacity:.05}}
+@keyframes kb2{to{opacity:.8}}
+.play .lift2{animation:lift .8s cubic-bezier(.65,0,.35,1) 2.85s both}
+.play .bar2{animation:cure 1.3s cubic-bezier(.33,0,.2,1) 3.35s both}
+.play .trk2{animation:fade .4s ease 3.55s both}
+@keyframes run2{from{transform:translate(-620px,17.89px)}to{transform:translate(35.58px,17.89px)}}
+.run2{transform:translate(-620px,17.89px)}
+/* 4. lean in place, settling to lockup size */
+@keyframes lean{from{transform:rotate(90deg) scale(1.4167)}to{transform:rotate(54.927deg) scale(1)}}
+.play .spin{animation:lean .9s cubic-bezier(.34,1.25,.64,1) 3.7s both}
+/* 5. the lockup slides left while the words read in from the left */
+.lock{transform:translateX(calc(50% - var(--u)*28))}
+@keyframes slide{to{transform:translateX(0)}}
+.play .lock{animation:slide 1.1s cubic-bezier(.65,0,.35,1) 4.65s both}
+.play .pool{animation:fade .8s ease 3.4s both}
+.words{clip-path:inset(0 100% 0 0);opacity:0}
+@keyframes read{from{clip-path:inset(0 100% 0 0);opacity:0;transform:translateX(calc(var(--u)*-6))}35%{opacity:1}to{clip-path:inset(0 0 0 0);opacity:1;transform:translateX(0)}}
+.play .words{animation:read 1.1s cubic-bezier(.25,1,.5,1) 4.8s both}
+/* 6. one light pass over the words */
+.words span{background:linear-gradient(100deg,var(--ink) 40%,#2F80FF 46.5%,#FF4B3E 53.5%,var(--ink) 60%) 100% 0/300% 100% no-repeat;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+@keyframes sheen{to{background-position:0% 0}}
+.play .words span{animation:sheen 1.5s cubic-bezier(.65,0,.35,1) 6s both}
+
+
+/* heat: where the tyres lock, the rubber glows Flame, deepening to Ember at the stopping point */
+.hot{opacity:0}
+@keyframes heat{0%{opacity:0}28%{opacity:1}80%{opacity:.9}100%{opacity:0}}
+.play .hot0{animation:heat 2.65s cubic-bezier(.3,0,.3,1) 1.10s both}
+.play .hot1{animation:heat 2.65s cubic-bezier(.3,0,.3,1) 0.94s both}
+.play .hot2{animation:heat 2.65s cubic-bezier(.3,0,.3,1) 1.24s both}
+/* measure: blueprint construction draws in Line Blue while the bars lean, then clears for the words */
+.bpc,.ang{opacity:0}
+.bpc line,.ang *{fill:none;stroke:#7FB2FF;stroke-width:.5}
+.bpc .c{stroke-dasharray:6 1.6 1 1.6}
+.bpc .m{stroke-opacity:.7}
+.ang text{stroke:none;fill:#7FB2FF;font:500 5.2px "IBM Plex Mono",ui-monospace,monospace}
+.dr{transform-box:fill-box;transform-origin:left center;transform:scaleX(0)}
+.dv{transform-box:fill-box;transform-origin:center top;transform:scaleY(0)}
+@keyframes bp{0%{opacity:0}12%{opacity:1}72%{opacity:1}100%{opacity:0}}
+@keyframes drx{to{transform:scaleX(1)}} @keyframes dry{to{transform:scaleY(1)}}
+.play .bpc{animation:bp 2.7s ease 3.55s both}
+.play .ang{animation:bp 1.9s ease 4.35s both}
+.play .dr{animation:drx .8s cubic-bezier(.16,1,.3,1) both}
+.play .dv{animation:dry .7s cubic-bezier(.16,1,.3,1) both}
+
+/* light canvas: construction in the darker blue, the button reads as a theme switch */
+:root[data-theme="light"] .bpc line,:root[data-theme="light"] .ang *{stroke:#1F66E0}
+:root[data-theme="light"] .ang text{fill:#1F66E0}
+
+/* embedded on the cover: the page's clash is the ground */
+:root[data-theme="dark"]{color-scheme:dark} :root[data-theme="light"]{color-scheme:light}
+:root[data-embed="cover"],:root[data-embed="cover"] body{background:transparent !important}
+:root[data-embed="cover"] .grain{opacity:.03}
+
+:root[data-embed="cover"] button{background:rgba(205,207,212,.14);color:#fff}
+:root[data-embed="cover"][data-theme="light"] button{background:rgba(28,30,34,.08);color:#000}
+@media (prefers-reduced-motion: reduce){
+  .play *,.play{animation-duration:1ms !important;animation-delay:0s !important}
+  .bpc,.ang,.hot{display:none}
+}
+
+/* the book's button behaviour: a panel wipes in at the lean, press brakes, a click streaks through */
+.controls button{position:relative;isolation:isolate;transition:transform .08s ease-out,color .3s}
+.controls button:hover{background:var(--btnBg)}
+.controls button::before{content:"";position:absolute;top:0;bottom:0;left:-40px;right:-40px;z-index:-1;background:rgba(128,128,128,.24);transform:translateX(-102%) skewX(35deg);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.controls button:hover::before{transform:translateX(0) skewX(35deg)}
+.controls button:active{transform:scale(.965)}
+.controls button.flash::after{content:"";position:absolute;top:0;bottom:0;left:0;width:26px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55) 45%,rgba(255,255,255,.55) 55%,transparent);animation:streak .28s cubic-bezier(.45,0,.25,1) both}
+@keyframes streak{from{transform:translateX(-40px) skewX(35deg)}to{transform:translateX(var(--bw,200px)) skewX(35deg)}}
+@media (prefers-reduced-motion: reduce){ .controls button::before{transition:none} .controls button.flash::after{display:none} }
+
+/* selection is red: the reader marking something is the lead */
+::selection{background:#D8231A;color:#fff;-webkit-text-fill-color:#fff}
+</style>
+</head>
+<body>
+<svg class="grain" aria-hidden="true"><filter id="gr"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#gr)"/></svg>
+<main class="stage play" id="stage">
+  <div class="rig">
+  <div class="spot" aria-hidden="true"><i></i></div>
+  <div class="lock" role="img" aria-label="Smedley Group, Advanced Technology">
+    <svg class="mark" viewBox="-0.9 -1 56 86" aria-hidden="true">
+      <defs>
+        <filter id="rubber" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="7" result="n"/>
+          <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.45 1.08" result="s"/>
+          <feComposite in="SourceGraphic" in2="s" operator="in" result="g"/>
+          <feDisplacementMap in="g" in2="n" scale=".35" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+        <!-- smoke texture: soft core, torn edges -->
+        <filter id="smokeF" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency=".16" numOctaves="3" seed="4" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G" result="d"/>
+          <feGaussianBlur in="d" stdDeviation="1.1"/>
+        </filter>
+        <!-- tyre wear: fine rubber grain and a little track grime at the shoulders -->
+        <filter id="wear" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="2" seed="9" result="n"/>
+          <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -3 1.55" result="spk"/>
+          <feComposite in="spk" in2="SourceGraphic" operator="in"/>
+        </filter>
+        <linearGradient id="grime" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#8C8676" stop-opacity=".22"/><stop offset=".14" stop-color="#8C8676" stop-opacity="0"/>
+          <stop offset=".5" stop-color="#fff" stop-opacity=".035"/>
+          <stop offset=".86" stop-color="#8C8676" stop-opacity="0"/><stop offset="1" stop-color="#8C8676" stop-opacity=".22"/>
+        </linearGradient>
+        <!-- one stationary light, just above where the tyres stop. it lights the face turned towards it and throws the shadow away -->
+        <!-- shadow in three layers: a hard contact line, a mid shadow, and a wide soft ambient one -->
+        <filter id="shHard" x="-20%" y="-30%" width="140%" height="160%"><feGaussianBlur stdDeviation=".45"/></filter>
+        <filter id="shMid" x="-40%" y="-60%" width="180%" height="220%"><feGaussianBlur stdDeviation="2.2"/></filter>
+        <filter id="shSoft" x="-60%" y="-90%" width="220%" height="280%"><feGaussianBlur stdDeviation="4.6"/></filter>
+        <radialGradient id="pool"><stop offset="0" stop-color="#fff" stop-opacity=".07"/><stop offset=".6" stop-color="#fff" stop-opacity=".025"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <linearGradient id="keyFwd" x1="0" y1="0" x2="1" y2="0"><stop offset="0.00" stop-color="#fff" stop-opacity="0.000"/><stop offset="0.10" stop-color="#fff" stop-opacity="0.000"/><stop offset="0.20" stop-color="#fff" stop-opacity="0.000"/><stop offset="0.30" stop-color="#fff" stop-opacity="0.000"/><stop offset="0.40" stop-color="#fff" stop-opacity="0.001"/><stop offset="0.50" stop-color="#fff" stop-opacity="0.015"/><stop offset="0.60" stop-color="#fff" stop-opacity="0.057"/><stop offset="0.70" stop-color="#fff" stop-opacity="0.125"/><stop offset="0.80" stop-color="#fff" stop-opacity="0.204"/><stop offset="0.90" stop-color="#fff" stop-opacity="0.272"/><stop offset="1.00" stop-color="#fff" stop-opacity="0.300"/></linearGradient>
+        <linearGradient id="keyBack" x1="0" y1="0" x2="1" y2="0"><stop offset="0.00" stop-color="#fff" stop-opacity="0.100"/><stop offset="0.10" stop-color="#fff" stop-opacity="0.088"/><stop offset="0.20" stop-color="#fff" stop-opacity="0.062"/><stop offset="0.30" stop-color="#fff" stop-opacity="0.033"/><stop offset="0.40" stop-color="#fff" stop-opacity="0.012"/><stop offset="0.50" stop-color="#fff" stop-opacity="0.002"/><stop offset="0.60" stop-color="#fff" stop-opacity="0.000"/><stop offset="0.70" stop-color="#fff" stop-opacity="0.000"/><stop offset="0.80" stop-color="#fff" stop-opacity="0.000"/><stop offset="0.90" stop-color="#fff" stop-opacity="0.000"/><stop offset="1.00" stop-color="#fff" stop-opacity="0.000"/></linearGradient>
+        <linearGradient id="keySideP" x1="0" y1="0" x2="0" y2="1"><stop offset="0.00" stop-color="#fff" stop-opacity="0.000"/><stop offset="0.10" stop-color="#fff" stop-opacity="0.000"/><stop offset="0.20" stop-color="#fff" stop-opacity="0.000"/><stop offset="0.30" stop-color="#fff" stop-opacity="0.000"/><stop offset="0.40" stop-color="#fff" stop-opacity="0.003"/><stop offset="0.50" stop-color="#fff" stop-opacity="0.017"/><stop offset="0.60" stop-color="#fff" stop-opacity="0.042"/><stop offset="0.70" stop-color="#fff" stop-opacity="0.073"/><stop offset="0.80" stop-color="#fff" stop-opacity="0.105"/><stop offset="0.90" stop-color="#fff" stop-opacity="0.130"/><stop offset="1.00" stop-color="#fff" stop-opacity="0.140"/></linearGradient>
+        <linearGradient id="keySideN" x1="0" y1="0" x2="0" y2="1"><stop offset="0.00" stop-color="#fff" stop-opacity="0.140"/><stop offset="0.10" stop-color="#fff" stop-opacity="0.130"/><stop offset="0.20" stop-color="#fff" stop-opacity="0.105"/><stop offset="0.30" stop-color="#fff" stop-opacity="0.073"/><stop offset="0.40" stop-color="#fff" stop-opacity="0.042"/><stop offset="0.50" stop-color="#fff" stop-opacity="0.017"/><stop offset="0.60" stop-color="#fff" stop-opacity="0.003"/><stop offset="0.70" stop-color="#fff" stop-opacity="0.000"/><stop offset="0.80" stop-color="#fff" stop-opacity="0.000"/><stop offset="0.90" stop-color="#fff" stop-opacity="0.000"/><stop offset="1.00" stop-color="#fff" stop-opacity="0.000"/></linearGradient>
+        <radialGradient id="puffG"><stop offset="0" stop-color="var(--smoke)" stop-opacity=".9"/><stop offset=".5" stop-color="var(--smoke)" stop-opacity=".45"/><stop offset="1" stop-color="var(--smoke)" stop-opacity="0"/></radialGradient>
+        <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A9099"/><stop offset=".53" stop-color="#C9CCD1"/><stop offset="1" stop-color="#2E3137"/></linearGradient>
+        <!-- tyre, seen from above: full-wet tread on dark rubber, rounded by the light. the V points the way the kart travels, same as its print -->
+        <pattern id="tt" patternUnits="userSpaceOnUse" x="0" y="-7.8" width="6.5" height="15.6"><rect width="6.500" height="15.600" fill="#07080A"/><g transform="scale(1.0000 1.0000)"><mask id="ttm" maskUnits="userSpaceOnUse" x="-20" y="-5" width="60" height="30"><rect x="-20" y="-5" width="60" height="30" fill="#fff"/><path d="M-5.50 -0.2 L-5.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 15.80 L-1.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 0.9 L-1.95 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M1.00 14.70 L1.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M-2.90 7.55 Q-4.20 5.3 -6.30 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M0.35 8.05 Q-0.95 10.30 -3.05 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M-1.50 6.3 Q-2.30 5.0 -3.30 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.75 9.30 Q0.95 10.60 -0.05 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.00 -0.2 L1.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 15.80 L4.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 0.9 L4.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M7.50 14.70 L7.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M3.60 7.55 Q2.30 5.3 0.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M6.85 8.05 Q5.55 10.30 3.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M5.00 6.3 Q4.20 5.0 3.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M8.25 9.30 Q7.45 10.60 6.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M7.50 -0.2 L8.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 15.80 L11.25 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 0.9 L11.05 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M14.00 14.70 L14.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M10.10 7.55 Q8.80 5.3 6.70 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M13.35 8.05 Q12.05 10.30 9.95 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M11.50 6.3 Q10.70 5.0 9.70 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.75 9.30 Q13.95 10.60 12.95 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.00 -0.2 L14.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 15.80 L17.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 0.9 L17.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M20.50 14.70 L20.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M16.60 7.55 Q15.30 5.3 13.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M19.85 8.05 Q18.55 10.30 16.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M18.00 6.3 Q17.20 5.0 16.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M21.25 9.30 Q20.45 10.60 19.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><rect x="-20" y="3.19" width="60" height="0.72" fill="#000"/><rect x="-20" y="11.69" width="60" height="0.72" fill="#000"/><rect x="-20" y="7.58" width="60" height="0.45" fill="#000"/></mask><rect x="0" y="0.35" width="6.5" height="14.9" fill="#2C323B" mask="url(#ttm)"/></g></pattern>
+        <linearGradient id="curve" x1="0" y1="0" x2="1" y2="0"><stop offset="0.00" stop-color="#000" stop-opacity="0.820"/><stop offset="0.06" stop-color="#000" stop-opacity="0.711"/><stop offset="0.12" stop-color="#000" stop-opacity="0.468"/><stop offset="0.19" stop-color="#000" stop-opacity="0.216"/><stop offset="0.25" stop-color="#000" stop-opacity="0.050"/><stop offset="0.31" stop-color="#fff" stop-opacity="-0.002"/><stop offset="0.38" stop-color="#fff" stop-opacity="0.010"/><stop offset="0.44" stop-color="#fff" stop-opacity="0.022"/><stop offset="0.50" stop-color="#fff" stop-opacity="0.035"/><stop offset="0.56" stop-color="#fff" stop-opacity="0.022"/><stop offset="0.62" stop-color="#fff" stop-opacity="0.010"/><stop offset="0.69" stop-color="#fff" stop-opacity="-0.002"/><stop offset="0.75" stop-color="#000" stop-opacity="0.050"/><stop offset="0.81" stop-color="#000" stop-opacity="0.216"/><stop offset="0.88" stop-color="#000" stop-opacity="0.468"/><stop offset="0.94" stop-color="#000" stop-opacity="0.711"/><stop offset="1.00" stop-color="#000" stop-opacity="0.820"/></linearGradient>
+        <linearGradient id="shoulder" x1="0" y1="0" x2="0" y2="1"><stop offset="0.00" stop-color="#000" stop-opacity="0.620"/><stop offset="0.08" stop-color="#000" stop-opacity="0.268"/><stop offset="0.17" stop-color="#000" stop-opacity="0.004"/><stop offset="0.25" stop-color="#000" stop-opacity="0.000"/><stop offset="0.33" stop-color="#000" stop-opacity="0.000"/><stop offset="0.42" stop-color="#000" stop-opacity="0.000"/><stop offset="0.50" stop-color="#000" stop-opacity="0.000"/><stop offset="0.58" stop-color="#000" stop-opacity="0.000"/><stop offset="0.67" stop-color="#000" stop-opacity="0.000"/><stop offset="0.75" stop-color="#000" stop-opacity="0.000"/><stop offset="0.83" stop-color="#000" stop-opacity="0.004"/><stop offset="0.92" stop-color="#000" stop-opacity="0.268"/><stop offset="1.00" stop-color="#000" stop-opacity="0.620"/></linearGradient>
+        <radialGradient id="shadow"><stop offset=".5" stop-color="#000" stop-opacity=".7"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+        <clipPath id="tc"><rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4"/></clipPath>
+        <pattern id="tp0" patternUnits="userSpaceOnUse" x="0" y="-25.01" width="6.5" height="14.2"><g transform="scale(1.0000 0.9103)"><mask id="tpm0" maskUnits="userSpaceOnUse" x="-20" y="-5" width="60" height="30"><rect x="-20" y="-5" width="60" height="30" fill="#fff"/><path d="M-5.50 -0.2 L-5.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 15.80 L-1.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 0.9 L-1.95 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M1.00 14.70 L1.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M-2.90 7.55 Q-4.20 5.3 -6.30 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M0.35 8.05 Q-0.95 10.30 -3.05 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M-1.50 6.3 Q-2.30 5.0 -3.30 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.75 9.30 Q0.95 10.60 -0.05 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.00 -0.2 L1.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 15.80 L4.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 0.9 L4.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M7.50 14.70 L7.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M3.60 7.55 Q2.30 5.3 0.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M6.85 8.05 Q5.55 10.30 3.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M5.00 6.3 Q4.20 5.0 3.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M8.25 9.30 Q7.45 10.60 6.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M7.50 -0.2 L8.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 15.80 L11.25 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 0.9 L11.05 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M14.00 14.70 L14.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M10.10 7.55 Q8.80 5.3 6.70 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M13.35 8.05 Q12.05 10.30 9.95 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M11.50 6.3 Q10.70 5.0 9.70 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.75 9.30 Q13.95 10.60 12.95 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.00 -0.2 L14.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 15.80 L17.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 0.9 L17.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M20.50 14.70 L20.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M16.60 7.55 Q15.30 5.3 13.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M19.85 8.05 Q18.55 10.30 16.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M18.00 6.3 Q17.20 5.0 16.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M21.25 9.30 Q20.45 10.60 19.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><rect x="-20" y="3.19" width="60" height="0.72" fill="#000"/><rect x="-20" y="11.69" width="60" height="0.72" fill="#000"/><rect x="-20" y="7.58" width="60" height="0.45" fill="#000"/></mask><rect x="0" y="0.35" width="6.5" height="14.9" fill="var(--tread)" mask="url(#tpm0)"/></g></pattern>
+<linearGradient id="sk0" gradientUnits="userSpaceOnUse" x1="-42.58" y1="0" x2="-32.58" y2="0"><stop offset="0" stop-color="var(--tread)" stop-opacity="0"/><stop offset="1" stop-color="var(--tread)"/></linearGradient>
+<mask id="rv0" maskUnits="userSpaceOnUse" x="-2000" y="-2000" width="4000" height="4000"><rect class="rv rv0" x="-620" y="-26.01" width="632.28" height="16.20" fill="#fff"/></mask>
+<clipPath id="tl0"><rect class="lift lift0" x="-620" y="-26.01" width="585.92" height="16.20"/></clipPath>
+<pattern id="tp1" patternUnits="userSpaceOnUse" x="0" y="-7.20" width="6.5" height="14.2"><g transform="scale(1.0000 0.9103)"><mask id="tpm1" maskUnits="userSpaceOnUse" x="-20" y="-5" width="60" height="30"><rect x="-20" y="-5" width="60" height="30" fill="#fff"/><path d="M-5.50 -0.2 L-5.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 15.80 L-1.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 0.9 L-1.95 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M1.00 14.70 L1.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M-2.90 7.55 Q-4.20 5.3 -6.30 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M0.35 8.05 Q-0.95 10.30 -3.05 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M-1.50 6.3 Q-2.30 5.0 -3.30 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.75 9.30 Q0.95 10.60 -0.05 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.00 -0.2 L1.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 15.80 L4.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 0.9 L4.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M7.50 14.70 L7.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M3.60 7.55 Q2.30 5.3 0.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M6.85 8.05 Q5.55 10.30 3.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M5.00 6.3 Q4.20 5.0 3.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M8.25 9.30 Q7.45 10.60 6.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M7.50 -0.2 L8.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 15.80 L11.25 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 0.9 L11.05 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M14.00 14.70 L14.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M10.10 7.55 Q8.80 5.3 6.70 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M13.35 8.05 Q12.05 10.30 9.95 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M11.50 6.3 Q10.70 5.0 9.70 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.75 9.30 Q13.95 10.60 12.95 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.00 -0.2 L14.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 15.80 L17.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 0.9 L17.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M20.50 14.70 L20.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M16.60 7.55 Q15.30 5.3 13.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M19.85 8.05 Q18.55 10.30 16.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M18.00 6.3 Q17.20 5.0 16.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M21.25 9.30 Q20.45 10.60 19.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><rect x="-20" y="3.19" width="60" height="0.72" fill="#000"/><rect x="-20" y="11.69" width="60" height="0.72" fill="#000"/><rect x="-20" y="7.58" width="60" height="0.45" fill="#000"/></mask><rect x="0" y="0.35" width="6.5" height="14.9" fill="var(--tread)" mask="url(#tpm1)"/></g></pattern>
+<linearGradient id="sk1" gradientUnits="userSpaceOnUse" x1="-42.62" y1="0" x2="-32.62" y2="0"><stop offset="0" stop-color="var(--tread)" stop-opacity="0"/><stop offset="1" stop-color="var(--tread)"/></linearGradient>
+<mask id="rv1" maskUnits="userSpaceOnUse" x="-2000" y="-2000" width="4000" height="4000"><rect class="rv rv1" x="-620" y="-8.20" width="655.68" height="16.20" fill="#fff"/></mask>
+<clipPath id="tl1"><rect class="lift lift1" x="-620" y="-8.20" width="585.88" height="16.20"/></clipPath>
+<pattern id="tp2" patternUnits="userSpaceOnUse" x="0" y="10.79" width="6.5" height="14.2"><g transform="scale(1.0000 0.9103)"><mask id="tpm2" maskUnits="userSpaceOnUse" x="-20" y="-5" width="60" height="30"><rect x="-20" y="-5" width="60" height="30" fill="#fff"/><path d="M-5.50 -0.2 L-5.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 15.80 L-1.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 0.9 L-1.95 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M1.00 14.70 L1.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M-2.90 7.55 Q-4.20 5.3 -6.30 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M0.35 8.05 Q-0.95 10.30 -3.05 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M-1.50 6.3 Q-2.30 5.0 -3.30 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.75 9.30 Q0.95 10.60 -0.05 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.00 -0.2 L1.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 15.80 L4.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 0.9 L4.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M7.50 14.70 L7.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M3.60 7.55 Q2.30 5.3 0.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M6.85 8.05 Q5.55 10.30 3.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M5.00 6.3 Q4.20 5.0 3.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M8.25 9.30 Q7.45 10.60 6.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M7.50 -0.2 L8.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 15.80 L11.25 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 0.9 L11.05 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M14.00 14.70 L14.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M10.10 7.55 Q8.80 5.3 6.70 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M13.35 8.05 Q12.05 10.30 9.95 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M11.50 6.3 Q10.70 5.0 9.70 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.75 9.30 Q13.95 10.60 12.95 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.00 -0.2 L14.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 15.80 L17.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 0.9 L17.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M20.50 14.70 L20.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M16.60 7.55 Q15.30 5.3 13.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M19.85 8.05 Q18.55 10.30 16.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M18.00 6.3 Q17.20 5.0 16.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M21.25 9.30 Q20.45 10.60 19.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><rect x="-20" y="3.19" width="60" height="0.72" fill="#000"/><rect x="-20" y="11.69" width="60" height="0.72" fill="#000"/><rect x="-20" y="7.58" width="60" height="0.45" fill="#000"/></mask><rect x="0" y="0.35" width="6.5" height="14.9" fill="var(--tread)" mask="url(#tpm2)"/></g></pattern>
+<linearGradient id="sk2" gradientUnits="userSpaceOnUse" x1="-19.08" y1="0" x2="-9.08" y2="0"><stop offset="0" stop-color="var(--tread)" stop-opacity="0"/><stop offset="1" stop-color="var(--tread)"/></linearGradient>
+<mask id="rv2" maskUnits="userSpaceOnUse" x="-2000" y="-2000" width="4000" height="4000"><rect class="rv rv2" x="-620" y="9.79" width="655.58" height="16.20" fill="#fff"/></mask>
+<clipPath id="tl2"><rect class="lift lift2" x="-620" y="9.79" width="609.42" height="16.20"/></clipPath>
+        <filter id="heatF" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="2.2"/></filter>
+        <linearGradient id="hotG0" gradientUnits="userSpaceOnUse" x1="-42.58" y1="0" x2="12.28" y2="0"><stop offset="0" stop-color="#FF4B3E" stop-opacity="0"/><stop offset=".3" stop-color="#FF4B3E" stop-opacity=".85"/><stop offset=".6" stop-color="#D8231A"/><stop offset="1" stop-color="#5A0A07"/></linearGradient>
+        <linearGradient id="hotG1" gradientUnits="userSpaceOnUse" x1="-42.62" y1="0" x2="35.68" y2="0"><stop offset="0" stop-color="#FF4B3E" stop-opacity="0"/><stop offset=".3" stop-color="#FF4B3E" stop-opacity=".85"/><stop offset=".6" stop-color="#D8231A"/><stop offset="1" stop-color="#5A0A07"/></linearGradient>
+        <linearGradient id="hotG2" gradientUnits="userSpaceOnUse" x1="-19.08" y1="0" x2="35.58" y2="0"><stop offset="0" stop-color="#FF4B3E" stop-opacity="0"/><stop offset=".3" stop-color="#FF4B3E" stop-opacity=".85"/><stop offset=".6" stop-color="#D8231A"/><stop offset="1" stop-color="#5A0A07"/></linearGradient>
+      </defs>
+      <!-- local frame: origin at the glyph's centre, +x along the bars -->
+      <g transform="translate(27.1 42)"><g class="spin">
+        <ellipse class="pool" cx="22" cy="0" rx="70" ry="44" fill="url(#pool)"/>
+        <g filter="url(#rubber)"><g class="trk trk0" mask="url(#rv0)">
+  <g clip-path="url(#tl0)"><rect x="-620" y="-25.01" width="585.92" height="14.2" fill="var(--tread)" opacity="var(--smear)"/><rect x="-620" y="-25.01" width="585.92" height="14.2" fill="url(#tp0)" opacity="var(--grit)"/></g>
+  <rect x="-42.58" y="-25.01" width="54.86" height="14.2" fill="url(#sk0)"/>
+</g>
+<g class="trk trk1" mask="url(#rv1)">
+  <g clip-path="url(#tl1)"><rect x="-620" y="-7.20" width="585.88" height="14.2" fill="var(--tread)" opacity="var(--smear)"/><rect x="-620" y="-7.20" width="585.88" height="14.2" fill="url(#tp1)" opacity="var(--grit)"/></g>
+  <rect x="-42.62" y="-7.20" width="78.30" height="14.2" fill="url(#sk1)"/>
+</g>
+<g class="trk trk2" mask="url(#rv2)">
+  <g clip-path="url(#tl2)"><rect x="-620" y="10.79" width="609.42" height="14.2" fill="var(--tread)" opacity="var(--smear)"/><rect x="-620" y="10.79" width="609.42" height="14.2" fill="url(#tp2)" opacity="var(--grit)"/></g>
+  <rect x="-19.08" y="10.79" width="54.66" height="14.2" fill="url(#sk2)"/>
+</g></g>
+        <g class="heat"><g mask="url(#rv0)"><g class="hot hot0"><rect x="-42.58" y="-27.01" width="58.86" height="18.2" fill="url(#hotG0)" filter="url(#heatF)"/><rect x="-42.58" y="-25.01" width="54.86" height="14.2" fill="url(#hotG0)"/></g></g><g mask="url(#rv1)"><g class="hot hot1"><rect x="-42.62" y="-9.20" width="82.30" height="18.2" fill="url(#hotG1)" filter="url(#heatF)"/><rect x="-42.62" y="-7.20" width="78.30" height="14.2" fill="url(#hotG1)"/></g></g><g mask="url(#rv2)"><g class="hot hot2"><rect x="-19.08" y="8.79" width="58.66" height="18.2" fill="url(#hotG2)" filter="url(#heatF)"/><rect x="-19.08" y="10.79" width="54.66" height="14.2" fill="url(#hotG2)"/></g></g></g>
+        <g><line class="bar bar0" x1="-35.58" y1="-17.91" x2="12.28" y2="-17.91"/>
+<line class="bar bar1" x1="-35.62" y1="-0.10" x2="35.68" y2="-0.10"/>
+<line class="bar bar2" x1="-12.08" y1="17.89" x2="35.58" y2="17.89"/></g>
+        <g class="bpc"><line class="c dr" style="animation-delay:3.75s" x1="-44.58" y1="-17.91" x2="21.28" y2="-17.91"/><line class="c dr" style="animation-delay:3.83s" x1="-44.62" y1="-0.10" x2="44.68" y2="-0.10"/><line class="c dr" style="animation-delay:3.91s" x1="-21.08" y1="17.89" x2="44.58" y2="17.89"/><line class="m dv" style="animation-delay:3.90s" x1="-35.62" y1="-31" x2="-35.62" y2="31"/><line class="m dv" style="animation-delay:3.97s" x1="-11.85" y1="-31" x2="-11.85" y2="31"/><line class="m dv" style="animation-delay:4.04s" x1="11.91" y1="-31" x2="11.91" y2="31"/><line class="m dv" style="animation-delay:4.11s" x1="35.68" y1="-31" x2="35.68" y2="31"/></g>
+        <g><g class="off off0"><g class="run run0">
+  <g class="sho sho0">
+    <g class="sh3 sh3_0"><ellipse cx="0" cy="0" rx="18.5" ry="12.3" fill="#000" opacity=".16" filter="url(#shSoft)"/></g>
+    <g class="sh2 sh2_0"><rect x="-15.0" y="-9.8" width="30" height="19.6" rx="5" fill="#000" opacity=".32" filter="url(#shMid)"/></g>
+    <g class="sh1 sh1_0"><rect x="-13.1" y="-8.3" width="26.2" height="16.6" rx="3.8" fill="#000" opacity=".7" filter="url(#shHard)"/></g>
+  </g>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="#0B0C0E"/>
+  <g clip-path="url(#tc)"><g class="roll roll0">
+    <rect x="-680" y="-7.8" width="720" height="15.6" fill="url(#tt)"/>
+    <rect x="-680" y="-7.8" width="720" height="15.6" fill="#A39D8C" filter="url(#wear)" opacity=".16"/>
+  </g></g>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#grime)"/>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#curve)"/>
+  <rect class="kf kf0" x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#keyFwd)"/>
+  <rect class="kb kb0" x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#keyBack)"/>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#keySideP)"/>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#shoulder)"/>
+  <rect x="-12.1" y="-7.3999999999999995" width="24.2" height="14.799999999999999" rx="3" fill="none" stroke="rgba(205,207,212,.2)" stroke-width=".3"/>
+</g></g>
+<g class="off off1"><g class="run run1">
+  <g class="sho sho1">
+    <g class="sh3 sh3_1"><ellipse cx="0" cy="0" rx="18.5" ry="12.3" fill="#000" opacity=".16" filter="url(#shSoft)"/></g>
+    <g class="sh2 sh2_1"><rect x="-15.0" y="-9.8" width="30" height="19.6" rx="5" fill="#000" opacity=".32" filter="url(#shMid)"/></g>
+    <g class="sh1 sh1_1"><rect x="-13.1" y="-8.3" width="26.2" height="16.6" rx="3.8" fill="#000" opacity=".7" filter="url(#shHard)"/></g>
+  </g>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="#0B0C0E"/>
+  <g clip-path="url(#tc)"><g class="roll roll1">
+    <rect x="-680" y="-7.8" width="720" height="15.6" fill="url(#tt)"/>
+    <rect x="-680" y="-7.8" width="720" height="15.6" fill="#A39D8C" filter="url(#wear)" opacity=".16"/>
+  </g></g>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#grime)"/>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#curve)"/>
+  <rect class="kf kf1" x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#keyFwd)"/>
+  <rect class="kb kb1" x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#keyBack)"/>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#keySideP)"/>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#shoulder)"/>
+  <rect x="-12.1" y="-7.3999999999999995" width="24.2" height="14.799999999999999" rx="3" fill="none" stroke="rgba(205,207,212,.2)" stroke-width=".3"/>
+</g></g>
+<g class="off off2"><g class="run run2">
+  <g class="sho sho2">
+    <g class="sh3 sh3_2"><ellipse cx="0" cy="0" rx="18.5" ry="12.3" fill="#000" opacity=".16" filter="url(#shSoft)"/></g>
+    <g class="sh2 sh2_2"><rect x="-15.0" y="-9.8" width="30" height="19.6" rx="5" fill="#000" opacity=".32" filter="url(#shMid)"/></g>
+    <g class="sh1 sh1_2"><rect x="-13.1" y="-8.3" width="26.2" height="16.6" rx="3.8" fill="#000" opacity=".7" filter="url(#shHard)"/></g>
+  </g>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="#0B0C0E"/>
+  <g clip-path="url(#tc)"><g class="roll roll2">
+    <rect x="-680" y="-7.8" width="720" height="15.6" fill="url(#tt)"/>
+    <rect x="-680" y="-7.8" width="720" height="15.6" fill="#A39D8C" filter="url(#wear)" opacity=".16"/>
+  </g></g>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#grime)"/>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#curve)"/>
+  <rect class="kf kf2" x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#keyFwd)"/>
+  <rect class="kb kb2" x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#keyBack)"/>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#keySideN)"/>
+  <rect x="-12.5" y="-7.8" width="25" height="15.6" rx="3.4" fill="url(#shoulder)"/>
+  <rect x="-12.1" y="-7.3999999999999995" width="24.2" height="14.799999999999999" rx="3" fill="none" stroke="rgba(205,207,212,.2)" stroke-width=".3"/>
+</g></g></g>
+        <g><g class="puffw" style="--dx:-29.3px;--dy:11.0px;--rot:-31deg;--pk:0.22;animation-delay:1.24s;animation-duration:2.03s"><circle class="puff" cx="-43.28" cy="-9.61" r="7.4"/></g>
+<g class="puffw" style="--dx:-20.3px;--dy:12.5px;--rot:-8deg;--pk:0.38;animation-delay:1.29s;animation-duration:2.26s"><circle class="puff" cx="-42.40" cy="-13.15" r="8.5"/></g>
+<g class="puffw" style="--dx:-25.2px;--dy:-13.6px;--rot:3deg;--pk:0.36;animation-delay:1.34s;animation-duration:1.67s"><circle class="puff" cx="-42.25" cy="-22.16" r="9.5"/></g>
+<g class="puffw" style="--dx:-31.2px;--dy:10.4px;--rot:15deg;--pk:0.29;animation-delay:1.39s;animation-duration:1.98s"><circle class="puff" cx="-38.51" cy="-12.36" r="8.5"/></g>
+<g class="puffw" style="--dx:-15.0px;--dy:11.5px;--rot:37deg;--pk:0.22;animation-delay:1.39s;animation-duration:1.78s"><circle class="puff" cx="-38.56" cy="-14.32" r="6.3"/></g>
+<g class="puffw" style="--dx:-33.1px;--dy:9.3px;--rot:-19deg;--pk:0.28;animation-delay:1.47s;animation-duration:1.79s"><circle class="puff" cx="-32.70" cy="-13.21" r="7.0"/></g>
+<g class="puffw" style="--dx:-21.0px;--dy:-5.7px;--rot:6deg;--pk:0.28;animation-delay:1.55s;animation-duration:1.58s"><circle class="puff" cx="-30.24" cy="-22.66" r="6.0"/></g>
+<g class="puffw" style="--dx:-23.3px;--dy:-6.7px;--rot:18deg;--pk:0.22;animation-delay:1.63s;animation-duration:2.01s"><circle class="puff" cx="-24.89" cy="-25.17" r="6.2"/></g>
+<g class="puffw" style="--dx:-27.7px;--dy:8.0px;--rot:37deg;--pk:0.25;animation-delay:1.71s;animation-duration:2.09s"><circle class="puff" cx="-21.14" cy="-14.30" r="7.1"/></g>
+<g class="puffw" style="--dx:-27.5px;--dy:-13.1px;--rot:38deg;--pk:0.22;animation-delay:1.80s;animation-duration:1.54s"><circle class="puff" cx="-15.09" cy="-26.39" r="8.6"/></g>
+<g class="puffw" style="--dx:-32.5px;--dy:4.9px;--rot:27deg;--pk:0.26;animation-delay:1.88s;animation-duration:2.12s"><circle class="puff" cx="-8.31" cy="-10.35" r="5.0"/></g>
+<g class="puffw" style="--dx:-33.6px;--dy:-6.2px;--rot:6deg;--pk:0.28;animation-delay:1.96s;animation-duration:2.27s"><circle class="puff" cx="-5.47" cy="-24.12" r="7.0"/></g>
+<g class="puffw" style="--dx:-18.4px;--dy:8.1px;--rot:-34deg;--pk:0.23;animation-delay:2.04s;animation-duration:2.00s"><circle class="puff" cx="-2.10" cy="-11.48" r="8.1"/></g>
+<g class="puffw" style="--dx:-21.3px;--dy:4.3px;--rot:5deg;--pk:0.20;animation-delay:2.49s;animation-duration:2.10s"><circle class="puff" cx="1.45" cy="-12.82" r="4.9"/></g>
+<g class="puffw" style="--dx:-33.3px;--dy:6.3px;--rot:-26deg;--pk:0.26;animation-delay:2.54s;animation-duration:1.75s"><circle class="puff" cx="4.15" cy="-9.59" r="4.8"/></g>
+<g class="puffw" style="--dx:-24.4px;--dy:9.2px;--rot:6deg;--pk:0.23;animation-delay:2.59s;animation-duration:1.65s"><circle class="puff" cx="1.42" cy="-12.63" r="6.3"/></g>
+<g class="puffw" style="--dx:-16.7px;--dy:9.5px;--rot:-16deg;--pk:0.17;animation-delay:2.64s;animation-duration:1.86s"><circle class="puff" cx="3.63" cy="-12.09" r="7.2"/></g>
+<g class="puffw" style="--dx:-23.8px;--dy:8.9px;--rot:-3deg;--pk:0.26;animation-delay:0.98s;animation-duration:1.88s"><circle class="puff" cx="-44.22" cy="5.07" r="7.0"/></g>
+<g class="puffw" style="--dx:-29.7px;--dy:-12.7px;--rot:-21deg;--pk:0.26;animation-delay:1.03s;animation-duration:2.26s"><circle class="puff" cx="-41.79" cy="-5.22" r="9.4"/></g>
+<g class="puffw" style="--dx:-29.1px;--dy:-8.9px;--rot:-19deg;--pk:0.27;animation-delay:1.08s;animation-duration:2.07s"><circle class="puff" cx="-37.73" cy="-7.65" r="10.5"/></g>
+<g class="puffw" style="--dx:-24.5px;--dy:12.3px;--rot:-16deg;--pk:0.24;animation-delay:1.13s;animation-duration:1.98s"><circle class="puff" cx="-36.91" cy="6.09" r="9.0"/></g>
+<g class="puffw" style="--dx:-29.9px;--dy:-5.9px;--rot:25deg;--pk:0.19;animation-delay:1.13s;animation-duration:2.02s"><circle class="puff" cx="-35.90" cy="-6.08" r="8.0"/></g>
+<g class="puffw" style="--dx:-19.2px;--dy:-12.4px;--rot:27deg;--pk:0.26;animation-delay:1.22s;animation-duration:2.13s"><circle class="puff" cx="-28.63" cy="-8.16" r="5.6"/></g>
+<g class="puffw" style="--dx:-15.6px;--dy:10.5px;--rot:-24deg;--pk:0.29;animation-delay:1.32s;animation-duration:1.93s"><circle class="puff" cx="-21.68" cy="4.14" r="5.4"/></g>
+<g class="puffw" style="--dx:-27.8px;--dy:-12.8px;--rot:25deg;--pk:0.20;animation-delay:1.41s;animation-duration:1.88s"><circle class="puff" cx="-13.91" cy="-8.52" r="5.3"/></g>
+<g class="puffw" style="--dx:-21.2px;--dy:7.4px;--rot:9deg;--pk:0.29;animation-delay:1.50s;animation-duration:2.08s"><circle class="puff" cx="-7.63" cy="6.94" r="7.5"/></g>
+<g class="puffw" style="--dx:-29.4px;--dy:-10.2px;--rot:31deg;--pk:0.18;animation-delay:1.59s;animation-duration:2.15s"><circle class="puff" cx="-0.43" cy="-8.09" r="6.5"/></g>
+<g class="puffw" style="--dx:-26.1px;--dy:6.6px;--rot:-2deg;--pk:0.25;animation-delay:1.69s;animation-duration:2.09s"><circle class="puff" cx="7.19" cy="6.14" r="4.8"/></g>
+<g class="puffw" style="--dx:-17.5px;--dy:-7.7px;--rot:-0deg;--pk:0.28;animation-delay:1.78s;animation-duration:2.00s"><circle class="puff" cx="15.57" cy="-4.72" r="8.2"/></g>
+<g class="puffw" style="--dx:-33.5px;--dy:9.2px;--rot:-19deg;--pk:0.19;animation-delay:1.87s;animation-duration:2.24s"><circle class="puff" cx="19.60" cy="7.19" r="7.7"/></g>
+<g class="puffw" style="--dx:-25.7px;--dy:-4.6px;--rot:8deg;--pk:0.26;animation-delay:2.33s;animation-duration:1.76s"><circle class="puff" cx="26.86" cy="-4.25" r="5.3"/></g>
+<g class="puffw" style="--dx:-22.2px;--dy:9.2px;--rot:-18deg;--pk:0.20;animation-delay:2.38s;animation-duration:2.07s"><circle class="puff" cx="26.38" cy="6.90" r="7.1"/></g>
+<g class="puffw" style="--dx:-19.7px;--dy:7.7px;--rot:12deg;--pk:0.16;animation-delay:2.43s;animation-duration:2.06s"><circle class="puff" cx="26.49" cy="5.41" r="4.5"/></g>
+<g class="puffw" style="--dx:-30.6px;--dy:11.8px;--rot:-33deg;--pk:0.23;animation-delay:2.48s;animation-duration:1.92s"><circle class="puff" cx="26.53" cy="7.58" r="5.1"/></g>
+<g class="puffw" style="--dx:-33.9px;--dy:-6.9px;--rot:-19deg;--pk:0.26;animation-delay:1.39s;animation-duration:1.62s"><circle class="puff" cx="-19.17" cy="11.83" r="8.0"/></g>
+<g class="puffw" style="--dx:-31.9px;--dy:4.2px;--rot:30deg;--pk:0.37;animation-delay:1.44s;animation-duration:1.99s"><circle class="puff" cx="-19.14" cy="25.56" r="9.9"/></g>
+<g class="puffw" style="--dx:-30.1px;--dy:8.1px;--rot:18deg;--pk:0.34;animation-delay:1.49s;animation-duration:1.58s"><circle class="puff" cx="-18.57" cy="23.33" r="9.7"/></g>
+<g class="puffw" style="--dx:-17.2px;--dy:10.4px;--rot:22deg;--pk:0.31;animation-delay:1.54s;animation-duration:1.83s"><circle class="puff" cx="-16.01" cy="24.25" r="8.5"/></g>
+<g class="puffw" style="--dx:-26.5px;--dy:-5.0px;--rot:-39deg;--pk:0.23;animation-delay:1.54s;animation-duration:2.06s"><circle class="puff" cx="-16.68" cy="12.44" r="5.4"/></g>
+<g class="puffw" style="--dx:-23.9px;--dy:-8.3px;--rot:-25deg;--pk:0.18;animation-delay:1.62s;animation-duration:1.93s"><circle class="puff" cx="-10.43" cy="11.79" r="8.1"/></g>
+<g class="puffw" style="--dx:-28.1px;--dy:6.6px;--rot:-17deg;--pk:0.23;animation-delay:1.70s;animation-duration:1.60s"><circle class="puff" cx="-7.22" cy="23.27" r="5.3"/></g>
+<g class="puffw" style="--dx:-29.3px;--dy:4.8px;--rot:37deg;--pk:0.23;animation-delay:1.78s;animation-duration:1.75s"><circle class="puff" cx="0.13" cy="23.59" r="6.0"/></g>
+<g class="puffw" style="--dx:-14.3px;--dy:8.4px;--rot:-33deg;--pk:0.20;animation-delay:1.86s;animation-duration:1.72s"><circle class="puff" cx="3.80" cy="23.92" r="7.4"/></g>
+<g class="puffw" style="--dx:-23.4px;--dy:14.0px;--rot:-6deg;--pk:0.30;animation-delay:1.94s;animation-duration:2.15s"><circle class="puff" cx="7.86" cy="25.55" r="5.6"/></g>
+<g class="puffw" style="--dx:-26.7px;--dy:4.4px;--rot:-11deg;--pk:0.21;animation-delay:2.02s;animation-duration:1.94s"><circle class="puff" cx="12.10" cy="24.50" r="6.0"/></g>
+<g class="puffw" style="--dx:-27.1px;--dy:6.1px;--rot:2deg;--pk:0.27;animation-delay:2.10s;animation-duration:1.66s"><circle class="puff" cx="17.31" cy="21.70" r="7.9"/></g>
+<g class="puffw" style="--dx:-25.2px;--dy:11.2px;--rot:-16deg;--pk:0.27;animation-delay:2.18s;animation-duration:2.09s"><circle class="puff" cx="21.56" cy="25.41" r="8.0"/></g>
+<g class="puffw" style="--dx:-31.4px;--dy:6.2px;--rot:28deg;--pk:0.17;animation-delay:2.63s;animation-duration:1.53s"><circle class="puff" cx="25.99" cy="25.52" r="7.5"/></g>
+<g class="puffw" style="--dx:-21.6px;--dy:-7.2px;--rot:-4deg;--pk:0.25;animation-delay:2.68s;animation-duration:1.80s"><circle class="puff" cx="26.24" cy="13.09" r="5.8"/></g>
+<g class="puffw" style="--dx:-23.0px;--dy:-10.2px;--rot:-33deg;--pk:0.20;animation-delay:2.73s;animation-duration:2.20s"><circle class="puff" cx="27.76" cy="11.21" r="6.5"/></g>
+<g class="puffw" style="--dx:-15.8px;--dy:6.3px;--rot:-26deg;--pk:0.21;animation-delay:2.78s;animation-duration:1.53s"><circle class="puff" cx="25.71" cy="21.62" r="5.1"/></g></g>
+      </g><g class="ang"><line x1="26.43" y1="37.65" x2="11.43" y2="37.65"/><path d="M17.43 37.65 A9 9 0 0 1 21.26 30.28"/><text x="11.43" y="45.15">55°</text></g></g>
+    </svg>
+    <div class="words" aria-hidden="true">
+      <span>Smedley<br>Group</span>
+      <i></i>
+      <span>Advanced<br>Technology</span>
+    </div>
+  </div>
+  </div>
+  <div class="controls">
+    <button id="theme" type="button"><svg class="ic sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><svg class="ic moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z"/></svg><span class="tx">Primary</span></button>
+    <button id="replay" type="button"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 3.5v3.7h3.7"/></svg><span class="tx">Replay</span></button>
+  </div>
+</main>
+<script>
+  // only the buttons use script; every frame of the animation is CSS
+  var stage=document.getElementById('stage'), root=document.documentElement, tb=document.getElementById('theme');
+  document.getElementById('replay').addEventListener('click',function(){stage.classList.remove('play');void stage.offsetWidth;stage.classList.add('play')});
+  function dark(){return root.getAttribute('data-theme')==='dark'}
+  var saved=null; try{saved=localStorage.getItem('sg-theme')}catch(e){}
+  root.setAttribute('data-theme','dark');
+  function label(){tb.querySelector('.tx').textContent=dark()?'Primary':'Reversed'} label();
+  tb.addEventListener('click',function(){var t=dark()?'light':'dark';root.setAttribute('data-theme',t);try{localStorage.setItem('sg-theme',t)}catch(e){}label()});
+  [].forEach.call(document.querySelectorAll('.controls button'),function(b){b.addEventListener('click',function(){b.style.setProperty('--bw',(b.offsetWidth+20)+'px');b.classList.remove('flash');void b.offsetWidth;b.classList.add('flash')});b.addEventListener('animationend',function(){b.classList.remove('flash')})});
+</script>
+</body>
+</html>
