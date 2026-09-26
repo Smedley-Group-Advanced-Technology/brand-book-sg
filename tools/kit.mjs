@@ -64,6 +64,29 @@ export async function downloadLabels(html) {
   return { html: out, wrong };
 }
 
+// ---------- the book's controls as a stylesheet other pages can use ----------
+// assets/ui.css is cut from the book: its tokens and themes, the animated properties and keyframes the
+// controls need, and the whole Controls group. The social post maker links it; the check keeps it current.
+export function uiCss(html) {
+  const css = html.slice(html.indexOf('<style>') + 7, html.indexOf('</style>'));
+  const out = [], KEEP_BASE = /^(select\.inp|button, input, select, textarea|::selection)/;
+  let group = '', i = 0;
+  while (i < css.length) {
+    const ws = css.slice(i).match(/^\s+/); if (ws) { i += ws[0].length; continue; }
+    if (css.startsWith('/*', i)) { const e = css.indexOf('*/', i) + 2, c = css.slice(i, e); const g = c.match(/\/\* =+ (.*?) =+ \*\//); if (g) group = g[1]; i = e; continue; }
+    // one top-level statement, braces balanced
+    let j = css.indexOf('{', i), depth = 0, k = j;
+    for (; k < css.length; k++) { if (css[k] === '{') depth++; else if (css[k] === '}' && --depth === 0) break; }
+    const stmt = css.slice(i, k + 1).trim(), head = css.slice(i, j).trim(); i = k + 1;
+    const keep = group === 'Controls'
+      || (group === 'Tokens and themes' && (/^:root/.test(head) || (/^@media \(prefers-color-scheme/.test(head) && stmt.includes(':root')) || /^@property/.test(head) || /^@keyframes (ld|pop|popk|streak)\b/.test(head)))
+      || (group === 'Base' && KEEP_BASE.test(head));
+    if (keep) out.push(stmt);
+  }
+  return '/* Smedley Group controls, cut from the brand book by npm run kit. Do not edit: change the book and rebuild. */\n'
+    + out.join('\n') + '\n';
+}
+
 // ---------- a small ZIP writer and reader, deflate only ----------
 export function writeZip(files, date) {
   const time = (date.getHours() << 11) | (date.getMinutes() << 5), day = ((date.getFullYear() - 1980) << 9) | ((date.getMonth() + 1) << 5) | date.getDate();
@@ -102,6 +125,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   await writeFile(ZIP, zip);
   html = html.replace(STAT, kitStat(files.size, zip.length, v));
   html = (await downloadLabels(html)).html;
+  await writeFile(join(A, 'ui.css'), uiCss(html));
   await writeFile(htmlPath, html);
   console.log(`kit: ${files.size} files, ${Math.round(zip.length / 1024)} KB, v${v}`);
 }

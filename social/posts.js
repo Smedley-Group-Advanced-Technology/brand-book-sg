@@ -41,23 +41,30 @@ export const TYPES = {
     fields: [['photo', 'Photo', '', 'file'], ['kicker', 'Label', 'Race report'], ['headline', 'Headline', 'A first F4 podium at Donington Park', 'area'], HANDLE] },
   results: { label: 'Results', hint: 'The leader goes red. The table takes five rows, the podium three.',
     variants: [['table', 'Table'], ['podium', 'Podium']],
-    fields: [['title', 'Title', 'Qualifying, round 7'], ['event', 'Event', 'British F4, Donington Park'], ['rows', 'Rows: driver; team; time, one per line', 'Maja Kowalczyk; FAT Racing; 1:02.418\nLeo Hartmann; FAT Racing; +0.103\nAarav Mehta; Hitech; +0.559\nElin Berg; Rodin; +0.611\nTomás Duarte; Virtuosi; +0.774', 'area'], HANDLE],
+    fields: [['title', 'Title', 'Qualifying, round 7'], ['event', 'Event', 'British F4, Donington Park'], ['rows', 'Results', 'Maja Kowalczyk; FAT Racing; 1:02.418\nLeo Hartmann; FAT Racing; +0.103\nAarav Mehta; Hitech; +0.559\nElin Berg; Rodin; +0.611\nTomás Duarte; Virtuosi; +0.774', 'area'], HANDLE],
     variantDefaults: { podium: { title: 'Race 2, round 7' } } },
   date: { label: 'Date', hint: 'Save the date, count down to it, or set out the day.',
     variants: [['day', 'Day'], ['countdown', 'Countdown'], ['schedule', 'Schedule']],
     fields: [['kicker', 'Label', 'Race day', '', ['day', 'countdown']], ['day', 'Day', '17', '', ['day']], ['month', 'Month and year', 'October 2026', '', ['day']], ['days', 'Number', '5', '', ['countdown']], ['daysLabel', 'Under the number', 'days to go', '', ['countdown']],
-      ['title', 'Event', 'British F4, round 9', 'area'], ['place', 'Place and time', 'Brands Hatch, 14:20'], ['rows', 'Sessions: time; name, one per line', '09:10; Free practice\n11:45; Qualifying\n14:20; Race 1\n16:05; Race 2', 'area', ['schedule']], HANDLE],
+      ['title', 'Event', 'British F4, round 9', 'area'], ['place', 'Place and time', 'Brands Hatch, 14:20'], ['rows', 'Sessions', '09:10; Free practice\n11:45; Qualifying\n14:20; Race 1\n16:05; Race 2', 'area', ['schedule']], HANDLE],
     variantDefaults: { countdown: { kicker: 'Countdown' }, schedule: { place: 'Brands Hatch, Saturday 17 October' } } },
   profile: { label: 'Profile', hint: 'A driver, scored the TalentID way: four bars, one name.',
     variants: [['card', 'Card'], ['photo', 'With photo']],
     fields: [['photo', 'Photo', '', 'file', ['photo']], ['kicker', 'Label', 'Driver profile'], ['name', 'Name', 'Maja Kowalczyk'], ['team', 'Team or hub', 'FAT Racing, F4 shortlist'],
-      ['metrics', 'Scores: name; value out of 100, one per line', 'Pace; 94\nConsistency; 88\nRacecraft; 90\nAdaptability; 86', 'area'], HANDLE] },
+      ['metrics', 'Scores, out of 100', 'Pace; 94\nConsistency; 88\nRacecraft; 90\nAdaptability; 86', 'area'], HANDLE] },
   carousel: { label: 'Carousel', hint: 'Page 1 is the cover; later pages carry one point each.',
     fields: [['page', 'Page', '1'], ['total', 'Of', '5'], ['headline', 'Heading', 'How TalentID picks an F4 driver', 'area'], ['body', 'Text, pages 2 onwards', 'Every lap of every session counts. Pace, consistency, racecraft and adaptability are scored against the class, so one index compares drivers from Lagos to Łódź.', 'area'], HANDLE] },
 };
 
 export const variantOf = (type, v) => (TYPES[type].variants || [['default']]).some(x => x[0] === v) ? v : (TYPES[type].variants || [['default']])[0][0];
 export const fieldsFor = (type, v) => TYPES[type].fields.filter(f => !f[4] || f[4].includes(variantOf(type, v)));
+// the columns of each row field, for the maker's row editor; rows are stored as "a; b; c" lines
+export const ROWS = {
+  // grid: the columns of the row's cells; the first cell spans the row when wide is set
+  'results.rows': { cols: [['Driver'], ['Team'], ['Time', 'mono']], grid: 'minmax(0,1.15fr) minmax(0,1fr)', wide: true, numbered: true, max: v => v === 'podium' ? 3 : 5, add: 'Add a driver' },
+  'date.rows': { cols: [['Time', 'mono'], ['Session']], grid: '82px minmax(0,1fr)', max: () => 7, add: 'Add a session' },
+  'profile.metrics': { cols: [['Score'], ['Value', 'range']], grid: 'minmax(0,1.3fr) minmax(0,1fr) 30px', max: () => 5, add: 'Add a score' },
+};
 export const defaults = (type, v) => Object.assign(Object.fromEntries(TYPES[type].fields.map(f => [f[0], f[2]])), TYPES[type].variantDefaults?.[variantOf(type, v)]);
 
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -94,10 +101,10 @@ const textBlock = (lines, x, y, size, lh, attrs, anchor = 'start') => lines.leng
   ? `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${attrs}>${lines.map((l, i) => `<tspan x="${x}" dy="${i ? size * lh : 0}">${esc(l)}</tspan>`).join('')}</text>` : '';
 const SEMI = 'font-family="Sora" font-weight="600"', REG = 'font-family="Sora" font-weight="400"', LIGHT = 'font-family="Sora" font-weight="300"', MONO = 'font-family="IBM Plex Mono" font-weight="400"', MONOM = 'font-family="IBM Plex Mono" font-weight="500"';
 
-// a board cut at 55° both ends: the offset is 0.7 of its height
+// a board cut at 55° both ends, leaning like the glyph (top left to bottom right): the offset is 0.7 of its height
 const board = (x, y, h, text, fill, color, size) => {
   const w = measure(text, size, 600) + h * 1.6, c = h * 0.7;
-  return { w, svg: `<polygon points="${x},${y + h} ${x + c},${y} ${x + w},${y} ${x + w - c},${y + h}" fill="${fill}"/><text x="${x + w / 2}" y="${y + h / 2 + size * 0.36}" font-size="${size}" text-anchor="middle" ${SEMI} fill="${color}">${esc(text)}</text>` };
+  return { w, svg: `<polygon points="${x},${y} ${x + w - c},${y} ${x + w},${y + h} ${x + c},${y + h}" fill="${fill}"/><text x="${x + w / 2}" y="${y + h / 2 + size * 0.36}" font-size="${size}" text-anchor="middle" ${SEMI} fill="${color}">${esc(text)}</text>` };
 };
 
 export function render(o, env) {
@@ -144,12 +151,17 @@ export function render(o, env) {
   const semi = (lines, x, y, size, lh, fill = g.ink) => parts.push(textBlock(lines, x, y + size * 0.86, size, lh, `${SEMI} fill="${fill}" letter-spacing="-0.02em"`));
   const mono = (text, x, y, size, fill = g.dim, extra = '') => text && parts.push(`<text x="${x}" y="${y}" font-size="${size}" ${MONO} fill="${fill}" ${extra}>${esc(text)}</text>`);
   const cut = h => h * 0.7;
-  const bar = (x, y, w, h, fill) => w > cut(h) && parts.push(`<polygon points="${x},${y + h} ${x + cut(h)},${y} ${x + w},${y} ${x + w - cut(h)},${y + h}" fill="${fill}"/>`);
+  const bar = (x, y, w, h, fill) => w > cut(h) && parts.push(`<polygon points="${x},${y} ${x + w - cut(h)},${y} ${x + w},${y + h} ${x + cut(h)},${y + h}" fill="${fill}"/>`);
   let clip = 0;
   const photoBox = (px, py, pw, ph) => {
     const id = 'pc' + clip++;
     defs.push(`<clipPath id="${id}"><rect x="${px}" y="${py}" width="${pw}" height="${ph}"/></clipPath>`);
-    if (env.photo) parts.push(`<image href="${env.photo}" x="${px}" y="${py}" width="${pw}" height="${ph}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${id})"/>`);
+    if (env.photo && env.photoSize) {
+      // cover the box, keeping the focal point (0 to 1 across and down the photo) in view
+      const { w: iw, h: ih } = env.photoSize, fx = env.focus?.x ?? 0.5, fy = env.focus?.y ?? 0.5, s = Math.max(pw / iw, ph / ih), dw = iw * s, dh = ih * s;
+      const dx = px + Math.min(0, Math.max(pw - dw, pw / 2 - fx * dw)), dy = py + Math.min(0, Math.max(ph - dh, ph / 2 - fy * dh));
+      parts.push(`<image href="${env.photo}" x="${dx}" y="${dy}" width="${dw}" height="${dh}" preserveAspectRatio="none" clip-path="url(#${id})"/>`);
+    } else if (env.photo) parts.push(`<image href="${env.photo}" x="${px}" y="${py}" width="${pw}" height="${ph}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${id})"/>`);
     else parts.push(`<rect x="${px}" y="${py}" width="${pw}" height="${ph}" fill="${o.ground === 'light' ? '#F0F0F0' : g.blueprint ? '#0E3673' : '#1C1E22'}"/><text x="${px + pw / 2}" y="${py + ph / 2}" font-size="${28 * u}" ${MONO} fill="${g.dim}" text-anchor="middle">Add a photo</text>`);
   };
 

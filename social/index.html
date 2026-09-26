@@ -7,96 +7,141 @@
 <meta name="description" content="Make a social post on the Smedley Group brand: pick a format, a post type and a business, write the words, download the picture.">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../assets/ui.css">
 <script>(function(){var t;try{t=localStorage.getItem('sg-book-theme')}catch(e){}if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t)})();</script>
 <style>
-:root{--ink:#FFFFFF;--dim:#9DA1A8;--faint:#777B82;--t:205,207,212;--rule:rgba(205,207,212,.14);--bg:#000000;--pop:#121316;--line:#7FB2FF;--red:#D8231A;--blue:#2F80FF;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--brake:cubic-bezier(.16,1,.3,1);color-scheme:dark}
-:root[data-theme="light"]{--ink:#0B0C0E;--dim:#585D65;--faint:#686B71;--t:28,30,34;--rule:rgba(28,30,34,.13);--bg:#FFFFFF;--pop:#F4F4F5;--line:#1F66E0;color-scheme:light}
+/* the page around the controls; the controls themselves come from the book, in ui.css */
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Sora,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:var(--line)}
-::selection{background:var(--red);color:#fff}
-header{display:flex;align-items:center;gap:18px;padding:18px 32px;border-bottom:1px solid var(--rule)}
-header a.back{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:600}
-header a.back svg{width:26px;height:40px}
-header .k{font-family:var(--mono);font-size:12px;color:var(--dim);padding-left:18px;border-left:1px solid var(--rule)}
-main{display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);min-height:calc(100vh - 77px)}
-.ctl{padding:28px 32px 48px;border-right:1px solid var(--rule)}
-h1{margin:0 0 6px;font-size:26px;letter-spacing:-.03em;font-weight:600}
-.lede{margin:0 0 28px;color:var(--dim)}
-fieldset{border:0;margin:0 0 22px;padding:0}
-legend,.lab{display:block;margin:0 0 8px;font-family:var(--mono);font-size:11px;color:var(--dim)}
-.seg{display:flex;flex-wrap:wrap;gap:0}
-.seg button{flex:1 1 auto;min-height:40px;padding:0 14px;border:0;background:rgba(var(--t),.07);color:var(--ink);font:inherit;font-size:13px;cursor:pointer;box-shadow:inset 0 0 0 1px var(--rule);transition:background .2s}
-.seg button:hover{background:rgba(var(--t),.14)}
-.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
-.seg button:focus-visible,.inp:focus-visible,.go:focus-visible,.gh:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.seg.grid{display:grid;grid-template-columns:repeat(4,1fr)}
-.note{margin:8px 0 0;font-size:12px;color:var(--faint)}
-.field{margin:0 0 16px}
-.inp{width:100%;min-height:44px;padding:10px 14px;background:rgba(var(--t),.05);border:0;box-shadow:inset 0 0 0 1px var(--rule);color:var(--ink);font:inherit;font-size:14px;border-radius:0}
-textarea.inp{min-height:88px;resize:vertical;line-height:1.45}
-select.inp{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--dim) 50%),linear-gradient(135deg,var(--dim) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%;background-size:5px 5px;background-repeat:no-repeat}
-input[type=file].inp{padding:10px}
-.check{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--dim);margin:0 0 22px}
-.check input{width:18px;height:18px;accent-color:var(--red)}
-.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.go,.gh{--h:48px;--c:calc(var(--h) * .7);display:inline-flex;align-items:center;gap:10px;min-height:var(--h);padding:0 calc(var(--c) + 18px);border:0;font:inherit;font-weight:600;cursor:pointer;clip-path:polygon(var(--c) 0,100% 0,calc(100% - var(--c)) 100%,0 100%);transition:filter .2s}
-.go{background:var(--red);color:#fff}
-.gh{background:rgba(var(--t),.1);color:var(--ink)}
-.go:hover,.gh:hover{filter:brightness(1.12)}
-.go svg,.gh svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.status{min-height:20px;margin:10px 0 0;font-family:var(--mono);font-size:12px;color:var(--dim)}
-.stage{position:sticky;top:0;align-self:start;height:calc(100vh - 77px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px;background:rgba(var(--t),.04)}
-.frame{max-width:100%;max-height:calc(100vh - 190px);aspect-ratio:var(--ar);width:auto;height:100%;box-shadow:0 0 0 1px var(--rule)}
-.frame svg{display:block;width:100%;height:100%}
-.meta{font-family:var(--mono);font-size:12px;color:var(--dim);text-align:center}
-.rules{margin:28px 0 0;padding:18px 0 0;border-top:1px solid var(--rule);font-size:13px;color:var(--dim)}
+html{background:var(--bg1)}
+body{margin:0;background:var(--bg1);color:var(--ink);font:14px/1.5 Sora,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.top{display:flex;align-items:center;gap:18px;padding:16px 32px;border-bottom:.75px solid var(--rule)}
+.top a{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);font-weight:600}
+.top a svg{width:24px;height:37px}
+.top span{font-family:var(--mono);font-size:12px;color:var(--dim);padding-left:18px;border-left:.75px solid var(--rule)}
+main{display:grid;grid-template-columns:minmax(340px,440px) minmax(0,1fr);min-height:calc(100vh - 70px)}
+.ctl{padding:30px 32px 56px;border-right:.75px solid var(--rule);min-width:0}
+h1{margin:0 0 6px;font-size:28px;letter-spacing:-.03em;font-weight:600;line-height:1.15}
+.lede{margin:0 0 30px;color:var(--dim)}
+.grp{margin:0 0 24px}
+.grp > .lab, .field > .lab{display:block;margin:0 0 10px;font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+.grp .help{display:block;margin-top:10px}
+.ctl .seg{margin:0 14px 0 10px}
+.ctl .seg span{padding:0 13px}
+.ctl .row.chips{padding-right:24px}
+.ctl .field{margin:0 0 20px}
+.ctl textarea.inp{padding:11px 14px;min-height:92px;line-height:1.45;resize:vertical}
+hr{border:0;border-top:.75px solid var(--rule);margin:28px 0}
+/* slider with its number */
+.slide{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center}
+.slide .stepper{grid-template-columns:40px 64px 40px}
+/* rows editor */
+.rows{display:flex;flex-direction:column;gap:10px}
+.rw{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center}
+.rw.num{grid-template-columns:auto auto minmax(0,1fr) auto}
+.rw .cells{display:grid;gap:6px;align-items:center}
+.rw .cells.wide > :first-child{grid-column:1/-1}
+.rw .n{--h:26px;display:grid;place-items:center;height:var(--h);min-width:40px;padding:0 12px;font-weight:600;font-size:12px;background:rgba(var(--t),.12);clip-path:polygon(0 0,calc(100% - var(--h) * .7) 0,100% 100%,calc(var(--h) * .7) 100%)}
+.rw .n.lead{background:var(--red);color:#fff}
+.rw .inp{min-height:40px;padding:0 12px;font-size:13px}
+.rw .range{height:40px}
+.rw output{font-family:var(--mono);font-weight:500;font-size:14px;min-width:30px;text-align:right}
+.rw .ibtn{--h:36px;width:calc(var(--c) + 30px)}
+.rw .ibtn svg{width:15px;height:15px}
+.rows + .btn{margin-top:12px}
+/* the photo's drop area: the book's corner brackets and focus rule, 55° stripes while a file is over it */
+.drop{--c:rgba(var(--t),.42);--rb:rgba(var(--t),.26);position:relative;display:grid;justify-items:center;align-content:center;gap:6px;min-height:188px;padding:26px 20px;text-align:center;cursor:pointer;isolation:isolate;outline:0;
+  background:linear-gradient(var(--red),var(--red)) left bottom/var(--lead) 2px no-repeat,linear-gradient(var(--blue),var(--blue)) left bottom/var(--run) 2px no-repeat,
+    linear-gradient(var(--c),var(--c)) 0 0/14px 1.5px no-repeat,linear-gradient(var(--c),var(--c)) 0 0/1.5px 14px no-repeat,linear-gradient(var(--c),var(--c)) 100% 0/14px 1.5px no-repeat,linear-gradient(var(--c),var(--c)) 100% 0/1.5px 14px no-repeat,
+    linear-gradient(var(--c),var(--c)) 0 100%/14px 1.5px no-repeat,linear-gradient(var(--c),var(--c)) 0 100%/1.5px 14px no-repeat,linear-gradient(var(--c),var(--c)) 100% 100%/14px 1.5px no-repeat,linear-gradient(var(--c),var(--c)) 100% 100%/1.5px 14px no-repeat,
+    linear-gradient(var(--rb),var(--rb)) left bottom/100% 1px no-repeat,rgba(var(--t),.035);transition:--lead .35s var(--brake),--run .6s var(--brake) .08s}
+.drop::before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(55deg,rgba(47,128,255,.16) 0 10px,transparent 10px 24px);opacity:0;transition:opacity .25s}
+.drop:hover, .drop:focus-visible{--c:rgba(var(--t),.75)}
+.drop:focus-visible{--c:var(--blue);--lead:28px;--run:100%}
+.drop.over{--c:var(--blue);--lead:28px;--run:100%}
+.drop.over::before{opacity:1}
+.dz-i svg{width:40px;height:40px;fill:none;stroke:var(--dim);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .45s var(--brake),stroke .2s}
+.drop:hover .dz-i svg, .drop.over .dz-i svg{transform:translateY(-4px);stroke:var(--ink)}
+.dz-t{font-weight:600;font-size:15px;margin-top:6px}
+.dz-s{font-size:13px;color:var(--dim)}
+.dz-s u{color:var(--ink);text-decoration:none;background:linear-gradient(var(--red),var(--red)) 0 100%/14px 2px no-repeat,linear-gradient(var(--blue),var(--blue)) 0 100%/100% 1px no-repeat;padding-bottom:2px}
+.dz-h{font-size:11px;color:var(--faint);font-family:var(--mono);margin-top:6px}
+.dz-o{position:absolute;inset:0;display:grid;place-items:center;font-weight:600;font-size:15px;color:var(--ink);background:rgba(var(--t),.02);opacity:0;pointer-events:none;transition:opacity .2s}
+.drop.over > :not(.dz-o){opacity:.12}
+.drop.over .dz-o{opacity:1}
+.drop.has{display:block;min-height:0;padding:12px;cursor:default}
+.drop.has.over .dz-o{background:rgba(0,0,0,.55);color:#fff}
+.frame.over{box-shadow:0 0 0 2px var(--blue)}
+/* the drag handle: the glyph's three bars */
+.grip{display:grid;place-items:center;width:30px;height:40px;padding:0;border:0;background:transparent;color:var(--dim);cursor:grab;touch-action:none;transition:color .2s}
+.grip:hover{color:var(--ink)}
+.grip:focus-visible{outline:2px solid var(--blue);outline-offset:1px;color:var(--ink)}
+.grip svg{width:22px;height:18px;fill:none;stroke:currentColor;stroke-width:2.6}
+.rows.sorting .rw{transition:transform .25s var(--brake)}
+.rw.dragging{position:relative;z-index:3;transition:none !important;background:var(--bg1);box-shadow:0 10px 28px rgba(0,0,0,.35),0 0 0 .75px var(--rule)}
+.rw.dragging .grip{cursor:grabbing;color:var(--red)}
+@media (prefers-reduced-motion: reduce){ .rows.sorting .rw, .drop, .dz-i svg{transition:none} }
+.pic{display:grid;gap:12px}
+.pic .thumb{position:relative;margin:0 auto;width:fit-content;max-width:100%;cursor:crosshair;line-height:0}
+.pic .thumb img{max-width:100%;max-height:220px;display:block}
+.pic .fp{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;pointer-events:none;transition:left .3s var(--brake),top .3s var(--brake)}
+.pic .fp::before, .pic .fp::after{content:"";position:absolute;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.5)}
+.pic .fp::before{left:12px;top:0;width:2px;height:26px}
+.pic .fp::after{top:12px;left:0;height:2px;width:26px}
+.pic .meta{font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.5}
+.pic .warn{font-size:12px;color:var(--amber)}
+.toggle{margin:6px 0 22px}
+.status{min-height:18px;margin:12px 0 0}
+.rules{margin:30px 0 0;padding:20px 0 0;border-top:.75px solid var(--rule);font-size:13px;color:var(--dim)}
+.rules p{margin:0 0 9px}
 .rules b{color:var(--ink);font-weight:600}
-.rules p{margin:0 0 8px}
-@media (max-width:860px){
-  header{padding:14px 16px}
-  header .k{display:none}
+.stage{position:sticky;top:0;align-self:start;height:calc(100vh - 70px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px;background:rgba(var(--t),.035)}
+.frame{max-width:100%;max-height:calc(100vh - 180px);aspect-ratio:var(--ar);width:auto;height:100%;box-shadow:0 0 0 .75px var(--rule)}
+.frame svg{display:block;width:100%;height:100%}
+.meta-post{font-family:var(--mono);font-size:12px;color:var(--dim);text-align:center}
+[hidden]{display:none !important}
+@media (max-width:900px){
+  .top{padding:12px 16px}
+  .top span{display:none}
   main{grid-template-columns:minmax(0,1fr);min-height:0}
-  .ctl{padding:22px 16px 40px;border-right:0;order:2}
-  .stage{position:sticky;top:0;z-index:2;height:auto;order:1;padding:12px 16px 10px;gap:6px;background:var(--bg);border-bottom:1px solid var(--rule)}
+  .ctl{padding:22px 16px 44px;border-right:0;order:2}
+  .stage{position:sticky;top:0;z-index:2;height:auto;order:1;padding:12px 16px 10px;gap:6px;background:var(--bg1);border-bottom:.75px solid var(--rule)}
   .frame{height:34vh;height:34svh;width:auto;max-width:100%;max-height:none}
-  .meta{font-size:11px}
-  .seg.grid{grid-template-columns:repeat(2,1fr)}
+  .meta-post{font-size:11px}
+  .rw .ibtn{--h:34px;width:calc(var(--c) + 22px)}
 }
 </style>
 </head>
 <body>
-<header>
-  <a class="back" href="../#resources-social-posts"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg>Brand book</a>
-  <span class="k">Social post maker</span>
+<header class="top">
+  <a href="../#resources-social-posts"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg>Brand book</a>
+  <span>Social post maker</span>
 </header>
 <main>
   <section class="ctl" aria-label="Post settings">
     <h1>Social post maker</h1>
     <p class="lede">Pick a format and a post type, write the words, download the picture. Everything else follows the brand.</p>
-    <fieldset><legend>Format</legend><div class="seg" id="format"></div><p class="note" id="formatNote"></p></fieldset>
-    <fieldset><legend>Post type</legend><div class="seg grid" id="type"></div><p class="note" id="typeNote"></p></fieldset>
-    <fieldset><legend>Layout</legend><div class="seg" id="variant"></div></fieldset>
+    <div class="grp"><span class="lab" id="formatL">Format</span><div class="seg" id="format" role="radiogroup" aria-labelledby="formatL"></div><span class="help" id="formatNote"></span></div>
+    <div class="grp"><span class="lab" id="typeL">Post type</span><div class="row chips" id="type" role="group" aria-labelledby="typeL"></div><span class="help" id="typeNote"></span></div>
+    <div class="grp" id="variantGrp"><span class="lab" id="variantL">Layout</span><div class="seg" id="variant" role="radiogroup" aria-labelledby="variantL"></div></div>
     <div class="field"><label class="lab" for="business">Business</label><select class="inp" id="business"></select></div>
-    <fieldset><legend>Ground</legend><div class="seg" id="ground"></div></fieldset>
+    <div class="grp"><span class="lab" id="groundL">Ground</span><div class="seg" id="ground" role="radiogroup" aria-labelledby="groundL"></div></div>
+    <hr>
     <div id="fields"></div>
-    <label class="check"><input type="checkbox" id="guides"> Show the safe area</label>
-    <div class="acts">
-      <button class="go" type="button" id="png"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 16.5v3.5h15v-3.5"/></svg>Download PNG</button>
-      <button class="gh" type="button" id="svg">SVG</button>
-      <button class="gh" type="button" id="copy">Copy</button>
+    <label class="toggle"><input type="checkbox" id="guides"><span class="tr"></span>Show the safe area</label>
+    <div class="bgroup" role="group" aria-label="Save the post">
+      <button class="btn p lg dl" type="button" id="png"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 16.5v3.5h15v-3.5"/></svg>Download PNG</button><button class="btn g lg" type="button" id="svg">SVG</button><button class="btn g lg" type="button" id="copy">Copy</button>
     </div>
-    <p class="status" id="status" role="status" aria-live="polite"></p>
+    <p class="help status" id="status" role="status" aria-live="polite"></p>
     <div class="rules">
       <p><b>One idea per post.</b> Say it in the headline, in sentence case, with no full stop.</p>
-      <p><b>Text never sits on a photo.</b> Pictures run to the edge; words go below them.</p>
+      <p><b>Text never sits on a photo.</b> Pictures run to the edge or sit in the margins; words go beside or below them.</p>
       <p><b>Real numbers, real names.</b> Units on every figure, a source under it, a name on every quote.</p>
       <p><b>FAT Karting League</b> posts use the FKL brand and its own templates.</p>
     </div>
   </section>
   <section class="stage" aria-label="Preview">
     <div class="frame" id="frame"></div>
-    <div class="meta" id="meta"></div>
+    <div class="meta-post" id="meta"></div>
   </section>
 </main>
 <script type="module" src="maker.js"></script>

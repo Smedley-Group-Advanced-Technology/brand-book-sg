@@ -10,7 +10,7 @@ import { join, extname, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import * as pw from 'playwright';
-import { kitFiles, readZip, tokensCss, bookVersion, kitStat, STAT, ZIP, downloadLabels } from '../tools/kit.mjs';
+import { kitFiles, readZip, tokensCss, bookVersion, kitStat, STAT, ZIP, downloadLabels, uiCss } from '../tools/kit.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const AXE = await readFile(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
@@ -81,6 +81,7 @@ console.log('kit');
   const bv = bookVersion(html), stat = (html.match(STAT) || [''])[0];
   if (!bv) K('no "Version x.y, d Month yyyy." line in the book');
   else if (stat !== kitStat(have.size, zipBuf.length, bv.v)) K(`download card reads ${stat.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()}, expected ${have.size} files, ${Math.round(zipBuf.length / 1024)} KB, v${bv.v}; run npm run kit`);
+  { let ui = ''; try { ui = await readFile(join(ROOT, 'assets/ui.css'), 'utf8'); } catch {} if (ui !== uiCss(html)) K('assets/ui.css no longer matches the book\'s controls, run npm run kit'); }
   for (const w of (await downloadLabels(html)).wrong) K(`download button for ${w}; run npm run kit`);
   if (failures.length === bad) ok(`tokens, book, generated files and the ${have.size}-file ZIP agree, download sizes are right`);
 }
@@ -253,6 +254,17 @@ for (const name of BROWSERS) {
             catch (e) { out.push(`${at}: ${e.message}`); } }
           return out; });
         bad.length ? W(where, 'posts that fail to draw: ' + bad.join(', ')) : ok('every post type and layout draws in every format and ground');
+        // the photo field takes a dropped file, and a row moves by its handle from the keyboard
+        await page.click('#type .chip[data-k="photo"]');
+        const dt = await page.evaluateHandle(async () => { const b = await (await fetch('../assets/showcase/race-suit-800.webp')).blob(); const d = new DataTransfer(); d.items.add(new File([b], 'suit.webp', { type: 'image/webp' })); return d; });
+        await page.locator('.drop').dispatchEvent('drop', { dataTransfer: dt });
+        await page.waitForSelector('.pic .thumb img', { timeout: 5000 }).catch(() => {});
+        (await page.evaluate(() => !!document.querySelector('#frame svg image'))) ? ok('a dropped photo lands in the post') : W(where, 'a dropped photo did not reach the post');
+        await page.click('#type .chip[data-k="results"]');
+        const before = await page.evaluate(() => document.querySelector('.rw .cells .inp').value);
+        await page.locator('.rw .grip').first().focus(); await page.keyboard.press('ArrowDown');
+        const after = await page.evaluate(() => [...document.querySelectorAll('.rw .cells .inp:first-child')].map(i => i.value));
+        after[1] === before ? ok('rows reorder by their handles') : W(where, `moving the first row down gave ${after.join(', ')}`);
         const size = await page.evaluate(async () => (await window.sgPost.png()).size);
         size > 20000 ? ok(`PNG export works (${Math.round(size / 1024)} KB)`) : W(where, `PNG export is only ${size} bytes`);
       }
