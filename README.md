@@ -9,7 +9,9 @@ Published via GitHub Pages from `index.html` on the `main` branch.
 
 The brand book is [`index.html`](index.html). Styles and artwork are inline; the only
 external dependencies are the Sora and IBM Plex Mono webfonts from Google Fonts.
-Edit the file directly and push to `main` to publish.
+Edit the file directly and push to `main` to publish. The stylesheet is grouped by
+component, with a list of the groups at its top; put new rules in the group they
+belong to, after the rules they override.
 
 [`assets/`](assets) holds what the book links to: the hero animation (`mark.html`,
 loaded by the cover and the Motion section), outlined logo SVGs for every business,

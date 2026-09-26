@@ -16,7 +16,7 @@
   --sg-inv:#000000;
   --sg-ground:#000000;
   --sg-dim:#9DA1A8;
-  --sg-faint:#63676F;
+  --sg-faint:#777B82;
   --sg-rule:rgba(205,207,212,.14);
   --sg-flame:#FF4B3E;
   --sg-line:#7FB2FF;
@@ -29,12 +29,12 @@
     --sg-inv:#FFFFFF;
     --sg-ground:#FFFFFF;
     --sg-dim:#585D65;
-    --sg-faint:#8A8F97;
+    --sg-faint:#686B71;
     --sg-rule:rgba(28,30,34,.13);
     --sg-flame:#D8231A;
     --sg-line:#1F66E0;
-    --sg-green:#00A04A;
-    --sg-amber:#B87400;
+    --sg-green:#007A38;
+    --sg-amber:#9C6300;
   }
 }
 :root[data-theme="light"]{
@@ -42,12 +42,12 @@
   --sg-inv:#FFFFFF;
   --sg-ground:#FFFFFF;
   --sg-dim:#585D65;
-  --sg-faint:#8A8F97;
+  --sg-faint:#686B71;
   --sg-rule:rgba(28,30,34,.13);
   --sg-flame:#D8231A;
   --sg-line:#1F66E0;
-  --sg-green:#00A04A;
-  --sg-amber:#B87400;
+  --sg-green:#007A38;
+  --sg-amber:#9C6300;
 }
 /* The cut: every accent end leans at 55 degrees. cut = height x 0.7 */
 .sg-cut{clip-path:polygon(0 0,calc(100% - var(--sg-h,44px) * .7) 0,100% 100%,calc(var(--sg-h,44px) * .7) 100%)}
