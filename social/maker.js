@@ -1,8 +1,8 @@
 // The post maker: settings on the left, the post drawn live on the right, downloads at the post's real size.
 // Every control is the book's own, from assets/ui.css; the few behaviours they need are wired up here.
-import { FORMATS, TYPES, BUSINESSES, GROUNDS, FONTS, ROWS, defaults, variantOf, fieldsFor, render, loadLogos, fontCSS, toPNG } from './posts.js?v=973b57a4d3';
+import { FORMATS, TYPES, BUSINESSES, GROUNDS, FONTS, ROWS, defaults, variantOf, fieldsFor, render, loadLogos, fontCSS, toPNG } from './posts.js?v=b22dc69188';
 
-import { picto } from './pictos.js?v=45740573cb';
+import { picto, formatPicto, groundPicto } from './pictos.js?v=7e8a7453fd';
 
 const $ = s => document.querySelector(s);
 const el = (tag, attrs = {}, html = '') => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) v === true ? e.setAttribute(k, '') : v !== false && v != null && e.setAttribute(k, v); if (html) e.innerHTML = html; return e; };
@@ -21,21 +21,6 @@ let photo = null, focus = { x: 0.5, y: 0.5 }, logos = {}, embedded = null;
 const vOf = t => variantOf(t, state.variant[t]);
 const dataFor = t => Object.assign(defaults(t, vOf(t)), state.data[t] || {});
 const setData = (k, v) => { (state.data[state.type] ||= {})[k] = v; draw(); save(); };
-
-// ---------- the book's segmented control: radios in a skewed track, the red sliding under the choice ----------
-function seg(box, name, items, current, onPick) {
-  box.innerHTML = ''; box.classList.add('js');
-  const ind = el('i', { class: 'segind' }); box.appendChild(ind);
-  for (const [k, label] of items) {
-    const lab = el('label'), inp = el('input', { type: 'radio', name, value: k });
-    inp.checked = k === current;
-    inp.addEventListener('change', () => { onPick(k); place(); });
-    lab.append(inp, el('span', {}, `<i>${label}</i>`)); box.appendChild(lab);
-  }
-  const place = () => { const c = box.querySelector('input:checked'); if (c) { const l = c.parentNode; ind.style.left = l.offsetLeft + 'px'; ind.style.width = l.offsetWidth + 'px'; } };
-  box._place = place; requestAnimationFrame(place);
-}
-addEventListener('resize', () => document.querySelectorAll('.seg').forEach(s => s._place?.()));
 
 // ---------- the book's buttons: a streak runs through on click ----------
 document.addEventListener('click', e => { const b = e.target.closest?.('.btn:not(.t)'); if (!b || b.disabled) return; b.style.setProperty('--bw', (b.offsetWidth + 20) + 'px'); b.classList.remove('flash'); void b.offsetWidth; b.classList.add('flash'); });
@@ -263,11 +248,11 @@ for (const b of BUSINESSES) sel.add(new Option(b.name, b.key));
 sel.value = state.business;
 sel.addEventListener('change', () => { state.business = sel.value; draw(); save(); });
 
-seg($('#format'), 'format', Object.entries(FORMATS).map(([k, f]) => [k, f.label]), state.format, k => { state.format = k; if (photo) buildFields(); draw(); save(); });
-seg($('#ground'), 'ground', Object.entries(GROUNDS).map(([k, g]) => [k, g.label]), state.ground, k => { state.ground = k; draw(); save(); });
+// format and ground are picked by pictogram too
+for (const [k, f] of Object.entries(FORMATS)) $('#format').appendChild(tile(k, f.label, f.note, formatPicto(f), state.format === k, () => { state.format = k; press($('#format'), k); if (photo) buildFields(); draw(); save(); }));
+for (const [k, g] of Object.entries(GROUNDS)) $('#ground').appendChild(tile(k, g.label, `${g.label} ground`, groundPicto(k), state.ground === k, () => { state.ground = k; press($('#ground'), k); draw(); save(); }));
 buildTypes(); buildVariants(); buildFields();
 await Promise.all(FONTS.map(f => document.fonts.load(f)));
-document.querySelectorAll('.seg').forEach(s => s._place?.());
 logos = await loadLogos('../assets/logo/');
 draw();
 document.documentElement.dataset.ready = '1';

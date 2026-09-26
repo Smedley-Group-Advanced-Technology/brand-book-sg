@@ -2,10 +2,10 @@
 // assets/templates, so both always draw the same thing. Runs in a browser: text is measured with canvas.
 
 export const FORMATS = {
-  square: { w: 1080, h: 1080, m: 96, top: 96, bottom: 96, u: 1, big: 1, label: 'Square', note: '1080 × 1080. Instagram, LinkedIn and X feeds.' },
-  portrait: { w: 1080, h: 1350, m: 96, top: 96, bottom: 96, u: 1, big: 1.12, label: 'Portrait', note: '1080 × 1350. The most space in Instagram and LinkedIn feeds.' },
-  story: { w: 1080, h: 1920, m: 96, top: 250, bottom: 380, u: 1.06, big: 1.3, label: 'Story', note: '1080 × 1920. Stories and reels: the app covers the top 250 px and bottom 380 px.' },
-  landscape: { w: 1200, h: 627, m: 64, top: 56, bottom: 56, u: 0.62, big: 1, label: 'Landscape', note: '1200 × 627. Link posts on LinkedIn, X and Facebook.' },
+  square: { w: 1080, h: 1080, m: 96, top: 96, bottom: 96, u: 1, big: 1, label: 'Square', ratio: '1:1', note: '1080 × 1080. Instagram, LinkedIn and X feeds.' },
+  portrait: { w: 1080, h: 1350, m: 96, top: 96, bottom: 96, u: 1, big: 1.12, label: 'Portrait', ratio: '4:5', note: '1080 × 1350. The most space in Instagram and LinkedIn feeds.' },
+  story: { w: 1080, h: 1920, m: 96, top: 250, bottom: 380, u: 1.06, big: 1.3, label: 'Story', ratio: '9:16', note: '1080 × 1920. Stories and reels: the app covers the top 250 px and bottom 380 px.' },
+  landscape: { w: 1200, h: 627, m: 64, top: 56, bottom: 56, u: 0.62, big: 1, label: 'Landscape', ratio: '1.91:1', note: '1200 × 627. Link posts on LinkedIn, X and Facebook.' },
 };
 
 export const BUSINESSES = [

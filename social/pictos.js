@@ -35,3 +35,24 @@ export const PICTOS = {
   'carousel.default': R(20, 8, 32, 40, 'f') + R(14, 11, 32, 40, 'f') + R(8, 14, 32, 40, 'card') + R(12, 36, 22, 3.6, 'i') + R(12, 41, 16, 3.6, 'i') + R(12, 49, 24, .8, 'b') + T(44, 55, 8, '→', 'i'),
 };
 export const picto = key => `<svg viewBox="0 0 60 60" aria-hidden="true">${PICTOS[key] || ''}</svg>`;
+
+// formats: the post's own shape, with its proportion written inside
+export function formatPicto(f) {
+  const ar = f.w / f.h, W_ = ar >= 1 ? 46 : 46 * ar, H_ = ar >= 1 ? 46 / ar : 46, x = (60 - W_) / 2, y = (60 - H_) / 2;
+  const size = Math.min(8.6, (W_ - 8) / (f.ratio.length * 0.62)); // the number fits inside the shape with room either side
+  return `<svg viewBox="0 0 60 60" aria-hidden="true"><rect class="card" x="${x}" y="${y}" width="${W_}" height="${H_}"/>`
+    + `<text class="i" x="30" y="${30 + size * 0.36}" font-size="${size}" font-family="IBM Plex Mono" font-weight="500" text-anchor="middle">${f.ratio}</text></svg>`;
+}
+
+// grounds: a swatch of the ground itself with its colour written inside, in the ground's own ink
+const GROUND_COLOURS = {
+  dark: { bg: '#000000', ink: '#FFFFFF' },
+  light: { bg: '#FFFFFF', ink: '#0B0C0E' },
+  blueprint: { bg: '#0B2D63', ink: '#FFFFFF', grid: true },
+};
+export function groundPicto(key) {
+  const c = GROUND_COLOURS[key]; let grid = '';
+  if (c.grid) for (let v = 6; v < 60; v += 6) grid += `<path d="M${v} 0V60M0 ${v}H60" stroke="rgba(255,255,255,${v % 18 ? .07 : .16})" stroke-width=".5"/>`;
+  return `<svg viewBox="0 0 60 60" aria-hidden="true"><rect width="60" height="60" fill="${c.bg}"/>${grid}`
+    + `<text x="30" y="${30 + 7.6 * 0.36}" font-size="7.6" font-family="IBM Plex Mono" font-weight="500" text-anchor="middle" fill="${c.ink}">${c.bg}</text></svg>`;
+}
