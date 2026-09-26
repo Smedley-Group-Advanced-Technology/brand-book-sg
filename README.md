@@ -7,8 +7,9 @@ Published via GitHub Pages from `index.html` on the `main` branch.
 
 ## Editing
 
-The brand book is [`index.html`](index.html). Styles and artwork are inline; the only
-external dependencies are the Sora and IBM Plex Mono webfonts from Google Fonts.
+The brand book is [`index.html`](index.html). Styles and artwork are inline, and it loads
+nothing from other sites: Sora and IBM Plex Mono are served from [`assets/fonts`](assets/fonts)
+(Latin and Latin Extended, SIL Open Font Licence).
 Edit the file directly and push to `main` to publish. The stylesheet is grouped by
 component, with a list of the groups at its top; put new rules in the group they
 belong to, after the rules they override.
@@ -18,6 +19,12 @@ loaded by the cover and the Motion section), outlined logo SVGs for every busine
 the tool icons, colour tokens (`tokens.css`, `tokens.json`), templates for slides,
 documents, email signatures and social posts, the favicon and link-preview image,
 and a ZIP of all of them.
+
+Colours live in [`assets/tokens.json`](assets/tokens.json). After changing it, a logo, a
+template or a tool icon in the book, run `npm run kit`: it regenerates `tokens.css` and
+`assets/icons`, rebuilds the ZIP and updates the file count and size on the book's
+download card. Update the matching colours in the book by hand; the check below fails
+until the book, the tokens and the ZIP agree.
 
 Preview through a local server, for example `python3 -m http.server`, rather than
 opening the file directly: browsers block the page from talking to the animation
@@ -30,10 +37,11 @@ like the existing ones.
 ## Checks
 
 Every push and pull request runs [`tests/check.mjs`](tests/check.mjs) in Chromium,
-Firefox and WebKit (see the Actions tab). It fails on console errors, missing files
-or anchors, duplicate IDs, sideways scrolling on phones, accessibility violations
-(axe, WCAG 2.1 AA), broken interactions, a failed print, or an em dash anywhere in
-the text. To run it locally:
+Firefox and WebKit (see the Actions tab). It fails on console errors, requests to other
+sites, missing files or anchors, duplicate IDs, sideways scrolling on phones,
+accessibility violations (axe, WCAG 2.1 AA), broken interactions, a failed print,
+an em dash anywhere in the text, or colours, generated files or the ZIP that no longer
+match `tokens.json`. To run it locally:
 
 ```
 npm install

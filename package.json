@@ -3,7 +3,8 @@
   "private": true,
   "description": "Smedley Group brand book",
   "scripts": {
-    "check": "node tests/check.mjs"
+    "check": "node tests/check.mjs",
+    "kit": "node tools/kit.mjs"
   },
   "devDependencies": {
     "axe-core": "4.13.0",

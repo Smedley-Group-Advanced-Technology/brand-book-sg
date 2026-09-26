@@ -1,6 +1,7 @@
 // Guardrails for the brand book. Serves the repo, then for each browser checks console errors,
 // failed requests, broken links and anchors, duplicate IDs, horizontal overflow on phones,
-// accessibility (axe, WCAG 2.1 AA) and the key interactions. Also scans the text files for em dashes.
+// accessibility (axe, WCAG 2.1 AA), requests to other sites and the key interactions. Also checks that
+// tokens.json, the book's colours, the generated kit files, the ZIP and its download card agree. Also scans the text files for em dashes.
 //   npm run check                   every browser
 //   BROWSERS=chromium npm run check just one
 import { createServer } from 'node:http';
@@ -9,6 +10,7 @@ import { join, extname, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import * as pw from 'playwright';
+import { kitFiles, readZip, tokensCss, bookVersion, kitStat, STAT, ZIP } from '../tools/kit.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const AXE = await readFile(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
@@ -36,6 +38,51 @@ for await (const f of walk(ROOT)) {
   lines.forEach((l, i) => { if (l.includes(EM)) { dashes++; fail('text', `em dash in ${f.slice(ROOT.length)}:${i + 1}`); } });
 }
 if (!dashes) ok('no em dashes');
+
+// ---------- the kit agrees with the book ----------
+console.log('kit');
+{
+  const html = await readFile(join(ROOT, 'index.html'), 'utf8');
+  const tokens = JSON.parse(await readFile(join(ROOT, 'assets/tokens.json'), 'utf8'));
+  const K = msg => fail('kit', msg);
+  let bad = failures.length;
+  // the book's own theme variables, outside print and other media queries except the system light theme
+  const css = html.slice(html.indexOf('<style>'), html.indexOf('</style>'));
+  const topLevel = []; let depth = 0, media = '', start = 0;
+  for (let i = 0; i < css.length; i++) {
+    if (css[i] === '{') { const pre = css.slice(start, i).trim(); if (pre.startsWith('@')) { media = pre; depth++; start = i + 1; continue; } topLevel.push({ media: depth ? media : '', sel: pre.replace(/^.*[}]/s, '').trim(), i }); }
+    if (css[i] === '}') { const last = topLevel[topLevel.length - 1]; if (last && last.end === undefined && last.i < i && !css.slice(last.i + 1, i).includes('{')) last.end = i; else if (depth) { depth--; media = ''; } }
+    if (css[i] === '{' || css[i] === '}') start = i + 1;
+  }
+  const vars = (sel, med = '') => { const r = topLevel.find(b => b.sel === sel && b.media === med && /--ink:/.test(css.slice(b.i, b.end))); if (!r) return null;
+    return Object.fromEntries([...css.slice(r.i + 1, r.end).matchAll(/(--[\w-]+):([^;}]+)/g)].map(m => [m[1], m[2].trim()])); };
+  const MAP = { ink: '--ink', inv: '--inv', ground: '--bg1', dim: '--dim', faint: '--faint', rule: '--rule', flame: '--flame', line: '--line', green: '--green', amber: '--amber' };
+  const cmp = (label, v, want) => { for (const [k, p] of Object.entries(MAP)) if (!v || (v[p] || '').toUpperCase() !== want[k].toUpperCase()) K(`${label} ${p} is ${v && v[p]}, tokens.json says ${want[k]}`); };
+  cmp('dark theme', vars(':root'), tokens.dark);
+  cmp('light theme', vars(':root[data-theme="light"]'), tokens.light);
+  cmp('system light theme', vars(':root:not([data-theme="dark"])', '@media (prefers-color-scheme:light)') || vars(':root:not([data-theme="dark"])', '@media (prefers-color-scheme: light)'), tokens.light);
+  const root = vars(':root') || {};
+  if ((root['--red'] || '').toUpperCase() !== tokens.fixed['race-red']) K(`--red is ${root['--red']}, tokens.json says ${tokens.fixed['race-red']}`);
+  if ((root['--blue'] || '').toUpperCase() !== tokens.fixed['engineering-blue']) K(`--blue is ${root['--blue']}, tokens.json says ${tokens.fixed['engineering-blue']}`);
+  for (const [k, hex] of Object.entries(tokens.fixed)) {
+    const name = k.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
+    const m = html.match(new RegExp(`\\['${name}','(#[0-9A-Fa-f]{6})'`));
+    if (!m) K(`no swatch named ${name} in the colour section`); else if (m[1].toUpperCase() !== hex.toUpperCase()) K(`swatch ${name} shows ${m[1]}, tokens.json says ${hex}`);
+  }
+  // generated files, the ZIP and the download card
+  const want = await kitFiles();
+  for (const k of ['tokens.css', ...[...want.keys()].filter(k => k.startsWith('icons/'))]) {
+    let disk = null; try { disk = await readFile(join(ROOT, 'assets', k)); } catch {}
+    if (!disk || !disk.equals(want.get(k))) K(`assets/${k} is out of date, run npm run kit`);
+  }
+  const zipBuf = await readFile(ZIP), have = readZip(zipBuf);
+  for (const [k, v] of want) { const got = have.get(k); if (!got) K(`ZIP is missing ${k}, run npm run kit`); else if (!got.equals(v)) K(`ZIP holds an old ${k}, run npm run kit`); }
+  for (const k of have.keys()) if (!want.has(k)) K(`ZIP holds ${k}, which is no longer in assets, run npm run kit`);
+  const bv = bookVersion(html), stat = (html.match(STAT) || [''])[0];
+  if (!bv) K('no "Version x.y, d Month yyyy." line in the book');
+  else if (stat !== kitStat(have.size, zipBuf.length, bv.v)) K(`download card reads ${stat.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()}, expected ${have.size} files, ${Math.round(zipBuf.length / 1024)} KB, v${bv.v}; run npm run kit`);
+  if (failures.length === bad) ok(`tokens, book, generated files and the ${have.size}-file ZIP agree`);
+}
 
 // ---------- static server ----------
 const TYPES = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml',
@@ -67,6 +114,7 @@ for (const name of BROWSERS) {
     page.on('pageerror', e => errors.push(e.message));
     page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
     page.on('requestfailed', r => { if (r.url().startsWith(BASE)) errors.push('request failed ' + r.url().slice(BASE.length)); });
+    page.on('request', r => { const u = r.url(); if (!u.startsWith(BASE) && !/^(data|blob|about):/.test(u)) errors.push('third-party request ' + u.split('?')[0]); });
     page.on('response', r => { if (r.url().startsWith(BASE) && r.status() >= 400) errors.push(`${r.status()} ${r.url().slice(BASE.length)}`); });
     await page.goto(URL_, { waitUntil: 'load' });
     await page.waitForTimeout(1500);
@@ -173,6 +221,12 @@ for (const name of BROWSERS) {
         const closed = !(await m.page.evaluate(() => document.querySelector('.index').classList.contains('open')));
         const cur = await m.page.textContent('#mcur');
         closed && /Calendar/.test(cur) ? ok('phone menu opens, jumps and closes') : W(w, `closed ${closed}, header reads "${cur}"`);
+        await m.page.locator('#mbtn').click(); await m.page.waitForTimeout(300);
+        // the header bar must not be a scroll container, and a wheel over it must not move it or the locked page
+        const before = await m.page.evaluate(() => scrollY);
+        try { await m.page.mouse.move(200, 30); await m.page.mouse.wheel(0, 300); await m.page.waitForTimeout(300); } catch {}
+        const bar = await m.page.evaluate(y => { const ix = document.querySelector('.index'); return { ov: getComputedStyle(ix).overflowY, top: ix.scrollTop, page: scrollY - y }; }, before);
+        /auto|scroll/.test(bar.ov) || bar.top || bar.page ? W(w, `with the menu open the header is overflow ${bar.ov}, scrolled ${bar.top} px, page moved ${bar.page} px`) : ok('with the menu open the header and the page stay put');
       } catch (e) { W(w, e.message.split('\n')[0]); }
     })();
     await m.ctx.close();
