@@ -267,6 +267,8 @@ for (const name of BROWSERS) {
         await page.locator('.rw .grip').first().focus(); await page.keyboard.press('ArrowDown');
         const after = await page.evaluate(() => [...document.querySelectorAll('.rw .cells .inp:first-child')].map(i => i.value));
         after[1] === before ? ok('rows reorder by their handles') : W(where, `moving the first row down gave ${after.join(', ')}`);
+        const shown = await page.evaluate(() => [...document.querySelectorAll('.vh')].filter(e => { const r = e.getBoundingClientRect(); return r.width > 1 || r.height > 1; }).map(e => e.textContent.slice(0, 40) || e.tagName));
+        shown.length ? W(where, 'screen-reader-only text is visible: ' + shown.join(', ')) : ok('screen-reader-only text stays hidden');
         const size = await page.evaluate(async () => (await window.sgPost.png()).size);
         size > 20000 ? ok(`PNG export works (${Math.round(size / 1024)} KB)`) : W(where, `PNG export is only ${size} bytes`);
       }
