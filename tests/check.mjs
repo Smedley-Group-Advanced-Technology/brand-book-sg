@@ -246,12 +246,13 @@ for (const name of BROWSERS) {
       sw[0] <= sw[1] ? ok(`${where} no horizontal overflow`) : W(where, `page is ${sw[0]} px wide in a ${sw[1]} px viewport`);
       if (width === 1440) {
         const bad = await page.evaluate(async () => { const m = await import('./posts.js'), logos = await m.loadLogos('../assets/logo/'), out = [];
-          for (const type of Object.keys(m.TYPES)) for (const format of Object.keys(m.FORMATS)) for (const ground of Object.keys(m.GROUNDS)) {
-            try { const svg = m.render({ type, format, ground, business: 'fat-racing', data: m.defaults(type) }, { logos });
-              const doc = new DOMParser().parseFromString(svg, 'image/svg+xml'); if (doc.querySelector('parsererror') || !doc.querySelector('text')) out.push(`${type} ${format} ${ground}`); }
-            catch (e) { out.push(`${type} ${format} ${ground}: ${e.message}`); } }
+          for (const type of Object.keys(m.TYPES)) for (const [variant] of (m.TYPES[type].variants || [['default']])) for (const format of Object.keys(m.FORMATS)) for (const ground of Object.keys(m.GROUNDS)) {
+            const at = `${type} ${variant} ${format} ${ground}`;
+            try { const svg = m.render({ type, variant, format, ground, business: 'fat-racing', data: m.defaults(type, variant) }, { logos });
+              const doc = new DOMParser().parseFromString(svg, 'image/svg+xml'); if (doc.querySelector('parsererror') || !doc.querySelector('text') || /NaN|undefined/.test(svg)) out.push(at); }
+            catch (e) { out.push(`${at}: ${e.message}`); } }
           return out; });
-        bad.length ? W(where, 'posts that fail to draw: ' + bad.join(', ')) : ok('every post type draws in every format and ground');
+        bad.length ? W(where, 'posts that fail to draw: ' + bad.join(', ')) : ok('every post type and layout draws in every format and ground');
         const size = await page.evaluate(async () => (await window.sgPost.png()).size);
         size > 20000 ? ok(`PNG export works (${Math.round(size / 1024)} KB)`) : W(where, `PNG export is only ${size} bytes`);
       }

@@ -20,8 +20,9 @@ the tool icons, colour tokens (`tokens.css`, `tokens.json`), templates for slide
 documents, email signatures and social posts, the favicon and link-preview image,
 and a ZIP of all of them.
 
-[`social/`](social) is the social post maker, linked from Resources: seven post types in four
-formats for each business, downloaded as PNG or SVG. Its renderer, `social/posts.js`, also
+[`social/`](social) is the social post maker, linked from Resources: eight post types and 19
+layouts in four formats for each business, downloaded as PNG or SVG. Add a layout by listing
+it in a type's `variants` and drawing it in `render`; the check draws every combination. Its renderer, `social/posts.js`, also
 draws the SVG frames in `assets/templates`, so the two never drift apart.
 
 The templates in `assets/templates` (slides, report, letter, email signature lockups, social frames) are
