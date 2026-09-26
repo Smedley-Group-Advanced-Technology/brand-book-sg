@@ -28,7 +28,7 @@ h1{margin:0 0 6px;font-size:28px;letter-spacing:-.03em;font-weight:600;line-heig
 .ctl .seg{margin:0 14px 0 10px}
 .ctl .seg span{padding:0 13px}
 /* post types and layouts as live thumbnails */
-.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 10px;align-items:start}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 10px;align-items:start;padding:4px}
 .tiles.sm{grid-template-columns:repeat(4,minmax(0,1fr))}
 .tile{display:flex;flex-direction:column;gap:8px;min-width:0;padding:0;border:0;background:none;color:var(--dim);font:inherit;text-align:left;cursor:pointer}
 .tile .tt{display:block;aspect-ratio:1;background:rgba(var(--t),.05);box-shadow:0 0 0 .75px var(--rule);overflow:hidden;transition:box-shadow .2s,transform .45s var(--brake),background .2s}
@@ -38,11 +38,14 @@ h1{margin:0 0 6px;font-size:28px;letter-spacing:-.03em;font-weight:600;line-heig
 .tt .ph{fill:rgba(var(--t),.2)} .tt .mt{fill:rgba(var(--t),.34)} .tt .gr{fill:rgba(47,128,255,.16)} .tt .gl{stroke:var(--blue);stroke-width:.6}
 .tt .card{fill:var(--bg1);stroke:rgba(var(--t),.5);stroke-width:.6}
 .tt .mk line{stroke:var(--ink);stroke-width:14.2}
-.tile:hover .tt, .tile[aria-pressed="true"] .tt{background:rgba(var(--t),.09)}
+.tile[aria-pressed="true"] .tt{background:rgba(var(--t),.09)}
+@media (hover:hover){ .tile:hover .tt{background:rgba(var(--t),.09)} }
 .tile .tl{display:flex;align-items:center;gap:7px;min-height:14px;font-family:var(--mono);font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .2s}
 .tiles.sm .tl{white-space:normal;align-items:flex-start;line-height:1.35}
-.tile:hover .tt{box-shadow:0 0 0 1px rgba(var(--t),.55);transform:translateY(-2px)}
-.tile:hover .tl{color:var(--ink)}
+@media (hover:hover){
+  .tile:hover .tt{box-shadow:0 0 0 1px rgba(var(--t),.55);transform:translateY(-2px)}
+  .tile:hover .tl{color:var(--ink)}
+}
 .tile[aria-pressed="true"] .tt{box-shadow:0 0 0 2px var(--red)}
 .tile[aria-pressed="true"] .tl{color:var(--ink);font-weight:500}
 .tile[aria-pressed="true"] .tl::before{content:"";flex:none;width:4px;height:11px;background:var(--red);transform:skewX(35deg);animation:popk .35s var(--brake)}
@@ -130,7 +133,7 @@ hr{border:0;border-top:.75px solid var(--rule);margin:28px 0}
   .stage{position:sticky;top:0;z-index:2;height:auto;order:1;padding:12px 16px 10px;gap:6px;background:var(--bg1);border-bottom:.75px solid var(--rule)}
   .frame{height:34vh;height:34svh;width:auto;max-width:100%;max-height:none}
   .meta-post{font-size:11px}
-  .tiles, .tiles.sm{display:flex;align-items:flex-start;max-width:none;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;gap:10px;margin-right:-16px;padding:2px 16px 8px 2px;scrollbar-width:none}
+  .tiles, .tiles.sm{display:flex;align-items:flex-start;max-width:none;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-left:4px;gap:10px;margin:0 -16px 0 -4px;padding:6px 16px 8px 4px;scrollbar-width:none}
   .tiles::-webkit-scrollbar{display:none}
   .tile{flex:0 0 auto;width:84px;scroll-snap-align:start}
   .rw .ibtn{--h:34px;width:calc(var(--c) + 22px)}
@@ -170,6 +173,6 @@ hr{border:0;border-top:.75px solid var(--rule);margin:28px 0}
     <div class="meta-post" id="meta"></div>
   </section>
 </main>
-<script type="module" src="maker.js?v=42f0c9422a"></script>
+<script type="module" src="maker.js?v=a5a90be758"></script>
 </body>
 </html>

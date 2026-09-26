@@ -9,7 +9,8 @@ const FOOT = (w = 44) => R(8, 51, w, 1, 'b') + R(8, 50, 8, 2, 'r');
 const PHOTO = (x, y, w, h) => { const m = Math.min(h, w * .62), b = y + h, sy = y + Math.min(h * .28, w * .3);
   return R(x, y, w, h, 'ph') + `<polygon class="mt" points="${x},${b} ${x + w * .34},${b - m * .58} ${x + w * .58},${b - m * .26} ${x + w * .74},${b - m * .46} ${x + w},${b - m * .12} ${x + w},${b}"/><circle class="mt" cx="${x + w * .78}" cy="${sy}" r="${Math.min(w, h) * .09}"/>`; };
 const SEAM = (gw = 24, rw = 10) => `<polygon class="gr" points="${60 - gw},0 60,0 60,${gw / .7}"/><line class="gl" x1="${60 - gw}" y1="0" x2="60" y2="${gw / .7}"/>` + `<polygon class="r" points="${60 - rw},0 60,0 60,${rw / .7}"/>`;
-const STRIPES = y => { let s = ''; for (let x = -6; x < 60; x += 4.5) s += B(x, y, 2.2 + 5.6, 8, x < 26 ? 'b' : x > 29 ? 'r' : 'no'); return `<g>${s}</g>`; };
+// whole stripes inside the margins, a gap where blue hands over to red
+const STRIPES = y => { let s = ''; for (let i = 0; i < 9; i++) if (i !== 4) { const x = 8 + i * 4.3; s += `<polygon class="${i < 4 ? 'b' : 'r'}" points="${x},${y} ${x + 1.9},${y} ${x + 1.9 + 4.9},${y + 7} ${x + 4.9},${y + 7}"/>`; } return s; };
 const SCORE = (y, v) => R(8, y, 9, 1.6, 'd') + B(21, y - .5, 31, 2.6, 'f') + B(21, y - .5, 31 * v, 2.6, 'i');
 // the mark sits in the top left corner down to y 17; content starts at y 20, the scale rule sits at y 50 to 52
 export const PICTOS = {

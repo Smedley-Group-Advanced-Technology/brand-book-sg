@@ -1,8 +1,8 @@
 // The post maker: settings on the left, the post drawn live on the right, downloads at the post's real size.
 // Every control is the book's own, from assets/ui.css; the few behaviours they need are wired up here.
-import { FORMATS, TYPES, BUSINESSES, GROUNDS, FONTS, ROWS, defaults, variantOf, fieldsFor, render, loadLogos, fontCSS, toPNG } from './posts.js?v=5ab2f18930';
+import { FORMATS, TYPES, BUSINESSES, GROUNDS, FONTS, ROWS, defaults, variantOf, fieldsFor, render, loadLogos, fontCSS, toPNG } from './posts.js?v=973b57a4d3';
 
-import { picto } from './pictos.js?v=256e5f9e64';
+import { picto } from './pictos.js?v=45740573cb';
 
 const $ = s => document.querySelector(s);
 const el = (tag, attrs = {}, html = '') => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) v === true ? e.setAttribute(k, '') : v !== false && v != null && e.setAttribute(k, v); if (html) e.innerHTML = html; return e; };

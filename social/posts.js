@@ -165,13 +165,17 @@ export function render(o, env) {
     else parts.push(`<rect x="${px}" y="${py}" width="${pw}" height="${ph}" fill="${o.ground === 'light' ? '#F0F0F0' : g.blueprint ? '#0E3673' : '#1C1E22'}"/><text x="${px + pw / 2}" y="${py + ph / 2}" font-size="${28 * u}" ${MONO} fill="${g.dim}" text-anchor="middle">Add a photo</text>`);
   };
 
-  // a band of 55° stripes across the post: blue for engineering, red for racing, the ground between them at the cut
+  // a band of 55° stripes inside the margins: whole stripes only, blue for engineering, red for racing,
+  // one stripe's worth of ground between the two groups
   const stripes = (y, h) => {
-    const sw = 16 * ub, per = 40 * ub, split = W * { balance: 0.5, blue: 0.7, red: 0.3 }[biz.lean], gap = per;
-    const pat = (id, c) => defs.push(`<pattern id="${id}" width="${per}" height="${per}" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><rect width="${sw}" height="${per}" fill="${c}"/></pattern>`);
-    pat('stb', g.line); pat('str', g.blueprint ? g.line : g.accent);
-    parts.push(`<polygon points="0,${y} ${split},${y} ${split + cut(h)},${y + h} 0,${y + h}" fill="url(#stb)"/>`);
-    parts.push(`<polygon points="${split + gap},${y} ${W},${y} ${W},${y + h} ${split + gap + cut(h)},${y + h}" fill="url(#str)"/>`);
+    const sw = 16 * ub, per = 38 * ub, k = cut(h), n = Math.floor((TW - sw - k) / per) + 1;
+    const blue = Math.max(1, Math.min(n - 3, Math.round((n - 1) * { balance: 0.5, blue: 0.68, red: 0.32 }[biz.lean])));
+    const x = x0 + (TW - sw - k - (n - 1) * per) / 2;
+    for (let i = 0; i < n; i++) {
+      if (i === blue) continue;
+      const sx = x + i * per, c = i < blue ? g.line : g.blueprint ? g.line : g.accent;
+      parts.push(`<polygon points="${sx},${y} ${sx + sw},${y} ${sx + sw + k},${y + h} ${sx + k},${y + h}" fill="${c}"/>`);
+    }
     return y + h;
   };
 
