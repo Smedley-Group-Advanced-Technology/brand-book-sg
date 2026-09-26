@@ -12,5 +12,6 @@
     "docx": "9.7.2",
     "playwright": "1.63.0",
     "pptxgenjs": "4.0.1"
-  }
+  },
+  "type": "module"
 }

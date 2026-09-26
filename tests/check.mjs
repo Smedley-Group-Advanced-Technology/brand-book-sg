@@ -10,7 +10,8 @@ import { join, extname, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import * as pw from 'playwright';
-import { kitFiles, readZip, tokensCss, bookVersion, kitStat, STAT, ZIP, downloadLabels, uiCss, socialStamps } from '../tools/kit.mjs';
+import { kitFiles, readZip, tokensCss, bookVersion, kitStat, STAT, ZIP, downloadLabels, uiCss, pageStamps, syncBookTools, iconCount, syncIcons, ICON_PAGES } from '../tools/kit.mjs';
+import { ICONS } from '../icons/library.js';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const AXE = await readFile(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
@@ -82,8 +83,17 @@ console.log('kit');
   if (!bv) K('no "Version x.y, d Month yyyy." line in the book');
   else if (stat !== kitStat(have.size, zipBuf.length, bv.v)) K(`download card reads ${stat.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()}, expected ${have.size} files, ${Math.round(zipBuf.length / 1024)} KB, v${bv.v}; run npm run kit`);
   { let ui = ''; try { ui = await readFile(join(ROOT, 'assets/ui.css'), 'utf8'); } catch {} if (ui !== uiCss(html)) K('assets/ui.css no longer matches the book\'s controls, run npm run kit'); }
-  { const s = await socialStamps();
-    if (s.maker !== await readFile(join(ROOT, 'social/maker.js'), 'utf8') || s.page !== await readFile(join(ROOT, 'social/index.html'), 'utf8')) K('the post maker\'s cache stamps are out of date, run npm run kit'); }
+  for (const [f, s] of Object.entries(await pageStamps())) if (s !== await readFile(join(ROOT, f), 'utf8')) K(`${f} has out-of-date cache stamps, run npm run kit`);
+  if (syncBookTools(html) !== html) K('the book\'s tool icons differ from the icon library, run npm run kit');
+  if (iconCount(html) !== html) K('the book gives the wrong number of icons, run npm run kit');
+  // every icon on the 24 px grid names its library drawing and matches it, so refining an icon updates it everywhere
+  { const stray = [];
+    for (const f of ICON_PAGES) {
+      const s = await readFile(join(ROOT, f), 'utf8');
+      if (syncIcons(s) !== s) stray.push(`${f}: an icon differs from its library drawing, run npm run kit`);
+      for (const m of s.matchAll(/<svg([^>]*viewBox="0 0 24 24"[^>]*)>(.*?)<\/svg>/gs)) if (!/data-icon=|class="tool"|id="sicon"/.test(m[1]) && m[2]) stray.push(`${f}: an icon without data-icon: ${m[2].slice(0, 40)}`);
+    }
+    stray.length ? stray.slice(0, 5).forEach(s => K(s)) : ok('every icon comes from the icon library'); }
   for (const w of (await downloadLabels(html)).wrong) K(`download button for ${w}; run npm run kit`);
   if (failures.length === bad) ok(`tokens, book, generated files and the ${have.size}-file ZIP agree, download sizes are right`);
 }
@@ -279,6 +289,31 @@ for (const name of BROWSERS) {
         const size = await page.evaluate(async () => (await window.sgPost.png()).size);
         size > 20000 ? ok(`PNG export works (${Math.round(size / 1024)} KB)`) : W(where, `PNG export is only ${size} bytes`);
       }
+      if (name === 'chromium') {
+        await page.addScriptTag({ content: AXE });
+        const v = await page.evaluate(async () => (await axe.run(document, { resultTypes: ['violations'], runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'best-practice'] } })).violations.map(v => `${v.id} x${v.nodes.length} (${v.nodes.slice(0, 3).map(n => n.target.join(' ')).join('; ')})`));
+        v.length ? v.forEach(x => W(where, 'axe ' + x)) : ok(`${where} axe finds no violations`);
+      }
+    } catch (e) { W(where, e.message.split('\n')[0]); }
+    errors.length ? W(where, 'console: ' + [...new Set(errors)].join(' | ')) : ok(`${where} no console errors`);
+    await ctx.close();
+  }
+
+  for (const [theme, width] of [['dark', 1440], ['light', 390]]) {
+    const where = `icon library ${theme} ${width}`;
+    const ctx = await browser.newContext({ viewport: { width, height: width < 800 ? 844 : 900 }, colorScheme: theme, reducedMotion: 'reduce', ...(width < 800 && name !== 'firefox' ? { isMobile: true, hasTouch: true } : {}) });
+    const page = await ctx.newPage(); const errors = [];
+    page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+    try {
+      await page.goto(BASE + '/icons/'); await page.waitForFunction(() => document.documentElement.dataset.ready === '1', null, { timeout: 20000 });
+      const sw = await page.evaluate(() => [document.documentElement.scrollWidth, innerWidth]);
+      sw[0] <= sw[1] ? ok(`${where} no horizontal overflow`) : W(where, `page is ${sw[0]} px wide in a ${sw[1]} px viewport`);
+      const all = await page.evaluate(() => document.querySelectorAll('.ic').length);
+      all === ICONS.length ? ok(`all ${all} icons listed`) : W(where, `${all} icons listed, the library has ${ICONS.length}`);
+      await page.fill('#q', 'flag'); await page.waitForTimeout(100);
+      (await page.evaluate(() => document.querySelectorAll('.ic').length)) >= 1 ? ok('search finds icons') : W(where, 'searching for flag found nothing');
+      await page.click('.ic[data-k="flag"]');
+      (await page.textContent('#dname')) === 'Chequered flag' ? ok('choosing an icon shows it') : W(where, 'the chosen icon did not show');
       if (name === 'chromium') {
         await page.addScriptTag({ content: AXE });
         const v = await page.evaluate(async () => (await axe.run(document, { resultTypes: ['violations'], runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'best-practice'] } })).violations.map(v => `${v.id} x${v.nodes.length} (${v.nodes.slice(0, 3).map(n => n.target.join(' ')).join('; ')})`));

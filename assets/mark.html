@@ -54,7 +54,7 @@ body{margin:0;height:100%;overflow:hidden;color:var(--ink);
 .controls{position:absolute;right:max(20px,4vw);bottom:max(20px,4vh);display:flex;gap:0;z-index:2}
 .controls button{display:inline-flex;align-items:center;gap:8px}
 .controls button + button{margin-left:-27.9px}
-.controls .ic{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.controls .ic{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:square;stroke-linejoin:miter;transition:transform .45s cubic-bezier(.16,1,.3,1)}
 .controls .moon{display:none} :root[data-theme="light"] .controls .sun{display:none} :root[data-theme="light"] .controls .moon{display:block}
 #replay:hover .ic{transform:rotate(-120deg)} #theme:hover .ic{transform:rotate(25deg)}
 button{font:600 12px/1 "Sora",system-ui,sans-serif;color:var(--btnText);background:var(--btnBg);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:0;border-radius:0;height:44px;min-height:0;padding:0 29.5px;clip-path:polygon(0 0,calc(100% - 30.9px) 0,100% 100%,30.9px 100%);min-height:44px;cursor:pointer;transition:color .3s ease,border-color .3s ease}
@@ -419,8 +419,8 @@ button:focus-visible{outline:2px solid #2F80FF;outline-offset:3px}
   </div>
   </div>
   <div class="controls">
-    <button id="theme" type="button"><svg class="ic sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><svg class="ic moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z"/></svg><span class="tx">Primary</span></button>
-    <button id="replay" type="button"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 3.5v3.7h3.7"/></svg><span class="tx">Replay</span></button>
+    <button id="theme" type="button"><svg class="ic sun" viewBox="0 0 24 24" aria-hidden="true" data-icon="sun"><circle cx="12" cy="12" r="4"/><path d="M12 2.5V4.5M12 19.5V21.5M2.5 12H4.5M19.5 12H21.5M5.3 5.3L6.7 6.7M17.3 17.3L18.7 18.7M5.3 18.7L6.7 17.3M17.3 6.7L18.7 5.3"/></svg><svg class="ic moon" viewBox="0 0 24 24" aria-hidden="true" data-icon="moon"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg><span class="tx">Primary</span></button>
+    <button id="replay" type="button"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" data-icon="replay"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M6 3.5V7.5H10"/></svg><span class="tx">Replay</span></button>
   </div>
 </main>
 <script>

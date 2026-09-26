@@ -2,15 +2,16 @@
 // Every control is the book's own, from assets/ui.css; the few behaviours they need are wired up here.
 import { FORMATS, TYPES, BUSINESSES, GROUNDS, FONTS, ROWS, defaults, variantOf, fieldsFor, render, loadLogos, fontCSS, toPNG } from './posts.js?v=b22dc69188';
 
+import { bodyOf } from '../icons/library.js?v=4d617bed0d';
 import { picto, formatPicto, groundPicto } from './pictos.js?v=7e8a7453fd';
 
 const $ = s => document.querySelector(s);
 const el = (tag, attrs = {}, html = '') => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) v === true ? e.setAttribute(k, '') : v !== false && v != null && e.setAttribute(k, v); if (html) e.innerHTML = html; return e; };
 const ICON = {
-  grip: '<svg viewBox="0 0 22 18" aria-hidden="true"><path d="M2 3l5 7.1M8 3l5 7.1M14 3l5 7.1" transform="translate(0 2.5)"/></svg>',
-  remove: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
-  add: '<svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',
-  photo: '<svg viewBox="0 0 34 34" aria-hidden="true"><path d="M3 9h7l2.5-3.5h9L24 9h7v19H3z"/><circle cx="17" cy="18" r="6"/></svg>',
+  grip: `<svg viewBox="0 0 24 24" aria-hidden="true">${bodyOf('drag')}</svg>`,
+  remove: `<svg viewBox="0 0 24 24" aria-hidden="true">${bodyOf('close')}</svg>`,
+  add: `<svg class="bi" viewBox="0 0 24 24" aria-hidden="true">${bodyOf('plus')}</svg>`,
+  photo: `<svg viewBox="0 0 24 24" aria-hidden="true">${bodyOf('camera')}</svg>`,
 };
 
 const KEY = 'sg-social-maker';

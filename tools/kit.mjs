@@ -8,6 +8,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { deflateRawSync, inflateRawSync, crc32 } from 'node:zlib';
 import { createHash } from 'node:crypto';
+import { ICONS, svgOf, sprite, bodyOf } from '../icons/library.js';
 
 export const ROOT = fileURLToPath(new URL('..', import.meta.url));
 export const A = join(ROOT, 'assets');
@@ -23,25 +24,24 @@ export function tokensCss(t) {
     + `.sg-cut{clip-path:polygon(0 0,calc(100% - var(--sg-h,44px) * ${String(t.angle.cutPerHeight).replace(/^0/, '')}) 0,100% 100%,calc(var(--sg-h,44px) * ${String(t.angle.cutPerHeight).replace(/^0/, '')}) 100%)}\n`;
 }
 
-// the tool icons exactly as the book draws them
-export function iconsFromBook(html) {
-  const out = {};
-  for (const m of html.matchAll(/<figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24"[^>]*>(.*?)<\/svg><\/div><figcaption>([^<]+)<\/figcaption>/gs)) {
-    const [, body, name] = m;
-    out[name.toLowerCase().replace(/ /g, '-') + '.svg'] = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><title>${name}</title>${body}</svg>`;
-  }
-  return out;
-}
+// the book's tool figures draw from the icon library: this puts each library drawing into its figure
+// every icon in the pages names its library drawing (data-icon="name"); this redraws each from the library
+export const ICON_PAGES = ['index.html', 'assets/mark.html', 'social/index.html', 'icons/index.html'];
+export const syncIcons = html => html.replace(/(<svg[^>]*\bdata-icon="([\w-]+)"[^>]*>)(.*?)(<\/svg>)/gs, (all, open, name, body, close) => { const b = bodyOf(name); return b ? open + b + close : all; });
+// the book says how many icons the library holds
+export const iconCount = html => html.replace(/\b\d+ icons in one style/g, `${ICONS.length} icons in one style`);
+export const syncBookTools = html => html.replace(/(<figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24"[^>]*>)(.*?)(<\/svg><\/div><figcaption>([^<]+)<\/figcaption>)/gs,
+  (all, open, body, close, name) => { const b = bodyOf(name.toLowerCase().replace(/ /g, '-')); return b ? open + b + close : all; });
 
 // every file the ZIP should hold, by its path inside the ZIP, as it should read
 export async function kitFiles() {
-  const html = await readFile(join(ROOT, 'index.html'), 'utf8');
   const tokens = await readFile(join(A, 'tokens.json'), 'utf8');
   const files = new Map();
   for (const f of (await readdir(join(A, 'logo'))).sort()) files.set('logo/' + f, await readFile(join(A, 'logo', f)));
   files.set('tokens.css', Buffer.from(tokensCss(JSON.parse(tokens))));
   files.set('tokens.json', Buffer.from(tokens));
-  for (const [f, svg] of Object.entries(iconsFromBook(html)).sort()) files.set('icons/' + f, Buffer.from(svg));
+  for (const ic of [...ICONS].sort((a, b) => a[0].localeCompare(b[0]))) files.set(`icons/${ic[0]}.svg`, Buffer.from(svgOf(ic)));
+  files.set('icons/sprite.svg', Buffer.from(sprite()));
   for (const f of (await readdir(join(A, 'templates'))).sort()) files.set('templates/' + f, await readFile(join(A, 'templates', f)));
   return files;
 }
@@ -92,17 +92,23 @@ export function uiCss(html) {
 // Browsers keep scripts for a while, so a new page could run an old script. Each file the maker loads is
 // addressed with a stamp of its content: change the file and the address changes with it.
 const stamp = s => createHash('sha1').update(s).digest('hex').slice(0, 10);
-export async function socialStamps() {
-  const read = p => readFile(join(ROOT, p), 'utf8');
-  const posts = await read('social/posts.js');
-  let maker = await read('social/maker.js');
-  maker = maker.replace(/from '\.\/posts\.js(\?v=\w+)?'/, `from './posts.js?v=${stamp(posts)}'`);
-  maker = maker.replace(/from '\.\/pictos\.js(\?v=\w+)?'/, `from './pictos.js?v=${stamp(await read('social/pictos.js'))}'`);
-  let page = await read('social/index.html');
-  page = page.replace(/src="maker\.js(\?v=\w+)?"/, `src="maker.js?v=${stamp(maker)}"`)
-    .replace(/href="\.\.\/assets\/ui\.css(\?v=\w+)?"/, `href="../assets/ui.css?v=${stamp(uiCss(await read('index.html')))}"`)
-    .replace(/href="\.\.\/assets\/fonts\/fonts\.css(\?v=\w+)?"/, `href="../assets/fonts/fonts.css?v=${stamp(await read('assets/fonts/fonts.css'))}"`);
-  return { maker, page };
+export const PAGES = [['social', 'maker.js'], ['icons', 'page.js']];
+export async function pageStamps() {
+  const read = p => readFile(join(ROOT, p), 'utf8'), out = {};
+  for (const [dir, entry] of PAGES) {
+    // every script the page's entry imports, then the entry itself, then the stylesheets it links
+    let js = await read(`${dir}/${entry}`);
+    for (const [, p] of [...js.matchAll(/from '(\.\.?\/[^'?]+\.js)(?:\?v=\w+)?'/g)]) {
+      const s = stamp(await read(join(dir, p)));
+      js = js.replace(new RegExp(`from '${p.replace(/[.\/]/g, m => '\\' + m)}(\\?v=\\w+)?'`), `from '${p}?v=${s}'`);
+    }
+    let page = await read(`${dir}/index.html`);
+    page = page.replace(new RegExp(`src="${entry.replace('.', '\\.')}(\\?v=\\w+)?"`), `src="${entry}?v=${stamp(js)}"`);
+    for (const [, css] of [...page.matchAll(/href="\.\.\/assets\/([\w/.-]+\.css)(?:\?v=\w+)?"/g)])
+      page = page.replace(new RegExp(`href="\\.\\./assets/${css.replace(/[.\/]/g, m => '\\' + m)}(\\?v=\\w+)?"`), `href="../assets/${css}?v=${stamp(await read('assets/' + css))}"`);
+    out[`${dir}/${entry}`] = js; out[`${dir}/index.html`] = page;
+  }
+  return out;
 }
 
 // ---------- a small ZIP writer and reader, deflate only ----------
@@ -137,14 +143,17 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const files = await kitFiles();
   await writeFile(join(A, 'tokens.css'), files.get('tokens.css'));
   for (const [k, v] of files) if (k.startsWith('icons/')) await writeFile(join(A, k), v);
-  const htmlPath = join(ROOT, 'index.html'); let html = await readFile(htmlPath, 'utf8');
+  const htmlPath = join(ROOT, 'index.html'); let html = syncBookTools(await readFile(htmlPath, 'utf8'));
   const { v, date } = bookVersion(html);
   const zip = writeZip(files, date);
   await writeFile(ZIP, zip);
   html = html.replace(STAT, kitStat(files.size, zip.length, v));
   html = (await downloadLabels(html)).html;
+  html = iconCount(html);
+  html = syncIcons(html);
+  for (const f of ICON_PAGES.slice(1)) await writeFile(join(ROOT, f), syncIcons(await readFile(join(ROOT, f), 'utf8')));
   await writeFile(join(A, 'ui.css'), uiCss(html));
-  { const { maker, page } = await socialStamps(); await writeFile(join(ROOT, 'social/maker.js'), maker); await writeFile(join(ROOT, 'social/index.html'), page); }
+  for (const [f, s] of Object.entries(await pageStamps())) await writeFile(join(ROOT, f), s);
   await writeFile(htmlPath, html);
   console.log(`kit: ${files.size} files, ${Math.round(zip.length / 1024)} KB, v${v}`);
 }
