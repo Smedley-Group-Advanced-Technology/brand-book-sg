@@ -1,0 +1,192 @@
+// Guardrails for the brand book. Serves the repo, then for each browser checks console errors,
+// failed requests, broken links and anchors, duplicate IDs, horizontal overflow on phones,
+// accessibility (axe, WCAG 2.1 AA) and the key interactions. Also scans the text files for em dashes.
+//   npm run check                   every browser
+//   BROWSERS=chromium npm run check just one
+import { createServer } from 'node:http';
+import { readFile, readdir, stat } from 'node:fs/promises';
+import { join, extname, normalize } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
+import * as pw from 'playwright';
+
+const ROOT = fileURLToPath(new URL('..', import.meta.url));
+const AXE = await readFile(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
+const BROWSERS = (process.env.BROWSERS || 'chromium,firefox,webkit').split(',');
+const failures = [];
+const fail = (where, msg) => { failures.push(`${where}: ${msg}`); console.log(`  FAIL ${msg}`); };
+const ok = msg => console.log(`  ok   ${msg}`);
+
+// ---------- text files: no em dashes ----------
+console.log('text');
+const TEXT = new Set(['.html', '.css', '.js', '.mjs', '.json', '.md', '.svg', '.yml']);
+const skip = new Set(['.git', 'node_modules', 'drift-assets']);
+async function* walk(dir) {
+  for (const e of await readdir(dir, { withFileTypes: true })) {
+    if (skip.has(e.name) || e.name === 'drift-mark.html') continue;
+    const p = join(dir, e.name);
+    if (e.isDirectory()) yield* walk(p); else if (TEXT.has(extname(e.name))) yield p;
+  }
+}
+const EM = String.fromCharCode(0x2014);
+let dashes = 0;
+for await (const f of walk(ROOT)) {
+  if (f.endsWith('package-lock.json')) continue;
+  const lines = (await readFile(f, 'utf8')).split('\n');
+  lines.forEach((l, i) => { if (l.includes(EM)) { dashes++; fail('text', `em dash in ${f.slice(ROOT.length)}:${i + 1}`); } });
+}
+if (!dashes) ok('no em dashes');
+
+// ---------- static server ----------
+const TYPES = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml',
+  '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.avif': 'image/avif', '.ico': 'image/x-icon', '.zip': 'application/zip',
+  '.pptx': 'application/octet-stream', '.docx': 'application/octet-stream', '.woff2': 'font/woff2' };
+const server = createServer(async (req, res) => {
+  const path = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname)).replace(/^(\.\.[/\\])+/, '');
+  let file = join(ROOT, path);
+  try { if ((await stat(file)).isDirectory()) file = join(file, 'index.html'); res.writeHead(200, { 'content-type': TYPES[extname(file)] || 'application/octet-stream' }); res.end(await readFile(file)); }
+  catch { res.writeHead(404); res.end(); }
+});
+await new Promise(r => server.listen(0, '127.0.0.1', r));
+const BASE = `http://127.0.0.1:${server.address().port}`;
+const URL_ = BASE + '/index.html';
+
+// ---------- per browser ----------
+for (const name of BROWSERS) {
+  console.log(name);
+  let browser;
+  try { browser = await pw[name].launch(); } catch (e) { fail(name, 'could not launch: ' + e.message.split('\n')[0]); continue; }
+  const W = (where, msg) => fail(`${name} ${where}`, msg);
+
+  const open = async (theme, width, extra = {}) => {
+    const phone = width < 800;
+    const ctx = await browser.newContext({ viewport: { width, height: phone ? 844 : 900 }, colorScheme: theme, reducedMotion: 'reduce',
+      ...(phone && name !== 'firefox' ? { isMobile: true, hasTouch: true } : {}), ...extra });
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', e => errors.push(e.message));
+    page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+    page.on('requestfailed', r => { if (r.url().startsWith(BASE)) errors.push('request failed ' + r.url().slice(BASE.length)); });
+    page.on('response', r => { if (r.url().startsWith(BASE) && r.status() >= 400) errors.push(`${r.status()} ${r.url().slice(BASE.length)}`); });
+    await page.goto(URL_, { waitUntil: 'load' });
+    await page.waitForTimeout(1500);
+    return { ctx, page, errors };
+  };
+
+  for (const [theme, width] of [['dark', 1440], ['light', 1440], ['light', 390], ['dark', 320]]) {
+    const where = `${theme} ${width}`;
+    const { ctx, page, errors } = await open(theme, width);
+    // scroll through so lazy images and iframes load
+    await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += innerHeight) { scrollTo(0, y); await new Promise(r => setTimeout(r, 40)); } scrollTo(0, 0); });
+    await page.waitForTimeout(800);
+
+    const got = await page.evaluate(() => document.documentElement.dataset.theme);
+    got === theme ? ok(`${where} theme follows the system`) : W(where, `theme is ${got}, expected ${theme}`);
+
+    const sw = await page.evaluate(() => [document.documentElement.scrollWidth, innerWidth]);
+    sw[0] <= sw[1] ? ok(`${where} no horizontal overflow`) : W(where, `page is ${sw[0]} px wide in a ${sw[1]} px viewport`);
+
+    const broken = await page.evaluate(() => [...document.images].filter(i => i.getAttribute('src') && i.complete && i.naturalWidth === 0 && !i.closest('[hidden]')).map(i => i.currentSrc || i.src));
+    broken.length ? W(where, 'images that failed to decode: ' + broken.join(', ')) : ok(`${where} every image decodes`);
+
+    if (width === 1440 && theme === 'dark') {
+      const dup = await page.evaluate(() => { const c = {}; document.querySelectorAll('[id]').forEach(e => c[e.id] = (c[e.id] || 0) + 1); return Object.keys(c).filter(k => c[k] > 1); });
+      dup.length ? W(where, 'duplicate ids: ' + dup.join(', ')) : ok('ids are unique');
+
+      const anchors = await page.evaluate(() => [...document.querySelectorAll('a[href^="#"]')].map(a => a.getAttribute('href')).filter(h => h.length > 1 && !document.getElementById(decodeURIComponent(h.slice(1)))));
+      anchors.length ? W(where, 'links to missing anchors: ' + [...new Set(anchors)].join(', ')) : ok('every in-page link has a target');
+
+      const local = await page.evaluate(() => [...new Set([...document.querySelectorAll('a[href],img[src],source[srcset],iframe[src],link[href],script[src]')]
+        .flatMap(e => (e.getAttribute('href') || e.getAttribute('src') || e.getAttribute('srcset')).split(',').map(s => s.trim().split(/\s+/)[0]))
+        .filter(u => u && !/^(#|[a-z]+:|\/\/)/i.test(u)))]);
+      const missing = [];
+      for (const u of local) { const r = await page.request.get(new URL(u, URL_).href); if (!r.ok()) missing.push(u); }
+      missing.length ? W(where, 'missing files: ' + missing.join(', ')) : ok(`all ${local.length} local files exist`);
+    }
+
+    if (name === 'chromium' && width !== 320) {
+      await page.addScriptTag({ content: AXE });
+      const v = await page.evaluate(async () => (await axe.run(document, { resultTypes: ['violations'], runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'best-practice'] } }))
+        .violations.map(v => `${v.id} x${v.nodes.length} (${v.nodes.slice(0, 3).map(n => n.target.join(' ')).join('; ')})`));
+      v.length ? v.forEach(x => W(where, 'axe ' + x)) : ok(`${where} axe finds no violations`);
+    }
+
+    errors.length ? W(where, 'console: ' + [...new Set(errors)].join(' | ')) : ok(`${where} no console errors`);
+    await ctx.close();
+  }
+
+  // ---------- interactions ----------
+  {
+    const where = 'interactions';
+    const { ctx, page, errors } = await open('dark', 1440, { reducedMotion: 'no-preference' });
+    const step = async (label, fn) => { try { const r = await fn(); r === true ? ok(label) : W(where, `${label}: ${r}`); } catch (e) { W(where, `${label}: ${e.message.split('\n')[0]}`); } };
+
+    await step('primary button runs its highlight on click', async () => {
+      const b = page.locator('#components .kit .cell .btn.p').first(); await b.scrollIntoViewIfNeeded(); await b.click();
+      return (await b.evaluate(x => x.classList.contains('flash'))) || 'no flash class';
+    });
+    await step('hold to confirm completes', async () => {
+      const b = page.locator('#holdBtn'); await b.scrollIntoViewIfNeeded(); const before = await b.textContent();
+      await b.hover(); await page.mouse.down(); await page.waitForTimeout(1400); await page.mouse.up();
+      return (await b.textContent()) !== before || 'label did not change';
+    });
+    await step('tabs move their indicator', async () => {
+      const i = page.locator('.tabind'); const a = await i.evaluate(x => x.getBoundingClientRect().left);
+      await page.locator('#tabs button').nth(1).click(); await page.waitForTimeout(500);
+      return (await i.evaluate(x => x.getBoundingClientRect().left)) !== a || 'indicator did not move';
+    });
+    await step('calendar selects a range', async () => {
+      await page.locator('#calDays button').nth(9).click();
+      return /Selected/.test(await page.textContent('#calNote')) || 'note not updated';
+    });
+    await step('TalentID switches driver', async () => {
+      const n = await page.textContent('#tName'); await page.locator('#tRank button[data-i="5"]').click();
+      return (await page.textContent('#tName')) !== n || 'name unchanged';
+    });
+    await step('search finds sections and jumps', async () => {
+      await page.fill('#srch', 'kerb'); await page.waitForTimeout(200);
+      const n = await page.locator('#srchr a').count(); if (!n) return 'no results';
+      await page.keyboard.press('Enter'); await page.waitForTimeout(800);
+      return (await page.evaluate(() => location.hash)).length > 1 || 'no jump';
+    });
+    await step('showcase opens and closes the lightbox', async () => {
+      const s = page.locator('.scb').first(); await s.scrollIntoViewIfNeeded(); await s.click(); await page.waitForTimeout(300);
+      if (!(await page.evaluate(() => document.querySelector('dialog.lbx').open))) return 'did not open';
+      await page.keyboard.press('Escape'); await page.waitForTimeout(200);
+      return !(await page.evaluate(() => document.querySelector('dialog.lbx').open)) || 'did not close';
+    });
+    await step('theme switch reaches the page and the hero', async () => {
+      await page.locator('.themes button[data-t=light]').click(); await page.waitForTimeout(400);
+      const t = await page.evaluate(() => [document.documentElement.dataset.theme, document.querySelector('.cover iframe').contentDocument.documentElement.dataset.theme]);
+      return (t[0] === 'light' && t[1] === 'light') || 'got ' + t.join('/');
+    });
+    errors.length ? W(where, 'console: ' + [...new Set(errors)].join(' | ')) : ok('no console errors while interacting');
+    await ctx.close();
+
+    const m = await open('dark', 390);
+    await (async () => {
+      const w = 'phone menu';
+      try {
+        await m.page.locator('#mbtn').click(); await m.page.waitForTimeout(300);
+        if (!(await m.page.evaluate(() => document.querySelector('.index').classList.contains('open')))) return W(w, 'menu did not open');
+        await m.page.locator('#toc a[href="#calendar-sec"]').click(); await m.page.waitForTimeout(1200);
+        const closed = !(await m.page.evaluate(() => document.querySelector('.index').classList.contains('open')));
+        const cur = await m.page.textContent('#mcur');
+        closed && /Calendar/.test(cur) ? ok('phone menu opens, jumps and closes') : W(w, `closed ${closed}, header reads "${cur}"`);
+      } catch (e) { W(w, e.message.split('\n')[0]); }
+    })();
+    await m.ctx.close();
+  }
+
+  if (name === 'chromium') {
+    const { ctx, page } = await open('light', 1440);
+    try { const pdf = await page.pdf({ format: 'A4', printBackground: true }); pdf.length > 100000 ? ok(`prints (${Math.round(pdf.length / 1024)} KB PDF)`) : fail('print', 'PDF suspiciously small'); }
+    catch (e) { fail('print', e.message.split('\n')[0]); }
+    await ctx.close();
+  }
+  await browser.close();
+}
+
+server.close();
+console.log(failures.length ? `\n${failures.length} problem(s):\n` + failures.join('\n') : '\nall checks passed');
+process.exit(failures.length ? 1 : 0);

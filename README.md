@@ -23,6 +23,24 @@ Preview through a local server, for example `python3 -m http.server`, rather tha
 opening the file directly: browsers block the page from talking to the animation
 over `file://`, so the theme switch and Replay only reach it over HTTP.
 
+Photographs go in as WebP with the JPEG kept as a fallback: a showcase image needs
+`name.jpg`, `name.webp` (1600 px) and `name-800.webp`, wired up with `<picture>`
+like the existing ones.
+
+## Checks
+
+Every push and pull request runs [`tests/check.mjs`](tests/check.mjs) in Chromium,
+Firefox and WebKit (see the Actions tab). It fails on console errors, missing files
+or anchors, duplicate IDs, sideways scrolling on phones, accessibility violations
+(axe, WCAG 2.1 AA), broken interactions, a failed print, or an em dash anywhere in
+the text. To run it locally:
+
+```
+npm install
+npx playwright install chromium firefox
+npm run check                      # or BROWSERS=chromium npm run check
+```
+
 ## Themes
 
 The book has a dark and a light theme. It follows the reader's system setting until

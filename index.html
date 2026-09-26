@@ -444,8 +444,8 @@ ol.seq li p{margin:6px 0 0;font-size:13px;color:var(--dim)}
 .lk .w{display:flex;align-items:center;gap:calc(var(--lk)*17)}
 .lk .w span{display:block;font-weight:600;font-size:calc(var(--lk)*30);line-height:.94;letter-spacing:-0.025em;white-space:nowrap}
 .lk .w i{display:block;width:calc(var(--lk)*4.6);height:calc(var(--lk)*62);background:currentColor;border-radius:calc(var(--lk)*2.3)}
-.plate.light{box-shadow:inset 0 0 0 .75px var(--rule)}
-.plate.dark{isolation:isolate;--ink:#FFFFFF;--inv:#000000;--dim:#9DA1A8;--faint:#777B82;--t:205,207,212;--rule:rgba(205,207,212,.14);--bg1:#000000;--surf:#000000;--pop:#121316;--flame:#FF4B3E;--line:#7FB2FF;--amber:#FFB547;--green:#3DDC84;--steel:#4A4F57;--alloy:#8A9099;--cloud2:#DCDDE0;color-scheme:dark;color:var(--ink);box-shadow:inset 0 0 0 .75px rgba(205,207,212,.18)}
+.plate.light{box-shadow:inset 0 0 0 1px var(--rule)}
+.plate.dark{isolation:isolate;--ink:#FFFFFF;--inv:#000000;--dim:#9DA1A8;--faint:#777B82;--t:205,207,212;--rule:rgba(205,207,212,.14);--bg1:#000000;--surf:#000000;--pop:#121316;--flame:#FF4B3E;--line:#7FB2FF;--amber:#FFB547;--green:#3DDC84;--steel:#4A4F57;--alloy:#8A9099;--cloud2:#DCDDE0;color-scheme:dark;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(205,207,212,.18)}
 .plate{min-height:220px;place-items:center;border-radius:0 !important}
 .plate.crop::after{display:none}
 .bzg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 28px}
@@ -476,7 +476,7 @@ ol.seq li p{margin:6px 0 0;font-size:13px;color:var(--dim)}
   .edge::before{display:none !important}
   .plate.dark{box-shadow:inset 0 0 0 .75pt #8A8F97 !important}
 }
-.fklnote{background:var(--pop);box-shadow:inset 0 0 0 .75px var(--rule),inset 3px 0 0 #0000FF}
+.fklnote{background:var(--pop);box-shadow:inset 0 0 0 1px var(--rule),inset 3px 0 0 #0000FF}
 
 /* ============ Colour and surfaces ============ */
 .band svg, .glowdemo svg{overflow:visible}
@@ -530,13 +530,13 @@ ol.seq li p{margin:6px 0 0;font-size:13px;color:var(--dim)}
 .band.light{border:0;background:var(--cloud2);color:var(--inv)}
 .seam .l, .seam .l b, .seam .l em{color:var(--ink)}
 .seam .r{right:28px;text-align:right;align-items:flex-end;color:#fff}
-.sig{background:var(--bg1);box-shadow:inset 0 0 0 .75px var(--rule)}
+.sig{background:var(--bg1);box-shadow:inset 0 0 0 1px var(--rule)}
 :root[data-theme="light"] .paper, :root[data-theme="light"] .seam::before{--gl:31,102,224}
 @media (prefers-color-scheme: light){
   :root:not([data-theme="dark"]) .paper, :root:not([data-theme="dark"]) .seam::before{--gl:31,102,224}
 }
-.paper{--gl:127,178,255;box-shadow:inset 0 0 0 .75px rgba(var(--gl),.35)}
-.seam{overflow:hidden;background:var(--bg1);box-shadow:inset 0 0 0 .75px rgba(47,128,255,.4)}
+.paper{--gl:127,178,255;box-shadow:inset 0 0 0 1px rgba(var(--gl),.35)}
+.seam{overflow:hidden;background:var(--bg1);box-shadow:inset 0 0 0 1px rgba(47,128,255,.4)}
 .seam::before{content:"";--gl:127,178,255;background:linear-gradient(rgba(var(--gl),.2) 1px,transparent 1px) -1px -1px/40px 40px,linear-gradient(90deg,rgba(var(--gl),.2) 1px,transparent 1px) -1px -1px/40px 40px}
 .seam .l span{color:var(--line)}
 .chipc .c, .sig, .glowdemo, .tread, .seam, .paper, .band{border-radius:0 !important}
@@ -1135,7 +1135,7 @@ svg.tel:focus-visible{outline:2px solid var(--pale);outline-offset:4px}
 .btab .bt{min-width:0;overflow:hidden;text-overflow:ellipsis}
 .btab.off{flex:none;background:transparent;color:var(--dim)}
 .fav{flex:none;width:16px;height:16px;background:#F0F0F0;display:grid;place-items:center}
-.fav.dark{background:var(--surf);box-shadow:inset 0 0 0 .5px rgba(var(--t),.35)}
+.fav.dark{background:var(--surf);box-shadow:inset 0 0 0 1px rgba(var(--t),.2)}
 .fav svg{overflow:visible}
 .addr{padding:8px 12px;background:var(--pop)}
 .addr span{display:block;padding:6px 12px;background:#0D0E10;font-size:11px;color:var(--dim)}
@@ -1230,7 +1230,7 @@ table.lines .dwg .cn, table.lines .dwg .cl, table.lines .dwg .dm{stroke-width:1}
 .dwg .cn{stroke:rgba(var(--gl,127,178,255),.55)}
 .dwg .cx{stroke:rgba(var(--gl,127,178,255),.25)}
 .dwg .cl{stroke:rgba(var(--gl,127,178,255),.9)}
-.bp{position:relative;--gl:127,178,255;box-shadow:inset 0 0 0 .75px rgba(var(--gl),.35);border-radius:0 !important}
+.bp{position:relative;--gl:127,178,255;box-shadow:inset 0 0 0 1px rgba(var(--gl),.35);border-radius:0 !important}
 .dwg text{font-family:var(--mono);font-size:10.5px;paint-order:stroke;stroke:var(--bg1);stroke-width:5px;stroke-linejoin:round}
 .dwg .tk, .dwg .dm, .dwg .cn, .dwg .cl{stroke-linecap:butt}
 .bp:has(svg.kart) .tb{margin-top:22px}
@@ -1350,7 +1350,7 @@ table.timing .p{place-items:center;--h:22px;--c:calc(var(--h) * .7002);height:va
 .board{align-items:center;justify-content:center;font-weight:700;letter-spacing:-.03em;height:26px;padding:0 20px;font-size:13px;clip-path:polygon(0 0,calc(100% - 18.2px) 0,100% 100%,18.2px 100%)}
 .board.sm{height:22px;padding:0 17px;font-size:11px;clip-path:polygon(0 0,calc(100% - 15.4px) 0,100% 100%,15.4px 100%)}
 svg.tool{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;overflow:visible;stroke-width:1.5}
-.kg{box-shadow:inset 0 0 0 .75px rgba(47,128,255,.3);border-radius:0 !important;aspect-ratio:1;background:linear-gradient(rgba(47,128,255,.1) 1px,transparent 1px) center/6px 6px,linear-gradient(90deg,rgba(47,128,255,.1) 1px,transparent 1px) center/6px 6px,var(--bg1) !important}
+.kg{box-shadow:inset 0 0 0 1px rgba(47,128,255,.3);border-radius:0 !important;aspect-ratio:1;background:linear-gradient(rgba(47,128,255,.1) 1px,transparent 1px) center/6px 6px,linear-gradient(90deg,rgba(47,128,255,.1) 1px,transparent 1px) center/6px 6px,var(--bg1) !important}
 .kerb{background:repeating-linear-gradient(55deg,var(--red) 0 8.5px,#fff 9.5px 17.5px,var(--red) 18.5px)}
 @media (max-width:420px){
   table.timing th:nth-child(n+4), table.timing td:nth-child(n+4){display:none}
@@ -1554,6 +1554,7 @@ table.vx td:first-child{width:18%}
 .sc{margin:0}
 .sc.wide{grid-column:1/-1}
 .scb{display:block;width:100%;padding:0;border:0;background:#000;cursor:zoom-in;overflow:hidden}
+.scb picture, .rthumb picture{display:block;width:100%;height:100%}
 .scb img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;transition:transform .8s var(--brake)}
 .scb:hover img{transform:scale(1.02)}
 .scb:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
@@ -1572,7 +1573,7 @@ table.vx td:first-child{width:18%}
 /* ============ Resources ============ */
 .dls-m{font-family:var(--mono);font-size:10.5px;color:var(--dim)}
 .dli{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.rhero{position:relative;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;padding:36px 40px;background:var(--pop);box-shadow:inset 0 0 0 .75px var(--rule);overflow:hidden}
+.rhero{position:relative;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;padding:36px 40px;background:var(--pop);box-shadow:inset 0 0 0 1px var(--rule);overflow:hidden}
 .rhero::after{position:absolute;right:-40px;top:0;bottom:0;width:260px;background:repeating-linear-gradient(55deg,transparent 0 21.5px,rgba(216,35,26,.18) 22.5px 29.5px,transparent 30.5px 44px)}
 .rhero > *{position:relative;z-index:1}
 .rk{font-family:var(--mono);font-size:11px;color:var(--line)}
@@ -1584,7 +1585,7 @@ table.vx td:first-child{width:18%}
 .rzip .dli{width:20px;height:20px;margin-right:2px}
 .rgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .rgrid.r2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.rgrid article{display:flex;flex-direction:column;background:var(--pop);box-shadow:inset 0 0 0 .75px var(--rule)}
+.rgrid article{display:flex;flex-direction:column;background:var(--pop);box-shadow:inset 0 0 0 1px var(--rule)}
 .rprev{display:grid;grid-template-rows:1fr 1fr;height:176px}
 #resources .subhead{margin-top:64px}
 .rprev > div{display:grid;place-items:center;padding:18px}
@@ -2158,7 +2159,7 @@ table.vx td:first-child{width:18%}
       <h2 data-anchor="motion">Motion<button class="hlink" type="button" aria-label="Copy link to Motion"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">The mark is made on track and measured in the garage. Three tyres brake, their skids burn red and cool into the bars, and blue construction lines set the glyph at its lean. Motion always decelerates like a car on the brakes.</p>
       <div class="hair"></div>
-      <div class="stage"><iframe title="Logo animation, full sequence" src="assets/mark.html"></iframe></div>
+      <div class="stage"><iframe title="Logo animation, full sequence" src="assets/mark.html" loading="lazy"></iframe></div>
       <ol class="seq" style="margin-top:48px">
         <li><b><span>1</span>Braking run</b><p>Three tyres drop in, rolling a tread print inspired by Pirelli's F1 full wets behind them, under one fixed light. Each sits on three shadows that swing round as it passes under the lamp.</p></li>
         <li><b><span>2</span>Heat</b><p>At the start of each bar the tyres lock. The tread smears into skid rubber that glows Flame, white-hot where the tyre stops, and smoke rolls off the shoulders. This is the track's half of the mark.</p></li>
@@ -2516,7 +2517,7 @@ table.vx td:first-child{width:18%}
       <h2 data-anchor="showcase">Brand showcase<button class="hlink" type="button" aria-label="Copy link to Brand showcase"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">The system away from the screen: on cars, race kit, the track and the paddock. Each one follows the same few rules: black or white ground, one red lead, blue where something is measured, and every cut at 55°.</p>
       <div class="hair"></div>
-      <div class="scg"><figure class="sc wide"><button class="scb" type="button" data-full="assets/showcase/car-wrap.jpg" aria-label="Enlarge: Car wrap"><img src="assets/showcase/car-wrap.jpg" alt="Car wrap: A concept supercar in satin black, one red panel cut at 55°, the glyph on the door." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Car wrap</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>A concept supercar in satin black, one red panel cut at 55°, the glyph on the door.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/race-suit.jpg" aria-label="Enlarge: Race suit and helmet"><img src="assets/showcase/race-suit.jpg" alt="Race suit and helmet: One red band across the chest at 55°, blue piping, the glyph over the heart." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Race suit and helmet</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>One red band across the chest at 55°, blue piping, the glyph over the heart.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/trackside.jpg" aria-label="Enlarge: Trackside"><img src="assets/showcase/trackside.jpg" alt="Trackside: Kerbs at 55°, barrier boards alternating the lockup, the glyph and stripes." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Trackside</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>Kerbs at 55°, barrier boards alternating the lockup, the glyph and stripes.</span></figcaption></figure><figure class="sc wide"><button class="scb" type="button" data-full="assets/showcase/transporter.jpg" aria-label="Enlarge: Transporter"><img src="assets/showcase/transporter.jpg" alt="Transporter: A red panel cut at the lean, a blue stripe parallel to it." loading="lazy" decoding="async"></button><figcaption><span class="sct"><b>Transporter</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>A red panel cut at the lean, a blue stripe parallel to it.</span></figcaption></figure></div>
+      <div class="scg"><figure class="sc wide"><button class="scb" type="button" data-full="assets/showcase/car-wrap.webp" aria-label="Enlarge: Car wrap"><picture><source type="image/webp" srcset="assets/showcase/car-wrap-800.webp 800w, assets/showcase/car-wrap.webp 1600w" sizes="(max-width:820px) calc(100vw - 40px), 560px"><img src="assets/showcase/car-wrap.jpg" width="1600" height="900" alt="Car wrap: A concept supercar in satin black, one red panel cut at 55°, the glyph on the door." loading="lazy" decoding="async"></picture></button><figcaption><span class="sct"><b>Car wrap</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>A concept supercar in satin black, one red panel cut at 55°, the glyph on the door.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/race-suit.webp" aria-label="Enlarge: Race suit and helmet"><picture><source type="image/webp" srcset="assets/showcase/race-suit-800.webp 800w, assets/showcase/race-suit.webp 1600w" sizes="(max-width:820px) calc(100vw - 40px), 560px"><img src="assets/showcase/race-suit.jpg" width="1600" height="900" alt="Race suit and helmet: One red band across the chest at 55°, blue piping, the glyph over the heart." loading="lazy" decoding="async"></picture></button><figcaption><span class="sct"><b>Race suit and helmet</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>One red band across the chest at 55°, blue piping, the glyph over the heart.</span></figcaption></figure><figure class="sc"><button class="scb" type="button" data-full="assets/showcase/trackside.webp" aria-label="Enlarge: Trackside"><picture><source type="image/webp" srcset="assets/showcase/trackside-800.webp 800w, assets/showcase/trackside.webp 1600w" sizes="(max-width:820px) calc(100vw - 40px), 560px"><img src="assets/showcase/trackside.jpg" width="1600" height="900" alt="Trackside: Kerbs at 55°, barrier boards alternating the lockup, the glyph and stripes." loading="lazy" decoding="async"></picture></button><figcaption><span class="sct"><b>Trackside</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>Kerbs at 55°, barrier boards alternating the lockup, the glyph and stripes.</span></figcaption></figure><figure class="sc wide"><button class="scb" type="button" data-full="assets/showcase/transporter.webp" aria-label="Enlarge: Transporter"><picture><source type="image/webp" srcset="assets/showcase/transporter-800.webp 800w, assets/showcase/transporter.webp 1600w" sizes="(max-width:820px) calc(100vw - 40px), 560px"><img src="assets/showcase/transporter.jpg" width="1600" height="900" alt="Transporter: A red panel cut at the lean, a blue stripe parallel to it." loading="lazy" decoding="async"></picture></button><figcaption><span class="sct"><b>Transporter</b><span class="leadk"><i class="r"></i>Red leads</span></span><span>A red panel cut at the lean, a blue stripe parallel to it.</span></figcaption></figure></div>
       <p class="plate-cap scnote">Concept renders made with AI image generation, for direction and mood. Details such as vehicle shapes are invented, and the artwork is approximate: production work uses the files in <a href="#resources">Resources</a>.</p>
     </div></section>
 
@@ -2594,10 +2595,10 @@ table.vx td:first-child{width:18%}
           <div class="rbody"><h4 id="resources-glyph" data-anchor="resources-glyph">Glyph<button class="hlink" type="button" aria-label="Copy link to Glyph"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="rbtns"><a class="dlb" href="assets/logo/glyph-white.svg" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 16.5v3.5h15v-3.5"/></svg><span class="dlt"><b>White</b><span>SVG, 1 KB</span></span></a><a class="dlb" href="assets/logo/glyph-ink.svg" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 16.5v3.5h15v-3.5"/></svg><span class="dlt"><b>Ink</b><span>SVG, 1 KB</span></span></a></div></div></article></div>
       <p class="plate-cap">App icons for iOS and Android: <a href="assets/logo/app-icon-dark.svg" download>dark</a> and <a href="assets/logo/app-icon-light.svg" download>light</a>, 1024 px SVG.</p>
       <h3 class="subhead" id="resources-templates" data-anchor="resources-templates">Templates<button class="hlink" type="button" aria-label="Copy link to Templates"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
-      <div class="rgrid r2"><article class="rtpl"><div class="rthumb"><img src="assets/resources/thumb-slides.jpg" alt="Slides template preview" loading="lazy"></div>
-          <div class="rbody"><h4 id="resources-slides" data-anchor="resources-slides">Slides<button class="hlink" type="button" aria-label="Copy link to Slides"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>16:9 PowerPoint, six layouts on the book's grid</p><div class="rbtns"><a class="dlb" href="assets/templates/smedley-group-slides.pptx" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 16.5v3.5h15v-3.5"/></svg><span class="dlt"><b>Download</b><span>PPTX, 674 KB</span></span></a></div></div></article><article class="rtpl"><div class="rthumb"><img src="assets/resources/thumb-document.jpg" alt="Documents template preview" loading="lazy"></div>
-          <div class="rbody"><h4 id="resources-documents" data-anchor="resources-documents">Documents<button class="hlink" type="button" aria-label="Copy link to Documents"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>A4 Word, with title, heading, body, caption and strapline styles</p><div class="rbtns"><a class="dlb" href="assets/templates/smedley-group-document.docx" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 16.5v3.5h15v-3.5"/></svg><span class="dlt"><b>Download</b><span>DOCX, 48 KB</span></span></a></div></div></article><article class="rtpl"><div class="rthumb"><img src="assets/resources/thumb-signature.jpg" alt="Email signature template preview" loading="lazy"></div>
-          <div class="rbody"><h4 id="resources-email-signature" data-anchor="resources-email-signature">Email signature<button class="hlink" type="button" aria-label="Copy link to Email signature"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>Replace the words in brackets, paste into your mail settings</p><div class="rbtns"><a class="dlb" href="assets/templates/email-signature.html" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 16.5v3.5h15v-3.5"/></svg><span class="dlt"><b>Download</b><span>HTML, 1 KB</span></span></a></div></div></article><article class="rtpl"><div class="rthumb"><img src="assets/resources/thumb-social.jpg" alt="Social posts template preview" loading="lazy"></div>
+      <div class="rgrid r2"><article class="rtpl"><div class="rthumb"><picture><source type="image/webp" srcset="assets/resources/thumb-slides.webp"><img src="assets/resources/thumb-slides.jpg" width="640" height="360" alt="Slides template preview" loading="lazy"></picture></div>
+          <div class="rbody"><h4 id="resources-slides" data-anchor="resources-slides">Slides<button class="hlink" type="button" aria-label="Copy link to Slides"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>16:9 PowerPoint, six layouts on the book's grid</p><div class="rbtns"><a class="dlb" href="assets/templates/smedley-group-slides.pptx" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 16.5v3.5h15v-3.5"/></svg><span class="dlt"><b>Download</b><span>PPTX, 674 KB</span></span></a></div></div></article><article class="rtpl"><div class="rthumb"><picture><source type="image/webp" srcset="assets/resources/thumb-document.webp"><img src="assets/resources/thumb-document.jpg" width="640" height="360" alt="Documents template preview" loading="lazy"></picture></div>
+          <div class="rbody"><h4 id="resources-documents" data-anchor="resources-documents">Documents<button class="hlink" type="button" aria-label="Copy link to Documents"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>A4 Word, with title, heading, body, caption and strapline styles</p><div class="rbtns"><a class="dlb" href="assets/templates/smedley-group-document.docx" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 16.5v3.5h15v-3.5"/></svg><span class="dlt"><b>Download</b><span>DOCX, 48 KB</span></span></a></div></div></article><article class="rtpl"><div class="rthumb"><picture><source type="image/webp" srcset="assets/resources/thumb-signature.webp"><img src="assets/resources/thumb-signature.jpg" width="640" height="360" alt="Email signature template preview" loading="lazy"></picture></div>
+          <div class="rbody"><h4 id="resources-email-signature" data-anchor="resources-email-signature">Email signature<button class="hlink" type="button" aria-label="Copy link to Email signature"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>Replace the words in brackets, paste into your mail settings</p><div class="rbtns"><a class="dlb" href="assets/templates/email-signature.html" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 16.5v3.5h15v-3.5"/></svg><span class="dlt"><b>Download</b><span>HTML, 1 KB</span></span></a></div></div></article><article class="rtpl"><div class="rthumb"><picture><source type="image/webp" srcset="assets/resources/thumb-social.webp"><img src="assets/resources/thumb-social.jpg" width="640" height="360" alt="Social posts template preview" loading="lazy"></picture></div>
           <div class="rbody"><h4 id="resources-social-posts" data-anchor="resources-social-posts">Social posts<button class="hlink" type="button" aria-label="Copy link to Social posts"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>Square and story frames with safe-area guides</p><div class="rbtns"><a class="dlb" href="assets/templates/social-square.svg" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 16.5v3.5h15v-3.5"/></svg><span class="dlt"><b>Square</b><span>SVG, 12 KB</span></span></a><a class="dlb" href="assets/templates/social-story.svg" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 16.5v3.5h15v-3.5"/></svg><span class="dlt"><b>Story</b><span>SVG, 12 KB</span></span></a></div></div></article></div>
       <h3 class="subhead" id="resources-colour-type-and-icons" data-anchor="resources-colour-type-and-icons">Colour, type and icons<button class="hlink" type="button" aria-label="Copy link to Colour, type and icons"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
       <div class="rgrid r3">

@@ -1,0 +1,12 @@
+{
+  "name": "brand-book-sg",
+  "private": true,
+  "description": "Smedley Group brand book",
+  "scripts": {
+    "check": "node tests/check.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.13.0",
+    "playwright": "1.63.0"
+  }
+}
