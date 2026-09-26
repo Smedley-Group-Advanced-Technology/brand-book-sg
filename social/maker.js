@@ -218,7 +218,7 @@ const env = extra => Object.assign({ logos, photo: photo?.src, photoSize: photo 
 const opts = extra => Object.assign({ format: state.format, type: state.type, variant: vOf(state.type), business: state.business, ground: state.ground, data: dataFor(state.type) }, extra);
 function draw() {
   const f = FORMATS[state.format], frame = $('#frame');
-  frame.style.setProperty('--ar', `${f.w} / ${f.h}`);
+  frame.style.setProperty('--ar', `${f.w} / ${f.h}`); frame.style.setProperty('--arn', f.w / f.h);
   frame.innerHTML = own(render(opts({ guides: state.guides }), env()), 'pv-');
   const svg = frame.querySelector('svg'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', `Preview: ${TYPES[state.type].label.toLowerCase()} post`);
   $('#formatNote').textContent = f.note;

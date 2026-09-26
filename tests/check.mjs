@@ -247,6 +247,13 @@ for (const name of BROWSERS) {
       await page.goto(BASE + '/social/'); await page.waitForFunction(() => document.documentElement.dataset.ready === '1', null, { timeout: 20000 });
       const sw = await page.evaluate(() => [document.documentElement.scrollWidth, innerWidth]);
       sw[0] <= sw[1] ? ok(`${where} no horizontal overflow`) : W(where, `page is ${sw[0]} px wide in a ${sw[1]} px viewport`);
+      // the preview fits its post exactly in every format: no letterbox bands
+      const boxed = await page.evaluate(async () => { const out = [];
+        for (const k of ['square', 'portrait', 'story', 'landscape']) { document.querySelector(`#format [data-k="${k}"]`).click(); await new Promise(r => requestAnimationFrame(r));
+          const f = document.querySelector('#frame').getBoundingClientRect(), s = document.querySelector('#frame svg').getBoundingClientRect();
+          if (Math.abs(f.width - s.width) > 1.5 || Math.abs(f.height - s.height) > 1.5) out.push(`${k} ${Math.round(f.width)}x${Math.round(f.height)} around ${Math.round(s.width)}x${Math.round(s.height)}`); }
+        document.querySelector('#format [data-k="square"]').click(); return out; });
+      boxed.length ? W(where, 'preview letterboxes: ' + boxed.join(', ')) : ok(`${where} the preview fits its post in every format`);
       if (width === 1440) {
         const bad = await page.evaluate(async () => { const m = await import('./posts.js'), logos = await m.loadLogos('../assets/logo/'), out = [];
           for (const type of Object.keys(m.TYPES)) for (const [variant] of (m.TYPES[type].variants || [['default']])) for (const format of Object.keys(m.FORMATS)) for (const ground of Object.keys(m.GROUNDS)) {
