@@ -9,7 +9,8 @@ body{margin:0;background:var(--bg1);color:var(--ink);font:14px/1.5 Sora,system-u
 .top .lk:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
 .top span{font-family:var(--mono);font-size:12px;color:var(--dim);padding-left:18px;border-left:.75px solid var(--rule)}
 /* footer: the checker at 55°, then the lockup, the way back into the book and the small print, as in the book */
-.finish{overflow:hidden;border-top:.75px solid var(--rule)}
+/* the checker is the separator: nothing else sits above or below it */
+.finish{overflow:hidden}
 .finish .chq{height:16px;margin:0 -24px 0 -12px;background:conic-gradient(var(--ink) 25%,transparent 0 50%,var(--ink) 0 75%,transparent 0) 0 0/16px 16px;transform:skewX(35deg);transform-origin:0 100%}
 .colophon{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:20px 40px;padding:36px 32px 48px;font-size:12px;color:var(--faint)}
 .colophon .lk{display:inline-flex;line-height:0;color:var(--ink);opacity:.85;transition:opacity .2s}

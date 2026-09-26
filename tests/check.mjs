@@ -10,7 +10,7 @@ import { join, extname, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import * as pw from 'playwright';
-import { kitFiles, readZip, tokensCss, bookVersion, kitStat, STAT, ZIP, downloadLabels, uiCss, pageStamps, syncBookTools, iconCount, syncIcons, ICON_PAGES } from '../tools/kit.mjs';
+import { kitFiles, readZip, tokensCss, bookVersion, kitStat, STAT, ZIP, downloadLabels, uiCss, pageStamps, syncBookTools, iconCount, syncIcons, ICON_PAGES, skillGenerated, skillFiles, SKILL, SKILL_ZIP } from '../tools/kit.mjs';
 import { ICONS } from '../icons/library.js';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
@@ -86,6 +86,15 @@ console.log('kit');
   for (const [f, s] of Object.entries(await pageStamps())) if (s !== await readFile(join(ROOT, f), 'utf8')) K(`${f} has out-of-date cache stamps, run npm run kit`);
   if (syncBookTools(html) !== html) K('the book\'s tool icons differ from the icon library, run npm run kit');
   if (iconCount(html) !== html) K('the book gives the wrong number of icons, run npm run kit');
+  // the Claude skill: its generated references and assets match the book, and the download matches the skill
+  { let bad = 0;
+    for (const [k, v] of await skillGenerated(html)) { let d = null; try { d = await readFile(join(SKILL, k)); } catch {} if (!d || !d.equals(v)) { bad++; K(`skills/smedley-group-ui/${k} is out of date, run npm run kit`); } }
+    const skill = await readFile(join(SKILL, 'SKILL.md'), 'utf8'), fm = skill.match(/^---\nname: ([a-z0-9-]+)\ndescription: (.+)\n---\n/);
+    if (!fm || fm[1] !== 'smedley-group-ui' || fm[2].length > 1024) { bad++; K('SKILL.md needs a front matter with name smedley-group-ui and a description under 1024 characters'); }
+    let zipped = new Map(); try { zipped = readZip(await readFile(SKILL_ZIP)); } catch {}
+    const want = await skillFiles();
+    if (zipped.size !== want.size || [...want].some(([k, v]) => !zipped.get(k)?.equals(v))) { bad++; K('the skill download no longer matches skills/smedley-group-ui, run npm run kit'); }
+    if (!bad) ok(`the Claude skill is current (${want.size} files)`); }
   // every icon on the 24 px grid names its library drawing and matches it, so refining an icon updates it everywhere
   { const stray = [];
     for (const f of ICON_PAGES) {

@@ -31,6 +31,12 @@ writes `assets/icons` (one SVG per icon and `sprite.svg`), keeps the book's tool
 updates the icon count; the check fails on any icon in the book, the hero animation or the tool
 pages that is not drawn from the library. To add an icon, add a line to `ICONS` and run the kit.
 
+[`skills/smedley-group-ui`](skills/smedley-group-ui) is a Claude skill for designing UI with the
+book, offered as a download in Resources. Edit `SKILL.md` and `references/components.md` by hand;
+`npm run kit` writes the tokens and icon references, copies in the book's stylesheet, tokens, sprite
+and fonts, and zips it to `assets/skills/smedley-group-ui.zip`. The check fails if any of it is
+stale.
+
 The templates in `assets/templates` (slides, report, letter, email signature lockups, social frames) are
 built by [`tools/templates`](tools/templates): run `npm run templates` after changing a logo
 or the template code. It also refreshes the Resources previews when LibreOffice and Poppler

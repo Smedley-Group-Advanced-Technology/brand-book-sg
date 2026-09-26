@@ -3,7 +3,7 @@
 //   npm run kit    rebuild everything after changing tokens.json, an icon in the book, a logo or a template
 // tokens.json is the source for colours; the book's tool icons are the source for assets/icons.
 // tests/check.mjs imports the same functions and fails if anything has drifted.
-import { readFile, writeFile, readdir } from 'node:fs/promises';
+import { readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { deflateRawSync, inflateRawSync, crc32 } from 'node:zlib';
@@ -111,6 +111,30 @@ export async function pageStamps() {
   return out;
 }
 
+// ---------- the Claude skill ----------
+// skills/smedley-group-ui holds the hand-written guidance; the kit adds what must match the book exactly
+// (the tokens and icon references, the book's stylesheet, tokens, sprite and fonts) and zips it for Resources.
+export const SKILL = join(ROOT, 'skills/smedley-group-ui');
+export const SKILL_ZIP = join(A, 'skills/smedley-group-ui.zip');
+export async function skillGenerated(html) {
+  const t = JSON.parse(await readFile(join(A, 'tokens.json'), 'utf8')), g = new Map();
+  const rows = o => Object.entries(o).map(([k, v]) => `| \`--sg-${k}\` | ${v} |`).join('\n');
+  g.set('references/tokens.md', `# Colour and theme tokens\n\nGenerated from the brand book's tokens.json by npm run kit. Use the CSS in \`assets/tokens.css\`.\n\n## Fixed colours, the same in both themes\n\n| Token | Value |\n|---|---|\n${rows(t.fixed)}\n\n## Dark theme (the default)\n\n| Token | Value |\n|---|---|\n${rows(t.dark)}\n\n## Light theme\n\n| Token | Value |\n|---|---|\n${rows(t.light)}\n\n## The cut\n\n${t.angle.degrees} degrees; the cut is the height x ${t.angle.cutPerHeight}. Type: ${t.type.display} and ${t.type.readout}.\n`);
+  const fam = Object.fromEntries((await import('../icons/library.js')).FAMILIES);
+  g.set('references/icons.md', `# Icon catalogue\n\nGenerated from the brand book's icon library by npm run kit: ${ICONS.length} icons, 24 px grid, 1.5 px stroke, square ends, sharp corners, diagonals at 55 degrees. Use \`assets/sprite.svg\`: \`<svg viewBox="0 0 24 24"><use href="sprite.svg#sg-NAME"/></svg>\`.\n\n| Name | Label | Family | Search words |\n|---|---|---|---|\n${ICONS.map(i => `| \`${i[0]}\` | ${i[1]} | ${fam[i[2]]} | ${i[3]} |`).join('\n')}\n`);
+  g.set('assets/ui.css', uiCss(html));
+  g.set('assets/tokens.css', tokensCss(t));
+  g.set('assets/sprite.svg', sprite());
+  for (const f of (await readdir(join(A, 'fonts'))).sort()) g.set(`assets/fonts/${f}`, await readFile(join(A, 'fonts', f)));
+  return new Map([...g].map(([k, v]) => [k, Buffer.isBuffer(v) ? v : Buffer.from(v)]));
+}
+async function* walkFiles(dir, base = dir) {
+  for (const e of (await readdir(dir, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
+    const p = join(dir, e.name); if (e.isDirectory()) yield* walkFiles(p, base); else yield [p.slice(base.length + 1), p];
+  }
+}
+export async function skillFiles() { const m = new Map(); for await (const [rel, p] of walkFiles(SKILL)) m.set('smedley-group-ui/' + rel, await readFile(p)); return m; }
+
 // ---------- a small ZIP writer and reader, deflate only ----------
 export function writeZip(files, date) {
   const time = (date.getHours() << 11) | (date.getMinutes() << 5), day = ((date.getFullYear() - 1980) << 9) | ((date.getMonth() + 1) << 5) | date.getDate();
@@ -145,6 +169,8 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   for (const [k, v] of files) if (k.startsWith('icons/')) await writeFile(join(A, k), v);
   const htmlPath = join(ROOT, 'index.html'); let html = syncBookTools(await readFile(htmlPath, 'utf8'));
   const { v, date } = bookVersion(html);
+  for (const [k, v] of await skillGenerated(html)) { await mkdir(join(SKILL, k, '..'), { recursive: true }); await writeFile(join(SKILL, k), v); }
+  await mkdir(join(A, 'skills'), { recursive: true }); await writeFile(SKILL_ZIP, writeZip(await skillFiles(), date));
   const zip = writeZip(files, date);
   await writeFile(ZIP, zip);
   html = html.replace(STAT, kitStat(files.size, zip.length, v));
