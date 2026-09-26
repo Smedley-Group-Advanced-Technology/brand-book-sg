@@ -2,7 +2,7 @@
 // Every control is the book's own, from assets/ui.css; the few behaviours they need are wired up here.
 import { FORMATS, TYPES, BUSINESSES, GROUNDS, FONTS, ROWS, defaults, variantOf, fieldsFor, render, loadLogos, fontCSS, toPNG } from './posts.js?v=5ab2f18930';
 
-import { picto } from './pictos.js?v=1aba51d7b3';
+import { picto } from './pictos.js?v=256e5f9e64';
 
 const $ = s => document.querySelector(s);
 const el = (tag, attrs = {}, html = '') => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) v === true ? e.setAttribute(k, '') : v !== false && v != null && e.setAttribute(k, v); if (html) e.innerHTML = html; return e; };
