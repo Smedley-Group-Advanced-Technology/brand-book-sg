@@ -10,7 +10,7 @@ import { join, extname, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import * as pw from 'playwright';
-import { kitFiles, readZip, tokensCss, bookVersion, kitStat, STAT, ZIP } from '../tools/kit.mjs';
+import { kitFiles, readZip, tokensCss, bookVersion, kitStat, STAT, ZIP, downloadLabels } from '../tools/kit.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const AXE = await readFile(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
@@ -81,7 +81,8 @@ console.log('kit');
   const bv = bookVersion(html), stat = (html.match(STAT) || [''])[0];
   if (!bv) K('no "Version x.y, d Month yyyy." line in the book');
   else if (stat !== kitStat(have.size, zipBuf.length, bv.v)) K(`download card reads ${stat.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()}, expected ${have.size} files, ${Math.round(zipBuf.length / 1024)} KB, v${bv.v}; run npm run kit`);
-  if (failures.length === bad) ok(`tokens, book, generated files and the ${have.size}-file ZIP agree`);
+  for (const w of (await downloadLabels(html)).wrong) K(`download button for ${w}; run npm run kit`);
+  if (failures.length === bad) ok(`tokens, book, generated files and the ${have.size}-file ZIP agree, download sizes are right`);
 }
 
 // ---------- static server ----------
@@ -230,6 +231,38 @@ for (const name of BROWSERS) {
       } catch (e) { W(w, e.message.split('\n')[0]); }
     })();
     await m.ctx.close();
+  }
+
+  // ---------- the social post maker ----------
+  for (const [theme, width] of [['dark', 1440], ['light', 390]]) {
+    const where = `post maker ${theme} ${width}`;
+    const ctx = await browser.newContext({ viewport: { width, height: width < 800 ? 844 : 900 }, colorScheme: theme, reducedMotion: 'reduce', ...(width < 800 && name !== 'firefox' ? { isMobile: true, hasTouch: true } : {}) });
+    const page = await ctx.newPage(); const errors = [];
+    page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+    page.on('request', r => { const u = r.url(); if (!u.startsWith(BASE) && !/^(data|blob|about):/.test(u)) errors.push('third-party request ' + u.split('?')[0]); });
+    try {
+      await page.goto(BASE + '/social/'); await page.waitForFunction(() => document.documentElement.dataset.ready === '1', null, { timeout: 20000 });
+      const sw = await page.evaluate(() => [document.documentElement.scrollWidth, innerWidth]);
+      sw[0] <= sw[1] ? ok(`${where} no horizontal overflow`) : W(where, `page is ${sw[0]} px wide in a ${sw[1]} px viewport`);
+      if (width === 1440) {
+        const bad = await page.evaluate(async () => { const m = await import('./posts.js'), logos = await m.loadLogos('../assets/logo/'), out = [];
+          for (const type of Object.keys(m.TYPES)) for (const format of Object.keys(m.FORMATS)) for (const ground of Object.keys(m.GROUNDS)) {
+            try { const svg = m.render({ type, format, ground, business: 'fat-racing', data: m.defaults(type) }, { logos });
+              const doc = new DOMParser().parseFromString(svg, 'image/svg+xml'); if (doc.querySelector('parsererror') || !doc.querySelector('text')) out.push(`${type} ${format} ${ground}`); }
+            catch (e) { out.push(`${type} ${format} ${ground}: ${e.message}`); } }
+          return out; });
+        bad.length ? W(where, 'posts that fail to draw: ' + bad.join(', ')) : ok('every post type draws in every format and ground');
+        const size = await page.evaluate(async () => (await window.sgPost.png()).size);
+        size > 20000 ? ok(`PNG export works (${Math.round(size / 1024)} KB)`) : W(where, `PNG export is only ${size} bytes`);
+      }
+      if (name === 'chromium') {
+        await page.addScriptTag({ content: AXE });
+        const v = await page.evaluate(async () => (await axe.run(document, { resultTypes: ['violations'], runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'best-practice'] } })).violations.map(v => `${v.id} x${v.nodes.length} (${v.nodes.slice(0, 3).map(n => n.target.join(' ')).join('; ')})`));
+        v.length ? v.forEach(x => W(where, 'axe ' + x)) : ok(`${where} axe finds no violations`);
+      }
+    } catch (e) { W(where, e.message.split('\n')[0]); }
+    errors.length ? W(where, 'console: ' + [...new Set(errors)].join(' | ')) : ok(`${where} no console errors`);
+    await ctx.close();
   }
 
   if (name === 'chromium') {

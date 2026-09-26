@@ -20,10 +20,19 @@ the tool icons, colour tokens (`tokens.css`, `tokens.json`), templates for slide
 documents, email signatures and social posts, the favicon and link-preview image,
 and a ZIP of all of them.
 
+[`social/`](social) is the social post maker, linked from Resources: seven post types in four
+formats for each business, downloaded as PNG or SVG. Its renderer, `social/posts.js`, also
+draws the SVG frames in `assets/templates`, so the two never drift apart.
+
+The templates in `assets/templates` (slides, report, letter, email signature lockups, social frames) are
+built by [`tools/templates`](tools/templates): run `npm run templates` after changing a logo
+or the template code. It also refreshes the Resources previews when LibreOffice and Poppler
+are installed, then runs the kit.
+
 Colours live in [`assets/tokens.json`](assets/tokens.json). After changing it, a logo, a
 template or a tool icon in the book, run `npm run kit`: it regenerates `tokens.css` and
 `assets/icons`, rebuilds the ZIP and updates the file count and size on the book's
-download card. Update the matching colours in the book by hand; the check below fails
+download card, and the size on every download button. Update the matching colours in the book by hand; the check below fails
 until the book, the tokens and the ZIP agree.
 
 Preview through a local server, for example `python3 -m http.server`, rather than

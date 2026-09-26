@@ -52,6 +52,18 @@ export const bookVersion = html => {
 export const kitStat = (count, bytes, v) => `<div class="rstat"><span><b>${count}</b>files</span><span><b>${Math.round(bytes / 1024)} KB</b>ZIP</span><span><b>v${v}</b>version</span></div>`;
 export const STAT = /<div class="rstat">.*?<\/div>/;
 
+// the size printed on each download button in the book, from the file itself
+const DL = /(<a class="dlb" href="(assets\/[^"]+)" download>(?:(?!<\/a>).)*?<span class="dlt"><b>[^<]*<\/b><span>)([A-Z0-9]+), (\d+) KB(<\/span>)/gs;
+export async function downloadLabels(html) {
+  const wrong = []; let out = html;
+  for (const m of html.matchAll(DL)) {
+    let size; try { size = (await readFile(join(ROOT, m[2]))).length; } catch { wrong.push(`${m[2]} is linked but missing`); continue; }
+    const kb = Math.max(1, Math.round(size / 1024)), type = m[2].split('.').pop().toUpperCase();
+    if (Number(m[4]) !== kb || m[3] !== type) { wrong.push(`${m[2]} reads ${m[3]}, ${m[4]} KB, is ${type}, ${kb} KB`); out = out.replace(m[0], `${m[1]}${type}, ${kb} KB${m[5]}`); }
+  }
+  return { html: out, wrong };
+}
+
 // ---------- a small ZIP writer and reader, deflate only ----------
 export function writeZip(files, date) {
   const time = (date.getHours() << 11) | (date.getMinutes() << 5), day = ((date.getFullYear() - 1980) << 9) | ((date.getMonth() + 1) << 5) | date.getDate();
@@ -89,6 +101,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const zip = writeZip(files, date);
   await writeFile(ZIP, zip);
   html = html.replace(STAT, kitStat(files.size, zip.length, v));
+  html = (await downloadLabels(html)).html;
   await writeFile(htmlPath, html);
   console.log(`kit: ${files.size} files, ${Math.round(zip.length / 1024)} KB, v${v}`);
 }

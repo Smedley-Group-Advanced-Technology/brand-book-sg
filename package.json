@@ -4,10 +4,13 @@
   "description": "Smedley Group brand book",
   "scripts": {
     "check": "node tests/check.mjs",
-    "kit": "node tools/kit.mjs"
+    "kit": "node tools/kit.mjs",
+    "templates": "node tools/templates/build.mjs"
   },
   "devDependencies": {
     "axe-core": "4.13.0",
-    "playwright": "1.63.0"
+    "docx": "9.7.2",
+    "playwright": "1.63.0",
+    "pptxgenjs": "4.0.1"
   }
 }
