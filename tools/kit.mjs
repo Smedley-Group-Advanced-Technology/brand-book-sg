@@ -7,6 +7,7 @@ import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { deflateRawSync, inflateRawSync, crc32 } from 'node:zlib';
+import { createHash } from 'node:crypto';
 
 export const ROOT = fileURLToPath(new URL('..', import.meta.url));
 export const A = join(ROOT, 'assets');
@@ -87,6 +88,22 @@ export function uiCss(html) {
     + out.join('\n') + '\n';
 }
 
+// ---------- cache stamps for the post maker ----------
+// Browsers keep scripts for a while, so a new page could run an old script. Each file the maker loads is
+// addressed with a stamp of its content: change the file and the address changes with it.
+const stamp = s => createHash('sha1').update(s).digest('hex').slice(0, 10);
+export async function socialStamps() {
+  const read = p => readFile(join(ROOT, p), 'utf8');
+  const posts = await read('social/posts.js');
+  let maker = await read('social/maker.js');
+  maker = maker.replace(/from '\.\/posts\.js(\?v=\w+)?'/, `from './posts.js?v=${stamp(posts)}'`);
+  let page = await read('social/index.html');
+  page = page.replace(/src="maker\.js(\?v=\w+)?"/, `src="maker.js?v=${stamp(maker)}"`)
+    .replace(/href="\.\.\/assets\/ui\.css(\?v=\w+)?"/, `href="../assets/ui.css?v=${stamp(uiCss(await read('index.html')))}"`)
+    .replace(/href="\.\.\/assets\/fonts\/fonts\.css(\?v=\w+)?"/, `href="../assets/fonts/fonts.css?v=${stamp(await read('assets/fonts/fonts.css'))}"`);
+  return { maker, page };
+}
+
 // ---------- a small ZIP writer and reader, deflate only ----------
 export function writeZip(files, date) {
   const time = (date.getHours() << 11) | (date.getMinutes() << 5), day = ((date.getFullYear() - 1980) << 9) | ((date.getMonth() + 1) << 5) | date.getDate();
@@ -126,6 +143,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   html = html.replace(STAT, kitStat(files.size, zip.length, v));
   html = (await downloadLabels(html)).html;
   await writeFile(join(A, 'ui.css'), uiCss(html));
+  { const { maker, page } = await socialStamps(); await writeFile(join(ROOT, 'social/maker.js'), maker); await writeFile(join(ROOT, 'social/index.html'), page); }
   await writeFile(htmlPath, html);
   console.log(`kit: ${files.size} files, ${Math.round(zip.length / 1024)} KB, v${v}`);
 }

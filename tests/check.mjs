@@ -10,7 +10,7 @@ import { join, extname, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import * as pw from 'playwright';
-import { kitFiles, readZip, tokensCss, bookVersion, kitStat, STAT, ZIP, downloadLabels, uiCss } from '../tools/kit.mjs';
+import { kitFiles, readZip, tokensCss, bookVersion, kitStat, STAT, ZIP, downloadLabels, uiCss, socialStamps } from '../tools/kit.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const AXE = await readFile(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
@@ -82,6 +82,8 @@ console.log('kit');
   if (!bv) K('no "Version x.y, d Month yyyy." line in the book');
   else if (stat !== kitStat(have.size, zipBuf.length, bv.v)) K(`download card reads ${stat.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()}, expected ${have.size} files, ${Math.round(zipBuf.length / 1024)} KB, v${bv.v}; run npm run kit`);
   { let ui = ''; try { ui = await readFile(join(ROOT, 'assets/ui.css'), 'utf8'); } catch {} if (ui !== uiCss(html)) K('assets/ui.css no longer matches the book\'s controls, run npm run kit'); }
+  { const s = await socialStamps();
+    if (s.maker !== await readFile(join(ROOT, 'social/maker.js'), 'utf8') || s.page !== await readFile(join(ROOT, 'social/index.html'), 'utf8')) K('the post maker\'s cache stamps are out of date, run npm run kit'); }
   for (const w of (await downloadLabels(html)).wrong) K(`download button for ${w}; run npm run kit`);
   if (failures.length === bad) ok(`tokens, book, generated files and the ${have.size}-file ZIP agree, download sizes are right`);
 }
