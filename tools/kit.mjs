@@ -97,6 +97,7 @@ export async function socialStamps() {
   const posts = await read('social/posts.js');
   let maker = await read('social/maker.js');
   maker = maker.replace(/from '\.\/posts\.js(\?v=\w+)?'/, `from './posts.js?v=${stamp(posts)}'`);
+  maker = maker.replace(/from '\.\/pictos\.js(\?v=\w+)?'/, `from './pictos.js?v=${stamp(await read('social/pictos.js'))}'`);
   let page = await read('social/index.html');
   page = page.replace(/src="maker\.js(\?v=\w+)?"/, `src="maker.js?v=${stamp(maker)}"`)
     .replace(/href="\.\.\/assets\/ui\.css(\?v=\w+)?"/, `href="../assets/ui.css?v=${stamp(uiCss(await read('index.html')))}"`)

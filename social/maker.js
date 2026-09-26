@@ -2,6 +2,8 @@
 // Every control is the book's own, from assets/ui.css; the few behaviours they need are wired up here.
 import { FORMATS, TYPES, BUSINESSES, GROUNDS, FONTS, ROWS, defaults, variantOf, fieldsFor, render, loadLogos, fontCSS, toPNG } from './posts.js?v=5ab2f18930';
 
+import { picto } from './pictos.js?v=1aba51d7b3';
+
 const $ = s => document.querySelector(s);
 const el = (tag, attrs = {}, html = '') => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) v === true ? e.setAttribute(k, '') : v !== false && v != null && e.setAttribute(k, v); if (html) e.innerHTML = html; return e; };
 const ICON = {
@@ -201,19 +203,30 @@ function buildFields() {
   $('#typeNote').textContent = TYPES[t].hint;
 }
 
+// post types and layouts are picked by pictogram, from pictos.js
+// the preview's ids are prefixed so nothing else on the page can collide with them
+const own = (svg, p) => svg.replace(/id="([^"]+)"/g, `id="${p}$1"`).replace(/url\(#([^)]+)\)/g, `url(#${p}$1)`);
+function tile(k, label, desc, art, pressed, onPick) {
+  const b = el('button', { class: 'tile', type: 'button', 'aria-pressed': String(pressed), 'data-k': k, title: desc || label });
+  b.append(el('span', { class: 'tt' }, art), el('span', { class: 'tl' }, label));
+  b.addEventListener('click', onPick); return b;
+}
+const press = (box, k) => box.querySelectorAll('.tile').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.k === k)));
+const pictoOf = t => picto(`${t}.${vOf(t)}`);
+
 function buildVariants() {
-  const list = TYPES[state.type].variants || [];
-  $('#variantGrp').hidden = list.length < 2;
-  seg($('#variant'), 'variant', list, vOf(state.type), k => { state.variant[state.type] = k; buildFields(); draw(); save(); });
+  const box = $('#variant'), list = TYPES[state.type].variants || [];
+  $('#variantGrp').hidden = list.length < 2; box.innerHTML = '';
+  for (const [k, label] of list) box.appendChild(tile(k, label, '', picto(`${state.type}.${k}`), vOf(state.type) === k, () => {
+    state.variant[state.type] = k; press(box, k);
+    const tt = $(`#type .tile[data-k="${state.type}"] .tt`); if (tt) tt.innerHTML = pictoOf(state.type); // the type shows its chosen layout
+    buildFields(); draw(); save();
+  }));
 }
 
 function buildTypes() {
   const box = $('#type'); box.innerHTML = '';
-  for (const [k, tp] of Object.entries(TYPES)) {
-    const c = el('button', { class: 'chip', type: 'button', 'aria-pressed': String(state.type === k), 'data-k': k }, tp.label);
-    c.addEventListener('click', () => { state.type = k; box.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.k === k))); buildVariants(); buildFields(); draw(); save(); });
-    box.appendChild(c);
-  }
+  for (const [k, tp] of Object.entries(TYPES)) box.appendChild(tile(k, tp.label, tp.hint, pictoOf(k), state.type === k, () => { state.type = k; press(box, k); buildVariants(); buildFields(); draw(); save(); }));
 }
 
 const env = extra => Object.assign({ logos, photo: photo?.src, photoSize: photo && { w: photo.w, h: photo.h }, focus }, extra);
@@ -221,8 +234,8 @@ const opts = extra => Object.assign({ format: state.format, type: state.type, va
 function draw() {
   const f = FORMATS[state.format], frame = $('#frame');
   frame.style.setProperty('--ar', `${f.w} / ${f.h}`);
-  frame.innerHTML = render(opts({ guides: state.guides }), env());
-  const svg = frame.querySelector('svg'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', svg.querySelector('title')?.textContent || 'Post preview');
+  frame.innerHTML = own(render(opts({ guides: state.guides }), env()), 'pv-');
+  const svg = frame.querySelector('svg'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', `Preview: ${TYPES[state.type].label.toLowerCase()} post`);
   $('#formatNote').textContent = f.note;
   $('#meta').textContent = `${f.w} × ${f.h} px, ${BUSINESSES.find(b => b.key === state.business).name}, ${GROUNDS[state.ground].label.toLowerCase()} ground`;
 }

@@ -257,12 +257,12 @@ for (const name of BROWSERS) {
           return out; });
         bad.length ? W(where, 'posts that fail to draw: ' + bad.join(', ')) : ok('every post type and layout draws in every format and ground');
         // the photo field takes a dropped file, and a row moves by its handle from the keyboard
-        await page.click('#type .chip[data-k="photo"]');
+        await page.click('#type [data-k="photo"]');
         const dt = await page.evaluateHandle(async () => { const b = await (await fetch('../assets/showcase/race-suit-800.webp')).blob(); const d = new DataTransfer(); d.items.add(new File([b], 'suit.webp', { type: 'image/webp' })); return d; });
         await page.locator('.drop').dispatchEvent('drop', { dataTransfer: dt });
         await page.waitForSelector('.pic .thumb img', { timeout: 5000 }).catch(() => {});
         (await page.evaluate(() => !!document.querySelector('#frame svg image'))) ? ok('a dropped photo lands in the post') : W(where, 'a dropped photo did not reach the post');
-        await page.click('#type .chip[data-k="results"]');
+        await page.click('#type [data-k="results"]');
         const before = await page.evaluate(() => document.querySelector('.rw .cells .inp').value);
         await page.locator('.rw .grip').first().focus(); await page.keyboard.press('ArrowDown');
         const after = await page.evaluate(() => [...document.querySelectorAll('.rw .cells .inp:first-child')].map(i => i.value));
