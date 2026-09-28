@@ -1,4 +1,7 @@
-# The book's controls
+# The book's controls, in HTML
+
+For work outside React only (a static page, an email, a prototype). Every Back Office screen uses the React
+library instead: see `library.md`. These are the same controls; the library wraps these classes.
 
 Link the fonts and `ui.css` (and the tokens if you need the `--sg-*` names), then use these classes. Themes follow `data-theme="dark"` or `"light"` on `<html>`, or the reader's system setting.
 
