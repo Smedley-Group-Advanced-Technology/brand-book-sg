@@ -181,12 +181,14 @@ Everything a drag does also works with one tap or key, through the **Send to** m
 
 ## B7. What every app must do
 
-The shell (windows, gaps, drag and drop, Send to) is not yet part of the Back Office app. Build every app ready
-for it: records as `RecordChip`s, and the two functions below written as plain functions in the app's module.
-The shell reads them from the app's root element as `el._office = { accepts(record), receive(record) }`, where
-`record` is `{ type, id, rec }` and `rec` is the record's data (for a range, `{ id, from, to, days }`).
+The shell (windows, gaps, drag and drop, Send to) is the library's `Desk`, and the signed-in home page is a desk.
+An app takes part by calling `useDeskApp({ accepts, receive })` inside itself (the React form of
+`el._office = { accepts(record), receive(record) }`) and marking what changed with `useLandingMark()`.
+`record` is `{ type, id, name, context?, rec? }`; `rec` is the app's data from the desk's `resolveRecord`, or
+`{ id, from, to, days }` for a range. See `library.md`, Records and drops.
 
-1. **Show every record as a `RecordChip`**, or as a focusable row carrying the same `data-drag` key.
+1. **Show every record as a `RecordChip`**, or as a focusable row carrying the same `data-drag` key
+   (`DataTable rowDragKey`, with `data-drag-name` and `data-drag-context` when the row has no chip).
 2. **Say what it would do.** Register with the shell an `accepts(record)` that returns `{ verb, icon }` for
    every record type the app can act on, and nothing for the rest. It runs for every window as a drag starts,
    so keep it quick and without side effects.
@@ -201,6 +203,7 @@ The shell reads them from the app's root element as `el._office = { accepts(reco
    something has been dropped.
 7. **Follow the window's width.** Build the app in `AppScreen` and lay it out for any width from 260 px.
 8. **Keep state per window**, because the same app can be open twice and each copy receives its own drops.
+   Use `useCollectionState` without `url` inside apps.
 9. **Leave the shell's keys and gestures alone:** never bind Alt with the arrows, Alt O, Alt R, Alt F, Alt C,
    Shift F10, the menu key or Escape; never cancel pointer presses on records unless the app handles the
    gesture itself (as the Calendar does for marking days); never put a drag key on an input.

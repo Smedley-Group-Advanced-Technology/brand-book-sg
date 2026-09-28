@@ -29,7 +29,10 @@ Pick from this table before writing any markup. The left column is the need; use
 
 | The screen needs | Use | Not |
 |---|---|---|
+| The desk that holds the apps | `Desk` with a `DeskAppDefinition` per app | your own windows or tabs |
+| An app taking part in drag and drop | `useDeskApp({ accepts, receive })` and `useLandingMark()` | reading `data-drag` yourself |
 | The root of an app screen | `AppScreen` | a `div` with your own padding |
+| The heading of a screen (title, context line, up to 3 controls) | `PageHeader` | a `Heading` and a flex row |
 | A driver, venue, session or range of dates shown anywhere | `RecordChip` | plain text or a link |
 | What a dropped record narrows the app to | `FilterBar` holding the `RecordChip` | a `Badge` next to the title |
 | The invitation to drop a record | `Hint` | an `EmptyState` |
@@ -37,10 +40,16 @@ Pick from this table before writing any markup. The left column is the need; use
 | Navigation that looks like a button | `ButtonLink` | `Button` with `onClick={() => router.push()}` |
 | An icon-only action | `IconButton` with a `label` | `Button` with only an icon |
 | Actions that belong together | `ButtonGroup` | a flex row of buttons |
-| An irreversible action (delete, remove, revoke) | `HoldToConfirm`, or `Dialog` with a `warning` button | a plain `Button` |
+| An irreversible action (delete, remove, revoke) | `HoldToConfirm`, or `ConfirmDialog` | a plain `Button`, or a `Dialog` you wire yourself |
 | Any labelled input | `Field` wrapping `Input`, `Textarea`, `Select` or `DateInput` | a bare `<label>` and `<input>` |
 | A number with a unit | `UnitInput` | `Input` plus a text suffix |
-| A search box | `IconInput icon="search"` with `type="search"` | `Input` with a placeholder only |
+| A search box | `SearchField` (labelled, reports after typing pauses) | `Input` with a placeholder only |
+| The row of search, chips and sorting above a collection | `CollectionToolbar` | a flex row of controls |
+| The buttons at the end of a form | `FormActions` | a row of `Button`s |
+| Read-only facts on a record | `FactList` | disabled inputs |
+| The errors after a failed save | `ErrorSummary` at the top, plus `error` on each `Field` | an `Alert` listing them |
+| Work that would be lost by leaving | `UnsavedChangesGuard when={dirty}` | `window.confirm` |
+| A term explained beside a field's label | `Field tip="..."` | text in the label |
 | One choice from 2 to 5 short options, always visible | `SegmentedControl` | `Select` |
 | One choice from 6 to about 15 options | `Select` | `RadioGroup` |
 | One choice from a long or searchable list (people, venues) | `Combobox` | `Select` |
@@ -59,11 +68,18 @@ Pick from this table before writing any markup. The left column is the need; use
 | A passing confirmation ("Saved") | `useToast()` | `Alert` |
 | An unread count | `CountBadge` | `Badge` |
 | Loading a region | `Skeleton` in the shape of the content | `Spinner` over a blank area |
+| Loading a whole screen (`loading.tsx`, Suspense) | `ScreenSkeleton` | a centred `Spinner` |
+| A page that does not exist, may not be opened, or failed | `StatusPage` | an `Alert` on an empty page |
+| The bar across the signed-in workspace | `WorkspaceBar` with `UserMenu` | your own header |
 | Loading inside a button | `Button loading` | swapping the label for a spinner |
 | A task with known progress | `Progress` or `LinearProgress value` | `Spinner` |
 | A task with unknown progress | `LinearProgress` without `value`, or `Spinner` | a looping animation of your own |
 | Nothing to show yet | `EmptyState` | an empty table |
-| Rows of records with columns | `Table` | a grid of `div`s |
+| Rows of records that sort, select, open or carry drag keys | `DataTable` | `Table` with your own sorting and checkboxes |
+| Acting on the selected rows | `BulkActionBar` | buttons that appear in the header |
+| The count and pages under a collection | `PaginationBar` | `Pagination` with a count beside it |
+| Search, sort, page and filters of a collection | `useCollectionState` (`url: true` on pages, off in desk apps) | several `useState`s |
+| Static rows with columns (no sorting or selection) | `Table` | a grid of `div`s |
 | A short list of records (up to about 12) | `List` | `Table` |
 | Dated items | `Agenda` | `List` with dates in the title |
 | History or milestones | `Timeline` | `List` |
@@ -71,7 +87,7 @@ Pick from this table before writing any markup. The left column is the need; use
 | Switching views of the same content | `Tabs` | `SegmentedControl` |
 | Sections a person opens one by one (FAQ, advanced settings) | `Accordion` | `Tabs` |
 | More actions behind one control | `Dropdown` (links and buttons) or `Menu` (menu items) | a custom popup |
-| Explaining a term | `Tooltip` | the `title` attribute |
+| Explaining a term | `Tooltip` on the term, or `Tooltip icon="help"` / `"info"` beside it | the `title` attribute |
 | Content that scrolls inside a fixed area | `ScrollArea` | `overflow: auto` |
 | Where the person is | `Breadcrumbs` (pages) or `SideNavigation` (sections) | a row of links |
 | Progress through a multi-step flow | `Steps` | numbered headings |
@@ -86,8 +102,9 @@ Pick from this table before writing any markup. The left column is the need; use
 ## Rules that apply to every component
 
 - One `Button variant="primary"` per view. Everything else is `secondary`, or `text` for low-weight links.
-- Every control has a visible label. `IconButton`, `Tooltip`, `ScrollArea` (when focusable), charts and
-  `Table` take the text that names them; always pass it.
+- Every control has a visible label. `IconButton`, `Tooltip`, `ScrollArea` (when focusable), charts,
+  `Table` and `DataTable` take the text that names them; always pass it. An icon `Tooltip` is named by its
+  children ("About the performance index").
 - `Field` connects the label, `hint` and `error` to the control through the render prop. Always spread the
   props it gives you onto the control: `{(props) => <Input {...props} />}`.
 - Errors are sentences that say what is wrong and how to fix it, passed as `error` to `Field` (they show in
@@ -104,6 +121,34 @@ Pick from this table before writing any markup. The left column is the need; use
 Back Office apps share one desk and hand records to each other by drag and drop (see `ux.md`). These are the
 pieces an app needs to take part.
 
+**Desk** `apps: DeskAppDefinition[]`, `initialApps?` (ids to open side by side on first use), `storageKey?`
+(remembers the layout in this browser; include the person's id), `homeApps?` (`{ person, venue, session,
+range }`: the app id each record opens in on a gap), `resolveRecord?(type, id)` (the app's data, passed as
+`record.rec`), `comingSoon?`, `label?`. The whole of `ux.md` Part A: Tile and Scroll, gaps, resizing, window
+bars and menus, the overview, narrow tabs under 760 px of desk width, drag and drop and Send to. It fills
+its parent, which must have a height.
+
+**DeskAppDefinition** `{ id, name, owner, icon, description?, context?: "engineering" | "racing" | "group",
+render() }`. `owner` is the business shown in mono in the window bar ("Advanced Technology").
+
+**useDeskApp** `({ accepts?(record), receive?(record) })`, called inside the app. `record` is `{ type, id,
+name, context?, rec? }`; `accepts` returns `{ verb, icon }` or nothing. Each window registers separately,
+and outside a `Desk` it does nothing, so the app also works as a page. **useLandingMark** returns a function
+taking the changed element (or a function that finds it after the redraw) and draws the landing mark.
+
+```tsx
+function Booking() {
+  const [driver, setDriver] = useState<string | null>(null);
+  const mark = useLandingMark();
+  const lead = useRef<HTMLDivElement>(null);
+  useDeskApp({
+    accepts: (r) => (r.type === "person" ? { verb: `Book a session for ${r.name.split(" ")[0]}`, icon: "calendar" } : null),
+    receive: (r) => { setDriver(r.name); mark(() => lead.current); },
+  });
+  return <AppScreen>{/* ... */}<div ref={lead}>{/* the lead */}</div></AppScreen>;
+}
+```
+
 **AppScreen** the root of every app. It fills its parent and is the container its layout measures, so the
 app follows the width of its window, from a 260 px column to a full desk. It pads 24 px (16 px under
 480 px) with 24 px between children. Never put a `Container` inside it.
@@ -111,12 +156,15 @@ app follows the width of its window, from a 260 px column to a full desk. It pad
 **RecordChip** `type: "person" | "venue" | "session" | "range"`, `id` (ranges as
 `"YYYY-MM-DD..YYYY-MM-DD"`), `name`, `context?` (one line: "FKL Łódź, cadet", "Heyford Park, Fri 26 Sep,
 16:00", "Oxfordshire, United Kingdom", "7 days, 18 sessions"), `large?` (in a record's header),
-`onActivate?()`. It renders `data-drag="type:id"`, which the shell reads to make it draggable and to give it
-the Send to menu. Every record an app shows is a `RecordChip`, or a row carrying the same `data-drag` key.
+`onActivate?()`. It renders `data-drag="type:id"`, which the desk reads to make it draggable and to give it
+the Send to menu. Inside a desk a click opens Send to, so leave `onActivate` unset there. Every record an app
+shows is a `RecordChip`, or a row carrying the same `data-drag` key (`DataTable rowDragKey`); a row without a
+chip names its record with `data-drag-name` and `data-drag-context`.
 
 **FilterBar** `label` (what the filter does: "Sessions in", "Drivers at", "Laps between"), children (the
 dropped record, as a `RecordChip` so it can be picked up again), `onClear()`, `clearLabel?` (default "Clear
-this filter"). One bar per filter; they stack.
+this filter"), shown as a quiet cross. One bar per filter; they stack. In an app under 400 px wide the
+record takes its own line under the label.
 
 **Hint** `icon?` (default `drag`), children: what to drop and what it will do ("Drag a driver here for their
 account, a venue for its books, or a range of dates from the Calendar."). Remove it once something has been
@@ -160,15 +208,16 @@ drains the fill and nothing happens.
 live (a session, a timer).
 
 **Dropdown** `label` (the trigger text), `align?: "start" | "end"`, children: `<button>` and `<a>` elements,
-`<hr />` between groups, `className="neg"` on a destructive one.
+`<hr />` between groups, `className="neg"` on a destructive one. The open panel is placed against the
+viewport, so it is never clipped by a table or a window, and opens above when there is no room below.
 
 **Menu** `label`, `items: { label, onSelect(), checked?, disabled?, warning?, shortcut? }[]`. Use `checked`
 for a choice among items (sorting), `warning` for a destructive item.
 
 ## Forms
 
-**Field** `id`, `label`, `hint?`, `error?`, children as a render prop receiving
-`{ id, "aria-describedby", "aria-invalid" }`.
+**Field** `id`, `label`, `hint?`, `error?`, `tip?` (a help mark beside the label for a term the hint
+cannot carry), children as a render prop receiving `{ id, "aria-describedby", "aria-invalid" }`.
 
 ```tsx
 <Field id="driver-email" label="Email" hint="Where session reminders go." error={errors.email}>
@@ -177,7 +226,9 @@ for a choice among items (sorting), `warning` for a destructive item.
 ```
 
 **Input** every native input prop. **Textarea** every native textarea prop (2 rows by default).
-**UnitInput** `unit: string` plus input props: `<UnitInput unit="bar" defaultValue="1.40" />`.
+**UnitInput** `unit: string` plus input props: `<UnitInput unit="bar" type="number" step=".01"
+defaultValue="1.40" />`. With `type="number"` it has the brand's minus and plus instead of the browser's
+spin arrows; holding repeats, decimals are kept and `min`/`max` hold.
 **IconInput** `icon: IconName` plus input props.
 
 **Select** (inside `Field`) `options: { value, label, description?, disabled? }[]`, `value: string | null`,
@@ -205,6 +256,31 @@ whole "or choose a file" line), `hint?` (types and limits, for example "PDF or D
 **Slider** `label`, `value`, `onValueChange`, `min?`, `max?`, `step?`, `disabled?`.
 **Stepper** `label`, `value`, `onValueChange`, `min?`, `max?`, `step?`, `disabled?`.
 
+**FormActions** `submitLabel` (what happens: "Save changes", "Add Maja to FKL Łódź"), `pending?`,
+`disabled?`, `submitVariant?: "primary" | "engineering"`, `cancelHref?` or `onCancel?`, `cancelLabel?`
+(default "Cancel"), `status?` (one short line: "Unsaved changes"). The submit is the view's primary.
+
+**ErrorSummary** `errors: { id, message }[]` (the field ids), `title?`. It takes focus when errors arrive and
+links to each field. Renders nothing without errors.
+
+**FactList** `items: { label, value, measure? }[]`. Read-only facts, a mono label above each value;
+`measure` for codes, licences and amounts. An empty value reads "Not set".
+
+**UnsavedChangesGuard** `when` (the form is dirty), `title?`, `description?`, `leaveLabel?`, `stayLabel?`.
+Asks before a tab close or a link discards the work. Navigation the screen starts itself is not
+intercepted.
+
+```tsx
+<form onSubmit={save} noValidate>
+  <UnsavedChangesGuard when={dirty} />
+  <ErrorSummary errors={errors} />
+  <Section title="Licence">
+    <FactList items={[{ label: "Licence number", value: "PL-C-2026-0412", measure: true }]} />
+  </Section>
+  <FormActions submitLabel="Save changes" pending={saving} cancelHref="/drivers/mk" />
+</form>
+```
+
 ## Feedback
 
 **Alert** `title` (required, the point), children (the detail and the fix), `tone?: "info" | "success" |
@@ -228,6 +304,10 @@ notify("Session archived", "info", { label: "Undo", onClick: restore });
 
 **EmptyState** `title`, children (what will appear and why it is empty), `action?` (usually a `Button`).
 
+**StatusPage** `code?` ("404", "403"), `title` (what happened), children (why, and how to continue),
+`actions?`. For `not-found.tsx`, `error.tsx` and a page the person may not open. **ScreenSkeleton** `label`
+(announced), `layout?: "collection" | "record"`, `rows?`. For `loading.tsx`.
+
 ## Navigation and overlays
 
 **Tabs** `label`, `items: { id, label, content }[]`, `defaultValue?`. **Accordion**
@@ -239,10 +319,24 @@ notify("Session archived", "info", { label: "Undo", onClick: restore });
 **Dialog** `open`, `onOpenChange(open)`, `title` (a question for decisions: "Remove from shortlist?"),
 `description?` (the concrete effect), children, `footer?` (the buttons; the safe choice last).
 
-**Tooltip** `label` (one short line), `placement?: "top" | "bottom"`, children (the trigger text).
+**ConfirmDialog** `open`, `onOpenChange`, `title` (the question), `description?`, `confirmLabel` ("Remove
+driver"), `cancelLabel?`, `onConfirm()`, `tone?: "warning" | "primary"`, `pending?`, `error?`. The action
+comes first and the safe choice last with focus. If `onConfirm` returns a promise it stays busy and cannot
+be dismissed, closes on success and shows the error on failure.
+
+**Tooltip** `label` (a short note, one or two lines), `placement?: "top" | "bottom"`, `icon?: "help" |
+"info"`, children (the trigger text, or with `icon` the mark's accessible name). It reads as an annotation:
+the raised surface with a hairline and a Line Blue leader at 55 degrees to the trigger. In a form use
+`Field tip` rather than placing one yourself.
 **Popover** `title`, children: a static explanation surface.
 
-**ThemeSwitch** no props. Place it once, in the app bar.
+**ThemeSwitch** `onThemeChange?(theme)` (to remember the choice, for example in a cookie the server reads).
+Place it once, in the app bar; on phones it may move into the `UserMenu`. Switches on one page stay in step.
+
+**WorkspaceBar** `navigation: { label, href, current? }[]`, `actions?` (the `ThemeSwitch` and `UserMenu`),
+`homeHref?`, `mainId?` (the skip link's target, default "main"). The current destination has the red lead;
+on phones the destinations take a second row. **UserMenu** `name`, `detail?` (the role), children (links,
+and a sign-out form).
 
 ## Layout and content
 
@@ -257,7 +351,8 @@ section opener). **FinishSeparator** the checker: the last thing before the foot
 **BrandLogo** the Smedley Group logo for the theme. **AppIcon** `size?`, `theme?`.
 
 **Table** `caption` (required, names the table), children `<thead>`, `<tbody>` with native `<tr>`, `<th>`,
-`<td>`. It scrolls sideways inside itself on narrow screens. Sorting and filtering live in the screen.
+`<td>`. It scrolls sideways inside itself on narrow screens. For records that sort, select or open, use
+`DataTable`.
 
 **List** `items: { id, title, description?, value?, leading? }[]` (leading defaults to an `Avatar`).
 **Agenda** `items: { id, date, title, description, status? }[]`. **Timeline**
@@ -269,6 +364,50 @@ a size through `style` or `className` (for example `style={{ height: 320 }}`).
 
 **AppShell** `title`, `actions?`, `navigation`, children: a phone app frame. **BrowserFrame** and
 **EmailPreview** are for showing designs inside the catalogue, not for product screens.
+
+## Collections
+
+The blocks of the Collection template (`layouts.md`, B). Filtering, sorting and fetching stay with the
+screen; these show the result and report what the person asked for.
+
+**PageHeader** `title`, `context?`, `actions?` (up to three), `breadcrumbs?: { label, href? }[]`.
+
+**CollectionToolbar** `label?`, children: `SearchField` first, then `Chip`s and a sort `Menu` or `Dropdown`.
+**SearchField** `id`, `label`, `value`, `onValueChange`, `placeholder?`, `hint?`, `delay?` (250 ms).
+
+**DataTable** `caption`, `columns: { key, header, cell(row), sortable?, numeric?, priority?: "high" |
+"medium" | "low" }[]`, `rows` (already filtered, sorted and paged), `rowKey(row)`, `rowLabel(row)` (names the
+row for its checkbox and actions), `sort?` and `onSortChange?`, `selected?: Set<string>` and
+`onSelectedChange?`, `onRowActivate?(row)` (click or Enter opens the record), `rowActions?(row)` (one
+`IconButton` or a `Dropdown align="end"`), `rowDragKey?(row)` ("person:mk"), `loading?`, `empty?` (an
+`EmptyState` that replaces the table). The first column is the record, as a `RecordChip`. `low` columns
+hide under 800 px of app width and `medium` ones under 480 px; under 480 px the rows stack with the headers
+as labels, so offer sorting in the toolbar too. **SortHeader** is its sortable header, for a hand-built
+`Table`.
+
+**BulkActionBar** `count`, `noun: { one, other }`, `onClear()`, children (the actions). Shown only while
+rows are selected. **PaginationBar** `page`, `pageSize`, `total`, `noun`, `onPageChange` ("21 to 40 of 248
+drivers").
+
+**useCollectionState** `(defaults?, { url?, prefix? })` returns `query`, `sort`, `page`, `filters` and
+`setQuery`, `setSort`, `setPage`, `setFilter(name, value | null)`, `reset()`. Search, sort and filter
+changes return to page 1. `url: true` keeps it in the address on pages (`?q=maja&sort=-best&page=2&f.hub=lodz`);
+leave it off in desk apps, where each window keeps its own. `sortRows(rows, sort, value)` and
+`pageRows(rows, page, size)` handle short lists loaded whole.
+
+```tsx
+const state = useCollectionState({ sort: { key: "name", direction: "asc" } });
+const rows = pageRows(sortRows(drivers, state.sort, (d, key) => d[key]), state.page, 20);
+<PageHeader title="Driver pool" context="Season 2026, 248 drivers in 12 hubs" />
+<CollectionToolbar>
+  <SearchField id="driver-search" label="Search drivers" value={state.query} onValueChange={state.setQuery} />
+</CollectionToolbar>
+<DataTable caption="Drivers by best lap" columns={columns} rows={rows} rowKey={(d) => d.id}
+  rowLabel={(d) => d.name} rowDragKey={(d) => `person:${d.id}`} sort={state.sort} onSortChange={state.setSort}
+  onRowActivate={(d) => open(d.id)} empty={<EmptyState title="No drivers match">...</EmptyState>} />
+<PaginationBar page={state.page} pageSize={20} total={drivers.length} noun={{ one: "driver", other: "drivers" }}
+  onPageChange={state.setPage} />
+```
 
 ## Data and charts
 

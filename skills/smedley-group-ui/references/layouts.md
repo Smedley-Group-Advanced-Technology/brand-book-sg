@@ -17,7 +17,7 @@ narrow as 260 px. So an app is laid out by **the width of its own window**:
 
 | App width | Name | What changes |
 |---|---|---|
-| 260 to 479 px | narrow | one column; section actions drop under the heading; a `Table` hides its least useful columns or becomes a `List`; `Metric`s two across; dialogs full width with stacked buttons |
+| 260 to 479 px | narrow | one column; section actions drop under the heading; a `DataTable` hides its `medium` and `low` columns and stacks its rows (a plain `Table` becomes a `List`); `Metric`s two across; dialogs full width with stacked buttons |
 | 480 to 799 px | half | two columns of supporting content; forms stay one column; a side column becomes a section below |
 | 800 to 1199 px | wide | a main column with a 280 to 320 px side column; `Metric`s four across; forms may pair two short fields |
 | 1200 px and over | desk | the same layout with more room; never stretch paragraphs past 76 characters |
@@ -57,7 +57,7 @@ AppScreen
 └─ Sections ─── calmer supporting content, separated by hairlines and space
 ```
 
-- **Heading.** `Heading level={1}` with a noun ("Driver pool"), then `Text muted` with the period, count or
+- **Heading.** `PageHeader` with a noun `title` ("Driver pool") and a `context` line with the period, count or
   place ("Season 2026, 248 drivers in 12 hubs"). Controls on the right: a `SegmentedControl` for the period
   or view, a search, one action. They drop under the heading when narrow.
 - **Metrics.** Two or four `Metric`s, never three, never more than four. Each has a unit; a change is green
@@ -84,18 +84,22 @@ Sections  two smaller charts or lists, two across from 480 px
 Many records: drivers, venues, invoices, accounts.
 
 ```
-Heading   "People" · "248 drivers in 12 hubs"                 [search] [primary action]
-Toolbar   Chips for quick filters · sort Menu
-FilterBar (when a record was dropped)
-Lead      Table (wide, desk) or List (narrow, half)
-          Pagination with the count
+PageHeader        "People" · "248 drivers in 12 hubs"                        [primary action]
+CollectionToolbar SearchField · Chips for quick filters · sort Menu
+FilterBar         (when a record was dropped)
+BulkActionBar     (while rows are selected)
+Lead              DataTable (it stacks its rows when narrow)
+                  PaginationBar with the count
 ```
+
+- State: `useCollectionState` (`url: true` on a page, off in a desk app).
 
 - The first column is the record as a `RecordChip` (or its name with an `Avatar`), then attributes, status
   as a `Badge` last. Numbers right-aligned in mono, with units.
 - A row opens its record on click or Enter. Row actions: one `IconButton` or a `Dropdown align="end"` at the
   end of the row, never a row of buttons.
-- No results: an `EmptyState` that repeats the search and offers to clear it.
+- No results: an `EmptyState`, passed as `DataTable empty`, that repeats the search and offers to clear it.
+- Loading: `DataTable loading` inside the screen, `ScreenSkeleton` for the whole page.
 
 ### C. Record
 
@@ -108,14 +112,16 @@ Tabs         Details · Sessions · Account · History
 Lead         <form>, one column, max 720 px
                Section "Details"   Full name · Email · Hub (Select)
                Section "Licence"   Number (mono) · Expires (DateInput)
-             [Save changes] [Cancel]
+             FormActions [Save changes] [Cancel]
 ```
+
+- The form opens with `ErrorSummary` after a failed save and holds an `UnsavedChangesGuard` while dirty.
 
 - Fields in one column; two short fields may share a row from 800 px, never three.
 - Group fields in `Section`s of three to six, titled with a noun.
-- Read-only facts are text with a muted label above, never disabled inputs.
+- Read-only facts are a `FactList`, never disabled inputs.
 - Destructive actions sit apart from Save: in the header `Dropdown` or a last `Section`, confirmed with
-  `HoldToConfirm` or a `Dialog`.
+  `HoldToConfirm` or a `ConfirmDialog`.
 
 ### D. Flow
 

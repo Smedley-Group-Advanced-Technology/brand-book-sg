@@ -207,14 +207,16 @@ Before handing over, check every line. Report any you could not check.
 2. The screen follows one template from `layouts.md`, with its regions in order and one lead element.
 3. Every control, list, table, chart and message is a library component imported from `@/design-system`;
    nothing is restyled; no other UI package was added.
-4. One primary button in the view. Destructive actions are confirmed and sit apart from Save.
+4. One primary button in the view. Destructive actions are confirmed (`ConfirmDialog` or `HoldToConfirm`) and
+   sit apart from Save.
 5. The ground is flat black or white; only drawings sit on Blueprint.
 6. Red and blue never touch edge to edge, no red type on blue, red never means an error.
 7. Sora and IBM Plex Mono only, in their roles; no italics or capital labels.
 8. Every accent is cut at 55° leaning with the glyph; no rounded corners.
 9. Sections are separated by hairlines or space, not boxes; no hairline or border next to a checker; chequers only
    at a finish.
-10. Loading, empty and error states are designed.
+10. Loading, empty and error states are designed: `DataTable loading` and `empty`, `ScreenSkeleton`,
+    `StatusPage`, `ErrorSummary`. Lists of records use `DataTable`, forms end in `FormActions`.
 11. The app works at 260, 320, 480, 800, 1200 and 1440 px: no overlap, no sideways scroll, metrics 2 or 4.
 12. It takes part in the desk (`ux.md` Part B): records are `RecordChip`s, verbs for what it accepts, the landing
     mark on receive, dropped ranges as `FilterBar`s, no shell keys bound.
