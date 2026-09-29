@@ -20,7 +20,9 @@ if something is not listed here, it does not exist, so do not import it and do n
 - Stack: Next.js (App Router), React 19, TypeScript, Tailwind CSS 4. No other UI library is installed and none
   may be added: no Radix, shadcn, MUI, Headless UI, date, chart, icon or class-merging packages.
 - Server and client: primitives and form wrappers work in server components. Stateful widgets already carry
-  `"use client"`. A page only needs `"use client"` if the page itself holds state or handlers.
+  `"use client"`. A page only needs `"use client"` if the page itself holds state or handlers. The pure helpers
+  (`parseCollectionState`, `serializeCollectionState`, `sortRows`, `pageRows`, `restore`, `serialise`, `panes`)
+  come from modules without a directive, so a server component or a route handler can call them.
 - `ToastProvider` must wrap the app once (in the root layout) before any screen calls `useToast()`.
 
 ## Which component for which job
@@ -109,8 +111,10 @@ Pick from this table before writing any markup. The left column is the need; use
   props it gives you onto the control: `{(props) => <Input {...props} />}`.
 - Errors are sentences that say what is wrong and how to fix it, passed as `error` to `Field` (they show in
   yellow). Never colour anything red to mean wrong.
-- IDs you pass (`id` on `Field`, `Combobox`, `Select`, `DateInput`, `FileDrop`; option and tab ids) must be
-  unique on the page and stable across renders.
+- `id` is optional on `Field`, `SearchField`, `Select`, `Combobox`, `DateInput` and `FileDrop`: without one the
+  control makes its own with `useId`, so the same app can be open in two windows. Pass one only where something
+  else must link to the control (an `ErrorSummary` to its field). Any id you do pass, and option and tab ids,
+  must be unique on the page and stable across renders.
 - Dates in and out of components are local `YYYY-MM-DD` strings.
 - Controlled components (`value` plus `onValueChange`) need both. Keep the state in the screen.
 - Pass `className` only for layout (margins, grid placement, width). Never for colour, font, border or radius.
@@ -122,11 +126,21 @@ Back Office apps share one desk and hand records to each other by drag and drop 
 pieces an app needs to take part.
 
 **Desk** `apps: DeskAppDefinition[]`, `initialApps?` (ids to open side by side on first use), `storageKey?`
-(remembers the layout in this browser; include the person's id), `homeApps?` (`{ person, venue, session,
-range }`: the app id each record opens in on a gap), `resolveRecord?(type, id)` (the app's data, passed as
-`record.rec`), `comingSoon?`, `label?`. The whole of `ux.md` Part A: Tile and Scroll, gaps, resizing, window
-bars and menus, the overview, narrow tabs under 760 px of desk width, drag and drop and Send to. It fills
-its parent, which must have a height.
+(remembers the layout in this browser; include the person's id), `initialLayout?: string | null` (a saved
+layout to start from, as `onLayoutChange` gave it; it wins over `storageKey`), `onLayoutChange?(layout: string)`
+(after each settled change, to save the layout elsewhere, such as per person in the API), `onAppIntent?(appId)`
+(when a person points at or focuses an app tile, a moment to prefetch its data), `homeApps?` (`{ person, venue,
+session, range }`: the app id each record opens in on a gap), `resolveRecord?(type, id)` (the app's data,
+passed as `record.rec`), `comingSoon?`, `label?` (default "Workspace"), `className?`. The whole of `ux.md`
+Part A: Tile and Scroll, gaps, resizing, window bars and menus, the overview, narrow tabs under 760 px of desk
+width, the A10 touch gestures, drag and drop and Send to. It fills its parent, which must have a height. A gap
+that cannot make room for another 260 px window says "No room for another space here" and opens nothing.
+
+For the application's own persistence the barrel also exports **restore**`(text, appIds)` (a saved layout as a
+`DeskState`, or `null` for anything malformed; windows of an app that no longer exists become new spaces),
+**serialise**`(state)` (the string `onLayoutChange` gives) and **panes**`(state)` (the windows in it, each
+`{ id, app }`), plus the `DeskState` type. They have no client directive, so a route handler can validate a
+layout before saving it.
 
 **DeskAppDefinition** `{ id, name, owner, icon, description?, context?: "engineering" | "racing" | "group",
 render() }`. `owner` is the business shown in mono in the window bar ("Advanced Technology").
@@ -134,7 +148,9 @@ render() }`. `owner` is the business shown in mono in the window bar ("Advanced 
 **useDeskApp** `({ accepts?(record), receive?(record) })`, called inside the app. `record` is `{ type, id,
 name, context?, rec? }`; `accepts` returns `{ verb, icon }` or nothing. Each window registers separately,
 and outside a `Desk` it does nothing, so the app also works as a page. **useLandingMark** returns a function
-taking the changed element (or a function that finds it after the redraw) and draws the landing mark.
+taking the changed element (or a function that finds it after the redraw) and draws the landing mark;
+**markLanding**`(target)` is the same function outside a hook. **parseRange**`(id)` reads a range id
+("2026-09-22..2026-09-28", either way round) as `{ id, from, to, days }`, or `null` when it is not one.
 
 ```tsx
 function Booking() {
@@ -154,10 +170,12 @@ app follows the width of its window, from a 260 px column to a full desk. It pad
 480 px) with 24 px between children. Never put a `Container` inside it.
 
 **RecordChip** `type: "person" | "venue" | "session" | "range"`, `id` (ranges as
-`"YYYY-MM-DD..YYYY-MM-DD"`), `name`, `context?` (one line: "FKL Łódź, cadet", "Heyford Park, Fri 26 Sep,
-16:00", "Oxfordshire, United Kingdom", "7 days, 18 sessions"), `large?` (in a record's header),
-`onActivate?()`. It renders `data-drag="type:id"`, which the desk reads to make it draggable and to give it
-the Send to menu. Inside a desk a click opens Send to, so leave `onActivate` unset there. Every record an app
+`"YYYY-MM-DD..YYYY-MM-DD"`), `name`, `context?` (one line: "FKL Łódź, cadet", "Heyford Park, Friday 26
+September 2026, 16:00", "Oxfordshire, United Kingdom", "7 days, 18 sessions"), `large?` (in a record's
+header), `onActivate?()`. It renders `data-drag="type:id"`, which the desk reads to make it draggable and to
+give it the Send to menu. Inside a desk a click opens Send to, so leave `onActivate` unset there. It claims
+`role="button"` only when it can act (inside a desk, or with `onActivate`); on a plain page without a handler
+it is a focusable record that promises nothing. Every record an app
 shows is a `RecordChip`, or a row carrying the same `data-drag` key (`DataTable rowDragKey`); a row without a
 chip names its record with `data-drag-name` and `data-drag-context`.
 
@@ -189,7 +207,8 @@ dropped.
 `size?: "small" | "medium" | "large"` (34, 44, 52 px; default `medium`), `loading?: boolean`, plus every
 native button prop. `type` defaults to `"button"`; set `type="submit"` in forms. `engineering` is the blue fill
 for the lead action in an Engineering context; `warning` is the yellow action for destructive confirmation.
-While `loading` the button is disabled and keeps its label.
+While `loading` the button keeps its label and its focus and ignores presses (`aria-busy`, `aria-disabled`);
+it is not `disabled`, so focus does not fall to the page while the work runs.
 
 **ButtonLink** the same `variant` and `size`, plus every native `<a>` prop (`href`).
 
@@ -201,8 +220,10 @@ While `loading` the button is disabled and keeps its label.
 **Chip** `pressed: boolean`, `onPressedChange(pressed)`, children as the label.
 
 **HoldToConfirm** `label` (for example "Hold to remove driver"), `onConfirm()`, `onUndo?()`,
-`doneLabel?` (default "Removed, tap to undo"), `disabled?`. The person holds for 1.1 s; letting go early
-drains the fill and nothing happens.
+`doneLabel?` (default "Removed, tap to undo"), `armedLabel?` (default "Press again to confirm"), `disabled?`.
+The person holds for 1.1 s; letting go early drains the fill and nothing happens. Assistive technology
+cannot hold: a click that arrives without a press (a screen reader's activate, iOS double tap) arms the button
+with `armedLabel` for four seconds, and a second such click confirms.
 
 **StartLights** `label?` (default "Start session"), `onStart()`, `onReset?()`. Only for starting something
 live (a session, a timer).
@@ -210,14 +231,16 @@ live (a session, a timer).
 **Dropdown** `label` (the trigger text), `align?: "start" | "end"`, children: `<button>` and `<a>` elements,
 `<hr />` between groups, `className="neg"` on a destructive one. The open panel is placed against the
 viewport, so it is never clipped by a table or a window, and opens above when there is no room below.
+Choosing an item or Escape closes it and puts focus back on the trigger.
 
 **Menu** `label`, `items: { label, onSelect(), checked?, disabled?, warning?, shortcut? }[]`. Use `checked`
 for a choice among items (sorting), `warning` for a destructive item.
 
 ## Forms
 
-**Field** `id`, `label`, `hint?`, `error?`, `tip?` (a help mark beside the label for a term the hint
-cannot carry), children as a render prop receiving `{ id, "aria-describedby", "aria-invalid" }`.
+**Field** `id?` (generated with `useId` when left out), `label`, `hint?`, `error?`, `tip?` (a help mark beside
+the label for a term the hint cannot carry), children as a render prop receiving `{ id, "aria-describedby",
+"aria-invalid" }`.
 
 ```tsx
 <Field id="driver-email" label="Email" hint="Where session reminders go." error={errors.email}>
@@ -232,18 +255,20 @@ spin arrows; holding repeats, decimals are kept and `min`/`max` hold.
 **IconInput** `icon: IconName` plus input props.
 
 **Select** (inside `Field`) `options: { value, label, description?, disabled? }[]`, `value: string | null`,
-`onValueChange(value)`, `placeholder?` (default "Choose"), `name?` (submits with a form), `disabled?`.
+`onValueChange(value)`, `placeholder?` (default "Choose"), `name?` (submits with a form), `disabled?`,
+`className?`, `id?` (from `Field`, or generated).
 
-**Combobox** (has its own label; do not wrap in `Field`) `id`, `label`, `hint?`, `error?`,
+**Combobox** (has its own label; do not wrap in `Field`) `id?`, `label`, `hint?`, `error?`,
 `options: { value, label, description?, disabled? }[]`, `value: string | null`,
-`onValueChange(value | null)`, `placeholder?` (default "Search"), `emptyText?`, `disabled?`. Search ignores
-case and accents and also matches `description`.
+`onValueChange(value | null)`, `placeholder?` (default "Search"), `emptyText?`, `disabled?`, `className?`.
+Search ignores case and accents and also matches `description`. The clear cross is a tab stop of its own, and
+Escape with the list closed clears the choice.
 
 **DateInput** (inside `Field`) `value: string | null`, `onValueChange(value | null)`, `placeholder?`
-(default "dd/mm/yyyy"), `disabled?`, `invalidText?`. Shows "26 September 2026"; accepts 26/09/2026,
-26-9-26, 2026-09-26 and 26 Sep 2026.
+(default "dd/mm/yyyy"), `disabled?`, `invalidText?`, `className?`, `id?` (from `Field`, or generated). Shows
+"26 September 2026"; accepts 26/09/2026, 26-9-26, 2026-09-26 and 26 Sep 2026.
 
-**FileDrop** (has its own label) `id`, `label`, `files: File[]`, `onFilesChange(files)`, `icon?` (default
+**FileDrop** (has its own label) `id?`, `label`, `files: File[]`, `onFilesChange(files)`, `icon?` (default
 `upload`), `title?` (default "Drop a file here"), `action?` (default "choose a file"), `prompt?` (replaces the
 whole "or choose a file" line), `hint?` (types and limits, for example "PDF or DOCX, up to 10 MB each"),
 `dropText?` (default "Release to add the file"), `rejectText?(name)`, `accept?`, `multiple?`, `disabled?`.
@@ -254,7 +279,8 @@ whole "or choose a file" line), `hint?` (types and limits, for example "PDF or D
 
 **SegmentedControl** `label`, `value`, `onValueChange`, `options: { value, label, disabled? }[]`, `name?`.
 **Slider** `label`, `value`, `onValueChange`, `min?`, `max?`, `step?`, `disabled?`.
-**Stepper** `label`, `value`, `onValueChange`, `min?`, `max?`, `step?`, `disabled?`.
+**Stepper** `label`, `value`, `onValueChange`, `min?`, `max?`, `step?`, `disabled?`. At a bound the button that
+can go no further disables, after moving focus to the other one.
 
 **FormActions** `submitLabel` (what happens: "Save changes", "Add Maja to FKL Łódź"), `pending?`,
 `disabled?`, `submitVariant?: "primary" | "engineering"`, `cancelHref?` or `onCancel?`, `cancelLabel?`
@@ -310,19 +336,25 @@ notify("Session archived", "info", { label: "Undo", onClick: restore });
 
 ## Navigation and overlays
 
-**Tabs** `label`, `items: { id, label, content }[]`, `defaultValue?`. **Accordion**
-`items: { id, title, content }[]`. **Breadcrumbs** `items: { label, href? }[]` (the last is the current page).
-**SideNavigation** `label`, `items: { label, href, current?, count? }[]`. **Steps** `items: string[]`,
-`current` (zero-based). **Pagination** `page` (one-based), `pages`, `onPageChange(page)`.
+**Tabs** `label`, `items: { id, label, content }[]`, `defaultValue?`, or controlled with `value` and
+`onValueChange(id)` so a tab can be deep-linked or kept in `useCollectionState`. **Accordion**
+`items: { id, title, content }[]`. **Breadcrumbs** `items: { label, href? }[]` (the last is the current page),
+`linkAs?` (the app's router link, as on `WorkspaceBar`). **SideNavigation** `label`,
+`items: { label, href, current?, count? }[]`. **Steps** `items: string[]`, `current` (zero-based; earlier steps
+are announced as done, not only shown in colour). **Pagination** `page` (one-based), `pages`, `onPageChange(page)`;
+Previous and Next move focus to the other arrow before disabling at an end.
 **TabBar** (phone apps only) `label`, `value`, `onValueChange`, `items: { value, label, icon }[]`.
 
 **Dialog** `open`, `onOpenChange(open)`, `title` (a question for decisions: "Remove from shortlist?"),
-`description?` (the concrete effect), children, `footer?` (the buttons; the safe choice last).
+`description?` (the concrete effect), children, `footer?` (the buttons; the safe choice last, marked
+`data-dialog-initial-focus`), `id?`, `className?`. A close it did not start reports through `onOpenChange(false)`;
+keep `open` true and it shows again.
 
 **ConfirmDialog** `open`, `onOpenChange`, `title` (the question), `description?`, `confirmLabel` ("Remove
-driver"), `cancelLabel?`, `onConfirm()`, `tone?: "warning" | "primary"`, `pending?`, `error?`. The action
-comes first and the safe choice last with focus. If `onConfirm` returns a promise it stays busy and cannot
-be dismissed, closes on success and shows the error on failure.
+driver"), `cancelLabel?`, `onConfirm()`, `tone?: "warning" | "primary"`, `pending?`, `error?`, `children?`.
+The action comes first and the safe choice last with focus. If `onConfirm` returns a promise it stays busy and
+cannot be dismissed, closes on success and shows the error on failure; a close the dialog did not start while
+busy is undone by showing it again.
 
 **Tooltip** `label` (a short note, one or two lines), `placement?: "top" | "bottom"`, `icon?: "help" |
 "info"`, children (the trigger text, or with `icon` the mark's accessible name). It reads as an annotation:
@@ -334,8 +366,9 @@ the raised surface with a hairline and a Line Blue leader at 55 degrees to the t
 Place it once, in the app bar; on phones it may move into the `UserMenu`. Switches on one page stay in step.
 
 **WorkspaceBar** `navigation: { label, href, current? }[]`, `actions?` (the `ThemeSwitch` and `UserMenu`),
-`homeHref?`, `mainId?` (the skip link's target, default "main"). The current destination has the red lead;
-on phones the destinations take a second row. **UserMenu** `name`, `detail?` (the role), children (links,
+`homeHref?`, `mainId?` (the skip link's target, default "main"), `linkAs?` (the app's router link for the logo
+and destinations, so they navigate without a reload). The current destination has the red lead; on phones the
+destinations take a second row. **UserMenu** `name`, `detail?` (the role), children (links,
 and a sign-out form).
 
 ## Layout and content
@@ -351,10 +384,11 @@ section opener). **FinishSeparator** the checker: the last thing before the foot
 **BrandLogo** the Smedley Group logo for the theme. **AppIcon** `size?`, `theme?`.
 
 **Table** `caption` (required, names the table), children `<thead>`, `<tbody>` with native `<tr>`, `<th>`,
-`<td>`. It scrolls sideways inside itself on narrow screens. For records that sort, select or open, use
-`DataTable`.
+`<td>`. It scrolls sideways inside itself on narrow screens, and its scroll box is a tab stop only while it
+actually overflows. For records that sort, select or open, use `DataTable`.
 
-**List** `items: { id, title, description?, value?, leading? }[]` (leading defaults to an `Avatar`).
+**List** `items: { id, title, description?, value?, leading? }[]` (leading defaults to an `Avatar`), rendered
+as a `ul` of `li`.
 **Agenda** `items: { id, date, title, description, status? }[]`. **Timeline**
 `items: { title, description?, planned? }[]`.
 
@@ -373,27 +407,32 @@ screen; these show the result and report what the person asked for.
 **PageHeader** `title`, `context?`, `actions?` (up to three), `breadcrumbs?: { label, href? }[]`.
 
 **CollectionToolbar** `label?`, children: `SearchField` first, then `Chip`s and a sort `Menu` or `Dropdown`.
-**SearchField** `id`, `label`, `value`, `onValueChange`, `placeholder?`, `hint?`, `delay?` (250 ms).
+**SearchField** `id?`, `label`, `value`, `onValueChange`, `placeholder?`, `hint?`, `delay?` (250 ms).
 
 **DataTable** `caption`, `columns: { key, header, cell(row), sortable?, numeric?, priority?: "high" |
 "medium" | "low" }[]`, `rows` (already filtered, sorted and paged), `rowKey(row)`, `rowLabel(row)` (names the
 row for its checkbox and actions), `sort?` and `onSortChange?`, `selected?: Set<string>` and
 `onSelectedChange?`, `onRowActivate?(row)` (click or Enter opens the record), `rowActions?(row)` (one
-`IconButton` or a `Dropdown align="end"`), `rowDragKey?(row)` ("person:mk"), `loading?`, `empty?` (an
-`EmptyState` that replaces the table). The first column is the record, as a `RecordChip`. `low` columns
-hide under 800 px of app width and `medium` ones under 480 px; under 480 px the rows stack with the headers
-as labels, so offer sorting in the toolbar too. **SortHeader** is its sortable header, for a hand-built
-`Table`.
+`IconButton` or a `Dropdown align="end"`), `rowDragKey?(row)` ("person:mk"), `loading?`, `skeletonRows?` (5),
+`empty?` (an `EmptyState` that replaces the table), `className?`. The first column is the record, as a
+`RecordChip`. `low` columns hide under 800 px of app width; under 480 px the rows stack with the headers as
+labels, `medium` columns kept as labelled rows, and the column header leaves the tab order, so offer sorting in
+the toolbar too. **SortHeader** `label`, `sortKey`, `sort`, `onSortChange`, `numeric?` is its sortable header,
+for a hand-built `Table`.
 
 **BulkActionBar** `count`, `noun: { one, other }`, `onClear()`, children (the actions). Shown only while
 rows are selected. **PaginationBar** `page`, `pageSize`, `total`, `noun`, `onPageChange` ("21 to 40 of 248
 drivers").
 
-**useCollectionState** `(defaults?, { url?, prefix? })` returns `query`, `sort`, `page`, `filters` and
-`setQuery`, `setSort`, `setPage`, `setFilter(name, value | null)`, `reset()`. Search, sort and filter
-changes return to page 1. `url: true` keeps it in the address on pages (`?q=maja&sort=-best&page=2&f.hub=lodz`);
-leave it off in desk apps, where each window keeps its own. `sortRows(rows, sort, value)` and
-`pageRows(rows, page, size)` handle short lists loaded whole.
+**useCollectionState** `(defaults?, { url?, prefix?, initialSearch? })` returns `query`, `sort`, `page`,
+`filters` and `setQuery`, `setSort`, `setPage`, `setFilter(name, value | null)`, `reset()`. Search, sort and
+filter changes return to page 1. `url: true` keeps it in the address on pages
+(`?q=maja&sort=-best&page=2&f.hub=lodz`); pass the page's `searchParams` (as a string) as `initialSearch` so the
+server render and the hydration show the same page. Leave `url` off in desk apps, where each window keeps its
+own. `reset()` returns to the defaults, default filters included, in both modes; clearing a filter with
+`setFilter(name, null)` returns it to its default, or removes it when it has none. `sortRows(rows, sort, value)`
+and `pageRows(rows, page, size)` handle short lists loaded whole; `parseCollectionState(search, defaults?)` and
+`serializeCollectionState(state, defaults?)` read and write the same query string, on the server too.
 
 ```tsx
 const state = useCollectionState({ sort: { key: "name", direction: "asc" } });
@@ -428,7 +467,8 @@ rising from 212 to 312"). Colours are fixed by the components: do not pass colou
   `onCursorChange?`. **TrackMap** `label`, `points: { x, y }[]`, `speeds?`, `cursor?`, `onCursorChange?`.
   Share one `cursor` state between them to link the views.
 - **Calendar** `value`, `onValueChange`, `end?` and `onRangeChange?` (for ranges), `events?` (dates that get
-  the booked bar), `today?`, `note?` (range calendars show the book's guiding note; `false` hides it).
+  the booked bar), `today?`, `note?` (range calendars show the book's guiding note; `false` hides it). The grid
+  follows `value` when the screen changes it; booked days and days inside the range say so in their labels.
 - **WeekSchedule** `days: { label, date, today? }[]`, `events: { id, day, hour, duration, title, detail?,
   leading? }[]`, `startHour?`, `endHour?`, `onEventClick?`. `leading` marks the one event that leads (red).
 

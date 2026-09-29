@@ -110,7 +110,9 @@ for anyone building or changing the shell itself.
 | One finger across a window's bar (phone) | the next or previous space |
 
 Three-finger gestures stand down while a field is being typed in. No gesture starts during a drag, a menu, the
-Apps sheet or the tour.
+Apps sheet or the tour. The library's `Desk` provides the two- and three-finger gestures in this table itself (its
+`use-desk-gestures` hook) and the swipe along the tabs, so an app never implements one and never cancels the
+touches that start them.
 
 ## A11. What is remembered
 
@@ -201,12 +203,16 @@ An app takes part by calling `useDeskApp({ accepts, receive })` inside itself (t
    cross that clears it. Never filter silently. One bar per filter.
 6. **Invite drops while waiting** with a `Hint` that names what to drop and what it will do. Remove it once
    something has been dropped.
-7. **Follow the window's width.** Build the app in `AppScreen` and lay it out for any width from 260 px.
+7. **Follow the window's width.** Build the app in `AppScreen` and lay it out for any width from 260 px. The
+   shell holds that floor on insert as well as on resize: a gap that cannot make room for another 260 px window
+   says "No room for another space here" and opens nothing, so an app is never rendered narrower.
 8. **Keep state per window**, because the same app can be open twice and each copy receives its own drops.
    Use `useCollectionState` without `url` inside apps.
 9. **Leave the shell's keys and gestures alone:** never bind Alt with the arrows, Alt O, Alt R, Alt F, Alt C,
    Shift F10, the menu key or Escape; never cancel pointer presses on records unless the app handles the
-   gesture itself (as the Calendar does for marking days); never put a drag key on an input.
+   gesture itself (as the Calendar does for marking days); never put a drag key on an input. The A10 touch
+   gestures are the shell's too: `Desk` provides them, and an app must not start its own two- or three-finger
+   handling.
 
 # Part C. Exact values, for the shell
 
