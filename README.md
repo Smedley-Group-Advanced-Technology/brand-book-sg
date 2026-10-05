@@ -25,8 +25,8 @@ layouts in four formats for each business, downloaded as PNG or SVG. Add a layou
 it in a type's `variants` and drawing it in `render`; the check draws every combination. Its renderer, `social/posts.js`, also
 draws the SVG frames in `assets/templates`, so the two never drift apart.
 
-Every icon comes from [`icons/library.js`](icons/library.js): 24 px grid, 1.5 px stroke, square
-ends, sharp corners, diagonals at 55°. [`icons/`](icons) is the icon library page. `npm run kit`
+Every icon comes from [`icons/library.js`](icons/library.js): 24 px grid, 1.5 px stroke, rounded
+ends and joins, right-angled chevrons, rounded corners. [`icons/`](icons) is the icon library page. `npm run kit`
 writes `assets/icons` (one SVG per icon and `sprite.svg`), keeps the book's tool icons in step and
 updates the icon count; the check fails on any icon in the book, the hero animation or the tool
 pages that is not drawn from the library. To add an icon, add a line to `ICONS` and run the kit.

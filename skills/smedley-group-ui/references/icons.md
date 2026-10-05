@@ -113,7 +113,7 @@ Generated from the brand book's icon library by npm run kit: 134 icons, 24 px gr
 | `database` | Database | Engineering | data storage records |
 | `chart-line` | Line chart | Engineering | trend graph data analytics |
 | `chart-bar` | Bar chart | Engineering | graph data results |
-| `set-square` | Set square | Engineering | drawing blueprint 55 degrees design |
+| `set-square` | Set square | Engineering | drawing blueprint angle design |
 | `cube` | Simulation | Engineering | cube 3d model simulation |
 | `nut` | Nut | Engineering | bolt hex fastener |
 | `gear` | Gear | Engineering | cog mechanism gearbox |

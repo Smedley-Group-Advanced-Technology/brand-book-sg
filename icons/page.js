@@ -1,5 +1,5 @@
 // The icon library page: search and filter the library, pick an icon, copy or download it.
-import { ICONS, FAMILIES, svgOf, bodyOf } from './library.js?v=8376433e7a';
+import { ICONS, FAMILIES, svgOf, bodyOf } from './library.js?v=5d97a6a608';
 
 const $ = s => document.querySelector(s);
 const svg = (body, size, extra = '') => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true"${extra}>${body}</svg>`;
@@ -7,7 +7,7 @@ let fam = 'all', chosen = ICONS[0], tone = 'ink';
 try { const s = JSON.parse(localStorage.getItem('sg-icons') || 'null'); if (s) { chosen = ICONS.find(i => i[0] === s.chosen) || chosen; tone = s.tone || tone; } } catch {}
 const save = () => { try { localStorage.setItem('sg-icons', JSON.stringify({ chosen: chosen[0], tone })); } catch {} };
 
-$('#lede').textContent = `${ICONS.length} icons in one style: a 24 px grid, a 1.5 px stroke, square ends and diagonals at 55°, like the glyph. Pick one to copy its SVG or download it.`;
+$('#lede').textContent = `${ICONS.length} icons in one style: a 24 px grid, a 1.5 px stroke, rounded ends and joins, right-angled chevrons and rounded corners, white on the signature surface in a tile. Pick one to copy its SVG or download it.`;
 $('#sicon').innerHTML = bodyOf('search');
 $('#dl').innerHTML = svg(bodyOf('download'), 16, ' class="bi"') + 'Download SVG';
 

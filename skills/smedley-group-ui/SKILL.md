@@ -180,7 +180,9 @@ Use the library's components, chosen with the table in `references/library.md`. 
 ## 8. Icons
 
 Every icon comes from the icon library (catalogue in `references/icons.md`; `Icon` in the library).
-- One monoline set on a 24 px grid: 1.5 px stroke, rounded ends and joins, no fill.
+- One monoline set on a 24 px grid (the book's 96 px grid): 1.5 px stroke, rounded ends and joins, no fill.
+  Geometric drawing: right-angled chevrons and arrowheads, rectangles with small rounded corners, circles for
+  joints and points, no slanted 55 degree geometry. Hand tools lie on the 45 degree diagonal; instruments sit level.
 - Sizes 16, 24, 32, 48. Inside buttons 16. Below 20 px a 1.8 px stroke reads better (the library does it).
 - An icon that stands for an idea sits in an `IconTile`: white on the signature surface. One icon per idea; if an
   idea needs two, it needs two cards. Icons are never drawn in a signal colour.
