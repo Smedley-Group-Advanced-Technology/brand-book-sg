@@ -226,8 +226,8 @@ for (const name of BROWSERS) {
         if (!(await m.page.evaluate(() => document.querySelector('.index').classList.contains('open')))) return W(w, 'menu did not open');
         await m.page.locator('#toc a[href="#calendar-sec"]').click(); await m.page.waitForTimeout(1200);
         const closed = !(await m.page.evaluate(() => document.querySelector('.index').classList.contains('open')));
-        const cur = await m.page.textContent('#mcur');
-        closed && /Calendar/.test(cur) ? ok('phone menu opens, jumps and closes') : W(w, `closed ${closed}, header reads "${cur}"`);
+        const at = await m.page.evaluate(() => Math.abs(document.querySelector('#calendar-sec').getBoundingClientRect().top) < 200);
+        closed && at ? ok('phone menu opens, jumps and closes') : W(w, `closed ${closed}, at the section ${at}`);
         await m.page.locator('#mbtn').click(); await m.page.waitForTimeout(300);
         // the header bar must not be a scroll container, and a wheel over it must not move it or the locked page
         const before = await m.page.evaluate(() => scrollY);

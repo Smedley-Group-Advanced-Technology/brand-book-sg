@@ -210,7 +210,7 @@ dropped.
 `size?: "small" | "medium" | "large"` (34, 44, 52 px; default `medium`), `loading?: boolean`, plus every
 native button prop. `type` defaults to `"button"`; set `type="submit"` in forms. `primary` wears the selected
 fill (the signature gradient with white type on light, Pale Blue with black type on dark), `secondary` a Steel
-hairline, `text` a Pale Blue underline that turns to the accent on hover, and `warning` the negative pair
+hairline, `text` a grey underline that turns to the accent on hover, and `warning` the negative pair
 (#C00000 on #FBE5D6) for destructive confirmation.
 While `loading` the button keeps its label and its focus and ignores presses (`aria-busy`, `aria-disabled`);
 it is not `disabled`, so focus does not fall to the page while the work runs.
@@ -380,7 +380,7 @@ outside an app (sign-in, the catalogue); inside an app use `AppScreen`. **Stack*
 (buttons at the right of the heading), children, `id?`: it opens with the section header (the title, a quiet
 description) and the divider beneath it, with space around.
 **Card** an `<article>` on the signature surface with its edge light, carrying the dark theme for what sits inside,
-for one thing a person picks up or opens. **Separator** `scale?` (the divider on its own: Pale Blue solid to 83 %
+for one thing a person picks up or opens. **Separator** `scale?` (the divider on its own: a grey hairline, solid to 83 %
 of its length, then fading; without `scale` a plain hairline).
 **Heading** `level?: 1 | 2 | 3 | 4` (32, 15, 14, 13 px). **Text** `as?: "p" | "span"`, `muted?`, `measure?`
 (SemiBold with tabular figures, for values). **Kbd** a key. **Avatar** `name`, `src?`, `size?: 32 | 36 | 40 | 48`.

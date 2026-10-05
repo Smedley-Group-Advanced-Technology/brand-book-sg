@@ -21,9 +21,9 @@ async function thumbnails(pdf) {
     const load = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src; });
     const draw = async fn => { const c = document.createElement('canvas'); c.width = 640; c.height = 360; const x = c.getContext('2d'); await fn(x); return [c.toDataURL('image/jpeg', .88), c.toDataURL('image/webp', .82)]; };
     const s = await load(slides), r = await load(report), l = await load(letter);
-    const page = (x, img, px, py, h) => { const w = h * img.width / img.height; x.drawImage(img, px, py, w, h); x.strokeStyle = '#ABC0E4'; x.lineWidth = 1; x.strokeRect(px + .5, py + .5, w - 1, h - 1); };
+    const page = (x, img, px, py, h) => { const w = h * img.width / img.height; x.drawImage(img, px, py, w, h); x.strokeStyle = '#CECECE'; x.lineWidth = 1; x.strokeRect(px + .5, py + .5, w - 1, h - 1); };
     return { slides: await draw(x => x.drawImage(s, 0, 0, 640, 360)),
-      document: await draw(x => { x.fillStyle = '#F0F0F0'; x.fillRect(0, 0, 640, 360); page(x, l, 330, 44, 330); page(x, r, 150, 26, 334); }) };
+      document: await draw(x => { x.fillStyle = '#FFFFFF'; x.fillRect(0, 0, 640, 360); page(x, l, 330, 44, 330); page(x, r, 150, 26, 334); }) };
   }, { slides, report, letter });
   await browser.close();
   for (const [k, [jpg, webp]] of Object.entries(out)) {
@@ -90,8 +90,8 @@ console.log('email signature: 4 lockups');
     const pic = async (o, h) => { const blob = await m.toPNG(m.render({ ...o, data: m.defaults(o.type, o.variant) }, { logos, fontCSS: fonts })); const img = new Image(); img.src = URL.createObjectURL(blob); await img.decode(); return img; };
     const a = await pic({ format: 'portrait', type: 'headline', variant: 'band', business: 'fat-racing', ground: 'light' }), b = await pic({ format: 'square', type: 'figure', business: 'advanced-technology', ground: 'dark' }), c = await pic({ format: 'story', type: 'date', business: 'insight-labs', ground: 'light' });
     const cv = document.createElement('canvas'); cv.width = 640; cv.height = 360; const x = cv.getContext('2d');
-    x.fillStyle = '#F0F0F0'; x.fillRect(0, 0, 640, 360);
-    const put = (img, px, py, h) => { const w = h * img.width / img.height; x.drawImage(img, px, py, w, h); x.strokeStyle = '#ABC0E4'; x.lineWidth = 1; x.strokeRect(px + .5, py + .5, w - 1, h - 1); };
+    x.fillStyle = '#FFFFFF'; x.fillRect(0, 0, 640, 360);
+    const put = (img, px, py, h) => { const w = h * img.width / img.height; x.drawImage(img, px, py, w, h); x.strokeStyle = '#CECECE'; x.lineWidth = 1; x.strokeRect(px + .5, py + .5, w - 1, h - 1); };
     put(c, 452, 30, 300); put(a, 40, 38, 284); put(b, 240, 70, 222);
     return { frames, jpg: cv.toDataURL('image/jpeg', .88), webp: cv.toDataURL('image/webp', .82) };
   });
@@ -109,7 +109,7 @@ console.log('email signature: 4 lockups');
   const sora = [await readFile(join(ROOT, 'assets/fonts/sora-latin.woff2')), await readFile(join(ROOT, 'assets/fonts/sora-latin-ext.woff2'))];
   const lockup = 'data:image/png;base64,' + (await readFile(join(OUT, 'signature-lockup.png'))).toString('base64');
   await page.setContent(`<style>@font-face{font-family:Sora;font-weight:300 700;src:${font(sora[0])}}@font-face{font-family:Sora;font-weight:300 700;src:${font(sora[1])}}
-    body{margin:0;width:640px;height:360px;background:#F0F0F0;font-family:Sora;display:grid;place-items:center}
+    body{margin:0;width:640px;height:360px;background:#FFFFFF;font-family:Sora;display:grid;place-items:center}
     .m{width:540px;height:290px;box-sizing:border-box;padding:26px 30px;background:#fff;border:1px solid #D6DCE5;border-radius:12px}
     .h{font-size:11px;color:#333F50;padding:6px 0;border-bottom:1px solid #D6DCE5}.h b{display:inline-block;width:62px;font-weight:400;color:#44546A}
     p{font-size:12px;margin:14px 0 18px;color:#000}</style>

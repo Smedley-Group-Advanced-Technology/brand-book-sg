@@ -55,6 +55,6 @@ const GROUND_COLOURS = {
 export function groundPicto(key) {
   const c = GROUND_COLOURS[key] || GROUND_COLOURS.light;
   return `<svg viewBox="0 0 60 60" aria-hidden="true"><defs><linearGradient id="gsf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#000000"/><stop offset="1" stop-color="#222A35"/></linearGradient></defs>`
-    + `<rect width="60" height="60" rx="6" fill="${c.bg}" stroke="#ABC0E4" stroke-width=".75"/>`
+    + `<rect width="60" height="60" rx="6" fill="${c.bg}" stroke="#CECECE" stroke-width=".75"/>`
     + `<text x="30" y="${30 + 7.6 * 0.36}" font-size="7.6" font-family="Sora" font-weight="600" text-anchor="middle" fill="${c.ink}">${c.name}</text></svg>`;
 }

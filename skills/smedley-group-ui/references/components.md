@@ -4,7 +4,7 @@ For work outside React only (a static page, an email, a prototype). Every Back O
 library instead: see `library.md`. These are the same controls; the library wraps these classes.
 
 Link the fonts, `ui.css` (the controls, with the `--sg-*` tokens included) and `extended.css` (the interface
-patterns: navigation, feedback, data, calendar, overlays), then use these classes. The light theme on Canvas is the
+patterns: navigation, feedback, data, calendar, overlays), then use these classes. The light theme on white is the
 default; `data-theme="dark"` on `<html>` switches to the dark theme on #10141A. Anything you draw in the signature
 surface takes `.sg-dark` so what sits inside it reads on dark; `.toast`, `.tip`, `.menu`, `.pop` and `.modal`
 already do.
@@ -27,7 +27,7 @@ already do.
 ```
 
 - `.p` primary in the selected fill (the signature gradient with white type on light, Pale Blue with black type on
-  dark), `.g` secondary with a Steel hairline, `.t` text link with a Pale Blue underline that turns to the accent on
+  dark), `.g` secondary with a Steel hairline, `.t` text link with a grey underline that turns to the accent on
   hover, `.neg` warning in the negative pair (#C00000 on #FBE5D6) for destructive actions.
 - Heights: `.sm` 34 px, default 44 px, `.lg` 52 px. Corners 8 px.
 - An icon leads the label: `<svg class="bi" viewBox="0 0 24 24">...</svg>`, 16 px, 8 px gap.
@@ -98,7 +98,7 @@ Fields are white (4 % white on dark) with a Steel edge, 8 px corners and a SemiB
 <hr style="border:0;border-top:1px solid var(--sg-rule)">                    <!-- a plain hairline -->
 ```
 
-- `.shead` opens every block: a 15 px SemiBold label, a quiet subtitle, and the divider under it, Pale Blue solid to
+- `.shead` opens every block: a 15 px SemiBold label, a quiet subtitle, and the divider under it, a grey hairline solid to
   83 % of its length, then fading. `hr.fade` is the same divider alone. It never closes a box.
 - `.eyebrow` is 11 px SemiBold uppercase, tracked +0.2 em, in Steel. Uppercase is for eyebrows and card titles only.
 

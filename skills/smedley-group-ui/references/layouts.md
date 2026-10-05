@@ -1,7 +1,7 @@
 # Layouts for Back Office screens
 
 How to arrange a screen. Pick one template below, build it from `library.md`, and keep the order of its
-regions. The brand book's rules apply throughout: the Canvas ground, lines rather than boxes, one bold element
+regions. The brand book's rules apply throughout: the white ground, lines rather than boxes, one bold element
 per view, calmer content around it, and only things you pick up drawn dark.
 
 ## Design for the window, not the device
@@ -39,7 +39,7 @@ Use only these.
 | Between fields in a form | 16 px; between groups of fields, a new `Section` |
 | Form and reading width | at most 720 px |
 | Control heights | 44 px default, 34 px small, 52 px large; never under 44 px on touch |
-| Hairline | 1 px in the rule colour (Pale Blue; 28 % Pale Blue on dark) |
+| Hairline | 1 px in the rule colour (black at 14 %; 28 % Pale Blue on dark) |
 | Radii | controls 8 px, chips 6 px, tiles 10 px, cards and windows 12 px |
 | Paragraph measure | at most 76 characters |
 | Type | page title 32, figure 28, dialog title 20, section title 15, body 13, field label 12 SemiBold, help 12, caption 11 (the floor); measured values in tabular figures |

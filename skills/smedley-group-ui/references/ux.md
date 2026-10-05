@@ -10,7 +10,7 @@ for anyone building or changing the shell itself.
 
 ## A1. The desk
 
-- The desk sits on the Canvas ground and holds **spaces**. A space is one window showing one app. A window is
+- The desk sits on the white ground and holds **spaces**. A space is one window showing one app. A window is
   an Off-white panel with 12 px corners and a Pale Blue edge. Two windows of the same app may be open
   at once, each with its own state.
 - The windows form a tree of splits: a split lays its children side by side (`row`) or stacked (`col`), each

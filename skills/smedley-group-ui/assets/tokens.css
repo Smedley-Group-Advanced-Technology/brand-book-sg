@@ -19,11 +19,11 @@
   --sg-product-blue:#ADB9CA;
   --sg-text:#000000;
   --sg-inv:#FFFFFF;
-  --sg-ground:#F0F0F0;
-  --sg-panel:#F3F2F2;
+  --sg-ground:#FFFFFF;
+  --sg-panel:#F7F7F7;
   --sg-dim:#333F50;
   --sg-faint:#44546A;
-  --sg-rule:#ABC0E4;
+  --sg-rule:rgba(0,0,0,.14);
   --sg-field:#FFFFFF;
   --sg-border:rgba(68,84,106,.45);
   --sg-accent:#44546A;

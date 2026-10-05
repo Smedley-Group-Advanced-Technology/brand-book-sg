@@ -20,7 +20,7 @@ export const BUSINESSES = [
 // two grounds: the Canvas, or the signature surface (the 45 degree gradient from #000000 to #222A35).
 // sel is the selected fill (the surface on the Canvas, Pale Blue on the surface); band is the strapline band
 export const GROUNDS = {
-  light: { label: 'Canvas', bg: '#F0F0F0', ink: '#000000', dim: '#333F50', quiet: '#44546A', eyebrow: '#44546A', rule: '#ABC0E4', track: '#D6DCE5', board: '#D6DCE5', onBoard: '#000000', sel: 'surface', onSel: '#FFFFFF', band: 'surface', onBand: '#FFFFFF', ph: '#D6DCE5', logo: 'ink' },
+  light: { label: 'White', bg: '#FFFFFF', ink: '#000000', dim: '#333F50', quiet: '#44546A', eyebrow: '#44546A', rule: '#CECECE', track: '#D6DCE5', board: '#D6DCE5', onBoard: '#000000', sel: 'surface', onSel: '#FFFFFF', band: 'surface', onBand: '#FFFFFF', ph: '#D6DCE5', logo: 'ink' },
   dark: { label: 'Surface', bg: 'surface', ink: '#FFFFFF', dim: '#D6DCE5', quiet: '#9AA0A8', eyebrow: '#ABC0E4', rule: '#ABC0E4', track: 'rgba(171,192,228,.22)', board: 'rgba(171,192,228,.16)', onBoard: '#FFFFFF', sel: '#ABC0E4', onSel: '#000000', band: '#D6DCE5', onBand: '#000000', ph: 'rgba(255,255,255,.07)', logo: 'white' },
 };
 

@@ -175,7 +175,7 @@ svg.ch text{fill:var(--sg-dim);font-family:var(--sg-font);font-size:10px;font-va
 .tabbar button.on::before{content:"";position:absolute;top:-9px;width:18px;height:2px;border-radius:2px;background:var(--sg-text)}
 .appicons{display:flex;gap:22px;align-items:flex-end;flex-wrap:wrap}
 .appicon{position:relative;display:grid;place-items:center;isolation:isolate;border-radius:22%;background:var(--sg-surface)}
-.appicon.light{background:var(--sg-canvas)}
+.appicon.light{background:#FFFFFF;box-shadow:inset 0 0 0 1px var(--sg-rule)}
 .appicon svg{overflow:visible}
 .appicons figure{margin:0;text-align:center;font-size:11px;color:var(--sg-dim)}
 .appicons figcaption{margin-top:8px}
@@ -184,12 +184,12 @@ svg.ch text{fill:var(--sg-dim);font-family:var(--sg-font);font-size:10px;font-va
 .btab b{margin-left:auto;padding-left:10px;font-weight:400;color:var(--sg-dim)}
 .btab .bt{min-width:0;overflow:hidden;text-overflow:ellipsis}
 .btab.off{flex:none;background:transparent;color:var(--sg-dim)}
-.fav{flex:none;display:grid;place-items:center;width:16px;height:16px;border-radius:4px;background:var(--sg-canvas)}
+.fav{flex:none;display:grid;place-items:center;width:16px;height:16px;border-radius:4px;background:#FFFFFF;box-shadow:inset 0 0 0 1px var(--sg-rule)}
 .fav.dark{background:var(--sg-surface)}
 .fav svg{overflow:visible}
 .addr{padding:8px 12px;background:var(--sg-panel)}
 .addr span{display:block;padding:6px 12px;border-radius:var(--sg-radius-chip);background:var(--sg-ground);font-size:11px;color:var(--sg-dim)}
-.email{padding:0;border-radius:var(--sg-radius-card);overflow:hidden;background:var(--sg-canvas);color:#000;font-size:13px}
+.email{padding:0;border-radius:var(--sg-radius-card);overflow:hidden;background:#FFFFFF;box-shadow:inset 0 0 0 1px var(--sg-rule);color:#000;font-size:13px}
 .email .eh{padding:22px 26px;background:var(--sg-surface);color:#fff}
 .email .eb{padding:24px 26px}
 .email .h6{margin:0 0 8px;font-size:20px;font-weight:600;letter-spacing:var(--sg-tracking)}

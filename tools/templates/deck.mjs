@@ -8,7 +8,7 @@ import { join } from 'node:path';
 import { BUSINESSES } from './images.mjs';
 
 export const SURF = '111820', EDGE = 'ABC0E5'; // sentinels: the signature surface and its edge light
-const C = { ink: '000000', navy: '222A35', slate: '333F50', steel: '44546A', mist: '8497B0', pale: 'ABC0E4', cloud: 'D6DCE5', canvas: 'F0F0F0', white: 'FFFFFF', caption: '9AA0A8',
+const C = { ink: '000000', navy: '222A35', slate: '333F50', steel: '44546A', mist: '8497B0', pale: 'ABC0E4', rule: 'CECECE', cloud: 'D6DCE5', canvas: 'F0F0F0', white: 'FFFFFF', caption: '9AA0A8',
   pos: '007A3D', posT: 'E2F0D9', neg: 'C00000', negT: 'FBE5D6' };
 const F = { semi: 'Sora SemiBold', reg: 'Sora', light: 'Sora Light' };
 const M = 0.46, W = 10, H = 5.625, TW = W - 2 * M, COLS = [0.46, 2.78, 5.10, 7.42], CW = 2.05;
@@ -27,11 +27,11 @@ export async function buildDeck(img, sizes, out) {
   const ph = (name, type, o, text) => ({ placeholder: { options: Object.assign({ name, type, align: 'left', valign: 'top', margin: 0 }, o), text } });
   const title = (o = {}) => ph('title', 'title', Object.assign({ x: M, y: 0.44, w: TW, h: 0.55, fontFace: F.semi, fontSize: 28, charSpacing: -0.68, color: C.ink }, o), 'Slide title in sentence case');
   // the divider: Pale Blue hairline (the fade is drawn in the book; a solid hairline in the deck)
-  const rule = (x, y, w) => ({ line: { x, y, w, h: 0, line: { color: C.pale, width: 0.75 } } });
+  const rule = (x, y, w) => ({ line: { x, y, w, h: 0, line: { color: C.rule, width: 0.75 } } });
   // the strapline band: full bleed, the conclusion in one sentence
   const band = [{ rect: { x: 0, y: BAND_Y, w: W, h: BAND_H, fill: { color: SURF } } }];
   const bandText = ph('band', 'body', { x: M, y: BAND_Y, w: TW, h: BAND_H, align: 'center', valign: 'middle', fontFace: F.semi, fontSize: 16, color: C.white }, 'The conclusion, in one sentence');
-  const canvas = { color: C.canvas };
+  const canvas = { color: C.white };
 
   // ---------- layouts ----------
   for (const b of BUSINESSES) pres.defineSlideMaster({ title: `Cover, ${b.name}`, background: { color: SURF },
@@ -82,7 +82,7 @@ export async function buildDeck(img, sizes, out) {
       ph('picture', 'pic', { x: 4.92, y: 1.12, w: 4.62, h: 2.95 }, ''), logo()], slideNumber: num });
 
   pres.defineSlideMaster({ title: 'Quote', background: canvas,
-    objects: [{ rect: { x: M, y: 1.28, w: 0.53, h: 0.04, fill: { color: C.pale } } },
+    objects: [{ rect: { x: M, y: 1.28, w: 0.53, h: 0.04, fill: { color: C.ink } } },
       ph('quote', 'body', { x: M, y: 1.5, w: 7.6, h: 2.0, fontFace: F.light, fontSize: 26, color: C.ink, lineSpacingMultiple: 1.1 }, 'Quote'),
       ph('who', 'body', { x: M, y: 3.65, w: 7.6, h: 0.5, fontFace: F.semi, fontSize: 10, color: C.slate }, 'Name, role'), logo()], slideNumber: num });
 
@@ -94,7 +94,7 @@ export async function buildDeck(img, sizes, out) {
 
   // ---------- helpers for example content ----------
   const T = (s, text, o) => s.addText(text, Object.assign({ isTextBox: true, margin: 0, fontFace: F.reg, fontSize: 11, color: C.ink, valign: 'top' }, o));
-  const hair = (s, x, y, w) => s.addShape(pres.shapes.LINE, { x, y, w, h: 0, line: { color: C.pale, width: 0.75 } });
+  const hair = (s, x, y, w) => s.addShape(pres.shapes.LINE, { x, y, w, h: 0, line: { color: C.rule, width: 0.75 } });
   // a content card: the signature surface with the edge light, an icon tile, an uppercase title and a Light caption
   const card = (s, x, y, w, h, icon, head, cap) => {
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w, h, rectRadius: 0.12, fill: { color: SURF }, line: { color: EDGE, width: 0.5 } });
@@ -173,7 +173,7 @@ export async function buildDeck(img, sizes, out) {
   const ty = 2.4;
   hair(s, M, ty, TW);
   tl.forEach((m, i) => { const x = COLS[i];
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: ty - 0.08, w: 0.16, h: 0.16, rectRadius: 0.04, fill: { color: i === 0 ? SURF : C.pale }, line: i === 0 ? { color: EDGE, width: 0.5 } : { type: 'none' } });
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: ty - 0.08, w: 0.16, h: 0.16, rectRadius: 0.04, fill: { color: i === 0 ? SURF : C.cloud }, line: i === 0 ? { color: EDGE, width: 0.5 } : { type: 'none' } });
     T(s, m[0], { x, y: ty - 0.5, w: CW, h: 0.3, fontFace: F.semi, fontSize: 9, color: C.steel });
     T(s, m[1], { x, y: ty + 0.25, w: CW, h: 0.35, fontFace: F.semi, fontSize: 14 });
     T(s, m[2], { x, y: ty + 0.65, w: CW, h: 0.8, fontSize: 10, color: C.slate }); });
@@ -189,8 +189,8 @@ export async function buildDeck(img, sizes, out) {
     { name: 'F4 entry', labels: lab, values: Array(12).fill(.3) }],
     { x: M, y: 1.12, w: 6.2, h: 3.1, chartColors: [C.ink, C.steel, C.mist], lineSize: 2, lineDataSymbol: 'none',
       catAxisLabelFontFace: F.reg, valAxisLabelFontFace: F.reg, catAxisLabelFontSize: 8, valAxisLabelFontSize: 8, catAxisLabelColor: C.slate, valAxisLabelColor: C.slate,
-      valAxisLabelFormatCode: '+0.00"s"', valAxisMinVal: 0, valAxisMaxVal: 0.7, valAxisMajorUnit: 0.35, valGridLine: { color: C.pale, size: 0.5 }, catGridLine: { style: 'none' },
-      catAxisLineColor: C.pale, valAxisLineShow: false, showLegend: true, legendPos: 'b', legendFontFace: F.reg, legendFontSize: 9, legendColor: C.slate,
+      valAxisLabelFormatCode: '+0.00"s"', valAxisMinVal: 0, valAxisMaxVal: 0.7, valAxisMajorUnit: 0.35, valGridLine: { color: C.rule, size: 0.5 }, catGridLine: { style: 'none' },
+      catAxisLineColor: C.rule, valAxisLineShow: false, showLegend: true, legendPos: 'b', legendFontFace: F.reg, legendFontSize: 9, legendColor: C.slate,
       showTitle: false, altText: 'Line chart: gap to the class reference over 12 sessions, falling from 0.62 s to 0.18 s, below the F4 entry line of 0.30 s' });
   T(s, '+0.18 s', { x: 7.0, y: 1.3, w: 2.5, h: 0.6, fontFace: F.semi, fontSize: 28 });
   T(s, 'gap to the class reference after 12 sessions, down from +0.62 s', { x: 7.0, y: 1.95, w: 2.5, h: 0.6, fontSize: 10, color: C.slate });
@@ -201,7 +201,7 @@ export async function buildDeck(img, sizes, out) {
   // 9 table
   s = pres.addSlide({ masterName: 'Title and content' });
   s.addText('Qualifying, cadet class, round 7', { placeholder: 'title' });
-  const bd = [{ type: 'none' }, { type: 'none' }, { pt: 0.75, color: C.pale }, { type: 'none' }];
+  const bd = [{ type: 'none' }, { type: 'none' }, { pt: 0.75, color: C.rule }, { type: 'none' }];
   const hd = { fontFace: F.semi, fontSize: 8, color: C.steel, border: bd };
   const cell = (t, o) => ({ text: t, options: Object.assign({ fontFace: F.reg, fontSize: 11, color: C.ink, border: bd }, o) });
   const R = { align: 'right' }, best = { align: 'right', color: C.pos, fontFace: F.semi };

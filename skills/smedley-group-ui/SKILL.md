@@ -1,6 +1,6 @@
 ---
 name: smedley-group-ui
-description: Design, build and review user interfaces on the Smedley Group brand book, and build every Back Office screen from its React component library (@/design-system). Use it for Back Office apps, pages, dashboards, forms, records, tables, charts, settings, emails, slides and graphics for Smedley Group, Advanced Technology, Insight Labs and FAT Racing. It gives a step-by-step procedure, the library's full API and which component to use for each job, screen templates and measurements, how apps share one desk through window management and drag and drop, and the brand rules: the near-monochrome palette, the Canvas ground, the 45 degree signature surface with its edge light, rounded parts, Sora in three weights, signal colours only as labels, icons, motion and copy, with a review checklist. Not for FAT Karting League, which has its own brand.
+description: Design, build and review user interfaces on the Smedley Group brand book, and build every Back Office screen from its React component library (@/design-system). Use it for Back Office apps, pages, dashboards, forms, records, tables, charts, settings, emails, slides and graphics for Smedley Group, Advanced Technology, Insight Labs and FAT Racing. It gives a step-by-step procedure, the library's full API and which component to use for each job, screen templates and measurements, how apps share one desk through window management and drag and drop, and the brand rules: the near-monochrome palette, the white ground, the 45 degree signature surface with its edge light, rounded parts, Sora in three weights, signal colours only as labels, icons, motion and copy, with a review checklist. Not for FAT Karting League, which has its own brand.
 ---
 
 # Designing UI with the Smedley Group brand book
@@ -40,7 +40,7 @@ Follow these steps in order for every screen. Do not skip one; write down the an
    about to write a `<button>`, `<input>`, `<select>`, `<table>` or a styled `<div>` yourself, stop and find
    the component.
 6. **Decide what is dark.** Only things you pick up or that float are drawn in the signature surface: cards,
-   app tiles, menus, dialogs, toasts, tooltips. The working area stays on the Canvas.
+   app tiles, menus, dialogs, toasts, tooltips. The working area stays on white.
 7. **Write the copy** by section 10: noun titles, a context line with period, count and place, buttons that
    say what happens, units on every number, dates in full. If the view needs a conclusion, write one `Strapline`.
 8. **Make it take part in the desk** (`ux.md` Part B): every record a `RecordChip`, a verb for each record type
@@ -58,7 +58,8 @@ These are never broken. A screen that breaks one is not finished.
   `back-office` repository). No other UI library, no hand-made controls, no copied markup, no restyling a
   component with colours, fonts, borders or radii. Layout utilities only.
 - **One primary action per view.** The signature fill (`Button variant="primary"`) once. Everything else secondary or text.
-- **The ground is Canvas, never pure white.** #F0F0F0 in the light theme (the default), #10141A in the dark one.
+- **The ground is white.** #FFFFFF in the light theme (the default), #10141A in the dark one. Canvas #F0F0F0 is a soft
+  panel and the slide background, not the screen ground.
 - **One surface for everything dark:** the 45 degree gradient from #000000 to #222A35 with its edge light. No other
   gradient, no gradient at any other angle, no drop shadows, no bevels, no glows.
 - **Signal colours only label.** Green and red appear as short bold text on their own tint, never as a fill, a
@@ -80,7 +81,7 @@ These are never broken. A screen that breaks one is not finished.
 | Surface and neutral | Cloud #D6DCE5, Plate #BFBFBF, Canvas #F0F0F0, Off-white #F3F2F2, White #FFFFFF, Caption #9AA0A8 |
 | Signal, in pairs | Positive #00B050 on #E2F0D9, Negative #C00000 on #FBE5D6; Product Blue #ADB9CA for a product name only |
 
-Everything structural is built from Ink, Deep Navy and Pale Blue. Pale Blue is the one highlight: hairlines, the
+Everything structural is built from Ink, Deep Navy and Pale Blue. Pale Blue is the one highlight: the edge light, the
 divider, the apex of the edge light.
 
 **FAT Karting League is out of scope.** FKL has its own brand (FAT Pill, FKL Blue #0000FF, ST Rapid). Never
@@ -94,12 +95,12 @@ The library applies these for you through the `--sg-*` tokens in `assets/tokens.
 
 | Role | Light (default) | Dark |
 |---|---|---|
-| Ground | Canvas #F0F0F0 | #10141A |
-| Panel (windows, alternate fills) | Off-white #F3F2F2 | #171C24 |
+| Ground | White #FFFFFF | #10141A |
+| Panel (windows, alternate fills) | #F7F7F7 | #171C24 |
 | Text | Ink #000000 | #FFFFFF |
 | Secondary text | Slate #333F50 | Cloud #D6DCE5 |
 | Quiet text and labels | Steel #44546A | Mist #8497B0 |
-| Hairline | Pale Blue #ABC0E4 | Pale Blue at 28 % |
+| Hairline | Black at 14 % (about #CECECE) | Pale Blue at 28 % |
 | Field | White with a Steel edge | 4 % white with a Pale Blue edge |
 | Accent (focus, references) | Steel #44546A | Pale Blue #ABC0E4 |
 | Selected (primary, checked, current) | the signature surface, white type | Pale Blue, black type |
@@ -108,7 +109,7 @@ The library applies these for you through the `--sg-*` tokens in `assets/tokens.
 
 - **The signature surface** is `--sg-surface` (`linear-gradient(135deg,#000 0%,#222A35 100%)`) inside a 1 px
   edge light, `--sg-edge`: Mist at the top, Pale Blue at 53 %, Slate at the foot. It reads as one light source above
-  the page and is what separates a card from the canvas. `.sg-surface` applies both.
+  the page and is what separates a card from the ground. `.sg-surface` applies both.
 - **Dark surfaces carry the dark theme.** Menus, dialogs, toasts, tooltips and popovers do so by class; anything
   else drawn in the surface takes `.sg-dark`, so what sits inside it (text, fields, buttons) reads on it. `Card`,
   `ContentCard`, desk tiles, the desk menu and the date picker already do.
@@ -117,7 +118,7 @@ The library applies these for you through the `--sg-*` tokens in `assets/tokens.
 
 ## 3. Colour rules
 
-- **Mist and Caption are never text on Canvas** (2.6 : 1 and 2.3 : 1). Use Slate or Steel. Caption is for small
+- **Mist and Caption are never text on white** (3.0 : 1 and 2.6 : 1). Use Slate or Steel. Caption is for small
   type on dark only.
 - **#00B050 is too light for small type on screen**; the library sets positive text in #007A3D (4.6 : 1 on its tint).
   #00B050 stays the print value.
@@ -127,7 +128,7 @@ The library applies these for you through the `--sg-*` tokens in `assets/tokens.
 - Charts: structure in Ink, Navy and Pale Blue. The subject series is the text colour, the reference is the accent,
   comparisons are Mist. The one ramp for speed or temperature runs Pale Blue, Mist, Slate. Gains and losses are
   told by the numbers in the signal colours, never by filled bars in green or red.
-- Contrast pairs that pass WCAG AA: Ink on Canvas 18.4 : 1, Slate on Canvas 9.4 : 1, Steel on Canvas 6.8 : 1, white
+- Contrast pairs that pass WCAG AA: Ink on white 21 : 1, Slate on white 10.7 : 1, Steel on white 7.7 : 1, white
   on the surface 14.5 : 1 at its navy end, black on Pale Blue 11.4 : 1, Negative on its tint 5.3 : 1, #007A3D on the
   positive tint 4.6 : 1.
 
@@ -157,20 +158,19 @@ The library applies these for you through the `--sg-*` tokens in `assets/tokens.
 
 The full rules and templates are in `references/layouts.md`. The essentials:
 - **Lines, not boxes.** Hairlines and space separate sections. Cards only for things you pick up.
-- **The section header opens every block**: a bold label, a quiet subtitle, and the divider under it, Pale Blue
-  solid to 83 % of its length, then fading (`Section` and `Separator scale` draw it). It never closes a box.
+- **The section header opens every block**: a bold label, a quiet subtitle, and the divider under it, a grey hairline solid to 83 % of its length, then fading (`Section` and `Separator scale` draw it). It never closes a box.
 - **One strapline per view at most** (`Strapline`): the conclusion, not a caption that restates the title. Dark by
   default; light when the area above is already dense with dark cards.
 - **No more than four columns.** Nothing but full-bleed imagery and the strapline touches the edge.
 - Keep the logo's clear space (the cap height of the wordmark on every side), its size and its corner steady within
-  one product. The logo is monochrome: ink on Canvas, white on dark. Never recolour it, box it or separate the glyph.
+  one product. The logo is monochrome: ink on white, white on dark. Never recolour it, box it or separate the glyph.
 - A 16 px side gutter on phones, no sideways scrolling, targets at least 44 px.
 
 ## 7. Controls
 
 Use the library's components, chosen with the table in `references/library.md`. Never draw a control.
 - Buttons: `primary` (the signature fill with white type, Pale Blue with black type on dark) once per view,
-  `secondary` (a Steel hairline), `text` (a Pale Blue underline that turns to the accent on hover), `warning` (the
+  `secondary` (a Steel hairline), `text` (a grey underline that turns to the accent on hover), `warning` (the
   negative pair, for destructive actions); 34, 44 and 52 px.
 - Buttons that belong together sit in a `ButtonGroup`, 8 px apart, the primary first.
 - Fields are white, rounded, with a Steel edge and a SemiBold label above. Focus turns the edge ink and adds a Pale
@@ -191,7 +191,8 @@ Every icon comes from the icon library (catalogue in `references/icons.md`; `Ico
 ## 9. Motion
 
 - Motion brakes: fast in, hard stop. Easing `cubic-bezier(.16, 1, .3, 1)` for anything arriving.
-- A press scales the control to 98 % for 80 ms. No sheen, no streaks, no hover choreography.
+- A press scales the control to 98 % for 80 ms. The primary action alone answers a hover: it lifts 1 px and one light
+  passes across it, left to right, over 1.2 s. Nothing else has hover choreography.
 - Window and drag motion has exact values in `references/ux.md` Part C.
 - One moment per view. No loops outside loaders (the logo's three bars, the gliding progress segment).
 - With reduced motion, show the end state at once. The library already does for its own components.
@@ -224,9 +225,9 @@ Before handing over, check every line. Report any you could not check.
    nothing is restyled; no other UI package was added.
 3. One primary button in the view. Destructive actions are confirmed (`ConfirmDialog` or `HoldToConfirm`) and
    sit apart from Save.
-4. The ground is Canvas (or #10141A in the dark theme); only cards, tiles and floating things are dark, all in the
+4. The ground is white (or #10141A in the dark theme); only cards, tiles and floating things are dark, all in the
    one signature surface with its edge light.
-5. Green and red only as labels on their tints, never fills; no orange or yellow; Mist and Caption never text on Canvas.
+5. Green and red only as labels on their tints, never fills; no orange or yellow; Mist and Caption never text on white.
 6. Sora only, in its three weights; uppercase only for card titles and eyebrows.
 7. Rounded corners at the four radii; no skewed or cut shapes; no shadows.
 8. Sections open with the section header and its fading divider; no boxes around sections; at most one strapline.

@@ -19,11 +19,11 @@
   --sg-product-blue:#ADB9CA;
   --sg-text:#000000;
   --sg-inv:#FFFFFF;
-  --sg-ground:#F0F0F0;
-  --sg-panel:#F3F2F2;
+  --sg-ground:#FFFFFF;
+  --sg-panel:#F7F7F7;
   --sg-dim:#333F50;
   --sg-faint:#44546A;
-  --sg-rule:#ABC0E4;
+  --sg-rule:rgba(0,0,0,.14);
   --sg-field:#FFFFFF;
   --sg-border:rgba(68,84,106,.45);
   --sg-accent:#44546A;
@@ -108,6 +108,14 @@ button, input, select, textarea{font:inherit;color:inherit}
 .btn.lg{--h:52px;padding:0 24px;font-size:14px}
 .btn.p{background:var(--sg-selected) padding-box,var(--sg-selected-edge) border-box;color:var(--sg-on-selected)}
 .btn.p:hover:not([disabled]){background:var(--sg-selected-hover) padding-box,var(--sg-selected-edge) border-box}
+.btn.p::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.34) 50%,transparent 65%) 130% 0/250% 100% no-repeat}
+.btn.p:hover:not([disabled])::after{background-position:-30% 0;transition:background-position 1.2s cubic-bezier(.45,0,.2,1)}
+.btn.p:hover:not([disabled]){transform:translateY(-1px)}
+.btn.p:active:not([disabled]){transform:translateY(0) scale(.98)}
+@media (prefers-reduced-motion: reduce){
+  .btn.p:hover:not([disabled])::after{transition:none;background-position:130% 0}
+  .btn.p:hover:not([disabled]){transform:none}
+}
 .btn.g{border-color:var(--sg-border)}
 .btn.g:hover:not([disabled]){background:var(--sg-quiet-tint);border-color:var(--sg-faint)}
 .btn.neg{background:var(--sg-negative-tint);color:var(--sg-negative)}

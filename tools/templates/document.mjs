@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { Document, Packer, Paragraph, TextRun, ImageRun, Header, Footer, AlignmentType, Table, TableRow, TableCell, WidthType, BorderStyle, ShadingType,
   LevelFormat, PageNumber, TabStopType, TableOfContents, VerticalAlign } from 'docx';
 
-const INK = '000000', DIM = '333F50', STEEL = '44546A', RULE = 'ABC0E4', NAVY = '222A35', GREEN = '007A3D';
+const INK = '000000', DIM = '333F50', STEEL = '44546A', RULE = 'CECECE', NAVY = '222A35', GREEN = '007A3D';
 const none = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
 const hair = { style: BorderStyle.SINGLE, size: 4, color: RULE };
 const W = 9026; // A4 text width at 1 in margins, in DXA
