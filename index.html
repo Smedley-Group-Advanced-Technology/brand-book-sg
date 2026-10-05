@@ -130,7 +130,7 @@ html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
 }
-html{min-height:100%;background-color:var(--bg1);scroll-padding-top:calc(env(safe-area-inset-top,0px) + 24px);background:var(--bg1)}
+html{min-height:100%;background:var(--sg-ground)}
 @keyframes clIn{to{transform:translate(0,0);opacity:1}}
 @keyframes clDim{to{opacity:1}}
 @keyframes clHit{0%{transform:translate(0,0)}35%{transform:translate(-2.5px,1.7px)}100%{transform:translate(0,0)}}
@@ -139,7 +139,7 @@ html{min-height:100%;background-color:var(--bg1);scroll-padding-top:calc(env(saf
 @keyframes fIn{to{transform:translate(0,0);opacity:1}}
 @keyframes plot{to{stroke-dashoffset:0}}
 @media (max-width:820px){
-  html{scroll-padding-top:72px}
+  
 }
 @page{size:A4;margin:14mm 14mm 16mm}
 /* ============ Base ============ */
@@ -191,15 +191,15 @@ h2 .hlink svg{width:22px;height:22px}
 }
 input[type=date], input[type=time]{color-scheme:inherit}
 /* ============ Page structure ============ */
-.layout{display:grid;grid-template-columns:232px minmax(0,1fr)}
-.index{position:sticky;top:0;height:100vh;overflow-y:auto;padding:28px 24px;border-right:0.75px solid var(--rule);display:flex;flex-direction:column}
-.index .t{margin-top:22px;font-weight:600;font-size:15px;color:var(--dim)}
-.index nav{display:flex;flex-direction:column}
-.index nav a{position:relative;display:flex;align-items:center;color:var(--dim);font-size:13px}
-.index nav a:hover{color:var(--ink)}
-.index nav a::before{width:4px;height:14px;margin-top:-7px;transform:scaleY(0);transition:transform .35s var(--brake)}
-.index nav a.on{color:var(--ink);font-weight:600}
-.index nav a.on::before{transform:scaleY(1)}
+
+
+
+
+
+
+
+
+
 main{min-width:0}
 section.s{border-bottom:0.75px solid var(--rule)}
 /* the checker is the separator: the section before it drops its hairline */
@@ -223,11 +223,11 @@ table.spec td:first-child{font-weight:600;width:38%;padding-right:16px;color:var
 .rules span{color:var(--dim)}
 .colophon{padding:40px 64px 60px;font-size:12px;color:var(--faint);display:flex;gap:24px;flex-wrap:wrap;align-items:center}
 @media (max-width:820px){
-  .layout{grid-template-columns:minmax(0,1fr)}
-  .index{height:auto}
-  .index nav{flex-direction:row;overflow-x:auto;margin-top:16px}
-  .index nav a{white-space:nowrap;padding:0 14px 0 18px}
-  .index .t{display:none}
+  
+
+
+
+
   .two, .rules{grid-template-columns:minmax(0,1fr);gap:32px}
   .rules div{grid-template-columns:minmax(0,1fr)}
   .colophon{padding:32px 20px 48px}
@@ -241,43 +241,36 @@ table.spec td:first-child{font-weight:600;width:38%;padding-right:16px;color:var
 .tb > div:first-child{border-left:0}
 .tb dt{font-size:10px}
 .tb dd{margin:1px 0 0;font-size:11.5px;font-variant-numeric:tabular-nums;color:var(--sg-text);white-space:nowrap}
-.lapbar{margin-top:8px;height:5px;border-radius:var(--sg-radius-chip)}
-.lapbar i{display:block;height:100%}
-.index nav{margin-top:18px}
-.index nav a::before{content:"";position:absolute;left:auto}
+
+
+
+
 
 .colophon .mono{color:var(--faint)}
-@media (max-width:820px){
 
-  .lapbar{display:none}
-  .index nav a{border-top:0}
-}
 .hair::before{content:none}
 .tb{grid-template-columns:repeat(3,auto);border:0.75px solid rgba(var(--t),.3)}
 .tb > div{min-width:74px;border-color:var(--sg-rule)}
 .tb dt{color:var(--sg-faint)}
-.index nav a::before{background:var(--sg-text);border-radius:2px}
-.lapbar{background:var(--sg-quiet-tint)}
-.lapbar i{width:0;background:var(--sg-text)}
+
+
+
 @media (min-width:821px){
   .two > .group + .group{margin-top:0}
 }
-.num, 
-.themes{display:inline-flex;margin-top:18px;padding:3px;background:rgba(var(--t),.08);transform:none;margin-left:8px;align-self:flex-start}
-.themes button{border:0;background:transparent;color:var(--dim);font-size:12px;padding:0 14px;line-height:30px;cursor:pointer}
-.themes button span{display:block;transform:none}
-.themes button[aria-pressed="true"]{background:var(--sg-selected);color:var(--sg-on-selected);font-weight:600}
-@media (max-width:820px){
-  .themes{margin-top:14px}
-}
-.themes{border-radius:var(--sg-radius-tile)}
-.themes button{border-radius:7px}
-.index nav a::before{top:50%;left:4px;right:auto;width:3px;height:16px;margin-top:-8px}
+.num{display:inline-flex;margin-top:18px;padding:3px;background:rgba(var(--t),.08);transform:none;margin-left:8px;align-self:flex-start}
+
+
+
+
+
+
+
 main{background:none}
 .tb, .tb > div{border-color:rgba(47,128,255,.28) !important}
 .tb dt{opacity:.8}
-.index nav a{gap:10px}
-.lapbar i{transition:width .6s var(--brake);border-radius:var(--sg-radius-chip)}
+
+
 #principles{border-bottom:0}
 
 .inner :is(p, td) > a:not([class]){color:var(--ink);text-decoration-color:var(--sg-rule);text-decoration-thickness:2px;text-underline-offset:3px}
@@ -287,10 +280,10 @@ section.s{padding:84px 64px 72px}
 section.s h2{margin-top:22px}
 .intro{max-width:64ch}
 .subhead{margin:64px 0 20px}
-.index nav .grp{margin:18px 0 6px;font-family:var(--mono);font-size:10px;color:var(--faint)}
-.index nav .grp:first-child{margin-top:0}
-.index nav a{text-decoration:none;padding-left:14px;border-top:0;min-height:30px;border-radius:var(--sg-radius-control)}
-.index nav a.on{background:var(--sg-quiet-tint)}
+
+
+
+
 .part{display:grid;grid-template-columns:minmax(0,160px) minmax(0,1fr) minmax(0,280px);gap:32px;align-items:start;padding:64px 64px 60px;border-bottom:.75px solid var(--rule)}
 .part .pt{margin:0;font-weight:600;font-size:clamp(28px,3.2vw,40px);letter-spacing:-.04em;line-height:1}
 .part .pl{margin:12px 0 0;max-width:48ch;color:var(--dim);font-size:15px}
@@ -305,7 +298,7 @@ section.s h2{margin-top:22px}
 @media (max-width:820px){
   section.s{overflow-x:clip;padding:56px 20px 52px}
   .part{grid-template-columns:minmax(0,1fr);gap:16px;padding:44px 20px 40px}
-  .index nav .grp{display:none}
+
 }
 .shr + .shr{margin-top:22px}
 .shh{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;font-size:13px}
@@ -313,23 +306,23 @@ section.s h2{margin-top:22px}
 .shh span{font-family:var(--mono);font-size:10.5px;color:var(--dim)}
 section.s{overflow-x:clip}
 @media (max-width:820px){
-  .index{border-right:0;position:sticky;top:0;z-index:60;overflow:visible;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;padding:10px 16px;background:var(--bg1);border-bottom:.75px solid var(--rule)}
-  .index > .lk{--lk:.28px !important}
-  .index .t, .index .themes, .index nav{display:none}
-  .index .lapbar{display:block;position:absolute;left:0;right:0;bottom:-1px;height:2px;margin:0;clip-path:none}
-  html.menu-open{overflow:hidden}
-  .index.open nav{display:flex;flex-direction:column;position:fixed;left:0;right:0;bottom:0;margin:0;padding:20px 20px 110px;overflow-y:auto;overscroll-behavior:contain;background:var(--bg1);z-index:59}
-  .index.open nav .grp{display:block;margin:22px 0 4px}
-  .index.open nav .grp:first-child{margin-top:0}
-  .index.open nav a{min-height:46px;padding:0 0 0 16px;white-space:normal;font-size:15px;border-top:1px solid var(--sg-rule)}
-.index.open nav a.on, .index.open nav a.on + a{border-top-color:transparent}
-  .index.open nav .grp + a{border-top:0}
-  .index.open::after{content:"";position:fixed;left:0;right:0;bottom:0;height:84px;background:var(--bg1);border-top:.75px solid var(--rule);z-index:60}
-  .index.open .themes{display:inline-flex;position:fixed;left:28px;bottom:24px;z-index:61;margin:0}
-  .index.open .themes button{line-height:34px;padding:0 16px;font-size:12px}
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
 }
-.part .pi a:focus-visible, .index nav a:focus-visible{outline:2px solid var(--sg-accent);outline-offset:-2px}
-.themes button:focus-visible{outline:2px solid var(--sg-accent);outline-offset:1px}
+.part .pi a:focus-visible{outline:2px solid var(--sg-accent);outline-offset:-2px}
+
 @media (max-width:820px){
   .part .pi a{min-height:44px}
 }
@@ -344,8 +337,8 @@ section.s{overflow-x:clip}
 @media (hover:none){
   .hlink{opacity:.6}
 }
-.srch{margin-top:22px}
-.srch .inp{min-height:38px;font-size:12.5px;padding:0 12px}
+
+
 .srchr{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column}
 .srchr a{display:block;padding:9px 0;text-decoration:none;border-top:.75px solid var(--rule)}
 .srchr li:first-child a{border-top:0}
@@ -355,26 +348,26 @@ section.s{overflow-x:clip}
 .srchr a.sel{box-shadow:inset 3px 0 0 var(--sg-text);padding-left:10px;background:var(--sg-quiet-tint)}
 .srchr .none{padding:10px 0;font-size:12px;color:var(--dim)}
 @media (max-width:820px){
-  .srch{display:none}
-  .index.open .srch{display:block;position:fixed;top:57px;left:0;right:0;z-index:61;margin:0;padding:14px 20px 12px;background:var(--bg1);border-bottom:.75px solid var(--rule)}
-  .index.open .srch .inp{min-height:44px;font-size:15px}
-  .index.open .srchr{max-height:calc(100svh - 230px);overflow-y:auto;overscroll-behavior:contain}
-  .index.open nav{top:131px}
+
+
+
+
+
 /* the menu drops in on the brakes, its entries in quick succession; closing hands straight back to the page */
 @keyframes mIn{from{opacity:0;transform:translateY(-12px)}}
 @keyframes mFade{from{opacity:0}}
 @keyframes mOut{to{opacity:0;transform:translateY(-6px)}}
-.index.open .srch, .index.open nav{animation:mFade .22s ease-out both}
-.index.open nav > *{animation:mIn .46s var(--brake) both;animation-delay:calc(var(--i,0) * 16ms + 40ms)}
-.index.open .srch .inp{animation:mIn .4s var(--brake) both}
-.index.open::after, .index.open .themes{animation:mFade .3s ease-out .1s both}
-.index.open.closing .srch, .index.open.closing nav, .index.open.closing::after, .index.open.closing .themes{animation:mOut .16s ease-in both}
-.index.open.closing nav > *{animation:none}
-@media (prefers-reduced-motion:reduce){ .index.open *, .index.open::after{animation:none !important} }
+
+
+
+
+
+
+
 }
 @media print{
   .layout{display:block}
-  .index, .mbtn, .hlink, .copied, .srch{display:none !important}
+   .hlink, .copied{display:none !important}
   .part{break-before:page;background:none;padding:10mm 0;border:0}
   section.s{padding:8mm 0 10mm;border:0;overflow:visible}
   section.s h2{font-size:30pt;break-after:avoid}
@@ -422,9 +415,7 @@ ol.seq li p{margin:6px 0 0;font-size:13px;color:var(--sg-dim)}
 /* ============ Page structure ============ */
 :root[data-theme="light"] .tb dt{color:#1F66E0}
 /* ============ Cover and motion ============ */
-@media (max-width:820px){
-  
-}
+
 .cover .cap, .cover .scroll, 
 :root[data-theme="light"] 
 .stage{aspect-ratio:16/9;border-radius:var(--sg-radius-card);overflow:hidden}
@@ -433,7 +424,7 @@ ol.seq li p{margin:6px 0 0;font-size:13px;color:var(--sg-dim)}
 :root[data-theme] 
 .cover .scroll i, .cover.light .scroll i{background:var(--sg-text);border-radius:2px}
 @media (max-width:820px){
-  .cover{height:calc(100svh - 57px);min-height:560px}
+  .cover{min-height:560px}
 }
 @media print{
   .cover iframe, .cover .scroll{display:none !important}
@@ -788,6 +779,28 @@ textarea.inp{min-height:88px;padding:12px 14px;line-height:1.5;resize:vertical}
   .btn.t{min-height:44px}
 }
 
+/* ----- scroll area: a native viewport with its own overlay bar ----- */
+/* The thumb is a rounded bar in the hairline family, 4 px at rest and 8 px under the pointer; it fades in fast and
+   out slowly. The viewport scrolls natively (wheel, touch, keyboard); the bar only shows where you are and drags. */
+.sg-scroll{position:relative;overflow:hidden;min-height:0}
+.sg-scroll-viewport{width:100%;height:100%;max-height:inherit;overflow:auto;scrollbar-width:none;overscroll-behavior:contain}
+.sg-scroll-viewport::-webkit-scrollbar{display:none}
+.sg-scroll-viewport[data-axes=vertical]{overflow-x:hidden}
+.sg-scroll-viewport[data-axes=horizontal]{overflow-y:hidden}
+.sg-scroll-viewport:focus-visible{outline:2px solid var(--sg-accent);outline-offset:-2px}
+.sg-scroll-bar{position:absolute;z-index:5;display:flex;touch-action:none;opacity:0;transition:opacity .45s ease-out}
+.sg-scroll[data-state=visible]>.sg-scroll-bar{opacity:1;transition:opacity .12s var(--brake)}
+.sg-scroll[data-overflow-y=false]>.sg-scroll-y,.sg-scroll[data-overflow-x=false]>.sg-scroll-x{display:none}
+.sg-scroll-y{top:4px;bottom:4px;right:0;width:12px;justify-content:flex-end;padding-right:2px}
+.sg-scroll-x{left:4px;right:4px;bottom:0;height:12px;align-items:flex-end;padding-bottom:2px}
+.sg-scroll-thumb{position:absolute;border-radius:4px;background:rgba(var(--t),.38);transition:width .2s var(--brake),height .2s var(--brake),background-color .2s}
+.sg-scroll-y .sg-scroll-thumb{right:2px;width:4px;top:0;height:var(--sa-y-size);transform:translateY(var(--sa-y-pos))}
+.sg-scroll-x .sg-scroll-thumb{bottom:2px;height:4px;left:0;width:var(--sa-x-size);transform:translateX(var(--sa-x-pos))}
+.sg-scroll-y:hover .sg-scroll-thumb,.sg-scroll[data-dragging=y] .sg-scroll-y .sg-scroll-thumb{width:8px}
+.sg-scroll-x:hover .sg-scroll-thumb,.sg-scroll[data-dragging=x] .sg-scroll-x .sg-scroll-thumb{height:8px}
+.sg-scroll-bar:hover .sg-scroll-thumb{background:rgba(var(--t),.6)}
+.sg-scroll[data-dragging] .sg-scroll-thumb{background:var(--sg-text)}
+
 /* ----- the identity's own parts: section header, strapline band, icon tile, content card, signal chips ----- */
 /* Section header: a bold label, a quiet subtitle and the divider, a grey hairline, solid to 83 % and then fading. It opens
    every column and every block, and never closes a box. */
@@ -819,10 +832,8 @@ textarea.inp{min-height:88px;padding:12px 14px;line-height:1.5;resize:vertical}
 .mono{font-family:var(--mono);font-size:.92em}
 :focus-visible{outline-color:var(--sg-accent)}
 /* ============ Page structure ============ */
-.mbtn{display:none}
-@media (max-width:820px){
-  .mbtn{display:inline-flex;flex:none;width:auto;margin-left:auto}
-}
+
+
 /* ============ Navigation and feedback ============ */
 .tabs{position:relative;display:flex;gap:4px;border-bottom:1px solid var(--sg-rule)}
 .tabs button{position:relative;flex:none;min-height:44px;padding:0 14px;border:0;background:transparent;color:var(--sg-dim);font-size:13px;white-space:nowrap;cursor:pointer}
@@ -1538,6 +1549,64 @@ table.vx td:first-child{width:18%}
   .rhero .btn{width:100%;justify-content:center}
   .rstat{gap:20px}
 }
+/* ============ Page structure ============ */
+/* The page shell, as in the component library: a top bar that runs edge to edge, then the sidebar and the book. The
+   bar holds the lockup (lined up with the sidebar's content), the label, the theme switch and, on phones, the menu;
+   the reading progress runs along its foot. The sidebar holds the search and the chapters in a scroll area. */
+html{scroll-padding-top:96px}
+.topbar{position:sticky;top:0;z-index:60;background:var(--sg-ground);border-bottom:1px solid var(--sg-rule)}
+.topbar-in{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px;padding:0 28px 0 24px}
+.tb-home{display:flex;align-items:center;min-height:44px;color:var(--sg-text);text-decoration:none}
+.tb-home .lk{--lk:.4px}
+.tb-home:focus-visible{outline:2px solid var(--sg-accent);outline-offset:4px;border-radius:4px}
+.tb-tools{display:flex;align-items:center;gap:20px}
+.tb-label{font-size:12px;color:var(--sg-faint)}
+.themes{display:inline-flex;gap:2px;padding:3px;border-radius:var(--sg-radius-tile);background:var(--sg-quiet-tint)}
+.themes button{border:0;border-radius:7px;background:transparent;color:var(--sg-dim);font-size:12px;line-height:32px;padding:0 14px;cursor:pointer;transition:background .2s,color .2s}
+.themes button span{display:block}
+.themes button:hover{color:var(--sg-text)}
+.themes button[aria-pressed="true"]{background:var(--sg-selected);color:var(--sg-on-selected);font-weight:600}
+.themes button:focus-visible{outline:2px solid var(--sg-accent);outline-offset:1px}
+.mbtn{display:none}
+.lapbar{position:absolute;left:0;right:0;bottom:-1px;height:2px;pointer-events:none}
+.lapbar i{display:block;width:0;height:100%;background:var(--sg-text);transition:width .6s var(--brake)}
+.layout{display:grid;grid-template-columns:240px minmax(0,1fr)}
+.index{position:sticky;top:73px;display:flex;flex-direction:column;height:calc(100vh - 73px);padding:24px 0 0 24px;border-right:1px solid var(--sg-rule)}
+.srch{margin:0 16px 0 0}
+.srch .inp{min-height:40px;padding:0 12px;font-size:13px}
+.idx-scroll{flex:1;margin-top:20px}
+.idx-scroll > .sg-scroll-viewport{padding:0 16px 32px 0}
+.index nav{display:flex;flex-direction:column;gap:1px}
+.index nav .grp{margin:20px 0 6px;padding-left:10px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--sg-faint)}
+.index nav .grp:first-child{margin-top:0}
+.index nav a{display:flex;align-items:center;min-height:32px;padding:6px 10px;border-radius:var(--sg-radius-control);font-size:13px;line-height:1.35;color:var(--sg-dim);text-decoration:none;transition:background .15s,color .15s}
+.index nav a:hover{color:var(--sg-text);background:var(--sg-quiet-tint)}
+.index nav a.on{color:var(--sg-text);font-weight:600;background:var(--sg-quiet-tint)}
+.index nav a:focus-visible, .part .pi a:focus-visible{outline:2px solid var(--sg-accent);outline-offset:-2px}
+.srchr{margin:12px 0 0;max-height:min(60vh,520px);overflow:auto;scrollbar-width:thin}
+.srchr a{padding:9px 10px;border-top:0;border-radius:var(--sg-radius-control)}
+.srchr a:hover{background:var(--sg-quiet-tint)}
+.srchr a.sel{box-shadow:none;padding-left:10px;background:var(--sg-quiet-tint)}
+.cover{height:calc(100svh - 73px)}
+@media (max-width:820px){
+  html{scroll-padding-top:76px}
+  .topbar-in{min-height:60px;padding:0 12px 0 16px;gap:10px}
+  .tb-home .lk{--lk:.3px}
+  .tb-label{display:none}
+  .tb-tools{gap:8px}
+  .themes button{line-height:30px;padding:0 10px}
+  .mbtn{display:inline-flex}
+  .layout{display:block}
+  .index{display:none}
+  html.menu-open{overflow:hidden}
+  .index.open{display:flex;position:fixed;top:61px;left:0;right:0;bottom:0;z-index:59;height:auto;padding:16px 0 0 20px;border-right:0;background:var(--sg-ground);animation:mFade .2s ease-out both}
+  .index.open .srch .inp{min-height:44px;font-size:15px}
+  .index.open nav a{min-height:44px;font-size:15px}
+  .index.open.closing{animation:mOut .16s ease-in both}
+  .cover{height:calc(100svh - 61px)}
+}
+@media (prefers-reduced-motion:reduce){ .index.open, .index.open.closing{animation:none !important} }
+@media print{ .topbar, .index, .mbtn, .srch{display:none !important} }
 </style>
 </head>
 <body>
@@ -1548,14 +1617,18 @@ table.vx td:first-child{width:18%}
   </defs>
 </svg>
 
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="tb-home" href="#" aria-label="Smedley Group, Advanced Technology: back to the top"><span class="lk" aria-hidden="true"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span></a>
+    <div class="tb-tools"><span class="tb-label">Brand book</span><div class="themes" role="group" aria-label="Theme"><button type="button" data-t="light" aria-pressed="false"><span>Light</span></button><button type="button" data-t="dark" aria-pressed="false"><span>Dark</span></button></div><button class="btn g sm mbtn" type="button" id="mbtn" aria-expanded="false" aria-controls="toc">Menu</button></div>
+  </div>
+  <div class="lapbar"><i id="lapBar"></i></div>
+</header>
+
 <div class="layout">
   <aside class="index">
-    <span class="lk" style="--lk:0.37px;color:var(--ink)" role="img" aria-label="Smedley Group, Advanced Technology"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span>
-    <button class="btn g sm mbtn" type="button" id="mbtn" aria-expanded="false" aria-controls="toc">Menu</button>
-    <div class="t">Brand book</div>
-    <div class="themes" role="group" aria-label="Theme"><button type="button" data-t="light" aria-pressed="false"><span>Light</span></button><button type="button" data-t="dark" aria-pressed="false"><span>Dark</span></button></div>
-    <div class="lapbar"><i id="lapBar"></i></div>
     <div class="srch" role="search"><input class="inp" id="srch" type="search" placeholder="Search the book" aria-label="Search the book" autocomplete="off"><ol id="srchr" class="srchr" hidden></ol></div>
+    <div class="sg-scroll idx-scroll" data-state="hidden"><div class="sg-scroll-viewport" data-axes="vertical">
     <nav id="toc" aria-label="Sections">
       <div class="grp">Foundations</div>
       <a href="#logo">Logo</a>
@@ -1585,6 +1658,7 @@ table.vx td:first-child{width:18%}
       <a href="#principles">Principles</a>
       <a href="#resources">Resources</a>
     </nav>
+    </div><div class="sg-scroll-bar sg-scroll-y" aria-hidden="true"><div class="sg-scroll-thumb"></div></div></div>
   </aside>
 
   <main>
@@ -2668,7 +2742,7 @@ table.vx td:first-child{width:18%}
       <div class="rgrid r3">
         <article class="rtok"><div class="rsw"><i style="background:#000000"></i><i style="background:#222A35"></i><i style="background:#333F50"></i><i style="background:#44546A"></i><i style="background:#8497B0"></i><i style="background:#ABC0E4"></i><i style="background:#D6DCE5"></i><i style="background:#BFBFBF"></i><i style="background:#FFFFFF"></i><i style="background:#F3F2F2"></i></div><div class="rbody"><h4 id="resources-colour-tokens" data-anchor="resources-colour-tokens">Colour tokens<button class="hlink" type="button" aria-label="Copy link to Colour tokens"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>The near-monochrome palette, the signal pairs, both themes, the signature surface, its edge light and the four radii, as custom properties or data.</p><div class="rbtns"><a class="dlb" href="assets/tokens.css" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg><span class="dlt"><b>CSS</b><span>custom properties, 1 KB</span></span></a><a class="dlb" href="assets/tokens.json" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg><span class="dlt"><b>JSON</b><span>for tools and code, 1 KB</span></span></a></div></div></article>
         <article class="rtype"><div class="rspec sg-surface sg-dark"><span class="s1">Aa</span><span class="s2">1:02.418</span></div><div class="rbody"><h4 id="resources-typefaces" data-anchor="resources-typefaces">Typefaces<button class="hlink" type="button" aria-label="Copy link to Typefaces"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>Sora only, in Light, Regular and SemiBold, with tabular figures for measured values. Open licence; the book and the skill self-host it.</p><div class="rbtns"><a class="dlb" href="https://fonts.google.com/specimen/Sora" target="_blank" rel="noopener"><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="external"><path d="M14 4H20V10"/><path d="M20 4L11 13"/><path d="M18 14V18A2 2 0 0 1 16 20H6A2 2 0 0 1 4 18V8A2 2 0 0 1 6 6H10"/></svg><span class="dlt"><b>Sora</b><span>Google Fonts</span></span></a></div></div></article>
-        <article class="ricons"><div class="rig"><a class="ricon" href="assets/icons/calliper.svg" download aria-label="Download calliper icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="calliper"><path d="M12 4.5H3.5V8H12M16.5 4.5H20.5V8H16.5"/><rect x="12" y="3" width="4.5" height="6.5" rx="1"/><path d="M4.5 8V19L7.5 16V8"/><path d="M13 9.5V17L15.5 14.5V9.5"/></svg><span>Calliper</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/data-logger.svg" download aria-label="Download data logger icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="data-logger"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M6.5 13L9.5 10L11.5 11.5L14.5 8L17.5 10"/><path d="M12 16.5V19.5M8.5 19.5H15.5"/></svg><span>Data logger</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/hex-key.svg" download aria-label="Download hex key icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="hex-key"><path d="M6.5 3.5H9.5V16a1 1 0 0 0 1 1H18V20H9.5A3 3 0 0 1 6.5 17Z"/></svg><span>Hex key</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/ratchet.svg" download aria-label="Download ratchet icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="ratchet"><path d="M3.8 18.4L12.1 10.1M5.6 20.2L13.9 11.9"/><path d="M3.8 18.4a1.27 1.27 0 0 0 1.8 1.8"/><circle cx="16.5" cy="7.5" r="4.3"/><rect x="15" y="6" width="3" height="3" rx="0.6"/></svg><span>Ratchet</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/spanner.svg" download aria-label="Download spanner icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="spanner"><path d="M4.3 17.8L12.7 9.4M6.2 19.7L14.6 11.3"/><path d="M4.3 17.8a1.35 1.35 0 0 0 1.9 1.9"/><path d="M12.7 9.4a4.6 4.6 0 0 1 6.2-6.1L16.2 6L16.8 8.2L19 8.8L21.7 6.1a4.6 4.6 0 0 1-6.1 6.2"/></svg><span>Spanner</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/stopwatch.svg" download aria-label="Download stopwatch icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="stopwatch"><circle cx="12" cy="13.5" r="7"/><path d="M10 2.5H14M12 2.5V6.5"/><path d="M17.5 7L19 5.5"/><path d="M8 13.5H9.8L11 11L13 16L14.2 13.5H16"/></svg><span>Stopwatch</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/torque-wrench.svg" download aria-label="Download torque wrench icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="torque-wrench"><circle cx="16.6" cy="7.4" r="3"/><path d="M14.4 9.5L6.4 17.5a1.41 1.41 0 0 0 2 2L16.4 11.6"/><path d="M9.4 14.5L11.4 16.5"/></svg><span>Torque wrench</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/tyre-gauge.svg" download aria-label="Download tyre gauge icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="tyre-gauge"><circle cx="12" cy="10" r="6.5"/><path d="M12 10L14.5 7.5"/><path d="M12 16.5V21M9.5 21H14.5"/></svg><span>Tyre gauge</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a></div><div class="rbody"><h4 id="resources-tool-icons" data-anchor="resources-tool-icons">Icon library<button class="hlink" type="button" aria-label="Copy link to Icon library"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>134 icons in one monoline style: a 24 px grid, 1.5 px stroke, rounded ends and joins. The workshop tools are here to download; the whole library is one click away.</p><div class="rbtns"><a class="btn p rmk" href="icons/"><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="arrow-up-right"><path d="M7 17L17 7"/><path d="M8.5 7H17V15.5"/></svg>Open the icon library</a></div></div></article><article class="rskill"><div class="rbody"><h4 id="resources-claude-skill" data-anchor="resources-claude-skill">Claude skill<button class="hlink" type="button" aria-label="Copy link to Claude skill"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>A skill that teaches Claude this brand book and how Back Office is built, so it can design, build and review screens on the brand. It gives a step-by-step procedure; the Back Office component library, with its full API and which component to use for each job; screen templates and measurements; how the apps share one desk, with window management and drag and drop; and the brand rules, from the near-monochrome palette, the white ground and the signature surface to rounded parts, Sora, signal colours as labels, icons, motion and words, with a review checklist. It carries the book's own stylesheet, tokens, icon sprite and fonts.</p><div class="rbtns"><a class="dlb" href="assets/skills/smedley-group-ui.zip" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg><span class="dlt"><b>Download the skill</b><span>ZIP, 106 KB</span></span></a></div><ol class="rsteps"><li><b>Claude</b><span>Settings, Capabilities, Skills: upload the ZIP.</span></li><li><b>Claude Code</b><span>Unzip into <code>~/.claude/skills/</code>, or into <code>.claude/skills/</code> in a project.</span></li><li><b>Then ask</b><span>“Design the results page for FAT Racing” or “Review this screen against the brand book”.</span></li></ol></div></article>
+        <article class="ricons"><div class="rig"><a class="ricon" href="assets/icons/calliper.svg" download aria-label="Download calliper icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="calliper"><path d="M12 4.5H3.5V8H12M16.5 4.5H20.5V8H16.5"/><rect x="12" y="3" width="4.5" height="6.5" rx="1"/><path d="M4.5 8V19L7.5 16V8"/><path d="M13 9.5V17L15.5 14.5V9.5"/></svg><span>Calliper</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/data-logger.svg" download aria-label="Download data logger icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="data-logger"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M6.5 13L9.5 10L11.5 11.5L14.5 8L17.5 10"/><path d="M12 16.5V19.5M8.5 19.5H15.5"/></svg><span>Data logger</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/hex-key.svg" download aria-label="Download hex key icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="hex-key"><path d="M6.5 3.5H9.5V16a1 1 0 0 0 1 1H18V20H9.5A3 3 0 0 1 6.5 17Z"/></svg><span>Hex key</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/ratchet.svg" download aria-label="Download ratchet icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="ratchet"><path d="M3.8 18.4L12.1 10.1M5.6 20.2L13.9 11.9"/><path d="M3.8 18.4a1.27 1.27 0 0 0 1.8 1.8"/><circle cx="16.5" cy="7.5" r="4.3"/><rect x="15" y="6" width="3" height="3" rx="0.6"/></svg><span>Ratchet</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/spanner.svg" download aria-label="Download spanner icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="spanner"><path d="M4.3 17.8L12.7 9.4M6.2 19.7L14.6 11.3"/><path d="M4.3 17.8a1.35 1.35 0 0 0 1.9 1.9"/><path d="M12.7 9.4a4.6 4.6 0 0 1 6.2-6.1L16.2 6L16.8 8.2L19 8.8L21.7 6.1a4.6 4.6 0 0 1-6.1 6.2"/></svg><span>Spanner</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/stopwatch.svg" download aria-label="Download stopwatch icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="stopwatch"><circle cx="12" cy="13.5" r="7"/><path d="M10 2.5H14M12 2.5V6.5"/><path d="M17.5 7L19 5.5"/><path d="M8 13.5H9.8L11 11L13 16L14.2 13.5H16"/></svg><span>Stopwatch</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/torque-wrench.svg" download aria-label="Download torque wrench icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="torque-wrench"><circle cx="16.6" cy="7.4" r="3"/><path d="M14.4 9.5L6.4 17.5a1.41 1.41 0 0 0 2 2L16.4 11.6"/><path d="M9.4 14.5L11.4 16.5"/></svg><span>Torque wrench</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/tyre-gauge.svg" download aria-label="Download tyre gauge icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="tyre-gauge"><circle cx="12" cy="10" r="6.5"/><path d="M12 10L14.5 7.5"/><path d="M12 16.5V21M9.5 21H14.5"/></svg><span>Tyre gauge</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a></div><div class="rbody"><h4 id="resources-tool-icons" data-anchor="resources-tool-icons">Icon library<button class="hlink" type="button" aria-label="Copy link to Icon library"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>134 icons in one monoline style: a 24 px grid, 1.5 px stroke, rounded ends and joins. The workshop tools are here to download; the whole library is one click away.</p><div class="rbtns"><a class="btn p rmk" href="icons/"><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="arrow-up-right"><path d="M7 17L17 7"/><path d="M8.5 7H17V15.5"/></svg>Open the icon library</a></div></div></article><article class="rskill"><div class="rbody"><h4 id="resources-claude-skill" data-anchor="resources-claude-skill">Claude skill<button class="hlink" type="button" aria-label="Copy link to Claude skill"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>A skill that teaches Claude this brand book and how Back Office is built, so it can design, build and review screens on the brand. It gives a step-by-step procedure; the Back Office component library, with its full API and which component to use for each job; screen templates and measurements; how the apps share one desk, with window management and drag and drop; and the brand rules, from the near-monochrome palette, the white ground and the signature surface to rounded parts, Sora, signal colours as labels, icons, motion and words, with a review checklist. It carries the book's own stylesheet, tokens, icon sprite and fonts.</p><div class="rbtns"><a class="dlb" href="assets/skills/smedley-group-ui.zip" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg><span class="dlt"><b>Download the skill</b><span>ZIP, 107 KB</span></span></a></div><ol class="rsteps"><li><b>Claude</b><span>Settings, Capabilities, Skills: upload the ZIP.</span></li><li><b>Claude Code</b><span>Unzip into <code>~/.claude/skills/</code>, or into <code>.claude/skills/</code> in a project.</span></li><li><b>Then ask</b><span>“Design the results page for FAT Racing” or “Review this screen against the brand book”.</span></li></ol></div></article>
       </div>
 
       <div class="two" style="margin-top:64px" id="versions">
@@ -3020,6 +3094,24 @@ table.vx td:first-child{width:18%}
   })();
 
 
+  // scroll areas: the component library's ScrollArea without React. The viewport scrolls natively; the overlay thumb
+  // shows on hover or scroll, fades after a moment, drags, and a click on its track pages towards the pointer.
+  $$('.sg-scroll').forEach(function(root){var vp=root.querySelector('.sg-scroll-viewport'),bar=root.querySelector('.sg-scroll-y'),th=bar&&bar.firstElementChild;if(!vp||!th)return;
+    var t=null,hover=false,drag=null,calm=matchMedia('(prefers-reduced-motion: reduce)');
+    function show(on){clearTimeout(t);if(on)root.dataset.state='visible';else t=setTimeout(function(){if(!drag&&!hover)root.dataset.state='hidden'},700)}
+    function measure(){var c=vp.clientHeight,all=vp.scrollHeight,track=c-8,over=all-c>1,size=over?Math.max(24,track*c/all):0,at=over?(track-size)*vp.scrollTop/(all-c):0;
+      root.style.setProperty('--sa-y-size',size+'px');root.style.setProperty('--sa-y-pos',at+'px');root.dataset.overflowY=String(over)}
+    vp.addEventListener('scroll',function(){measure();show(true);show(false)},{passive:true});
+    root.addEventListener('pointerenter',function(){hover=true;show(true)});root.addEventListener('pointerleave',function(){hover=false;show(false)});
+    th.addEventListener('pointerdown',function(e){if(e.button!==0)return;e.preventDefault();e.stopPropagation();var c=vp.clientHeight,all=vp.scrollHeight,track=c-8,size=Math.max(24,track*c/all);
+      drag={y:e.clientY,from:vp.scrollTop,k:(all-c)/(track-size)};th.setPointerCapture(e.pointerId);root.setAttribute('data-dragging','y');show(true)});
+    th.addEventListener('pointermove',function(e){if(drag)vp.scrollTop=drag.from+(e.clientY-drag.y)*drag.k});
+    function release(){if(!drag)return;drag=null;root.removeAttribute('data-dragging');show(false)}th.addEventListener('pointerup',release);th.addEventListener('pointercancel',release);
+    bar.addEventListener('pointerdown',function(e){if(e.target!==bar)return;var r=th.getBoundingClientRect();vp.scrollBy({top:(e.clientY<r.top?-1:1)*vp.clientHeight*.9,behavior:calm.matches?'auto':'smooth'})});
+    new ResizeObserver(measure).observe(vp);[].forEach.call(vp.children,function(c){new ResizeObserver(measure).observe(c)});measure()});
+  // keep the current chapter in view in the sidebar
+  (function(){var vp=document.querySelector('.idx-scroll > .sg-scroll-viewport');if(!vp)return;
+    new MutationObserver(function(){var a=vp.querySelector('a.on');if(!a)return;var r=a.getBoundingClientRect(),v=vp.getBoundingClientRect();if(r.top<v.top+8||r.bottom>v.bottom-8)vp.scrollTop+=r.top-v.top-v.height/3}).observe(vp,{subtree:true,attributes:true,attributeFilter:['class']})})();
   // at the foot of the page the last section is current, even if it is too short to reach the reading line
   (function(){var secs=[].slice.call(document.querySelectorAll('section.s')),last=secs[secs.length-1],n=secs.length;
     function foot(){if(innerHeight+scrollY<document.documentElement.scrollHeight-4)return;

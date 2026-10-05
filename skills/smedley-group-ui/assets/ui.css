@@ -221,6 +221,24 @@ textarea.inp{min-height:88px;padding:12px 14px;line-height:1.5;resize:vertical}
   .check, .radio{min-height:44px}
   .btn.t{min-height:44px}
 }
+.sg-scroll{position:relative;overflow:hidden;min-height:0}
+.sg-scroll-viewport{width:100%;height:100%;max-height:inherit;overflow:auto;scrollbar-width:none;overscroll-behavior:contain}
+.sg-scroll-viewport::-webkit-scrollbar{display:none}
+.sg-scroll-viewport[data-axes=vertical]{overflow-x:hidden}
+.sg-scroll-viewport[data-axes=horizontal]{overflow-y:hidden}
+.sg-scroll-viewport:focus-visible{outline:2px solid var(--sg-accent);outline-offset:-2px}
+.sg-scroll-bar{position:absolute;z-index:5;display:flex;touch-action:none;opacity:0;transition:opacity .45s ease-out}
+.sg-scroll[data-state=visible]>.sg-scroll-bar{opacity:1;transition:opacity .12s var(--brake)}
+.sg-scroll[data-overflow-y=false]>.sg-scroll-y,.sg-scroll[data-overflow-x=false]>.sg-scroll-x{display:none}
+.sg-scroll-y{top:4px;bottom:4px;right:0;width:12px;justify-content:flex-end;padding-right:2px}
+.sg-scroll-x{left:4px;right:4px;bottom:0;height:12px;align-items:flex-end;padding-bottom:2px}
+.sg-scroll-thumb{position:absolute;border-radius:4px;background:rgba(var(--t),.38);transition:width .2s var(--brake),height .2s var(--brake),background-color .2s}
+.sg-scroll-y .sg-scroll-thumb{right:2px;width:4px;top:0;height:var(--sa-y-size);transform:translateY(var(--sa-y-pos))}
+.sg-scroll-x .sg-scroll-thumb{bottom:2px;height:4px;left:0;width:var(--sa-x-size);transform:translateX(var(--sa-x-pos))}
+.sg-scroll-y:hover .sg-scroll-thumb,.sg-scroll[data-dragging=y] .sg-scroll-y .sg-scroll-thumb{width:8px}
+.sg-scroll-x:hover .sg-scroll-thumb,.sg-scroll[data-dragging=x] .sg-scroll-x .sg-scroll-thumb{height:8px}
+.sg-scroll-bar:hover .sg-scroll-thumb{background:rgba(var(--t),.6)}
+.sg-scroll[data-dragging] .sg-scroll-thumb{background:var(--sg-text)}
 .shead{margin:0 0 16px}
 .shead b{display:block;font-size:15px;font-weight:600;line-height:1.3}
 .shead small{display:block;margin-top:2px;font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--sg-faint)}

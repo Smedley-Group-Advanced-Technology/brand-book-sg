@@ -1,15 +1,14 @@
 /* The page around the brand book's tools: base, the top bar with its lockup, and the footer. Shared by the social post maker and the icon library. */
 *{box-sizing:border-box}
-html{background:var(--bg1)}
-body{margin:0;background:var(--bg1);color:var(--ink);font:14px/1.5 Sora,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-.top{display:flex;align-items:center;gap:18px;padding:16px 32px;border-bottom:.75px solid var(--rule)}
+html{background:var(--sg-ground)}
+body{margin:0;background:var(--sg-ground);color:var(--ink);font:14px/1.5 Sora,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:18px;min-height:72px;padding:0 28px 0 24px;background:var(--sg-ground);border-bottom:1px solid var(--sg-rule)}
 /* the lockup: the glyph and wordmark, the divider, then Brand book set like a business name */
 .top .lk{display:inline-flex;color:var(--ink);line-height:0}
 .top .lk svg{height:36px;width:auto}
 .top .lk:focus-visible{outline:2px solid var(--sg-accent);outline-offset:4px}
 .top span{font-size:12px;color:var(--dim);padding-left:18px;border-left:1px solid var(--sg-rule)}
-/* footer: the checker at 55°, then the lockup, the way back into the book and the small print, as in the book */
-/* the checker is the separator: nothing else sits above or below it */
+/* footer: the lockup, the way back into the book and the small print, as in the book */
 .colophon{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:20px 40px;padding:36px 32px 48px;font-size:12px;color:var(--faint)}
 .colophon .lk{display:inline-flex;line-height:0;color:var(--ink);opacity:.85;transition:opacity .2s}
 .colophon .lk:hover{opacity:1}
