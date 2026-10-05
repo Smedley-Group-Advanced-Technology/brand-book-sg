@@ -16,10 +16,11 @@
 html,body{margin:0;height:100%;background:var(--ground);color:var(--ink);font-family:"Sora",system-ui,sans-serif;overflow:hidden}
 :root[data-embed="cover"],:root[data-embed="cover"] body{background:transparent !important}
 main{position:relative;height:100%;display:grid;place-items:center;padding:0 8vw}
-/* on the cover the title holds the top left; the lockup sits low on the right */
-:root[data-embed="cover"] main{justify-items:end;align-items:end;padding:0 7vw 22vh}
+/* on the cover the lockup is the subject: centred, large, the title a small caption in the corner */
+:root[data-embed="cover"] main{padding:0 9vw}
 .logo{display:block;width:min(64vw,920px);height:auto;overflow:visible}
-:root[data-embed="cover"] .logo{width:min(46vw,640px)}
+:root[data-embed="cover"] .logo{width:min(72vw,1000px)}
+@media (max-width:600px){:root[data-embed="cover"] main{padding:0 6vw}:root[data-embed="cover"] .logo{width:88vw}}
 .bars line{stroke-dasharray:1 1;stroke-dashoffset:0}
 .div{transform-box:fill-box;transform-origin:50% 50%}
 .play .bars line{animation:draw .7s var(--brake) both}

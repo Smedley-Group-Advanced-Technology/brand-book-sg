@@ -31,7 +31,7 @@
   --sg-positive-tint:#E2F0D9;
   --sg-negative:#C00000;
   --sg-negative-tint:#FBE5D6;
-  --sg-quiet-tint:#D6DCE5;
+  --sg-quiet-tint:#F0F0F0;
   --sg-selected:linear-gradient(135deg,#000000 0%,#222A35 100%);
   --sg-selected-hover:linear-gradient(135deg,#222A35 0%,#333F50 100%);
   --sg-selected-edge:linear-gradient(180deg,#8497B0 0%,#ABC0E4 53%,#333F50 100%);

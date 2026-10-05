@@ -78,7 +78,7 @@
   --sg-positive-tint:#E2F0D9;
   --sg-negative:#C00000;
   --sg-negative-tint:#FBE5D6;
-  --sg-quiet-tint:#D6DCE5;
+  --sg-quiet-tint:#F0F0F0;
   --sg-selected:linear-gradient(135deg,#000000 0%,#222A35 100%);
   --sg-selected-hover:linear-gradient(135deg,#222A35 0%,#333F50 100%);
   --sg-selected-edge:linear-gradient(180deg,#8497B0 0%,#ABC0E4 53%,#333F50 100%);
@@ -123,7 +123,7 @@
 :root[data-theme="dark"], .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh{--t:171,192,228}
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--brake:cubic-bezier(.16,1,.3,1)}
 @media print{
-  :root, :root[data-theme]{--sg-text:#000000;--sg-inv:#FFFFFF;--sg-ground:#FFFFFF;--sg-panel:#F7F7F7;--sg-dim:#333F50;--sg-faint:#44546A;--sg-rule:rgba(0,0,0,.14);--sg-field:#FFFFFF;--sg-border:rgba(68,84,106,.45);--sg-accent:#44546A;--sg-positive:#007A3D;--sg-positive-tint:#E2F0D9;--sg-negative:#C00000;--sg-negative-tint:#FBE5D6;--sg-quiet-tint:#D6DCE5;--sg-selected:linear-gradient(135deg,#000000 0%,#222A35 100%);--sg-selected-hover:linear-gradient(135deg,#222A35 0%,#333F50 100%);--sg-selected-edge:linear-gradient(180deg,#8497B0 0%,#ABC0E4 53%,#333F50 100%);--sg-on-selected:#FFFFFF;--t:68,84,106;color-scheme:light}
+  :root, :root[data-theme]{--sg-text:#000000;--sg-inv:#FFFFFF;--sg-ground:#FFFFFF;--sg-panel:#F7F7F7;--sg-dim:#333F50;--sg-faint:#44546A;--sg-rule:rgba(0,0,0,.14);--sg-field:#FFFFFF;--sg-border:rgba(68,84,106,.45);--sg-accent:#44546A;--sg-positive:#007A3D;--sg-positive-tint:#E2F0D9;--sg-negative:#C00000;--sg-negative-tint:#FBE5D6;--sg-quiet-tint:#F0F0F0;--sg-selected:linear-gradient(135deg,#000000 0%,#222A35 100%);--sg-selected-hover:linear-gradient(135deg,#222A35 0%,#333F50 100%);--sg-selected-edge:linear-gradient(180deg,#8497B0 0%,#ABC0E4 53%,#333F50 100%);--sg-on-selected:#FFFFFF;--t:68,84,106;color-scheme:light}
   html{background:#fff !important}
 }
 html{scroll-behavior:smooth}
@@ -388,15 +388,15 @@ section.s{overflow-x:clip}
 /* ============ Cover and motion ============ */
 .cover{position:relative;height:100vh}
 .cover iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
-.cover .cap{position:absolute;left:64px;top:56px;pointer-events:none}
-.cover .cap .k{font-size:13px;color:var(--pale);font-weight:600}
-.cover .cap h1{margin:8px 0 0;font-weight:600;font-size:clamp(40px,5vw,72px);line-height:.95;letter-spacing:-0.045em}
-.cover .cap h1 span{display:block;font-weight:300;color:var(--dim)}
+.cover .cap{position:absolute;left:64px;top:48px;pointer-events:none}
+.cover .cap .k{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--sg-faint)}
+.cover .cap h1{margin:8px 0 0;font-weight:600;font-size:20px;line-height:1.25;letter-spacing:-0.01em}
+.cover .cap h1 span{display:inline;margin-left:8px;font-weight:300;color:var(--sg-dim)}
 .cover .scroll{position:absolute;left:64px;bottom:44px;font-size:12px;color:var(--dim);text-decoration:none;display:flex;gap:10px;align-items:center}
 .cover .scroll i{width:4px;height:16px;transform:none}
 .cover .cap h1, .cover .scroll, .cover .scroll i, .cover .cap .k, .cover .cap h1 span{transition:color .6s ease,background .6s ease}
 .cover.light .cap h1{color:#000}
-.cover.light .cap h1 span, .cover.light .cap .k, .cover.light .scroll{color:#4A4F57}
+.cover.light .cap h1 span, .cover.light .scroll{color:var(--sg-dim)}
 .stage{position:relative;overflow:hidden;background:var(--sg-ground);border:1px solid var(--sg-rule)}
 .stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 ol.seq{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 32px}
@@ -419,28 +419,18 @@ ol.seq li p{margin:6px 0 0;font-size:13px;color:var(--sg-dim)}
 .easing text{fill:var(--sg-dim);font-family:inherit}
 .easing .ax{stroke:var(--sg-rule)}
 #ecurve{stroke:var(--sg-text)}
-.cover .tb{position:absolute;pointer-events:none;transition:border-color .6s}
-.cover.light .tb{background:rgba(255,255,255,.35)}
-.cover.light .tb dd{color:#000}
-.cover.light .tb dt{color:#4A4F57}
 /* ============ Page structure ============ */
 :root[data-theme="light"] .tb dt{color:#1F66E0}
 /* ============ Cover and motion ============ */
 @media (max-width:820px){
-  .cover .tb{display:none}
+  
 }
-.cover::after{mix-blend-mode:screen;background:radial-gradient(60% 70% at 0% 0%,rgba(47,128,255,.34),transparent 72%),
-  radial-gradient(60% 70% at 100% 100%,rgba(216,35,26,.40),transparent 72%)}
-.cover.light::after{opacity:0}
-.cover .cap, .cover .scroll, .cover .tb{z-index:1}
-:root[data-theme="light"] .cover::after{opacity:1;mix-blend-mode:multiply;background:radial-gradient(60% 70% at 0% 0%,rgba(47,128,255,.16),transparent 72%),radial-gradient(60% 70% at 100% 100%,rgba(216,35,26,.14),transparent 72%)}
-:root[data-theme="light"] .cover .tb{background:rgba(255,255,255,.55)}
-.cover::after{content:"";position:absolute;inset:0;pointer-events:none;transition:opacity .6s;display:none}
-.cover .tb{right:46px;top:44px;background:var(--bg1)}
+.cover .cap, .cover .scroll, 
+:root[data-theme="light"] 
 .stage{aspect-ratio:16/9;border-radius:var(--sg-radius-card);overflow:hidden}
-.cover{min-height:620px;border-bottom:0.75px solid var(--rule);overflow:hidden;background:var(--bg1)}
+.cover{min-height:620px;border-bottom:1px solid var(--sg-rule);overflow:hidden;background:var(--sg-ground)}
 .cover iframe{background:transparent}
-:root[data-theme] .cover .tb{background:var(--bg1)}
+:root[data-theme] 
 .cover .scroll i, .cover.light .scroll i{background:var(--sg-text);border-radius:2px}
 @media (max-width:820px){
   .cover{height:calc(100svh - 57px);min-height:560px}
@@ -677,16 +667,12 @@ table.tsl td:first-child{width:22%}
 .btn.sm{--h:34px;padding:0 14px;font-size:12px}
 .btn.lg{--h:52px;padding:0 24px;font-size:14px}
 .btn.p{background:var(--sg-selected) padding-box,var(--sg-selected-edge) border-box;color:var(--sg-on-selected)}
-.btn.p:hover:not([disabled]){background:var(--sg-selected-hover) padding-box,var(--sg-selected-edge) border-box}
-/* The primary action's hover: one light passes across it, left to right, and the button lifts a pixel.
-   The light sits under the label and only runs on the way in, so it never sweeps back. */
-.btn.p::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.34) 50%,transparent 65%) 130% 0/250% 100% no-repeat}
-.btn.p:hover:not([disabled])::after{background-position:-30% 0;transition:background-position 1.2s cubic-bezier(.45,0,.2,1)}
-.btn.p:hover:not([disabled]){transform:translateY(-1px)}
-.btn.p:active:not([disabled]){transform:translateY(0) scale(.98)}
+/* The primary action's hover: the hover gradient fades in over the resting one, under the label, on the brake. No
+   movement and no light passing across; only the surface deepens. */
+.btn.p::after{content:"";position:absolute;inset:-1px;z-index:-1;border:1px solid transparent;border-radius:inherit;pointer-events:none;background:var(--sg-selected-hover) padding-box,var(--sg-selected-edge) border-box;opacity:0;transition:opacity .45s var(--brake)}
+.btn.p:hover:not([disabled])::after{opacity:1}
 @media (prefers-reduced-motion: reduce){
-  .btn.p:hover:not([disabled])::after{transition:none;background-position:130% 0}
-  .btn.p:hover:not([disabled]){transform:none}
+  .btn.p::after{transition:none}
 }
 .btn.g{border-color:var(--sg-border)}
 .btn.g:hover:not([disabled]){background:var(--sg-quiet-tint);border-color:var(--sg-faint)}
@@ -835,7 +821,7 @@ textarea.inp{min-height:88px;padding:12px 14px;line-height:1.5;resize:vertical}
 /* ============ Page structure ============ */
 .mbtn{display:none}
 @media (max-width:820px){
-  .mbtn{display:inline-flex}
+  .mbtn{display:inline-flex;flex:none;width:auto;margin-left:auto}
 }
 /* ============ Navigation and feedback ============ */
 .tabs{position:relative;display:flex;gap:4px;border-bottom:1px solid var(--sg-rule)}
@@ -1604,7 +1590,7 @@ table.vx td:first-child{width:18%}
   <main>
     <header class="cover" aria-label="Cover">
       
-      <iframe title="The Smedley Group mark drawing on the signature surface" src="assets/mark.html"></iframe>
+      <iframe title="The Smedley Group, Advanced Technology lockup drawing itself" src="assets/mark.html"></iframe>
       <div class="cap"><div class="k">Visual identity</div><h1>Brand book<span>Smedley Group</span></h1></div>
       <a class="scroll" href="#logo"><i></i>Start with the logo</a>
     </header>
@@ -2171,7 +2157,7 @@ table.vx td:first-child{width:18%}
         <li><b><span>3</span>The divider</b><p>At 1.35 s the divider grows from its centre to full height over 0.6 s.</p></li>
         <li><b><span>4</span>The division</b><p>At 1.55 s the division name reveals the same way, and the lockup holds still at 2.45 s. It is the outlined artwork from the kit throughout, never live text.</p></li>
         <li><b><span>5</span>Stillness</b><p>Everything is in place by 2.5 s and nothing moves again. The sequence plays once; Replay runs it on request.</p></li>
-        <li><b><span>6</span>The press</b><p>A pressed control scales to 98 % for 80 ms and comes back. The primary action alone answers a hover: it lifts a pixel and one light passes across it, left to right, over 1.2 s.</p></li>
+        <li><b><span>6</span>The press</b><p>A pressed control scales to 98 % for 80 ms and comes back. The primary action's hover gradient fades in over its resting one in 0.45 s; nothing moves.</p></li>
       </ol>
       <div class="two" style="margin-top:64px;align-items:center">
         <svg class="easing" viewBox="0 0 360 200" role="img" aria-label="Brake easing: most of the travel happens early, then a long, gentle stop">
@@ -2307,7 +2293,7 @@ table.vx td:first-child{width:18%}
         <div class="cell"><h4 id="components-try-them" data-anchor="components-try-them">Try them<button class="hlink" type="button" aria-label="Copy link to Try them"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><div class="row"><button class="btn p" type="button">Hover me</button><button class="btn t" type="button">Next lap<svg class="bi" viewBox="0 0 24 24" aria-hidden="true" data-icon="arrow-right"><path d="M5 12H19"/><path d="M14 7L19 12L14 17"/></svg></button></div><p class="note">Hover lightens the fill or turns the underline to the accent. Arrows move on by 3 px. Press scales to 98 %.</p></div>
         <div class="cell full"><table class="spec">
           <tr><th>Moment</th><th>Motion</th></tr>
-          <tr><td>Hover</td><td>A quieter fill or a lighter surface, 200 ms. The primary action lifts 1 px and one light passes across it, 1.2 s. Text buttons turn their underline to the accent</td></tr>
+          <tr><td>Hover</td><td>A quieter fill or a lighter surface, 200 ms. The primary action's lighter gradient fades in over 0.45 s; nothing moves. Text buttons turn their underline to the accent</td></tr>
           <tr><td>Press</td><td>Scale to 98 %, 80 ms, straight back</td></tr>
           <tr><td>Focus</td><td>A 2 px ring in the accent, 2 px out. Fields turn their edge ink and add a Pale Blue halo, 200 ms</td></tr>
           <tr><td>Change of state</td><td>Indicators slide and brake, 450 ms, easing cubic-bezier(.16, 1, .3, 1). Checks and marks pop from 60 %, 320 ms</td></tr>

@@ -31,7 +31,7 @@
   --sg-positive-tint:#E2F0D9;
   --sg-negative:#C00000;
   --sg-negative-tint:#FBE5D6;
-  --sg-quiet-tint:#D6DCE5;
+  --sg-quiet-tint:#F0F0F0;
   --sg-selected:linear-gradient(135deg,#000000 0%,#222A35 100%);
   --sg-selected-hover:linear-gradient(135deg,#222A35 0%,#333F50 100%);
   --sg-selected-edge:linear-gradient(180deg,#8497B0 0%,#ABC0E4 53%,#333F50 100%);
@@ -107,14 +107,10 @@ button, input, select, textarea{font:inherit;color:inherit}
 .btn.sm{--h:34px;padding:0 14px;font-size:12px}
 .btn.lg{--h:52px;padding:0 24px;font-size:14px}
 .btn.p{background:var(--sg-selected) padding-box,var(--sg-selected-edge) border-box;color:var(--sg-on-selected)}
-.btn.p:hover:not([disabled]){background:var(--sg-selected-hover) padding-box,var(--sg-selected-edge) border-box}
-.btn.p::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.34) 50%,transparent 65%) 130% 0/250% 100% no-repeat}
-.btn.p:hover:not([disabled])::after{background-position:-30% 0;transition:background-position 1.2s cubic-bezier(.45,0,.2,1)}
-.btn.p:hover:not([disabled]){transform:translateY(-1px)}
-.btn.p:active:not([disabled]){transform:translateY(0) scale(.98)}
+.btn.p::after{content:"";position:absolute;inset:-1px;z-index:-1;border:1px solid transparent;border-radius:inherit;pointer-events:none;background:var(--sg-selected-hover) padding-box,var(--sg-selected-edge) border-box;opacity:0;transition:opacity .45s var(--brake)}
+.btn.p:hover:not([disabled])::after{opacity:1}
 @media (prefers-reduced-motion: reduce){
-  .btn.p:hover:not([disabled])::after{transition:none;background-position:130% 0}
-  .btn.p:hover:not([disabled]){transform:none}
+  .btn.p::after{transition:none}
 }
 .btn.g{border-color:var(--sg-border)}
 .btn.g:hover:not([disabled]){background:var(--sg-quiet-tint);border-color:var(--sg-faint)}

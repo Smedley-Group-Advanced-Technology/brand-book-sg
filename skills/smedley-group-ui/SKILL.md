@@ -191,8 +191,7 @@ Every icon comes from the icon library (catalogue in `references/icons.md`; `Ico
 ## 9. Motion
 
 - Motion brakes: fast in, hard stop. Easing `cubic-bezier(.16, 1, .3, 1)` for anything arriving.
-- A press scales the control to 98 % for 80 ms. The primary action alone answers a hover: it lifts 1 px and one light
-  passes across it, left to right, over 1.2 s. Nothing else has hover choreography.
+- A press scales the control to 98 % for 80 ms. The primary action's hover gradient fades in over its resting one in 0.45 s; nothing moves. Nothing else has hover choreography.
 - Window and drag motion has exact values in `references/ux.md` Part C.
 - One moment per view. No loops outside loaders (the logo's three bars, the gliding progress segment).
 - With reduced motion, show the end state at once. The library already does for its own components.
