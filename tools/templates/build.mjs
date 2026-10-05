@@ -130,8 +130,8 @@ console.log('email signature: 4 lockups');
 // templates use (Sora Light, Sora SemiBold) onto the variable font's weights, so the system fonts stay untouched
 function soraFontconfig() {
   const dir = join(tmpdir(), 'sg-templates-fonts'); execFileSync('mkdir', ['-p', dir]);
-  for (const f of ['sora-latin.woff2']) execFileSync('woff2_decompress', [join(ROOT, 'assets/fonts', f)]);
-  execFileSync('mv', [join(ROOT, 'assets/fonts/sora-latin.ttf'), join(dir, 'sora.ttf')]);
+  // decompressed in the temporary folder, so nothing is written next to the book's fonts
+  for (const f of ['sora-latin', 'sora-latin-ext']) { execFileSync('cp', [join(ROOT, 'assets/fonts', `${f}.woff2`), dir]); execFileSync('woff2_decompress', [join(dir, `${f}.woff2`)]); }
   const alias = (name, weight) => `<match target="pattern"><test name="family"><string>${name}</string></test><edit name="family" mode="assign" binding="strong"><string>Sora</string></edit><edit name="weight" mode="assign"><const>${weight}</const></edit></match>`;
   const conf = join(dir, 'fonts.conf');
   return writeFile(conf, `<?xml version="1.0"?><!DOCTYPE fontconfig SYSTEM "fonts.dtd"><fontconfig><include ignore_missing="yes">/etc/fonts/fonts.conf</include><dir>${dir}</dir><cachedir>${dir}/cache</cachedir>${alias('Sora Light', 'light')}${alias('Sora SemiBold', 'semibold')}</fontconfig>`).then(() => conf);
