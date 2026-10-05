@@ -204,7 +204,7 @@ for (const name of BROWSERS) {
       return (await page.textContent('#tName')) !== n || 'name unchanged';
     });
     await step('search finds sections and jumps', async () => {
-      await page.fill('#srch', 'kerb'); await page.waitForTimeout(200);
+      await page.fill('#srch', 'timing'); await page.waitForTimeout(200);
       const n = await page.locator('#srchr a').count(); if (!n) return 'no results';
       await page.keyboard.press('Enter'); await page.waitForTimeout(800);
       return (await page.evaluate(() => location.hash)).length > 1 || 'no jump';

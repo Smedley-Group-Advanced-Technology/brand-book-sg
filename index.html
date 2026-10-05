@@ -412,18 +412,18 @@ section.s{overflow-x:clip}
 .cover .cap h1, .cover .scroll, .cover .scroll i, .cover .cap .k, .cover .cap h1 span{transition:color .6s ease,background .6s ease}
 .cover.light .cap h1{color:#000}
 .cover.light .cap h1 span, .cover.light .cap .k, .cover.light .scroll{color:#4A4F57}
-.stage{position:relative;overflow:hidden;background:var(--bg1)}
+.stage{position:relative;overflow:hidden;background:var(--sg-ground);border:1px solid var(--sg-rule)}
 .stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 ol.seq{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 32px}
-ol.seq li{border-top:0.75px solid var(--rule);padding-top:14px}
+ol.seq li{border-top:1px solid var(--sg-rule);padding-top:14px}
 ol.seq li b{display:flex;gap:10px;font-weight:600;font-size:14px}
-ol.seq li b span{color:var(--pale);font-variant-numeric:tabular-nums}
-ol.seq li p{margin:6px 0 0;font-size:13px;color:var(--dim)}
+ol.seq li b span{color:var(--sg-faint);font-variant-numeric:tabular-nums}
+ol.seq li p{margin:6px 0 0;font-size:13px;color:var(--sg-dim)}
 .easing{width:100%;height:auto;display:block}
 .easing text{font-size:11px}
 .stages3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:32px}
-.stages3 div{border-top:0.75px solid var(--rule);padding-top:12px;font-size:12px;color:var(--dim)}
-.stages3 b{display:block;font-weight:600;color:var(--ink);font-size:14px}
+.stages3 div{border-top:1px solid var(--sg-rule);padding-top:12px;font-size:12px;color:var(--sg-dim)}
+.stages3 b{display:block;font-weight:600;color:var(--sg-text);font-size:14px}
 @media (max-width:1100px){
   ol.seq{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
@@ -431,7 +431,9 @@ ol.seq li p{margin:6px 0 0;font-size:13px;color:var(--dim)}
   .cover .cap, .cover .scroll{left:20px}
   ol.seq, .stages3{grid-template-columns:minmax(0,1fr)}
 }
-.easing text{fill:var(--dim);font-family:var(--mono)}
+.easing text{fill:var(--sg-dim);font-family:inherit}
+.easing .ax{stroke:var(--sg-rule)}
+#ecurve{stroke:var(--sg-text)}
 .cover .tb{position:absolute;pointer-events:none;transition:border-color .6s}
 .cover.light .tb{background:rgba(255,255,255,.35)}
 .cover.light .tb dd{color:#000}
@@ -628,27 +630,30 @@ table.tsl td:first-child{width:22%}
   .anat{min-width:0}
 }
 /* ============ Progress ============ */
+/* The three bars as a gauge: rounded tracks in the quiet tint, filled in the text colour, bar by bar. */
 .gaugewrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:center}
 .gbody{position:relative;display:grid;place-items:center}
-.gbody::before{content:"";position:absolute;inset:-6% -10%;background:radial-gradient(ellipse 55% 50% at 50% 52%,rgba(var(--t),.09) 0%,rgba(var(--t),.03) 45%,transparent 72%);pointer-events:none;z-index:-1}
 .gbody svg{width:min(100%,440px);height:auto;display:block;overflow:visible}
-.lbl{font-family:inherit;font-weight:600;fill:var(--ink)}
-.lbl.off{fill:#70757D}
-.pct{font-family:inherit;font-weight:300;fill:var(--dim)}
+.gtr, .gfl{stroke-width:14.2;stroke-linecap:round}
+.gtr{stroke:var(--sg-quiet-tint)}
+.gfl{stroke:var(--sg-text)}
+.lbl{font-family:inherit;font-weight:600;fill:var(--sg-text)}
+.lbl.off{fill:var(--sg-faint)}
+.pct{font-family:inherit;font-weight:300;fill:var(--sg-dim);font-variant-numeric:tabular-nums}
 .big{font-weight:600;font-size:clamp(88px,10vw,140px);line-height:.8;letter-spacing:-0.06em;font-variant-numeric:tabular-nums}
-.big sup{font-size:.36em}
-.scrub{display:grid;grid-template-columns:auto minmax(0,1fr) 40px;gap:14px;align-items:center;font-size:12px;color:var(--dim);max-width:440px;margin-top:28px}
+.big sup{font-size:.36em;vertical-align:top;margin-left:4px;color:var(--sg-faint)}
+.scrub{display:grid;grid-template-columns:auto minmax(0,1fr) 44px;gap:14px;align-items:center;font-size:12px;color:var(--sg-dim);max-width:440px;margin-top:28px}
 .scrub input{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:pointer}
-.scrub input::-webkit-slider-runnable-track{height:2px;background:var(--rule)}
-.scrub input::-moz-range-track{height:2px;background:var(--rule)}
-.scrub input::-webkit-slider-thumb{width:9px;height:20px;border:0;transform:none}
-.scrub input::-moz-range-thumb{width:9px;height:20px;background:var(--ink);border:0;border-radius:6px;transform:none}
-.scrub span:last-child{color:var(--ink);font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.scrub input::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:var(--sg-quiet-tint)}
+.scrub input::-moz-range-track{height:4px;border-radius:2px;background:var(--sg-quiet-tint)}
+.scrub input::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:22px;margin-top:-9px;border:0;border-radius:6px;background:var(--sg-text)}
+.scrub input::-moz-range-thumb{width:12px;height:22px;border:0;border-radius:6px;background:var(--sg-text)}
+.scrub span:last-child{color:var(--sg-text);font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.ldrs{gap:20px;align-items:center}
+.ldrd{display:inline-grid;place-items:center;width:44px;height:46px;border-radius:var(--sg-radius-tile)}
 @media (max-width:1100px){
   .gaugewrap{grid-template-columns:minmax(0,1fr)}
 }
-.scrub input::-webkit-slider-thumb{-webkit-appearance:none;margin-top:-9px;background:var(--ink)}
-.big sup{vertical-align:top;margin-left:4px;color:var(--flame)}
 @media print{
   .gaugewrap{break-inside:avoid}
 }
@@ -1071,189 +1076,161 @@ svg.tel:focus-visible{outline:2px solid var(--sg-accent);outline-offset:4px}
 }
 /* ============ Page structure ============ */
 .finish .chq{height:16px;background-size:16px 16px;margin:0 -24px 0 -12px;transform:none;transform-origin:0 100%}
-/* ============ Drawings ============ */
-.crop{position:relative}
-.crop::after{position:absolute;background:linear-gradient(var(--c),var(--c)) 0 12px/8px 1px no-repeat,linear-gradient(var(--c),var(--c)) 12px 0/1px 8px no-repeat,
-  linear-gradient(var(--c),var(--c)) 100% 12px/8px 1px no-repeat,linear-gradient(var(--c),var(--c)) calc(100% - 12px) 0/1px 8px no-repeat,
-  linear-gradient(var(--c),var(--c)) 0 calc(100% - 12px)/8px 1px no-repeat,linear-gradient(var(--c),var(--c)) 12px 100%/1px 8px no-repeat,
-  linear-gradient(var(--c),var(--c)) 100% calc(100% - 12px)/8px 1px no-repeat,linear-gradient(var(--c),var(--c)) calc(100% - 12px) 100%/1px 8px no-repeat}
-.bp{padding:26px}
-.bp .tb{margin-top:18px;grid-template-columns:repeat(6,minmax(0,1fr))}
-.bp .tb > div{min-width:0}
-.bp .tb dd{white-space:normal}
-svg.dwg{display:block;width:100%;height:auto;overflow:visible}
-.dwg .ob{stroke:var(--ink);stroke-width:1.25}
-.dwg .cn, .dwg .cx{fill:none;stroke-width:.75}
-.dwg .cl{fill:none;stroke-width:.75;stroke-dasharray:14 3 2 3}
-.dwg .hd{fill:none;stroke:rgba(255,255,255,.5);stroke-width:1;stroke-dasharray:4 3}
-.dwg .dm{fill:none;stroke-width:.75}
-.dwg .tk{stroke-width:1.5}
-.dwg .bl{stroke-width:.75}
-.dwg text.tw{fill:var(--ink)}
-table.lines svg{display:block;width:110px;height:18px;overflow:visible}
-table.lines td:nth-child(2){color:var(--ink);font-weight:600;width:24%}
-@media (max-width:1100px){
-  .bp .tb{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .bp .tb > div:nth-child(4){border-left:0}
-  .bp .tb > div:nth-child(n+4){border-top:0.75px solid rgba(var(--t),.3)}
-}
-@media (max-width:820px){
-  .bp{padding:14px}
-  table.lines svg{width:80px}
-}
-.bp .tb > div:nth-child(n+4){border-top-color:rgba(47,128,255,.45)}
 /* ============ Page structure ============ */
 :root[data-theme="light"] .tb > div{border-color:rgba(31,102,224,.4)}
 /* ============ Drawings ============ */
-.dwg .ob{fill:rgba(255,255,255,.06)}
-/* ============ Drawings ============ */
-.dwg .dm, .dwg .tk, .dwg .bl{stroke:var(--line)}
-.dwg text.hot{fill:var(--flame)}
-table.lines .dwg .cn, table.lines .dwg .cl, table.lines .dwg .dm{stroke-width:1}
-.dwg text{fill:var(--line)}
-.dwg .dm, .dwg .tk{stroke:var(--line)}
-.dwg .dot{fill:var(--line)}
-:root[data-theme="light"] .bp .tb, :root[data-theme="light"] .bp .tb > div{border-color:rgba(47,128,255,.45)}
-:root[data-theme="light"] .bp .tb dt{color:rgba(127,178,255,.7)}
-.dwg .bl{fill:var(--bg1)}
-:root[data-theme="light"] .bp{--gl:31,102,224}
-@media (prefers-color-scheme: light){
-  :root:not([data-theme="dark"]) .bp{--gl:31,102,224}
-}
-.dwg .cn{stroke:rgba(var(--gl,127,178,255),.55)}
-.dwg .cx{stroke:rgba(var(--gl,127,178,255),.25)}
-.dwg .cl{stroke:rgba(var(--gl,127,178,255),.9)}
-.bp{position:relative;--gl:127,178,255;box-shadow:inset 0 0 0 1px rgba(var(--gl),.35);border-radius:var(--sg-radius-card)}
-.dwg text{font-family:var(--mono);font-size:10.5px;paint-order:stroke;stroke:var(--bg1);stroke-width:5px;stroke-linejoin:round}
+/* Technical drawings sit on the Canvas, or on the signature surface when reversed: parts in the text colour, set out in
+   Pale Blue hairlines, measured in the accent (Steel, Pale Blue on dark). No grid and no blueprint ground. Ticks are 45 degrees. */
+.crop{position:relative}
+.crop::after{content:"";position:absolute;inset:-12px;pointer-events:none;--c:var(--sg-accent);background:linear-gradient(var(--c),var(--c)) 0 12px/8px 1px no-repeat,linear-gradient(var(--c),var(--c)) 12px 0/1px 8px no-repeat,
+  linear-gradient(var(--c),var(--c)) 100% 12px/8px 1px no-repeat,linear-gradient(var(--c),var(--c)) calc(100% - 12px) 0/1px 8px no-repeat,
+  linear-gradient(var(--c),var(--c)) 0 calc(100% - 12px)/8px 1px no-repeat,linear-gradient(var(--c),var(--c)) 12px 100%/1px 8px no-repeat,
+  linear-gradient(var(--c),var(--c)) 100% calc(100% - 12px)/8px 1px no-repeat,linear-gradient(var(--c),var(--c)) calc(100% - 12px) 100%/1px 8px no-repeat}
+.bp{position:relative;padding:26px;border:1px solid var(--sg-rule);border-radius:var(--sg-radius-card);background:var(--sg-panel);color:var(--sg-text);--dw-halo:var(--sg-panel)}
+.bp .tb{margin-top:18px;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid var(--sg-rule)}
+.bp .tb > div, :root[data-theme] .bp .tb > div{min-width:0;border-color:var(--sg-rule)}
+.bp .tb dt, :root[data-theme] .bp .tb dt{font-family:inherit;font-size:11px;color:var(--sg-faint)}
+.bp .tb dd{font-family:inherit;font-size:13px;font-weight:600;color:var(--sg-text);white-space:normal;font-variant-numeric:tabular-nums}
+svg.dwg{display:block;width:100%;height:auto;overflow:visible;--dw-cn:var(--sg-pale-blue);--dw-cx:rgba(171,192,228,.5)}
+:root[data-theme="dark"] svg.dwg, .sg-dark svg.dwg{--dw-cn:rgba(171,192,228,.55);--dw-cx:rgba(171,192,228,.25)}
+.dwg .ob{fill:rgba(var(--t),.06);stroke:var(--sg-text);stroke-width:1.25}
+.dwg .cn{fill:none;stroke:var(--dw-cn);stroke-width:.75}
+.dwg .cx{fill:none;stroke:var(--dw-cx);stroke-width:.75}
+.dwg .cl{fill:none;stroke:var(--sg-accent);stroke-width:.75;stroke-dasharray:14 3 2 3}
+.dwg .hd{fill:none;stroke:var(--sg-dim);stroke-width:1;stroke-dasharray:4 3}
+.dwg .dm{fill:none;stroke:var(--sg-accent);stroke-width:.75}
+.dwg .tk{stroke:var(--sg-accent);stroke-width:1.5}
+.dwg .bl{fill:var(--dw-halo,var(--sg-ground));stroke:var(--sg-accent);stroke-width:.75}
+.dwg .dot{fill:var(--sg-accent)}
 .dwg .tk, .dwg .dm, .dwg .cn, .dwg .cl{stroke-linecap:butt}
-.bp:has(svg.kart) .tb{margin-top:22px}
-.bp:has(svg.kart) .tb dd{font-size:13px;font-weight:500}
-.bp:has(svg.kart) .tb > div:first-child dd{color:var(--flame)}
-.bp .tb dt, :root[data-theme="light"] .bp .tb dt{color:var(--line);opacity:.85}
-.bpg{background:linear-gradient(rgba(127,178,255,.07) 1px,transparent 1px) -1px -1px/8px 8px,linear-gradient(90deg,rgba(127,178,255,.07) 1px,transparent 1px) -1px -1px/8px 8px,linear-gradient(rgba(127,178,255,.16) 1px,transparent 1px) -1px -1px/40px 40px,linear-gradient(90deg,rgba(127,178,255,.16) 1px,transparent 1px) -1px -1px/40px 40px,#000}
-.bp:has(svg.kart){padding:30px 30px 26px}
-.kart text{stroke:none !important;paint-order:normal}
-.kart .kob{fill:rgba(var(--t),.04);stroke:var(--ink);stroke-width:1.3;stroke-linejoin:round;stroke-linecap:round}
-.kart .kty{fill:rgba(var(--t),.16);stroke:var(--ink);stroke-width:1.3}
-.kart .ktr{stroke:rgba(var(--t),.35);stroke-width:.8}
-.kart .khd{fill:none;stroke:rgba(var(--t),.5);stroke-width:1;stroke-dasharray:4 3}
-.kart .kcl{stroke:var(--line);stroke-width:.9;stroke-dasharray:10 3 2 3;opacity:.8}
-.kart .kex{stroke:var(--line);stroke-width:.6;opacity:.45}
-.kart .kdm{stroke:var(--line);stroke-width:1}
-.kart .ktk{stroke:var(--line);stroke-width:1.6}
-.kart .kdv{fill:var(--line);font-family:var(--mono);font-size:12px;font-weight:500}
-.kart .klb{fill:var(--dim);font-family:var(--mono);font-size:10.5px}
-.kart .kct{fill:var(--ink);font-family:"Sora",system-ui,sans-serif;font-weight:600;font-size:15px}
-.kart .kk{fill:var(--dim);font-family:var(--mono);font-size:11px}
-.kart .kbig{fill:var(--ink);font-family:var(--mono);font-weight:500;font-size:30px;letter-spacing:-.02em}
-.kart .kun{fill:var(--dim);font-size:13px;font-weight:400;letter-spacing:0}
-.kart .kv{fill:var(--ink);font-family:var(--mono);font-size:12.5px;font-weight:500}
-.kart .kv.hot{fill:var(--flame)}
-.kart .krl{stroke:rgba(var(--t),.14);stroke-width:.75}
-.kart .kld{stroke:var(--line);stroke-width:1}
-.kart .kdot{fill:var(--line)}
-.kart .ktb{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.kart .kth{stroke:var(--ink);stroke-width:1;opacity:.7}
-.kart .ksd{fill:none;stroke:rgba(var(--t),.35);stroke-width:.9}
-.kart .kfp{fill:none;stroke:var(--ink);stroke-width:3.2;stroke-linecap:round}
-.kart .khb{fill:var(--ink);opacity:.55}
-.kart .kwb{fill:none;stroke:var(--ink);stroke-width:1.9;stroke-linecap:round}
-.kart .kbr{stroke:var(--ink);stroke-width:1.6;stroke-linecap:round}
-:root[data-theme] .bp{--ink:#FFFFFF;--inv:#0B2D63;--dim:rgba(255,255,255,.66);--faint:rgba(255,255,255,.45);--t:255,255,255;--rule:rgba(255,255,255,.18);--bg1:#0B2D63;--line:#A9CCFF;--gl:255,255,255;--flame:#FF7A6E;--pop:#0E3673;color:#fff;color-scheme:dark;background:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px) -1px -1px/8px 8px,linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px) -1px -1px/8px 8px,linear-gradient(rgba(255,255,255,.075) 1px,transparent 1px) -1px -1px/40px 40px,linear-gradient(90deg,rgba(255,255,255,.075) 1px,transparent 1px) -1px -1px/40px 40px,#0B2D63 !important;box-shadow:none}
-:root[data-theme] .bp .dwg .ob{fill:rgba(255,255,255,.07);stroke:#fff}
-:root[data-theme] .bp .dwg .cn{stroke:rgba(169,204,255,.6)}
-:root[data-theme] .bp .dwg .cx{stroke:rgba(169,204,255,.28)}
-:root[data-theme] .bp .dwg .cl, :root[data-theme] .bp .dwg .dm, :root[data-theme] .bp .dwg .tk{stroke:#A9CCFF}
-:root[data-theme] .bp .dwg text{fill:#A9CCFF}
-:root[data-theme] .bp .dwg text.tw{fill:#fff}
-:root[data-theme] .bp .dwg .bl{fill:#0B2D63;stroke:#A9CCFF}
-:root[data-theme] .bp .tb, :root[data-theme] .bp .tb > div{border-color:rgba(255,255,255,.3) !important}
-:root[data-theme] .bp .tb dt{color:#A9CCFF;opacity:1}
-:root[data-theme] .bp .tb dd{color:#fff}
-:root[data-theme] .bp .kart .kct, :root[data-theme] .bp .kart .kbig, :root[data-theme] .bp .kart .kv{fill:#fff}
-:root[data-theme] .bp .kart .kk, :root[data-theme] .bp .kart .klb, :root[data-theme] .bp .kart .kun{fill:rgba(255,255,255,.66)}
-:root[data-theme] .bp .kart .kdv{fill:#A9CCFF}
-:root[data-theme] .bp .kart .krl{stroke:rgba(255,255,255,.3);stroke-width:1}
-.crop::after{content:"";inset:-12px;pointer-events:none;--c:rgba(11,45,99,.7)}
-:root[data-theme="dark"] .crop::after{--c:rgba(169,204,255,.6)}
+.dwg text{fill:var(--sg-accent);font-family:inherit;font-size:10.5px;font-variant-numeric:tabular-nums;paint-order:stroke;stroke:var(--dw-halo,var(--sg-ground));stroke-width:5px;stroke-linejoin:round}
+.dwg text.tw{fill:var(--sg-text)}
+.dwg text.hot{fill:var(--sg-negative)}
 table.lines td:first-child{width:150px}
-:root[data-theme] table.lines svg{box-sizing:content-box;width:110px;height:18px;padding:10px 12px;background:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px) -1px -1px/8px 8px,linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px) -1px -1px/8px 8px,#0B2D63}
-:root[data-theme] table.lines .dwg .ob{stroke:#fff}
-:root[data-theme] table.lines .dwg .cn{stroke:rgba(169,204,255,.6)}
-:root[data-theme] table.lines .dwg .cl{stroke:#A9CCFF}
-:root[data-theme] table.lines .dwg .hd{stroke:rgba(255,255,255,.55)}
-:root[data-theme] table.lines .dwg .dm, :root[data-theme] table.lines .dwg .tk{stroke:#A9CCFF}
-:root[data-theme] table.lines .dwg .dot{fill:#A9CCFF}
-:root[data-theme] table.lines .dwg text{fill:#A9CCFF;stroke:#0B2D63}
-:root[data-theme] table.lines .dwg text.tw{fill:#fff}
-@media (max-width:820px){
-  table.lines td:first-child{width:110px}
-  :root[data-theme] table.lines svg{width:80px;padding:8px}
-  :root[data-theme] .bp:has(svg.kart){overflow-x:auto;-webkit-overflow-scrolling:touch;padding:16px}
-  .bp svg.kart{min-width:760px}
-  .bp:has(svg.kart)::before{content:"Swipe to see the whole sheet";display:block;position:sticky;left:0;font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.6);margin-bottom:12px}
-}
+table.lines td:nth-child(2){color:var(--sg-text);font-weight:600;width:24%}
+table.lines .ls{display:block;box-sizing:content-box;width:110px;padding:8px 10px;border:1px solid var(--sg-rule);border-radius:var(--sg-radius-chip)}
+table.lines .ls + .ls{margin-top:6px;border-color:transparent}
+table.lines svg{display:block;width:110px;height:18px;overflow:visible}
+table.lines .dwg text{stroke:none}
+table.lines .dwg .cn, table.lines .dwg .cl, table.lines .dwg .dm{stroke-width:1}
+.bp:has(svg.kart){padding:30px 30px 26px}
+.bp:has(svg.kart) .tb{margin-top:22px}
+.kart text{stroke:none !important;paint-order:normal;font-variant-numeric:tabular-nums}
+.kart .kob{fill:rgba(var(--t),.05);stroke:var(--sg-text);stroke-width:1.3;stroke-linejoin:round;stroke-linecap:round}
+.kart .kty{fill:var(--sg-quiet-tint);stroke:var(--sg-text);stroke-width:1.3}
+.kart .ktr{stroke:rgba(var(--t),.45);stroke-width:.8}
+.kart .khd{fill:none;stroke:var(--sg-dim);stroke-width:1;stroke-dasharray:4 3}
+.kart .kcl{stroke:var(--sg-accent);stroke-width:.9;stroke-dasharray:10 3 2 3}
+.kart .kex{stroke:var(--sg-accent);stroke-width:.6;opacity:.6}
+.kart .kdm{stroke:var(--sg-accent);stroke-width:1}
+.kart .ktk{stroke:var(--sg-accent);stroke-width:1.6}
+.kart .kdv{fill:var(--sg-accent);font-size:12px;font-weight:600}
+.kart .klb{fill:var(--sg-faint);font-size:10.5px}
+.kart .kct{fill:var(--sg-text);font-weight:600;font-size:15px}
+.kart .kk{fill:var(--sg-faint);font-size:11px}
+.kart .kbig{fill:var(--sg-text);font-weight:600;font-size:30px;letter-spacing:-.024em}
+.kart .kun{fill:var(--sg-faint);font-size:13px;font-weight:400;letter-spacing:0}
+.kart .kv{fill:var(--sg-text);font-size:12.5px;font-weight:600}
+.kart .kv.hot{fill:var(--sg-negative)}
+.kart .krl{stroke:var(--sg-rule);stroke-width:.75}
+.kart .kld{stroke:var(--sg-accent);stroke-width:1}
+.kart .kdot{fill:var(--sg-accent)}
+.kart .ktb{fill:none;stroke:var(--sg-text);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.kart .kth{stroke:var(--sg-text);stroke-width:1;opacity:.7}
+.kart .ksd{fill:none;stroke:rgba(var(--t),.45);stroke-width:.9}
+.kart .kfp{fill:none;stroke:var(--sg-text);stroke-width:3.2;stroke-linecap:round}
+.kart .khb{fill:var(--sg-text);opacity:.55}
+.kart .kwb{fill:none;stroke:var(--sg-text);stroke-width:1.9;stroke-linecap:round}
+.kart .kbr{stroke:var(--sg-text);stroke-width:1.6;stroke-linecap:round}
 .lp{padding:22px 26px}
-.dwg.lay .fl{fill:rgba(255,255,255,.08);stroke:rgba(255,255,255,.35);stroke-width:.75}
-.dwg.lay .col{fill:rgba(169,204,255,.07);stroke:rgba(169,204,255,.55);stroke-width:.75;stroke-dasharray:4 3}
-.dwg.lay .band{fill:#000;stroke:#fff;stroke-width:1}
+.dwg.lay .fl{fill:var(--sg-quiet-tint);stroke:var(--sg-border);stroke-width:.75}
+.dwg.lay .col{fill:rgba(171,192,228,.12);stroke:var(--sg-accent);stroke-width:.75;stroke-dasharray:4 3}
+.dwg.lay .band{fill:#000;stroke:var(--sg-mist);stroke-width:1}
+.dwg.lay .band + text{fill:#fff}
 .dwg.lay text{font-size:13px}
 .bp .dwg.lay text{stroke:none !important}
+@media (max-width:1100px){
+  .bp .tb{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .bp .tb > div:nth-child(4){border-left:0}
+  .bp .tb > div:nth-child(n+4){border-top:1px solid var(--sg-rule)}
+}
+@media (max-width:820px){
+  .bp{padding:14px}
+  table.lines td:first-child{width:100px}
+  table.lines svg, table.lines .ls{width:80px}
+  table.lines .ls{padding:8px}
+  .bp:has(svg.kart){overflow-x:auto;-webkit-overflow-scrolling:touch;padding:16px}
+  .bp svg.kart{min-width:760px}
+  .bp:has(svg.kart)::before{content:"Swipe to see the whole sheet";display:block;position:sticky;left:0;font-size:11px;color:var(--sg-dim);margin-bottom:12px}
+}
 @media print{
   .bp{break-inside:avoid}
   .bp:has(svg.kart){overflow:visible}
   .bp svg.kart{min-width:0}
 }
-:root[data-theme] .bp .kart .kv.hot{fill:#fff;font-weight:600}
-:root[data-theme] .bp .tb > div:first-child dd{color:#fff}
-/* ============ Race engineering ============ */
+/* ============ Drawings and data ============ */
+/* Tool tiles, timing tables, readouts and limits. Numbers are Sora with tabular figures; gains and losses are label text. */
 .tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.kg{display:grid;place-items:center}
-svg.tool{display:block}
-.toolrow{display:flex;gap:22px;flex-wrap:wrap;margin-top:24px;color:var(--ink)}
-table.timing{width:100%;border-collapse:collapse;font-size:13px}
-table.timing th{font-family:var(--mono);font-weight:400;font-size:10px;color:var(--faint);text-align:right;padding:0 10px 8px}
+.kg{display:grid;place-items:center;aspect-ratio:49/51;border:1px solid transparent;border-radius:var(--sg-radius-tile);background:var(--sg-surface) padding-box,var(--sg-edge) border-box;color:#fff}
+svg.tool{display:block;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;overflow:visible;stroke-width:1.5}
+.kg svg.tool{width:46%;height:auto;max-width:48px}
+.toolrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+table.timing{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+table.timing th{font-weight:600;font-size:11px;color:var(--sg-faint);text-align:right;padding:0 10px 8px}
 table.timing th:nth-child(2){text-align:left}
-table.timing td{padding:0 10px;height:40px;border-top:0.75px solid var(--rule);font-family:var(--mono);font-size:12.5px;text-align:right;color:var(--dim);font-variant-numeric:tabular-nums}
-table.timing td:first-child, table.timing th:first-child{padding-left:0;width:40px}
-table.timing td:nth-child(2){text-align:left;white-space:nowrap;font-family:"Sora",system-ui,sans-serif;color:var(--ink)}
-table.timing td:nth-child(2) b{font-family:var(--mono);font-weight:500;margin-right:10px}
-table.timing td:nth-child(3){color:var(--ink)}
-table.timing .p{display:inline-grid;background:rgba(var(--t),.1);color:var(--ink);font-weight:500}
-table.timing td.pb{font-weight:500}
-.readouts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:0.75px solid var(--rule)}
+table.timing td{padding:0 10px;height:44px;border-top:1px solid var(--sg-rule);text-align:right;color:var(--sg-dim)}
+table.timing td:first-child, table.timing th:first-child{padding-left:0;width:44px;text-align:left}
+table.timing td:nth-child(2){text-align:left;white-space:nowrap;color:var(--sg-text)}
+table.timing td:nth-child(2) b{font-weight:600;margin-right:10px}
+table.timing td:nth-child(3){color:var(--sg-text);font-weight:600}
+table.timing td.pb{color:var(--sg-positive);font-weight:600}
+table.timing .p, .place{display:inline-grid;place-items:center;min-width:32px;height:24px;padding:0 8px;border:1px solid transparent;border-radius:var(--sg-radius-chip);background:var(--sg-quiet-tint);color:var(--sg-text);font-weight:600;font-size:12px;font-variant-numeric:tabular-nums}
+table.timing tr.lead .p, .place.lead{background:var(--sg-selected) padding-box,var(--sg-selected-edge) border-box;color:var(--sg-on-selected)}
+.readouts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--sg-rule)}
 .readouts div{padding:14px 14px 0 0}
-.readouts span{display:block;font-family:var(--mono);font-size:10px;color:var(--faint)}
-.readouts b{font-family:var(--mono);font-weight:500;font-size:22px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.readouts em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--dim);margin-left:4px}
-.board{display:inline-flex;background:var(--ink);color:var(--inv)}
-.kerb{height:14px}
+.readouts span{display:block;font-size:11px;color:var(--sg-faint)}
+.readouts b{font-weight:600;font-size:22px;letter-spacing:var(--sg-tracking);font-variant-numeric:tabular-nums}
+.readouts b.gain{color:var(--sg-positive)}
+.readouts em{font-style:normal;font-size:11px;color:var(--sg-dim);margin-left:4px}
+.board{display:inline-flex;align-items:center;justify-content:center;height:26px;padding:0 12px;border-radius:var(--sg-radius-chip);background:var(--sg-quiet-tint);color:var(--sg-text);font-weight:600;font-size:13px;font-variant-numeric:tabular-nums}
+.limit{position:relative;height:8px;border-radius:4px;background:var(--sg-quiet-tint)}
+.limit i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--sg-text)}
+.limit u{position:absolute;top:-5px;bottom:-5px;width:2px;margin-left:-1px;border-radius:1px;background:var(--sg-accent)}
 @media (max-width:1100px){
   .readouts{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:820px){
-  .tools{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tools{gap:10px}
+  table.timing th:nth-child(n+6), table.timing td:nth-child(n+6){display:none}
+}
+@media (max-width:420px){
   table.timing th:nth-child(n+5), table.timing td:nth-child(n+5){display:none}
 }
-table.timing tr.lead .p{background:var(--red);color:#fff}
-table.timing td.pb{color:var(--green)}
-table.timing .p{place-items:center;--h:22px;--c:calc(var(--h) * .7002);height:var(--h);min-height:0;border-radius:var(--sg-radius-chip);width:calc(var(--c) + 22px)}
-.board.bb{background:#1F66E0;color:#fff}
-.board{align-items:center;justify-content:center;font-weight:700;letter-spacing:-.03em;height:26px;padding:0 20px;font-size:13px;border-radius:var(--sg-radius-chip)}
-.board.sm{height:22px;padding:0 17px;font-size:11px;border-radius:var(--sg-radius-chip)}
-svg.tool{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;overflow:visible;stroke-width:1.5}
-.kg{box-shadow:inset 0 0 0 1px rgba(47,128,255,.3);border-radius:var(--sg-radius-tile);aspect-ratio:1;background:linear-gradient(rgba(47,128,255,.1) 1px,transparent 1px) center/6px 6px,linear-gradient(90deg,rgba(47,128,255,.1) 1px,transparent 1px) center/6px 6px,var(--bg1) !important}
-.kerb{background:var(--sg-quiet-tint)}
-@media (max-width:420px){
-  table.timing th:nth-child(n+4), table.timing td:nth-child(n+4){display:none}
-}
-/* ============ Usage context and examples ============ */
-table.ctx td:first-child{width:16%;white-space:nowrap}
-table.ctx td i{display:inline-block;width:5px;height:14px;margin-right:10px;vertical-align:-2px;transform:none}
-table.ctx .cb{background:var(--blue)}
-table.ctx .cr{background:var(--red)}
-table.ctx .cg{width:11px;background:linear-gradient(90deg,var(--blue) 0 4px,transparent 4px 7px,var(--red) 7px)}
-.ctxh{margin:72px 0 18px}
+/* ============ Across the group ============ */
+/* The divisions table restacks on phones; the examples are built from the shared components on the Canvas. */
+table.ctx td:first-child{width:22%;white-space:nowrap}
+table.ctx td{padding-right:18px}
+.gxg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 40px}
+.gx{display:flex;flex-direction:column;gap:16px;min-width:0;margin:0}
+.gx .eyebrow{margin:6px 0 0}
+.gxt{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:22px 24px;border-radius:var(--sg-radius-card)}
+.gxt .lk{margin-bottom:14px}
+.gxprod{font-weight:600;font-size:24px;letter-spacing:var(--sg-tracking);color:var(--sg-product-blue)}
+.gxt p{margin:0;max-width:40ch;font-size:13px;font-weight:300;color:var(--sg-dim);line-height:1.5}
+.gxc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.gxc .ccard{flex-direction:column;align-items:flex-start;gap:10px;padding:14px}
+.gxh{font-weight:600;font-size:20px;letter-spacing:var(--sg-tracking);line-height:1.2}
+.gxp{display:flex;flex-direction:column}
+.gxpr{display:grid;grid-template-columns:minmax(0,9em) minmax(0,1fr) 44px 64px;gap:12px;align-items:center;min-height:44px;border-top:1px solid var(--sg-rule);font-size:13px}
+.gxpr:first-child{border-top:0}
+.gxpr b{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.gxpr .up, .gxpr .down{text-align:right}
+.gxs{margin:0;font-size:11px;color:var(--sg-dim)}
+.gx .sig{height:auto;box-shadow:none}
+.gx .list .li{border-top:0}
+.gx .li .tag{white-space:nowrap}
+.gxl{color:var(--sg-text)}
+.gxk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding-top:14px;border-top:1px solid var(--sg-rule)}
 .ux{color:var(--ink);background:var(--sg-ground)}
 .uxp{container-type:inline-size;background:#000;color:#fff;font-size:13px}
 .uxn{display:flex;align-items:center;gap:28px;padding:18px 28px;border-bottom:.75px solid var(--rule)}
@@ -1261,89 +1238,40 @@ table.ctx .cg{width:11px;background:linear-gradient(90deg,var(--blue) 0 4px,tran
 .uxn nav a{position:relative;cursor:pointer}
 .uxn nav a.on{color:#fff;font-weight:600}
 .uxn nav a.on::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:3px;transform:none}
-.eng .uxn nav a.on::after{background:var(--blue)}
-.race .uxn nav a.on::after{background:var(--red)}
-.uxh{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:40px;align-items:center;padding:56px 28px 48px;position:relative;overflow:hidden}
-.uxh > *{position:relative}
-.uxk{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;color:var(--dim)}
-.uxh .h5{margin:18px 0 0;font-weight:600;font-size:clamp(30px,4.2cqi,50px);line-height:1;letter-spacing:-.045em}
-.uxh p{margin:16px 0 0;max-width:46ch;color:var(--dim);font-size:14px;line-height:1.6}
-.uxb{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
-.uxb .btn{margin-right:calc(4px - var(--c))}
-.uxd svg.dwg{max-width:340px;margin:0 auto}
-.ux .dwg text{stroke:#000;fill:#7FB2FF}
-.ux .dwg text.tw{fill:#fff}
-.ux .dwg .ob{stroke:#fff}
-.ux .dwg .cn{stroke:rgba(127,178,255,.55)}
-.ux .dwg .cx{stroke:rgba(127,178,255,.25)}
-.ux .dwg .cl{stroke:rgba(127,178,255,.9)}
-.ux .dwg .dm, .ux .dwg .tk{stroke:#7FB2FF}
-.ux .dwg .bl{fill:#000;stroke:#7FB2FF}
 .uxs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:.75px solid rgba(47,128,255,.4);border-bottom:.75px solid var(--rule)}
 .uxs div{padding:18px 28px;border-left:.75px solid var(--rule)}
 .uxs div:first-child{border-left:0}
 .uxs span{display:block;font-family:var(--mono);font-size:10px;color:#7FB2FF}
 .uxs b{font-family:var(--mono);font-weight:500;font-size:26px;letter-spacing:-.02em}
 .uxs em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--dim);margin-left:4px}
-.uxg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
-.uxg article{padding:26px 28px 30px;border-left:.75px solid var(--rule);display:flex;flex-direction:column;align-items:flex-start;gap:10px}
-.uxg article:first-child{border-left:0}
-.uxg .h6{margin:6px 0 0;font-weight:600;font-size:17px;letter-spacing:-.02em}
-.uxg p{margin:0;color:var(--dim);line-height:1.55;flex:1}
-.uxg .tool{color:#7FB2FF;margin-top:6px}
-.uxl{display:inline-flex;align-items:center;gap:8px;color:#7FB2FF;font-weight:600;cursor:pointer}
-.uxl .bi{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.uxcd{display:flex;gap:0;margin-top:24px}
-.uxcd div{padding:0 22px 0 0;margin-right:22px;border-right:.75px solid var(--rule)}
-.uxcd div:last-child{border:0}
-.uxcd b{display:block;font-family:var(--mono);font-weight:500;font-size:30px;letter-spacing:-.02em;line-height:1}
-.uxcd span{font-family:var(--mono);font-size:10px;color:var(--dim)}
-.uxt{justify-self:end;width:min(100%,300px);background:#0B0C0E;box-shadow:0 0 0 .75px var(--rule)}
-.uxtt{display:flex;justify-content:space-between;align-items:baseline;padding:12px 16px;border-bottom:.75px solid var(--rule);font-family:var(--mono);font-size:10px;color:var(--dim)}
-.uxtt b{color:#fff;font-weight:500;font-size:12px}
-.uxt ol{list-style:none;margin:0;padding:6px 0}
-.uxt li{display:grid;grid-template-columns:44px 1fr auto;align-items:center;height:36px;padding:0 16px;font-family:var(--mono);font-size:12px}
-.uxt li .p{--h:20px;display:inline-grid;place-items:center;width:34px;height:20px;background:rgba(205,207,212,.1);font-weight:500;border-radius:var(--sg-radius-chip)}
-.uxt li.lead .p{background:var(--red)}
-.uxt li b{font-weight:500}
-.uxt li > span:last-child{color:var(--dim)}
-.uxt li.lead > span:last-child{color:#fff}
-.uxref{display:flex;align-items:center;gap:10px;padding:10px 16px 12px;border-top:.75px solid var(--rule);font-family:var(--mono);font-size:10px;color:#7FB2FF}
-.uxref i{width:22px;height:0;border-top:1.2px dashed #2F80FF}
-.race .chq{height:14px;background-size:14px 14px;margin:0 -12px 0 -8px}
-.race .uxg{border-top:0}
 @container (max-width:720px){
-  .uxh{grid-template-columns:minmax(0,1fr);padding:40px 20px}
-  .uxt{justify-self:start}
-  .uxs, .uxg{grid-template-columns:minmax(0,1fr)}
-  .uxs div, .uxg article{border-left:0;border-top:.75px solid var(--rule);padding-left:20px}
+  .uxs{grid-template-columns:minmax(0,1fr)}
+  .uxs div{border-left:0;border-top:.75px solid var(--rule);padding-left:20px}
   .uxn{flex-wrap:wrap;padding:16px 20px}
   .uxn nav{order:3;width:100%;margin-left:0;gap:16px;overflow-x:auto}
   .uxn .btn{margin-left:auto}
 }
-.spd::before{content:"";position:absolute;pointer-events:none;inset:0;-webkit-mask:linear-gradient(90deg,transparent 30%,#000 75%);mask:linear-gradient(90deg,transparent 30%,#000 75%);background:var(--sg-quiet-tint),
-  var(--sg-quiet-tint)}
+@media (max-width:1100px){
+  .gxg{grid-template-columns:minmax(0,1fr)}
+}
 @media (max-width:820px){
   table.ctx, table.ctx tbody, table.ctx tr, table.ctx td{display:block;width:auto !important}
   table.ctx tr:first-child{display:none}
-  table.ctx tr{padding:14px 0;border-top:.75px solid var(--rule)}
-  table.ctx td{border:0;padding:3px 0}
+  table.ctx tr{padding:14px 0;border-top:1px solid var(--sg-rule)}
+  table.ctx td{border:0;padding:3px 0;white-space:normal}
   table.ctx td:first-child{font-size:15px;padding-bottom:8px}
-  table.ctx td:not(:first-child)::before{display:block;font-family:var(--mono);font-size:10px;color:var(--faint);margin-bottom:2px}
-  table.ctx td:nth-child(2)::before{content:"Leads"}
-  table.ctx td:nth-child(3)::before{content:"Supports, once per view"}
-  table.ctx td:nth-child(4)::before{content:"Where"}
-  .uxb{padding-right:26px}
-  .uxcd div{padding-right:14px;margin-right:14px}
+  table.ctx td:not(:first-child)::before{display:block;font-size:11px;font-weight:600;color:var(--sg-faint);margin-bottom:2px}
+  table.ctx td:nth-child(2)::before{content:"What it does"}
+  table.ctx td:nth-child(3)::before{content:"Typical material"}
 }
-@media (max-width:420px){
-  .uxcd b{font-size:24px}
+@media (max-width:560px){
+  .gxc{grid-template-columns:minmax(0,1fr)}
+  .gxc .ccard{flex-direction:row;align-items:center}
+  .gxc .ccard br{display:none}
+  .gxpr{grid-template-columns:minmax(0,1fr) 40px 58px;gap:4px 10px;padding:8px 0}
+  .gxpr .limit{grid-column:1/-1;grid-row:2}
+  .gxk{grid-template-columns:minmax(0,1fr)}
 }
-@media (max-width:820px){
-  .uxl{min-height:44px}
-}
-.race .board{background:var(--red);color:#fff}
-table.ctx td{padding-right:18px}
 /* ============ TalentID ============ */
 .tid .tprod{font-weight:600;font-size:14px;padding-left:22px;border-left:.75px solid var(--rule)}
 .tid .uxn nav{margin-left:14px}
@@ -1996,185 +1924,189 @@ table.vx td:first-child{width:18%}
 
     <!-- 09 RACE ENGINEERING -->
     <section class="s" id="engineering"><div class="inner">
-      <div class="sh"><div class="num">09</div><span class="chap">Two worlds</span></div>
-      <h2 data-anchor="engineering">Race engineering<button class="hlink" type="button" aria-label="Copy link to Race engineering"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
-      <p class="intro">The mark is earned on track and proven in the garage. Under the core identity sits a technical layer taken from four places we work: the drawing office, the workshop, the pit wall and the track. Use each where something is being measured, built, read or raced. Never as wallpaper.</p>
+      <div class="sh"><div class="num">09</div><span class="chap">In practice</span></div>
+      <h2 data-anchor="engineering">Drawings and data<button class="hlink" type="button" aria-label="Copy link to Drawings and data"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
+      <p class="intro">Where something is measured, built or read, the system draws it plainly. Technical drawings sit on the Canvas in ink, measured in Steel; values are Sora with tabular figures; and green and red appear only where a number has gone up or down. The same rules serve a kart, a sensor housing and a results table.</p>
       <div class="hair"></div>
 
-      <h3 class="subhead" id="engineering-the-drawing-office" data-anchor="engineering-the-drawing-office">The drawing office<button class="hlink" type="button" aria-label="Copy link to The drawing office"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
+      <h3 class="subhead" id="engineering-drawings" data-anchor="engineering-drawings">Drawings<button class="hlink" type="button" aria-label="Copy link to Drawings"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
       <div class="two">
         <div>
-          <h3 id="engineering-blueprint-grid" data-anchor="engineering-blueprint-grid">Blueprint grid<button class="hlink" type="button" aria-label="Copy link to Blueprint grid"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Blueprint ground, white grid at 3 % and 7.5 %</p>
-          <p class="body">The grid lives on drawings, not pages: drawings sit on Blueprint blue, ruled in white on the 8 px module and heavier every 40 px, so parts can be read off it. Everywhere else the ground stays clear. The grid is paper, not pattern.</p>
-          <p class="body" style="margin-top:14px">Drawings carry a <b>title block</b>: sheet, subject and date, in mono, in ruled cells. The rule under each introduction is a <b>scale</b>, ticked every 40 px.</p>
+          <h3 id="engineering-the-drawing-ground" data-anchor="engineering-the-drawing-ground">The drawing ground<button class="hlink" type="button" aria-label="Copy link to The drawing ground"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Canvas, or the signature surface when reversed</p>
+          <p class="body">Drawings sit on the page's own ground, with no grid behind them. The part is drawn in Ink, set out in Pale Blue hairlines and measured in Steel. Reversed on the signature surface, the part turns white and the measurements Pale Blue. Labels and values are set in Sora; a value that needs attention is set in the negative red, as text and nothing more.</p>
+          <p class="body" style="margin-top:14px">Every drawing carries a <b>title block</b>: sheet, subject, place and date in ruled cells. Dimensions end in short ticks at 45 degrees, or straight ones, never arrowheads.</p>
         </div>
-        <table class="spec lines"><tr><th>Sample</th><th>Line</th><th>Use</th></tr><tr><td><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="ob" x1="0" y1="9" x2="110" y2="9"/></svg></td><td>Object line</td><td>White, 1.25 px. What exists: the outline of the part.</td></tr><tr><td><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="cn" x1="0" y1="9" x2="110" y2="9"/></svg></td><td>Construction line</td><td>Line Blue at 50 %, 0.75 px. How it was set out: modules, envelopes, extensions.</td></tr><tr><td><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="cl" x1="0" y1="9" x2="110" y2="9"/></svg></td><td>Centre line</td><td>Line Blue, long and short dash. Axes and symmetry.</td></tr><tr><td><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="hd" x1="0" y1="9" x2="110" y2="9"/></svg></td><td>Hidden or planned</td><td>White at 50 %, dashed. What is out of sight or not built yet.</td></tr><tr><td><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="dm" x1="6" y1="11" x2="104" y2="11"/><line class="tk" x1="3.4" y1="7.2" x2="8.6" y2="14.8"/><line class="tk" x1="101.4" y1="7.2" x2="106.6" y2="14.8"/><text x="55" y="6" text-anchor="middle">1040</text></svg></td><td>Dimension</td><td>Line Blue, ticks at 55° that always lean with the glyph, never arrowheads. Value in mono above the line.</td></tr><tr><td><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><circle class="dot" cx="4" cy="12" r="2.6"/><line class="dm" x1="4" y1="12" x2="104" y2="12"/><text class="tw" x="104" y="7" text-anchor="end">motor</text></svg></td><td>Callout</td><td>A dot on the part, a shelf to the label. Balloons name items in a set.</td></tr></table>
+        <table class="spec lines"><tr><th>On Canvas, reversed</th><th>Line</th><th>Use</th></tr><tr><td><span class="ls"><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="ob" x1="0" y1="9" x2="110" y2="9"/></svg></span><span class="ls sg-surface sg-dark"><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="ob" x1="0" y1="9" x2="110" y2="9"/></svg></span></td><td>Object line</td><td>Ink, 1.25 px; white when reversed. What exists: the outline of the part.</td></tr><tr><td><span class="ls"><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="cn" x1="0" y1="9" x2="110" y2="9"/></svg></span><span class="ls sg-surface sg-dark"><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="cn" x1="0" y1="9" x2="110" y2="9"/></svg></span></td><td>Construction line</td><td>Pale Blue, 0.75 px. How it was set out: modules, envelopes, extensions.</td></tr><tr><td><span class="ls"><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="cl" x1="0" y1="9" x2="110" y2="9"/></svg></span><span class="ls sg-surface sg-dark"><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="cl" x1="0" y1="9" x2="110" y2="9"/></svg></span></td><td>Centre line</td><td>Steel, long and short dash; Pale Blue when reversed. Axes and symmetry.</td></tr><tr><td><span class="ls"><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="hd" x1="0" y1="9" x2="110" y2="9"/></svg></span><span class="ls sg-surface sg-dark"><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="hd" x1="0" y1="9" x2="110" y2="9"/></svg></span></td><td>Hidden or planned</td><td>Slate, dashed; Cloud when reversed. What is out of sight or not built yet.</td></tr><tr><td><span class="ls"><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="dm" x1="6" y1="11" x2="104" y2="11"/><line class="tk" x1="2.5" y1="14.5" x2="9.5" y2="7.5"/><line class="tk" x1="100.5" y1="14.5" x2="107.5" y2="7.5"/><text x="55" y="6" text-anchor="middle">1040</text></svg></span><span class="ls sg-surface sg-dark"><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><line class="dm" x1="6" y1="11" x2="104" y2="11"/><line class="tk" x1="2.5" y1="14.5" x2="9.5" y2="7.5"/><line class="tk" x1="100.5" y1="14.5" x2="107.5" y2="7.5"/><text x="55" y="6" text-anchor="middle">1040</text></svg></span></td><td>Dimension</td><td>Steel; Pale Blue when reversed. Short ticks at 45 degrees, or straight, never arrowheads. The value in Sora above the line.</td></tr><tr><td><span class="ls"><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><circle class="dot" cx="4" cy="12" r="2.6"/><line class="dm" x1="4" y1="12" x2="104" y2="12"/><text class="tw" x="104" y="7" text-anchor="end">motor</text></svg></span><span class="ls sg-surface sg-dark"><svg viewBox="0 0 110 18" aria-hidden="true" class="dwg"><circle class="dot" cx="4" cy="12" r="2.6"/><line class="dm" x1="4" y1="12" x2="104" y2="12"/><text class="tw" x="104" y="7" text-anchor="end">motor</text></svg></span></td><td>Callout</td><td>A dot on the part, a shelf to the label in the text colour. Balloons name items in a set.</td></tr></table>
       </div>
 
-      <h3 class="subhead" id="engineering-the-workshop" data-anchor="engineering-the-workshop">The workshop<button class="hlink" type="button" aria-label="Copy link to The workshop"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
-      <div class="two" style="align-items:start">
-        <div><div class="tools"><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true" data-icon="spanner"><path d="M4.3 17.8L12.7 9.4M6.2 19.7L14.6 11.3"/><path d="M4.3 17.8a1.35 1.35 0 0 0 1.9 1.9"/><path d="M12.7 9.4a4.6 4.6 0 0 1 6.2-6.1L16.2 6L16.8 8.2L19 8.8L21.7 6.1a4.6 4.6 0 0 1-6.1 6.2"/></svg></div><figcaption>Spanner</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true" data-icon="ratchet"><path d="M3.8 18.4L12.1 10.1M5.6 20.2L13.9 11.9"/><path d="M3.8 18.4a1.27 1.27 0 0 0 1.8 1.8"/><circle cx="16.5" cy="7.5" r="4.3"/><rect x="15" y="6" width="3" height="3" rx="0.6"/></svg></div><figcaption>Ratchet</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true" data-icon="torque-wrench"><circle cx="16.6" cy="7.4" r="3"/><path d="M14.4 9.5L6.4 17.5a1.41 1.41 0 0 0 2 2L16.4 11.6"/><path d="M9.4 14.5L11.4 16.5"/></svg></div><figcaption>Torque wrench</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true" data-icon="hex-key"><path d="M6.5 3.5H9.5V16a1 1 0 0 0 1 1H18V20H9.5A3 3 0 0 1 6.5 17Z"/></svg></div><figcaption>Hex key</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true" data-icon="calliper"><path d="M12 4.5H3.5V8H12M16.5 4.5H20.5V8H16.5"/><rect x="12" y="3" width="4.5" height="6.5" rx="1"/><path d="M4.5 8V19L7.5 16V8"/><path d="M13 9.5V17L15.5 14.5V9.5"/></svg></div><figcaption>Calliper</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true" data-icon="tyre-gauge"><circle cx="12" cy="10" r="6.5"/><path d="M12 10L14.5 7.5"/><path d="M12 16.5V21M9.5 21H14.5"/></svg></div><figcaption>Tyre gauge</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true" data-icon="stopwatch"><circle cx="12" cy="13.5" r="7"/><path d="M10 2.5H14M12 2.5V6.5"/><path d="M17.5 7L19 5.5"/><path d="M8 13.5H9.8L11 11L13 16L14.2 13.5H16"/></svg></div><figcaption>Stopwatch</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="72" height="72" aria-hidden="true" data-icon="data-logger"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M6.5 13L9.5 10L11.5 11.5L14.5 8L17.5 10"/><path d="M12 16.5V19.5M8.5 19.5H15.5"/></svg></div><figcaption>Data logger</figcaption></figure></div><div class="toolrow"><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon="spanner"><path d="M4.3 17.8L12.7 9.4M6.2 19.7L14.6 11.3"/><path d="M4.3 17.8a1.35 1.35 0 0 0 1.9 1.9"/><path d="M12.7 9.4a4.6 4.6 0 0 1 6.2-6.1L16.2 6L16.8 8.2L19 8.8L21.7 6.1a4.6 4.6 0 0 1-6.1 6.2"/></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon="ratchet"><path d="M3.8 18.4L12.1 10.1M5.6 20.2L13.9 11.9"/><path d="M3.8 18.4a1.27 1.27 0 0 0 1.8 1.8"/><circle cx="16.5" cy="7.5" r="4.3"/><rect x="15" y="6" width="3" height="3" rx="0.6"/></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon="torque-wrench"><circle cx="16.6" cy="7.4" r="3"/><path d="M14.4 9.5L6.4 17.5a1.41 1.41 0 0 0 2 2L16.4 11.6"/><path d="M9.4 14.5L11.4 16.5"/></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon="hex-key"><path d="M6.5 3.5H9.5V16a1 1 0 0 0 1 1H18V20H9.5A3 3 0 0 1 6.5 17Z"/></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon="calliper"><path d="M12 4.5H3.5V8H12M16.5 4.5H20.5V8H16.5"/><rect x="12" y="3" width="4.5" height="6.5" rx="1"/><path d="M4.5 8V19L7.5 16V8"/><path d="M13 9.5V17L15.5 14.5V9.5"/></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon="tyre-gauge"><circle cx="12" cy="10" r="6.5"/><path d="M12 10L14.5 7.5"/><path d="M12 16.5V21M9.5 21H14.5"/></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon="stopwatch"><circle cx="12" cy="13.5" r="7"/><path d="M10 2.5H14M12 2.5V6.5"/><path d="M17.5 7L19 5.5"/><path d="M8 13.5H9.8L11 11L13 16L14.2 13.5H16"/></svg><svg class="tool" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" data-icon="data-logger"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M6.5 13L9.5 10L11.5 11.5L14.5 8L17.5 10"/><path d="M12 16.5V19.5M8.5 19.5H15.5"/></svg></div></div>
-        <div>
-          <h3 id="engineering-tools" data-anchor="engineering-tools">Tools<button class="hlink" type="button" aria-label="Copy link to Tools"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">24 px grid, 1.5 px stroke, rounded ends and joins</p>
-          <p class="body">Drawn like the interface icons, on the same keylines. Hand tools lie on the diagonal, head to the top right; <b>instruments sit level</b>, because they read true. On a surface every tool sits white in an icon tile. Tool icons mark engineering work: setup, service, hardware and data. They are not general-purpose symbols; those, and these, are in the <a href="icons/">icon library</a>.</p>
-          <table class="spec" style="margin-top:22px">
-            <tr><td>Lean</td><td><code>rotate(55deg)</code> about the centre, hand tools only</td></tr>
-            <tr><td>Live area</td><td>20 px inside the 24 px square, one idea per tool</td></tr>
-            <tr><td>Sizes</td><td>16, 20 and 24 px in interface, 72 px on plates</td></tr>
-          </table>
-        </div>
-      </div>
       <div style="margin-top:56px">
         <h3 id="engineering-setup-sheet" data-anchor="engineering-setup-sheet">Setup sheet<button class="hlink" type="button" aria-label="Copy link to Setup sheet"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">The kart in plan view, front at the top, dimensions in mm</p>
-        <div class="bp crop" tabindex="0" role="region" aria-label="Kart setup sheet"><svg class="dwg kart" viewBox="0 0 1000 604" role="img" aria-label="Kart setup sheet in plan view, front at the top. Wheelbase 1040 mm, front track 1120 mm, rear track 1360 mm. Front left 0.72 bar, camber minus 1.50 degrees, toe 1.0 mm out. Front right 0.72 bar, camber minus 1.25 degrees, toe 1.0 mm out. Rear left 0.80 bar, surface 51 degrees. Rear right 0.82 bar, surface 54 degrees."><line class="kcl" x1="272" y1="160" x2="298" y2="160"/><line class="kcl" x1="702" y1="160" x2="728" y2="160"/><line class="kcl" x1="236" y1="470" x2="262" y2="470"/><line class="kcl" x1="738" y1="470" x2="764" y2="470"/><line class="kcl" x1="500" y1="18" x2="500" y2="52"/><line class="kcl" x1="500" y1="566" x2="500" y2="598"/><rect class="kty" x="312" y="122" width="40" height="76" rx="8"/><line class="ktr" x1="318" y1="132.857" x2="346" y2="132.857"/><line class="ktr" x1="318" y1="143.714" x2="346" y2="143.714"/><line class="ktr" x1="318" y1="154.571" x2="346" y2="154.571"/><line class="ktr" x1="318" y1="165.429" x2="346" y2="165.429"/><line class="ktr" x1="318" y1="176.286" x2="346" y2="176.286"/><line class="ktr" x1="318" y1="187.143" x2="346" y2="187.143"/><rect class="khb" x="349" y="138.72" width="3" height="42.56" rx="1"/><rect class="kty" x="648" y="122" width="40" height="76" rx="8"/><line class="ktr" x1="654" y1="132.857" x2="682" y2="132.857"/><line class="ktr" x1="654" y1="143.714" x2="682" y2="143.714"/><line class="ktr" x1="654" y1="154.571" x2="682" y2="154.571"/><line class="ktr" x1="654" y1="165.429" x2="682" y2="165.429"/><line class="ktr" x1="654" y1="176.286" x2="682" y2="176.286"/><line class="ktr" x1="654" y1="187.143" x2="682" y2="187.143"/><rect class="khb" x="648" y="138.72" width="3" height="42.56" rx="1"/><rect class="kty" x="268" y="426" width="56" height="88" rx="8"/><line class="ktr" x1="274" y1="438.571" x2="318" y2="438.571"/><line class="ktr" x1="274" y1="451.143" x2="318" y2="451.143"/><line class="ktr" x1="274" y1="463.714" x2="318" y2="463.714"/><line class="ktr" x1="274" y1="476.286" x2="318" y2="476.286"/><line class="ktr" x1="274" y1="488.857" x2="318" y2="488.857"/><line class="ktr" x1="274" y1="501.429" x2="318" y2="501.429"/><rect class="khb" x="321" y="445.36" width="3" height="49.28" rx="1"/><rect class="kty" x="676" y="426" width="56" height="88" rx="8"/><line class="ktr" x1="682" y1="438.571" x2="726" y2="438.571"/><line class="ktr" x1="682" y1="451.143" x2="726" y2="451.143"/><line class="ktr" x1="682" y1="463.714" x2="726" y2="463.714"/><line class="ktr" x1="682" y1="476.286" x2="726" y2="476.286"/><line class="ktr" x1="682" y1="488.857" x2="726" y2="488.857"/><line class="ktr" x1="682" y1="501.429" x2="726" y2="501.429"/><rect class="khb" x="676" y="445.36" width="3" height="49.28" rx="1"/><path class="kob" d="M374 124 C380 102 432 86 500 84 C568 86 620 102 626 124 C628 134 618 140 604 140 H396 C382 140 372 134 374 124 Z"/><path class="ksd" d="M410 128 C446 118 554 118 590 128"/><path class="ktb" d="M452 138 C446 190 428 250 426 320 L428 520 M548 138 C554 190 572 250 574 320 L572 520"/><path class="ktb" d="M452 150 H548 M427 330 H573 M428 505 H572"/><line class="kob" x1="352" y1="160" x2="363" y2="160"/><circle class="kob" cx="363" cy="160" r="5.5"/><line class="kob" x1="363" y1="160" x2="375" y2="182"/><line class="kth" x1="375" y1="182" x2="490" y2="194"/><line class="kob" x1="648" y1="160" x2="637" y2="160"/><circle class="kob" cx="637" cy="160" r="5.5"/><line class="kob" x1="637" y1="160" x2="625" y2="182"/><line class="kth" x1="625" y1="182" x2="510" y2="194"/><path class="kwb" d="M368 160 L448 143"/><circle class="kob" cx="448" cy="143" r="2.6"/><path class="kwb" d="M368 160 L448 177"/><circle class="kob" cx="448" cy="177" r="2.6"/><path class="kwb" d="M632 160 L552 143"/><circle class="kob" cx="552" cy="143" r="2.6"/><path class="kwb" d="M632 160 L552 177"/><circle class="kob" cx="552" cy="177" r="2.6"/><path class="kfp" d="M456 206 C476 198 524 198 544 206"/><rect class="kob" x="474" y="224" width="12" height="24" rx="2"/><rect class="kob" x="514" y="224" width="12" height="24" rx="2"/><rect class="kob" x="454" y="262" width="92" height="54" rx="5"/><text class="klb" x="500" y="293" text-anchor="middle">battery</text><path class="kob" d="M398 228 L370 236 C336 248 318 274 314 310 L310 384 C309 396 316 402 330 402 L398 402 Z"/><path class="kob" d="M602 228 L630 236 C664 248 682 274 686 310 L690 384 C691 396 684 402 670 402 L602 402 Z"/><path class="ksd" d="M380 252 C350 268 336 294 332 330 M620 252 C650 268 664 294 668 330"/><path class="kob" d="M462 346 C462 336 472 330 484 330 H516 C528 330 538 336 538 346 L542 424 C542 446 524 456 500 456 C476 456 458 446 458 424 Z"/><path class="ksd" d="M472 356 C472 348 480 344 490 344 H510 C520 344 528 348 528 356 L530 418 C530 432 518 440 500 440 C482 440 470 432 470 418 Z"/><text class="klb" x="500" y="398" text-anchor="middle">seat</text><rect class="kob" x="324" y="466" width="352" height="8" rx="4"/><rect class="kob" x="420" y="460" width="16" height="20" rx="2"/><rect class="kob" x="564" y="460" width="16" height="20" rx="2"/><rect class="kob" x="612" y="445" width="7" height="50" rx="2"/><path class="khd" d="M619 451 L624 450 M619 489 L640 450"/><rect class="kob" x="588" y="412" width="64" height="38" rx="7"/><text class="klb" x="620" y="435" text-anchor="middle">motor</text><rect class="kob" x="488" y="189" width="24" height="11" rx="2"/><circle class="kob" cx="500" cy="194.5" r="3"/><rect class="kob" x="478" y="452" width="6" height="40" rx="1"/><rect class="kob" x="474" y="484" width="14" height="12" rx="2"/><rect class="kob" x="324" y="461" width="12" height="18" rx="2"/><rect class="kob" x="664" y="461" width="12" height="18" rx="2"/><line class="kbr" x1="398" y1="262" x2="427" y2="262"/><line class="kbr" x1="602" y1="262" x2="573" y2="262"/><line class="kbr" x1="398" y1="372" x2="427" y2="372"/><line class="kbr" x1="602" y1="372" x2="573" y2="372"/><line class="kbr" x1="458" y1="392" x2="428" y2="392"/><line class="kbr" x1="542" y1="392" x2="572" y2="392"/><path class="kob" d="M300 532 C300 524 306 520 316 520 H684 C694 520 700 524 700 532 V548 C700 556 694 560 684 560 H316 C306 560 300 556 300 548 Z"/><line class="ktb" x1="440" y1="505" x2="440" y2="520"/><line class="ktb" x1="560" y1="505" x2="560" y2="520"/><line class="kex" x1="332" y1="116" x2="332" y2="30"/><line class="kex" x1="668" y1="116" x2="668" y2="30"/><line class="kdm" x1="332" y1="36" x2="668" y2="36"/><line class="ktk" x1="328.8" y1="31.4" x2="335.2" y2="40.6"/><line class="ktk" x1="664.8" y1="31.4" x2="671.2" y2="40.6"/><text class="kdv" x="510" y="30" text-anchor="start">1120</text><line class="kex" x1="296" y1="520" x2="296" y2="518"/><line class="kex" x1="296" y1="562" x2="296" y2="592"/><line class="kex" x1="704" y1="520" x2="704" y2="518"/><line class="kex" x1="704" y1="562" x2="704" y2="592"/><line class="kdm" x1="296" y1="586" x2="704" y2="586"/><line class="ktk" x1="292.8" y1="581.4" x2="299.2" y2="590.6"/><line class="ktk" x1="700.8" y1="581.4" x2="707.2" y2="590.6"/><text class="kdv" x="510" y="580" text-anchor="start">1360</text><line class="kdm" x1="250" y1="160" x2="250" y2="470"/><line class="ktk" x1="246.8" y1="155.4" x2="253.2" y2="164.6"/><line class="ktk" x1="246.8" y1="465.4" x2="253.2" y2="474.6"/><line class="kex" x1="244" y1="160" x2="272" y2="160"/><line class="kex" x1="244" y1="470" x2="236" y2="470"/><text class="kdv" x="242" y="345" text-anchor="middle" transform="rotate(-90 242 345)">1040</text><text class="klb" x="500" y="12" text-anchor="middle">front</text><text class="kct" x="24" y="116" text-anchor="start">Front left</text><text class="kk" x="24" y="138" text-anchor="start">pressure</text><text class="kbig" x="24" y="172">0.72<tspan class="kun" dx="6">bar</tspan></text><line class="krl" x1="24" y1="187" x2="200" y2="187"/><text class="kk" x="24" y="202" text-anchor="start">camber</text><text class="kv" x="200" y="202" text-anchor="end">−1.50°</text><line class="krl" x1="24" y1="211" x2="200" y2="211"/><text class="kk" x="24" y="226" text-anchor="start">toe</text><text class="kv" x="200" y="226" text-anchor="end">1.0 mm out</text><line class="kld" x1="212" y1="160" x2="313" y2="160"/><circle class="kdot" cx="313" cy="160" r="3"/><text class="kct" x="800" y="116" text-anchor="start">Front right</text><text class="kk" x="800" y="138" text-anchor="start">pressure</text><text class="kbig" x="800" y="172">0.72<tspan class="kun" dx="6">bar</tspan></text><line class="krl" x1="800" y1="187" x2="976" y2="187"/><text class="kk" x="800" y="202" text-anchor="start">camber</text><text class="kv" x="976" y="202" text-anchor="end">−1.25°</text><line class="krl" x1="800" y1="211" x2="976" y2="211"/><text class="kk" x="800" y="226" text-anchor="start">toe</text><text class="kv" x="976" y="226" text-anchor="end">1.0 mm out</text><line class="kld" x1="687" y1="160" x2="788" y2="160"/><circle class="kdot" cx="687" cy="160" r="3"/><text class="kct" x="24" y="426" text-anchor="start">Rear left</text><text class="kk" x="24" y="448" text-anchor="start">pressure</text><text class="kbig" x="24" y="482">0.80<tspan class="kun" dx="6">bar</tspan></text><line class="krl" x1="24" y1="497" x2="200" y2="497"/><text class="kk" x="24" y="512" text-anchor="start">surface</text><text class="kv hot" x="200" y="512" text-anchor="end">51 °C</text><line class="krl" x1="24" y1="521" x2="200" y2="521"/><text class="kk" x="24" y="536" text-anchor="start">hub</text><text class="kv" x="200" y="536" text-anchor="end">95 mm</text><line class="kld" x1="212" y1="470" x2="269" y2="470"/><circle class="kdot" cx="269" cy="470" r="3"/><text class="kct" x="800" y="426" text-anchor="start">Rear right</text><text class="kk" x="800" y="448" text-anchor="start">pressure</text><text class="kbig" x="800" y="482">0.82<tspan class="kun" dx="6">bar</tspan></text><line class="krl" x1="800" y1="497" x2="976" y2="497"/><text class="kk" x="800" y="512" text-anchor="start">surface</text><text class="kv hot" x="976" y="512" text-anchor="end">54 °C</text><line class="krl" x1="800" y1="521" x2="976" y2="521"/><text class="kk" x="800" y="536" text-anchor="start">hub</text><text class="kv" x="976" y="536" text-anchor="end">95 mm</text><line class="kld" x1="731" y1="470" x2="788" y2="470"/><circle class="kdot" cx="731" cy="470" r="3"/></svg>
-          <dl class="tb"><div><dt>Sheet</dt><dd>Setup</dd></div><div><dt>Hub</dt><dd>FKL Łódź</dd></div><div><dt>Class</dt><dd>Cadet</dd></div><div><dt>Driver</dt><dd>Maja Kowalczyk</dd></div><div><dt>Session</dt><dd>Qualifying</dd></div><div><dt>Date</dt><dd>24 Sep 2026</dd></div></dl>
+        <div class="bp crop" tabindex="0" role="region" aria-label="Kart setup sheet"><svg class="dwg kart" viewBox="0 0 1000 604" role="img" aria-label="Kart setup sheet in plan view, front at the top. Wheelbase 1040 mm, front track 1120 mm, rear track 1360 mm. Front left 0.72 bar, camber minus 1.50 degrees, toe 1.0 mm out. Front right 0.72 bar, camber minus 1.25 degrees, toe 1.0 mm out. Rear left 0.80 bar, surface 51 degrees. Rear right 0.82 bar, surface 54 degrees."><line class="kcl" x1="272" y1="160" x2="298" y2="160"/><line class="kcl" x1="702" y1="160" x2="728" y2="160"/><line class="kcl" x1="236" y1="470" x2="262" y2="470"/><line class="kcl" x1="738" y1="470" x2="764" y2="470"/><line class="kcl" x1="500" y1="18" x2="500" y2="52"/><line class="kcl" x1="500" y1="566" x2="500" y2="598"/><rect class="kty" x="312" y="122" width="40" height="76" rx="8"/><line class="ktr" x1="318" y1="132.857" x2="346" y2="132.857"/><line class="ktr" x1="318" y1="143.714" x2="346" y2="143.714"/><line class="ktr" x1="318" y1="154.571" x2="346" y2="154.571"/><line class="ktr" x1="318" y1="165.429" x2="346" y2="165.429"/><line class="ktr" x1="318" y1="176.286" x2="346" y2="176.286"/><line class="ktr" x1="318" y1="187.143" x2="346" y2="187.143"/><rect class="khb" x="349" y="138.72" width="3" height="42.56" rx="1"/><rect class="kty" x="648" y="122" width="40" height="76" rx="8"/><line class="ktr" x1="654" y1="132.857" x2="682" y2="132.857"/><line class="ktr" x1="654" y1="143.714" x2="682" y2="143.714"/><line class="ktr" x1="654" y1="154.571" x2="682" y2="154.571"/><line class="ktr" x1="654" y1="165.429" x2="682" y2="165.429"/><line class="ktr" x1="654" y1="176.286" x2="682" y2="176.286"/><line class="ktr" x1="654" y1="187.143" x2="682" y2="187.143"/><rect class="khb" x="648" y="138.72" width="3" height="42.56" rx="1"/><rect class="kty" x="268" y="426" width="56" height="88" rx="8"/><line class="ktr" x1="274" y1="438.571" x2="318" y2="438.571"/><line class="ktr" x1="274" y1="451.143" x2="318" y2="451.143"/><line class="ktr" x1="274" y1="463.714" x2="318" y2="463.714"/><line class="ktr" x1="274" y1="476.286" x2="318" y2="476.286"/><line class="ktr" x1="274" y1="488.857" x2="318" y2="488.857"/><line class="ktr" x1="274" y1="501.429" x2="318" y2="501.429"/><rect class="khb" x="321" y="445.36" width="3" height="49.28" rx="1"/><rect class="kty" x="676" y="426" width="56" height="88" rx="8"/><line class="ktr" x1="682" y1="438.571" x2="726" y2="438.571"/><line class="ktr" x1="682" y1="451.143" x2="726" y2="451.143"/><line class="ktr" x1="682" y1="463.714" x2="726" y2="463.714"/><line class="ktr" x1="682" y1="476.286" x2="726" y2="476.286"/><line class="ktr" x1="682" y1="488.857" x2="726" y2="488.857"/><line class="ktr" x1="682" y1="501.429" x2="726" y2="501.429"/><rect class="khb" x="676" y="445.36" width="3" height="49.28" rx="1"/><path class="kob" d="M374 124 C380 102 432 86 500 84 C568 86 620 102 626 124 C628 134 618 140 604 140 H396 C382 140 372 134 374 124 Z"/><path class="ksd" d="M410 128 C446 118 554 118 590 128"/><path class="ktb" d="M452 138 C446 190 428 250 426 320 L428 520 M548 138 C554 190 572 250 574 320 L572 520"/><path class="ktb" d="M452 150 H548 M427 330 H573 M428 505 H572"/><line class="kob" x1="352" y1="160" x2="363" y2="160"/><circle class="kob" cx="363" cy="160" r="5.5"/><line class="kob" x1="363" y1="160" x2="375" y2="182"/><line class="kth" x1="375" y1="182" x2="490" y2="194"/><line class="kob" x1="648" y1="160" x2="637" y2="160"/><circle class="kob" cx="637" cy="160" r="5.5"/><line class="kob" x1="637" y1="160" x2="625" y2="182"/><line class="kth" x1="625" y1="182" x2="510" y2="194"/><path class="kwb" d="M368 160 L448 143"/><circle class="kob" cx="448" cy="143" r="2.6"/><path class="kwb" d="M368 160 L448 177"/><circle class="kob" cx="448" cy="177" r="2.6"/><path class="kwb" d="M632 160 L552 143"/><circle class="kob" cx="552" cy="143" r="2.6"/><path class="kwb" d="M632 160 L552 177"/><circle class="kob" cx="552" cy="177" r="2.6"/><path class="kfp" d="M456 206 C476 198 524 198 544 206"/><rect class="kob" x="474" y="224" width="12" height="24" rx="2"/><rect class="kob" x="514" y="224" width="12" height="24" rx="2"/><rect class="kob" x="454" y="262" width="92" height="54" rx="5"/><text class="klb" x="500" y="293" text-anchor="middle">battery</text><path class="kob" d="M398 228 L370 236 C336 248 318 274 314 310 L310 384 C309 396 316 402 330 402 L398 402 Z"/><path class="kob" d="M602 228 L630 236 C664 248 682 274 686 310 L690 384 C691 396 684 402 670 402 L602 402 Z"/><path class="ksd" d="M380 252 C350 268 336 294 332 330 M620 252 C650 268 664 294 668 330"/><path class="kob" d="M462 346 C462 336 472 330 484 330 H516 C528 330 538 336 538 346 L542 424 C542 446 524 456 500 456 C476 456 458 446 458 424 Z"/><path class="ksd" d="M472 356 C472 348 480 344 490 344 H510 C520 344 528 348 528 356 L530 418 C530 432 518 440 500 440 C482 440 470 432 470 418 Z"/><text class="klb" x="500" y="398" text-anchor="middle">seat</text><rect class="kob" x="324" y="466" width="352" height="8" rx="4"/><rect class="kob" x="420" y="460" width="16" height="20" rx="2"/><rect class="kob" x="564" y="460" width="16" height="20" rx="2"/><rect class="kob" x="612" y="445" width="7" height="50" rx="2"/><path class="khd" d="M619 451 L624 450 M619 489 L640 450"/><rect class="kob" x="588" y="412" width="64" height="38" rx="7"/><text class="klb" x="620" y="435" text-anchor="middle">motor</text><rect class="kob" x="488" y="189" width="24" height="11" rx="2"/><circle class="kob" cx="500" cy="194.5" r="3"/><rect class="kob" x="478" y="452" width="6" height="40" rx="1"/><rect class="kob" x="474" y="484" width="14" height="12" rx="2"/><rect class="kob" x="324" y="461" width="12" height="18" rx="2"/><rect class="kob" x="664" y="461" width="12" height="18" rx="2"/><line class="kbr" x1="398" y1="262" x2="427" y2="262"/><line class="kbr" x1="602" y1="262" x2="573" y2="262"/><line class="kbr" x1="398" y1="372" x2="427" y2="372"/><line class="kbr" x1="602" y1="372" x2="573" y2="372"/><line class="kbr" x1="458" y1="392" x2="428" y2="392"/><line class="kbr" x1="542" y1="392" x2="572" y2="392"/><path class="kob" d="M300 532 C300 524 306 520 316 520 H684 C694 520 700 524 700 532 V548 C700 556 694 560 684 560 H316 C306 560 300 556 300 548 Z"/><line class="ktb" x1="440" y1="505" x2="440" y2="520"/><line class="ktb" x1="560" y1="505" x2="560" y2="520"/><line class="kex" x1="332" y1="116" x2="332" y2="30"/><line class="kex" x1="668" y1="116" x2="668" y2="30"/><line class="kdm" x1="332" y1="36" x2="668" y2="36"/><line class="ktk" x1="328.5" y1="39.5" x2="335.5" y2="32.5"/><line class="ktk" x1="664.5" y1="39.5" x2="671.5" y2="32.5"/><text class="kdv" x="510" y="30" text-anchor="start">1120</text><line class="kex" x1="296" y1="520" x2="296" y2="518"/><line class="kex" x1="296" y1="562" x2="296" y2="592"/><line class="kex" x1="704" y1="520" x2="704" y2="518"/><line class="kex" x1="704" y1="562" x2="704" y2="592"/><line class="kdm" x1="296" y1="586" x2="704" y2="586"/><line class="ktk" x1="292.5" y1="589.5" x2="299.5" y2="582.5"/><line class="ktk" x1="700.5" y1="589.5" x2="707.5" y2="582.5"/><text class="kdv" x="510" y="580" text-anchor="start">1360</text><line class="kdm" x1="250" y1="160" x2="250" y2="470"/><line class="ktk" x1="246.5" y1="163.5" x2="253.5" y2="156.5"/><line class="ktk" x1="246.5" y1="473.5" x2="253.5" y2="466.5"/><line class="kex" x1="244" y1="160" x2="272" y2="160"/><line class="kex" x1="244" y1="470" x2="236" y2="470"/><text class="kdv" x="242" y="345" text-anchor="middle" transform="rotate(-90 242 345)">1040</text><text class="klb" x="500" y="12" text-anchor="middle">front</text><text class="kct" x="24" y="116" text-anchor="start">Front left</text><text class="kk" x="24" y="138" text-anchor="start">pressure</text><text class="kbig" x="24" y="172">0.72<tspan class="kun" dx="6">bar</tspan></text><line class="krl" x1="24" y1="187" x2="200" y2="187"/><text class="kk" x="24" y="202" text-anchor="start">camber</text><text class="kv" x="200" y="202" text-anchor="end">−1.50°</text><line class="krl" x1="24" y1="211" x2="200" y2="211"/><text class="kk" x="24" y="226" text-anchor="start">toe</text><text class="kv" x="200" y="226" text-anchor="end">1.0 mm out</text><line class="kld" x1="212" y1="160" x2="313" y2="160"/><circle class="kdot" cx="313" cy="160" r="3"/><text class="kct" x="800" y="116" text-anchor="start">Front right</text><text class="kk" x="800" y="138" text-anchor="start">pressure</text><text class="kbig" x="800" y="172">0.72<tspan class="kun" dx="6">bar</tspan></text><line class="krl" x1="800" y1="187" x2="976" y2="187"/><text class="kk" x="800" y="202" text-anchor="start">camber</text><text class="kv" x="976" y="202" text-anchor="end">−1.25°</text><line class="krl" x1="800" y1="211" x2="976" y2="211"/><text class="kk" x="800" y="226" text-anchor="start">toe</text><text class="kv" x="976" y="226" text-anchor="end">1.0 mm out</text><line class="kld" x1="687" y1="160" x2="788" y2="160"/><circle class="kdot" cx="687" cy="160" r="3"/><text class="kct" x="24" y="426" text-anchor="start">Rear left</text><text class="kk" x="24" y="448" text-anchor="start">pressure</text><text class="kbig" x="24" y="482">0.80<tspan class="kun" dx="6">bar</tspan></text><line class="krl" x1="24" y1="497" x2="200" y2="497"/><text class="kk" x="24" y="512" text-anchor="start">surface</text><text class="kv hot" x="200" y="512" text-anchor="end">51 °C</text><line class="krl" x1="24" y1="521" x2="200" y2="521"/><text class="kk" x="24" y="536" text-anchor="start">hub</text><text class="kv" x="200" y="536" text-anchor="end">95 mm</text><line class="kld" x1="212" y1="470" x2="269" y2="470"/><circle class="kdot" cx="269" cy="470" r="3"/><text class="kct" x="800" y="426" text-anchor="start">Rear right</text><text class="kk" x="800" y="448" text-anchor="start">pressure</text><text class="kbig" x="800" y="482">0.82<tspan class="kun" dx="6">bar</tspan></text><line class="krl" x1="800" y1="497" x2="976" y2="497"/><text class="kk" x="800" y="512" text-anchor="start">surface</text><text class="kv hot" x="976" y="512" text-anchor="end">54 °C</text><line class="krl" x1="800" y1="521" x2="976" y2="521"/><text class="kk" x="800" y="536" text-anchor="start">hub</text><text class="kv" x="976" y="536" text-anchor="end">95 mm</text><line class="kld" x1="731" y1="470" x2="788" y2="470"/><circle class="kdot" cx="731" cy="470" r="3"/></svg>
+          <dl class="tb"><div><dt>Sheet</dt><dd>Setup</dd></div><div><dt>Hub</dt><dd>FKL Łódź</dd></div><div><dt>Class</dt><dd>Cadet</dd></div><div><dt>Driver</dt><dd>Maja Kowalczyk</dd></div><div><dt>Session</dt><dd>Qualifying</dd></div><div><dt>Date</dt><dd>24 September 2026</dd></div></dl>
         </div>
-        <p class="plate-cap">Object lines for the kart, centre and dimension lines outside it, one big figure per corner on a leader to its tyre. The same drawing works for a chassis, a sensor housing or a simulator rig.</p>
+        <p class="plate-cap">The kart in Ink, centre and dimension lines in Steel outside it, one large figure per corner on a leader to its tyre. The rear surface temperatures sit above the 50 °C working window, so they are the only red on the sheet. The same drawing works for a chassis, a sensor housing or a simulator rig.</p>
       </div>
 
-      <h3 class="subhead" id="engineering-the-pit-wall" data-anchor="engineering-the-pit-wall">The pit wall<button class="hlink" type="button" aria-label="Copy link to The pit wall"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
+      <h3 class="subhead" id="engineering-tool-icons" data-anchor="engineering-tool-icons">Tool icons<button class="hlink" type="button" aria-label="Copy link to Tool icons"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
       <div class="two" style="align-items:start">
+        <div><div class="tools"><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" data-icon="spanner"><path d="M4.3 17.8L12.7 9.4M6.2 19.7L14.6 11.3"/><path d="M4.3 17.8a1.35 1.35 0 0 0 1.9 1.9"/><path d="M12.7 9.4a4.6 4.6 0 0 1 6.2-6.1L16.2 6L16.8 8.2L19 8.8L21.7 6.1a4.6 4.6 0 0 1-6.1 6.2"/></svg></div><figcaption>Spanner</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" data-icon="ratchet"><path d="M3.8 18.4L12.1 10.1M5.6 20.2L13.9 11.9"/><path d="M3.8 18.4a1.27 1.27 0 0 0 1.8 1.8"/><circle cx="16.5" cy="7.5" r="4.3"/><rect x="15" y="6" width="3" height="3" rx="0.6"/></svg></div><figcaption>Ratchet</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" data-icon="torque-wrench"><circle cx="16.6" cy="7.4" r="3"/><path d="M14.4 9.5L6.4 17.5a1.41 1.41 0 0 0 2 2L16.4 11.6"/><path d="M9.4 14.5L11.4 16.5"/></svg></div><figcaption>Torque wrench</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" data-icon="hex-key"><path d="M6.5 3.5H9.5V16a1 1 0 0 0 1 1H18V20H9.5A3 3 0 0 1 6.5 17Z"/></svg></div><figcaption>Hex key</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" data-icon="calliper"><path d="M12 4.5H3.5V8H12M16.5 4.5H20.5V8H16.5"/><rect x="12" y="3" width="4.5" height="6.5" rx="1"/><path d="M4.5 8V19L7.5 16V8"/><path d="M13 9.5V17L15.5 14.5V9.5"/></svg></div><figcaption>Calliper</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" data-icon="tyre-gauge"><circle cx="12" cy="10" r="6.5"/><path d="M12 10L14.5 7.5"/><path d="M12 16.5V21M9.5 21H14.5"/></svg></div><figcaption>Tyre gauge</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" data-icon="stopwatch"><circle cx="12" cy="13.5" r="7"/><path d="M10 2.5H14M12 2.5V6.5"/><path d="M17.5 7L19 5.5"/><path d="M8 13.5H9.8L11 11L13 16L14.2 13.5H16"/></svg></div><figcaption>Stopwatch</figcaption></figure><figure class="tl"><div class="kg"><svg class="tool" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" data-icon="data-logger"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M6.5 13L9.5 10L11.5 11.5L14.5 8L17.5 10"/><path d="M12 16.5V19.5M8.5 19.5H15.5"/></svg></div><figcaption>Data logger</figcaption></figure></div><div class="toolrow"><span class="itile sm" role="img" aria-label="Spanner"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="spanner"><path d="M4.3 17.8L12.7 9.4M6.2 19.7L14.6 11.3"/><path d="M4.3 17.8a1.35 1.35 0 0 0 1.9 1.9"/><path d="M12.7 9.4a4.6 4.6 0 0 1 6.2-6.1L16.2 6L16.8 8.2L19 8.8L21.7 6.1a4.6 4.6 0 0 1-6.1 6.2"/></svg></span><span class="itile sm" role="img" aria-label="Ratchet"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="ratchet"><path d="M3.8 18.4L12.1 10.1M5.6 20.2L13.9 11.9"/><path d="M3.8 18.4a1.27 1.27 0 0 0 1.8 1.8"/><circle cx="16.5" cy="7.5" r="4.3"/><rect x="15" y="6" width="3" height="3" rx="0.6"/></svg></span><span class="itile sm" role="img" aria-label="Torque wrench"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="torque-wrench"><circle cx="16.6" cy="7.4" r="3"/><path d="M14.4 9.5L6.4 17.5a1.41 1.41 0 0 0 2 2L16.4 11.6"/><path d="M9.4 14.5L11.4 16.5"/></svg></span><span class="itile sm" role="img" aria-label="Hex key"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="hex-key"><path d="M6.5 3.5H9.5V16a1 1 0 0 0 1 1H18V20H9.5A3 3 0 0 1 6.5 17Z"/></svg></span><span class="itile sm" role="img" aria-label="Calliper"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="calliper"><path d="M12 4.5H3.5V8H12M16.5 4.5H20.5V8H16.5"/><rect x="12" y="3" width="4.5" height="6.5" rx="1"/><path d="M4.5 8V19L7.5 16V8"/><path d="M13 9.5V17L15.5 14.5V9.5"/></svg></span><span class="itile sm" role="img" aria-label="Tyre gauge"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="tyre-gauge"><circle cx="12" cy="10" r="6.5"/><path d="M12 10L14.5 7.5"/><path d="M12 16.5V21M9.5 21H14.5"/></svg></span><span class="itile sm" role="img" aria-label="Stopwatch"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="stopwatch"><circle cx="12" cy="13.5" r="7"/><path d="M10 2.5H14M12 2.5V6.5"/><path d="M17.5 7L19 5.5"/><path d="M8 13.5H9.8L11 11L13 16L14.2 13.5H16"/></svg></span><span class="itile sm" role="img" aria-label="Data logger"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="data-logger"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M6.5 13L9.5 10L11.5 11.5L14.5 8L17.5 10"/><path d="M12 16.5V19.5M8.5 19.5H15.5"/></svg></span></div></div>
         <div>
-          <h3 id="engineering-timing-screen" data-anchor="engineering-timing-screen">Timing screen<button class="hlink" type="button" aria-label="Copy link to Timing screen"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Qualifying, FKL Łódź, cadet</p>
-          <table class="timing">
-            <tr><th>Pos</th><th>Driver</th><th>Best</th><th>Gap</th><th>S1</th><th>S2</th><th>S3</th></tr>
-            <tr class="lead"><td><span class="p">1</span></td><td><b>KOW</b>Maja Kowalczyk</td><td>1:02.418</td><td>Leader</td><td>20.904</td><td class="pb">20.771</td><td>20.743</td></tr>
-            <tr><td><span class="p">2</span></td><td><b>HAR</b>Leo Hartmann</td><td>1:02.521</td><td>+0.103</td><td>20.951</td><td>20.868</td><td class="pb">20.702</td></tr>
-            <tr><td><span class="p">3</span></td><td><b>MEH</b>Aarav Mehta</td><td>1:02.977</td><td>+0.559</td><td class="pb">20.887</td><td>21.101</td><td>20.989</td></tr>
+          <h3 id="engineering-tools" data-anchor="engineering-tools">Tools<button class="hlink" type="button" aria-label="Copy link to Tools"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">24 px grid, 1.5 px stroke, rounded ends and joins</p>
+          <p class="body">Drawn like every other icon, on the same keylines. Hand tools lie on the 45 degree diagonal, head to the top right; <b>instruments sit level</b>, because they read true. Each tool sits white in an icon tile on the signature surface, never loose on the Canvas and never in a signal colour. Tool icons mark engineering work: setup, service, hardware and data. They live in the <a href="icons/">icon library</a> with the rest.</p>
+          <table class="spec" style="margin-top:22px">
+            <tr><td>Lean</td><td>45 degrees, head to the top right, hand tools only</td></tr>
+            <tr><td>Live area</td><td>20 px inside the 24 px square, one idea per tile</td></tr>
+            <tr><td>Sizes</td><td>16, 24, 32 and 48 px; 32 px tiles in interfaces, 48 px icons on plates</td></tr>
           </table>
-          <p class="note" style="margin-top:14px;font-size:12px;color:var(--dim)">The leader's position board goes red. The fastest time in each sector is the only green on the screen.</p>
-        </div>
-        <div>
-          <h3 id="engineering-readouts" data-anchor="engineering-readouts">Readouts<button class="hlink" type="button" aria-label="Copy link to Readouts"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Value, then unit, in IBM Plex Mono</p>
-          <div class="readouts">
-            <div><span>speed</span><b>87.4</b><em>km/h</em></div>
-            <div><span>throttle</span><b>100</b><em>%</em></div>
-            <div><span>brake</span><b>0.0</b><em>bar</em></div>
-            <div><span>delta</span><b style="color:var(--green)">−0.183</b><em>s</em></div>
-          </div>
-          <p class="body" style="margin-top:18px">Anything read off an instrument is set in mono: lap and sector times, channels, units, coordinates and axis ticks. Values keep a true minus and a fixed number of decimals so columns never jitter. Hero figures stay in Sora SemiBold.</p>
         </div>
       </div>
 
-      <h3 class="subhead" id="engineering-the-track" data-anchor="engineering-the-track">The track<button class="hlink" type="button" aria-label="Copy link to The track"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
-      <div class="kit">
-        <div class="cell"><h4 id="engineering-number-board" data-anchor="engineering-number-board">Number board<button class="hlink" type="button" aria-label="Copy link to Number board"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4>
-          <div class="row" style="gap:14px;align-items:flex-end"><span class="board" style="height:56px;padding:0 34px;font-size:32px;clip-path:polygon(0 0,calc(100% - 39px) 0,100% 100%,39px 100%)">06</span><span class="board" style="height:34px;padding:0 22px;font-size:19px;clip-path:polygon(0 0,calc(100% - 24px) 0,100% 100%,24px 100%)">P1</span></div>
-          <p class="note">Marks a place: a sheet, a grid slot, a position. A solid board with the number knocked out, cut at 55° both ends.</p></div>
-        <div class="cell"><h4 id="engineering-kerb" data-anchor="engineering-kerb">Kerb<button class="hlink" type="button" aria-label="Copy link to Kerb"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4>
-          <div class="kerb"></div>
-          <div style="margin-top:22px"><div class="row" style="justify-content:space-between;font-size:12px;color:var(--dim);margin-bottom:8px"><span>Index against F4 entry</span><b class="mono" style="color:var(--ink)">82.6</b></div><div class="limit"><i style="width:73%"></i><u style="width:18%"></u></div></div>
-          <p class="note">Marks a limit coming up: the F4 entry band, a budget cap, a track limit. Race Red and white at 55°, as painted at the apex.</p></div>
-        <div class="cell"><h4 id="engineering-chequer" data-anchor="engineering-chequer">Chequer<button class="hlink" type="button" aria-label="Copy link to Chequer"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4>
-          <div class="chq"></div>
-          <div class="steps" style="margin-top:22px"><div class="done">Hub trial</div><div class="done">FKL season</div><div class="done">F4 test day</div><div class="done">F4 seat</div></div>
-          <p class="note">Marks a finish, and only a finish: the last sheet, a completed flow, a final result. Chequers lean at 55°.</p></div>
+      <h3 class="subhead" id="engineering-data" data-anchor="engineering-data">Data<button class="hlink" type="button" aria-label="Copy link to Data"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
+      <div>
+        <div>
+          <h3 id="engineering-timing-table" data-anchor="engineering-timing-table">Timing table<button class="hlink" type="button" aria-label="Copy link to Timing table"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Qualifying, FKL Łódź, cadet, 24 September 2026</p>
+          <table class="timing">
+            <tr><th>Pos</th><th>Driver</th><th>Best</th><th>Gap</th><th>Places</th><th>S1</th><th>S2</th><th>S3</th></tr>
+            <tr class="lead"><td><span class="p">1</span></td><td><b>KOW</b>Maja Kowalczyk</td><td>1:02.418</td><td>Leader</td><td><span class="up">+1</span></td><td>20.904</td><td class="pb">20.771</td><td>20.743</td></tr>
+            <tr><td><span class="p">2</span></td><td><b>HAR</b>Leo Hartmann</td><td>1:02.521</td><td>+0.103</td><td><span class="down">&minus;1</span></td><td>20.951</td><td>20.868</td><td class="pb">20.702</td></tr>
+            <tr><td><span class="p">3</span></td><td><b>MEH</b>Aarav Mehta</td><td>1:02.977</td><td>+0.559</td><td>0</td><td class="pb">20.887</td><td>21.101</td><td>20.989</td></tr>
+          </table>
+          <p class="note" style="margin-top:14px;font-size:12px;color:var(--sg-dim)">Positions are rounded chips; the leader's takes the selected fill. Places gained since the last run read in positive, places lost in negative, as text. The fastest time in each sector is set in positive SemiBold.</p>
+        </div>
+        <div style="margin-top:48px">
+          <h3 id="engineering-readouts" data-anchor="engineering-readouts">Readouts<button class="hlink" type="button" aria-label="Copy link to Readouts"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">Value, then unit, in Sora with tabular figures</p>
+          <div class="readouts">
+            <div><span>Speed</span><b>87.4</b><em>km/h</em></div>
+            <div><span>Throttle</span><b>100</b><em>%</em></div>
+            <div><span>Brake</span><b>0.0</b><em>bar</em></div>
+            <div><span>Delta</span><b class="gain">&minus;0.183</b><em>s</em></div>
+          </div>
+          <p class="body" style="margin-top:18px;max-width:70ch">Anything read off an instrument is set in Sora with tabular figures: lap and sector times, channels, units and axis ticks. Values keep a true minus and a fixed number of decimals so columns never jitter. A gain or a loss is told by the colour of the number, never by a filled bar.</p>
+        </div>
+      </div>
+      <div class="kit" style="margin-top:56px">
+        <div class="cell"><h4 id="engineering-position" data-anchor="engineering-position">Position<button class="hlink" type="button" aria-label="Copy link to Position"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4>
+          <div class="row"><span class="place lead">P1</span><span class="place">P2</span><span class="place">P3</span><span class="place">P4</span></div>
+          <p class="note">A place in an order: a grid slot, a ranking, a sheet. A rounded chip in SemiBold with tabular figures; the leader or the current item takes the selected fill, the rest the quiet tint.</p></div>
+        <div class="cell"><h4 id="engineering-against-a-limit" data-anchor="engineering-against-a-limit">Against a limit<button class="hlink" type="button" aria-label="Copy link to Against a limit"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4>
+          <div class="row" style="justify-content:space-between;font-size:12px;color:var(--sg-dim);margin-bottom:10px"><span>Index against F4 entry</span><b style="color:var(--sg-text);font-variant-numeric:tabular-nums">82.6</b></div>
+          <div class="limit" role="img" aria-label="Index 82.6, F4 entry at 80.0"><i style="width:82.6%"></i><u style="left:80%"></u></div>
+          <div class="row" style="justify-content:space-between;font-size:11px;color:var(--sg-dim);margin-top:10px"><span>F4 entry 80.0</span><span class="up">2.6 above</span></div>
+          <p class="note">A value against a threshold: the subject in the text colour on the quiet track, the limit as a short mark in the accent. Over or under is said in words with a signal label.</p></div>
+        <div class="cell"><h4 id="engineering-steps" data-anchor="engineering-steps">Steps<button class="hlink" type="button" aria-label="Copy link to Steps"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4>
+          <div class="steps"><div class="done">Hub trial</div><div class="done">FKL season</div><div class="now">F4 test day</div><div>F4 seat</div></div>
+          <p class="note">Progress through a known sequence: done steps in the text colour, the current one half filled and SemiBold, the rest in the quiet tint. The last step needs no special mark.</p></div>
       </div>
     </div></section>
 
     <!-- 10 USAGE CONTEXT -->
     <section class="s" id="context"><div class="inner">
-      <div class="sh"><div class="num">10</div><span class="chap">Two worlds</span></div>
-      <h2 data-anchor="context">Usage context<button class="hlink" type="button" aria-label="Copy link to Usage context"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
-      <p class="intro">Both worlds are always present; the context decides which one leads. In the garage blue leads and red is the single mark of intent. On track red leads and blue is the single line of reference. Neither ever disappears, and neither ever shares the lead.</p>
+      <div class="sh"><div class="num">10</div><span class="chap">In practice</span></div>
+      <h2 data-anchor="context">Across the group<button class="hlink" type="button" aria-label="Copy link to Across the group"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
+      <p class="intro">One system serves the whole group. Smedley Group, Advanced Technology, Insight Labs and FAT Racing share the same palette, the same surface and the same type; only the division name in the lockup changes. FAT Karting League keeps its own brand.</p>
       <div class="hair"></div>
+      <div class="two" style="align-items:start;margin-top:40px">
+        <div>
+          <h3 id="context-one-system" data-anchor="context-one-system">One system, four names<button class="hlink" type="button" aria-label="Copy link to One system, four names"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">What changes from one division to the next</p>
+          <p class="body">Nothing in the look tells the divisions apart: not a colour, not a typeface, not a shape. The name to the right of the divider says who is speaking, and the work does the rest. A product takes its name in Product Blue under the division name, in a title on the signature surface, and nowhere else.</p>
+        </div>
+        <table class="spec">
+          <tr><th>Part</th><th>Everywhere in the group</th></tr>
+          <tr><td>Palette</td><td>Ink, navy and Pale Blue for structure; green and red only as labels</td></tr>
+          <tr><td>Surface</td><td>The Canvas ground and one 45 degree signature surface for everything dark</td></tr>
+          <tr><td>Type</td><td>Sora in Light, Regular and SemiBold, with tabular figures for numbers</td></tr>
+          <tr><td>Lockup</td><td>The glyph, Smedley Group, the divider and the division name</td></tr>
+          <tr><td>Product name</td><td>Product Blue #ADB9CA under the division name, titles only</td></tr>
+        </table>
+      </div>
+
+      <h3 class="subhead" id="context-the-divisions" data-anchor="context-the-divisions">The divisions<button class="hlink" type="button" aria-label="Copy link to The divisions"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
       <table class="spec ctx">
-        <tr><th>Context</th><th>Leads</th><th>Supports, once per view</th><th>Where</th></tr>
-        <tr><td><i class="cb"></i>Engineering</td><td>Engineering Blue fills, the blueprint grid, construction and dimension lines, blue number boards</td><td>Red as the lead of the scale rule, or the one live value</td><td>Advanced Technology, Insight Labs, technical documents, specs, product pages</td></tr>
-        <tr><td><i class="cr"></i>Racing</td><td>Race Red fills, red number boards, kerbs, chequers, speed streaks, the leader</td><td>Blue as the reference line: the pace to beat, the model, focus</td><td>FAT Karting League, FAT Racing, events, results, fan and driver content</td></tr>
-        <tr><td><i class="cg"></i>Group</td><td>Neither: the ground, white and the logo</td><td>Red and blue in balance, meeting at the seam</td><td>Smedley Group, investor and corporate material, this book</td></tr>
+        <tr><th>Division</th><th>What it does</th><th>Typical material</th></tr>
+        <tr><td>Smedley Group</td><td>The group itself</td><td>Investor and corporate material, group policies, this book. The glyph and Smedley Group alone, with no division name</td></tr>
+        <tr><td>Advanced Technology</td><td>Hardware and software engineering for the group and for clients in motorsport, sport and automotive</td><td>Product pages, specifications, technical drawings, proposals</td></tr>
+        <tr><td>Insight Labs</td><td>Sports data, simulation and modelling for fan engagement</td><td>Predictions, dashboards, broadcast and fan graphics, reports</td></tr>
+        <tr><td>FAT Racing</td><td>Funds and develops drivers promoted from the league into Formula 4</td><td>Driver reports, partner decks, team kit and paddock material</td></tr>
+        <tr><td>FAT Karting League</td><td>The global karting series, run by hubs and overseen from the UK</td><td>Its own brand: the FAT Pill, FKL Blue and ST Rapid. Never restyle it in Smedley Group colours. League data shown in a group app stays in group styling</td></tr>
       </table>
-      <div class="ctxh"><h3 id="context-engineering-blue-leads" data-anchor="context-engineering-blue-leads">Engineering, blue leads<button class="hlink" type="button" aria-label="Copy link to Engineering, blue leads"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">An Advanced Technology product page</p></div>
-      <div class="browser ux"><div class="addr"><span>smedley.group/advanced-technology</span></div>
-<div class="uxp eng">
-  <header class="uxn"><span class="lk" style="--lk:.3px;color:#fff" aria-hidden="true"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span><nav aria-label="Advanced Technology example"><a>Services</a><a class="on">Hardware</a><a>Software</a><a>Case studies</a></nav><button class="btn sm ub" type="button">Start a project</button></header>
-  <section class="uxh bpg">
-    <div class="uxc">
-      <div class="uxk"><span class="board bb">AT</span><span>Advanced Technology, hardware</span></div>
-      <div class="h5">Engineered for the last tenth.</div>
-      <p>Sensors, loggers and simulation built for motorsport, then proven for clients in sport and automotive. Every part is drawn, measured and tested before it reaches a car.</p>
-      <div class="uxb"><button class="btn ub" type="button">See the hardware</button><button class="btn g" type="button">Read the specs</button></div>
-      <div class="hair" style="margin:34px 0 0"></div>
-    </div>
-    <div class="uxd"><svg class="dwg" viewBox="34 16 370 427" aria-hidden="true"><rect class="cn" x="69.0" y="72.9" width="187.0" height="295.8"/><line class="cx" x1="68.9" y1="138.3" x2="162.4" y2="72.7"/><line class="cn" x1="166.6" y1="69.8" x2="207.0" y2="41.5"/><line class="cx" x1="65.4" y1="239.4" x2="208.7" y2="138.9"/><line class="cn" x1="212.9" y1="136.0" x2="253.3" y2="107.6"/><line class="cx" x1="111.7" y1="305.6" x2="255.0" y2="205.0"/><line class="cn" x1="259.2" y1="202.1" x2="299.6" y2="173.8"/><line class="cx" x1="157.9" y1="371.7" x2="251.5" y2="306.1"/><line class="cn" x1="255.7" y1="303.2" x2="345.9" y2="240.0"/><line class="dm" x1="198.6" y1="47.4" x2="337.5" y2="245.8"/><line class="tk" x1="196.0" y1="43.6" x2="201.3" y2="51.1"/><line class="tk" x1="242.3" y1="109.7" x2="247.6" y2="117.3"/><line class="tk" x1="288.6" y1="175.9" x2="293.9" y2="183.4"/><line class="tk" x1="334.9" y1="242.0" x2="340.1" y2="249.6"/><text x="239.3" y="73.0" text-anchor="middle">23.75</text><text x="285.6" y="139.2" text-anchor="middle">23.75</text><text x="331.9" y="205.3" text-anchor="middle">23.75</text><line class="cl" x1="73.5" y1="200.5" x2="215.1" y2="402.2"/><line class="cl" x1="59.7" y1="74.2" x2="264.9" y2="367.3"/><line class="cl" x1="126.8" y1="64.5" x2="268.8" y2="266.0"/><polygon class="ob" points="69.0,236.0 162.1,368.7 201.6,340.9 108.5,208.3"/><polygon class="ob" points="73.0,135.3 212.0,334.0 251.6,306.3 112.6,107.6"/><polygon class="ob" points="122.7,100.7 216.5,233.7 256.0,205.9 162.2,72.9"/><line class="dm" x1="69.5" y1="88.1" x2="125.5" y2="88.1"/><path class="dm" d="M99.5 88.1 A30 30 0 0 1 86.7 112.7"/><text x="103.5" y="76.1" class="tw" text-anchor="start">55°</text><line class="cn" x1="219.4" y1="237.9" x2="239.9" y2="267.1"/><line class="cn" x1="258.9" y1="210.1" x2="279.4" y2="239.3"/><line class="dm" x1="234.1" y1="258.8" x2="273.5" y2="231.0"/><line class="tk" x1="231.4" y1="255.0" x2="236.7" y2="262.5"/><line class="tk" x1="270.9" y1="227.2" x2="276.2" y2="234.7"/><text x="243.1" y="253.8" text-anchor="start">14.2</text><line class="dm" x1="251.2" y1="347.8" x2="201.4" y2="382.7"/><line class="tk" x1="248.6" y1="344.1" x2="253.9" y2="351.6"/><line class="tk" x1="198.8" y1="379.0" x2="204.1" y2="386.5"/><text x="261.2" y="351.8" text-anchor="start">17.9</text><circle class="bl" cx="222.6" cy="412.9" r="13"/><text x="222.6" y="416.5" class="tw" text-anchor="middle">FKL</text><circle class="bl" cx="272.3" cy="378.0" r="13"/><text x="272.3" y="381.6" class="tw" text-anchor="middle">F4</text><circle class="bl" cx="276.3" cy="276.6" r="13"/><text x="276.3" y="280.2" class="tw" text-anchor="middle">F1</text></svg></div>
-  </section>
-  <div class="uxs">
-    <div><span>latency</span><b>4.2</b><em>ms</em></div><div><span>sampling</span><b>1000</b><em>Hz</em></div><div><span>channels</span><b>240</b></div><div><span>tolerance</span><b>±0.01</b><em>mm</em></div>
-  </div>
-  <div class="uxg">
-    <article><span class="board bb sm">01</span><svg class="tool" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" data-icon="data-logger"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M6.5 13L9.5 10L11.5 11.5L14.5 8L17.5 10"/><path d="M12 16.5V19.5M8.5 19.5H15.5"/></svg><div class="h6">Data logging</div><p>Lap-synchronised telemetry from any kart, car or rig, on one timebase.</p><a class="uxl">Loggers<svg class="bi" viewBox="0 0 24 24" aria-hidden="true" data-icon="arrow-right"><path d="M5 12H19"/><path d="M14 7L19 12L14 17"/></svg></a></article>
-    <article><span class="board bb sm">02</span><svg class="tool" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" data-icon="calliper"><path d="M12 4.5H3.5V8H12M16.5 4.5H20.5V8H16.5"/><rect x="12" y="3" width="4.5" height="6.5" rx="1"/><path d="M4.5 8V19L7.5 16V8"/><path d="M13 9.5V17L15.5 14.5V9.5"/></svg><div class="h6">Chassis and parts</div><p>Setup hardware machined and checked to a hundredth of a millimetre.</p><a class="uxl">Parts<svg class="bi" viewBox="0 0 24 24" aria-hidden="true" data-icon="arrow-right"><path d="M5 12H19"/><path d="M14 7L19 12L14 17"/></svg></a></article>
-    <article><span class="board bb sm">03</span><svg class="tool" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" data-icon="tyre-gauge"><circle cx="12" cy="10" r="6.5"/><path d="M12 10L14.5 7.5"/><path d="M12 16.5V21M9.5 21H14.5"/></svg><div class="h6">Simulation</div><p>Models that separate the car, the weather and the track from the driver.</p><a class="uxl">Models<svg class="bi" viewBox="0 0 24 24" aria-hidden="true" data-icon="arrow-right"><path d="M5 12H19"/><path d="M14 7L19 12L14 17"/></svg></a></article>
-  </div>
-</div></div>
-      <p class="plate-cap">The hero sits on the blueprint grid with its drawing. Blue carries the actions and the numbering, readouts are mono. The only red is the lead of the scale rule.</p>
-      <div class="ctxh"><h3 id="context-racing-red-leads" data-anchor="context-racing-red-leads">Racing, red leads<button class="hlink" type="button" aria-label="Copy link to Racing, red leads"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p class="sub">A FAT Karting League championship page</p></div>
-      <div class="browser ux"><div class="addr"><span>fatkartingleague.com/championship</span></div>
-<div class="uxp race">
-  <header class="uxn"><span class="lk" style="--lk:.3px;color:#fff" aria-hidden="true"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w"><span>Smedley<br>Group</span><i></i><span>FAT Karting<br>League</span></span></span><nav aria-label="FAT Karting League example"><a class="on">Championship</a><a>Hubs</a><a>Drivers</a><a>Results</a></nav><button class="btn sm p" type="button">Book a race</button></header>
-  <section class="uxh spd">
-    <div class="uxc">
-      <div class="uxk"><span class="board">R07</span><span>FKL 2026, round 7 of 10</span></div>
-      <div class="h5">Round seven.<br>Łódź, under lights.</div>
-      <p>Eighteen cadets, one electric grid, and a championship three points wide. Qualifying runs Thursday at 16:00.</p>
-      <div class="uxcd"><div><b>04</b><span>days</span></div><div><b>11</b><span>hours</span></div><div><b>32</b><span>min</span></div><div><b>08</b><span>sec</span></div></div>
-      <div class="uxb"><button class="btn p lg" type="button">Get tickets</button><button class="btn g" type="button">Watch live</button></div>
-    </div>
-    <div class="uxt"><div class="uxtt"><span>Championship</span><b>Cadet</b></div><ol><li class="lead"><span class="p">1</span><b>KOW</b><span>1:02.418</span></li><li><span class="p">2</span><b>HAR</b><span>+0.103</span></li><li><span class="p">3</span><b>MEH</b><span>+0.559</span></li><li><span class="p">4</span><b>LIS</b><span>+0.781</span></li><li><span class="p">5</span><b>OKA</b><span>+0.902</span></li></ol><div class="uxref"><i></i>F4 entry pace, 1:02.900</div></div>
-  </section>
-  <div class="chq"></div>
-  <div class="uxg">
-    <article><span class="board sm">R08</span><div class="h6">FKL Milton Keynes</div><p>Sat 26 Sep, junior final, 22 drivers</p><button class="btn sm g" type="button">Enter</button></article>
-    <article><span class="board sm">R09</span><div class="h6">FKL Dubai</div><p>Fri 6 Nov, night race, 20 drivers</p><button class="btn sm g" type="button">Enter</button></article>
-    <article><span class="board sm">R10</span><div class="h6">Grand final, Łódź</div><p>Sat 5 Dec, all classes, title decider</p><button class="btn sm p" type="button">Enter</button></article>
-  </div>
-</div></div>
-      <p class="plate-cap">Speed streaks behind the hero, red boards for rounds, the leader in red and a chequer to close the fold. The only blue is the reference pace under the tower.</p>
+
+      <h3 class="subhead" id="context-the-same-parts" data-anchor="context-the-same-parts">The same parts, different work<button class="hlink" type="button" aria-label="Copy link to The same parts, different work"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
+      <div class="gxg">
+        <figure class="gx">
+          <div class="shead"><b>Advanced Technology</b><small>A product title and its offer</small></div>
+          <div class="gxt sg-surface sg-dark"><span class="lk" style="--lk:.34px;color:#fff" aria-hidden="true"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span><div class="gxprod">TalentID</div><p>Talent identification for karting hubs, from lap data to an F4 shortlist.</p></div>
+          <div class="gxc"><div class="ccard"><span class="itile sm"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="stopwatch"><circle cx="12" cy="13.5" r="7"/><path d="M10 2.5H14M12 2.5V6.5"/><path d="M17.5 7L19 5.5"/><path d="M8 13.5H9.8L11 11L13 16L14.2 13.5H16"/></svg></span><span><b>Timing data</b><small>Laps, sectors, <br>split times</small></span></div><div class="ccard"><span class="itile sm"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="users"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.7a3.5 3.5 0 0 1 0 6.6"/><path d="M18 13.6a6.5 6.5 0 0 1 3.5 6.4"/></svg></span><span><b>Driver profiles</b><small>Pace, consistency, <br>racecraft</small></span></div><div class="ccard"><span class="itile sm"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="chart-line"><path d="M4 17L7.96 13.44M10.12 13.34L11.88 14.66M13.95 14.48L19.05 9.02"/><circle cx="9" cy="12.5" r="1.4"/><circle cx="13" cy="15.5" r="1.4"/><circle cx="20" cy="8" r="1.4"/></svg></span><span><b>Pathway</b><small>From FKL <br>to an F4 seat</small></span></div></div>
+          <div class="strap">Every driver measured on one timebase</div>
+        </figure>
+        <figure class="gx">
+          <div class="shead"><b>Insight Labs</b><small>A fan prediction</small></div>
+          <p class="eyebrow">Prediction · British F4, Donington Park</p>
+          <div class="gxh">Who takes pole on Saturday</div>
+          <div class="gxp"><div class="gxpr"><span>Leo Hartmann</span><div class="limit" aria-hidden="true"><i style="width:41%"></i></div><b>41 %</b><span class="up">+6 pts</span></div><div class="gxpr"><span>Maja Kowalczyk</span><div class="limit" aria-hidden="true"><i style="width:33%"></i></div><b>33 %</b><span class="down">&minus;2 pts</span></div><div class="gxpr"><span>Aarav Mehta</span><div class="limit" aria-hidden="true"><i style="width:14%"></i></div><b>14 %</b><span class="up">+1 pt</span></div></div>
+          <p class="gxs">Change since Friday practice. Model run 26 September 2026, 18:00.</p>
+          <div class="strap light">Our model isolates performance from context</div>
+        </figure>
+        <figure class="gx">
+          <div class="shead"><b>FAT Racing</b><small>A driver report</small></div>
+          <div class="list"><div class="li"><span class="av">MK</span><span><b>Maja Kowalczyk</b><small>FKL Łódź, cadet, 14</small></span><span class="tag pos">F4 shortlist</span></div></div>
+          <div class="sigs"><div class="sig pos">Race pace</div><div class="sig pos">Consistency</div><div class="sig pos">Wet running</div><div class="sig pos">Racecraft</div></div>
+          <div class="strap">Maja is ready for an F4 test day this winter</div>
+        </figure>
+        <figure class="gx">
+          <div class="shead"><b>Smedley Group</b><small>An investor update</small></div>
+          <div class="gxl"><span class="lk" style="--lk:.3px;color:currentColor" aria-hidden="true"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w"><span>Smedley<br>Group</span></span></span></div>
+          <p class="eyebrow">Investor update · Q3 2026</p>
+          <div class="gxh">One ladder from karting to Formula 4</div>
+          <div class="gxk"><div class="kpi"><div class="k">Running cost against petrol karting</div><div class="v"><b>95 %</b><span class="up">lower</span></div></div><div class="kpi"><div class="k">Drivers promoted to F4</div><div class="v"><b>3</b><span class="up">+1 this season</span></div></div></div>
+        </figure>
+      </div>
+      <p class="plate-cap">Four divisions, one kit of parts: the same surface, content cards, chips, strapline and figures. Only the name in the lockup and the work change. Product Blue appears once, for TalentID.</p>
     </div></section>
 
     <!-- 11 MOTION -->
     <section class="s" id="motion"><div class="inner">
-      <div class="sh"><div class="num">11</div><span class="chap">Two worlds</span></div>
+      <div class="sh"><div class="num">11</div><span class="chap">In practice</span></div>
       <h2 data-anchor="motion">Motion<button class="hlink" type="button" aria-label="Copy link to Motion"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
-      <p class="intro">The mark is made on track and measured in the garage. Three tyres brake, their skids burn red and cool into the bars, and blue construction lines set the glyph at its lean. Motion always decelerates like a car on the brakes.</p>
+      <p class="intro">Motion brakes: fast in, hard stop, like a car arriving on its marks. Each view has one moment and no more. The logo's moment is the hero: three bars drawn in turn on the signature surface, then the lockup and the divider.</p>
       <div class="hair"></div>
-      <div class="stage"><iframe title="Logo animation, full sequence" src="assets/mark.html" loading="lazy"></iframe></div>
+      <div class="stage"><iframe title="The hero: the mark's three bars draw on the signature surface, then the lockup and the divider" src="assets/mark.html" loading="lazy"></iframe></div>
       <ol class="seq" style="margin-top:48px">
-        <li><b><span>1</span>Braking run</b><p>Three tyres drop in, rolling a tread print inspired by Pirelli's F1 full wets behind them, under one fixed light. Each sits on three shadows that swing round as it passes under the lamp.</p></li>
-        <li><b><span>2</span>Heat</b><p>At the start of each bar the tyres lock. The tread smears into skid rubber that glows Flame, white-hot where the tyre stops, and smoke rolls off the shoulders. This is the track's half of the mark.</p></li>
-        <li><b><span>3</span>Cool</b><p>The tyres pull away. The rolling print lifts and the three skids cool from Flame into white bars.</p></li>
-        <li><b><span>4</span>Measure</b><p>As the bars lean to 55°, the drawing office arrives: Line Blue centre lines run along them, the three module lines cross them and the angle is marked. This is engineering's half.</p></li>
-        <li><b><span>5</span>Lockup</b><p>The construction clears. The glyph slides left while the wordmark wipes in from the left, as one piece.</p></li>
-        <li><b><span>6</span>The seam</b><p>One slow light crosses the words, blue leading into red, the two worlds meeting once. Then stillness.</p></li>
+        <li><b><span>1</span>The surface</b><p>The tile arrives over 0.9 s: it rises a short way and grows from 96 % to full size on the brake, the 45 degree gradient inside its edge light.</p></li>
+        <li><b><span>2</span>The bars</b><p>The three bars draw in white, one after another, each from its upper end down the lean: the top bar at 0.35 s, the long bar at 0.55 s, the bottom bar at 0.75 s, 0.9 s each.</p></li>
+        <li><b><span>3</span>The lockup</b><p>At 1.2 s the lockup rises into place below the tile over 0.8 s: Smedley Group, the divider and the division name, as one piece.</p></li>
+        <li><b><span>4</span>The divider</b><p>At 1.5 s the Pale Blue hairline grows from the left over 1 s, solid to 83 % and fading after: the divider that opens every section.</p></li>
+        <li><b><span>5</span>Stillness</b><p>Everything is in place by 2.5 s and nothing moves again. The sequence plays once; Replay runs it on request.</p></li>
+        <li><b><span>6</span>The press</b><p>A pressed control scales to 98 % for 80 ms and comes back. No streak, no sheen, no light passing across it.</p></li>
       </ol>
       <div class="two" style="margin-top:64px;align-items:center">
-        <svg class="easing" viewBox="0 0 360 200" aria-label="Brake easing curve">
-          <line x1="30" y1="170" x2="340" y2="170" style="stroke:rgba(var(--t),.25)"/>
-          <line x1="30" y1="20" x2="30" y2="170" style="stroke:rgba(var(--t),.25)"/>
-          <path id="ecurve" fill="none" stroke-width="2" style="stroke:var(--ink)"/>
-          <text x="30" y="192">Time</text><text x="4" y="24">Travel</text>
+        <svg class="easing" viewBox="0 0 360 200" role="img" aria-label="Brake easing: most of the travel happens early, then a long, gentle stop">
+          <line class="ax" x1="30" y1="170" x2="340" y2="170"/>
+          <line class="ax" x1="30" y1="20" x2="30" y2="170"/>
+          <path id="ecurve" fill="none" stroke-width="2"/>
+          <text x="30" y="192">Time</text><text x="4" y="14">Travel</text>
         </svg>
         <table class="spec">
           <tr><td>Brake</td><td><code>cubic-bezier(.16, 1, .3, 1)</code>, for anything arriving</td></tr>
-          <tr><td>Lean</td><td>Ease-out with a light overshoot, 0.9 s</td></tr>
-          <tr><td>Gauge fill</td><td>1.0 s quint-out, bar by bar</td></tr>
-          <tr><td>One moment per view</td><td>No loops outside loaders, no blinking, no hover choreography</td></tr>
-          <tr><td>Reduced motion</td><td>Show the end state immediately</td></tr>
+          <tr><td>Arrive</td><td>0.8 to 0.9 s; parts that belong together follow 0.2 s apart</td></tr>
+          <tr><td>Press</td><td>Scale to 98 % for 80 ms, then back</td></tr>
+          <tr><td>Progress fill</td><td>1.4 s, quint-out, bar by bar</td></tr>
+          <tr><td>One moment per view</td><td>No loops outside loaders, no blinking, no hover choreography, no streaks or wipes</td></tr>
+          <tr><td>Reduced motion</td><td>Show the end state at once</td></tr>
         </table>
       </div>
     </div></section>
 
     <!-- 12 GLYPH AS PROGRESS -->
     <section class="s" id="progress"><div class="inner">
-      <div class="sh"><div class="num">12</div><span class="chap">Two worlds</span></div>
+      <div class="sh"><div class="num">12</div><span class="chap">In practice</span></div>
       <h2 data-anchor="progress">The glyph as progress<button class="hlink" type="button" aria-label="Copy link to The glyph as progress"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
-      <p class="intro">The three bars are the three rungs of the ladder. One value runs through them in order, so a driver becomes the whole logo only on reaching F1.</p>
+      <p class="intro">The three bars are the three rungs of the ladder: FAT Karting League, Formula 4, Formula 1. One value runs through them in order, so a driver completes the whole mark only on reaching F1. The same three bars are the loader.</p>
       <div class="hair"></div>
       <div class="gaugewrap">
         <div class="gbody"><svg id="g" viewBox="-4 -6 84 96" role="progressbar" aria-label="Pathway progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="57"></svg></div>
         <div>
           <div class="big"><span id="gv">57</span><sup>%</sup></div>
-          <p class="body" style="margin-top:18px">of the way to F1. Filled bars are solid ink: white on dark, black on light. The bar in progress carries a Flame leading edge, the hot front of the run. What is left shows the wet-weather tread print.</p>
+          <p class="body" style="margin-top:18px">of the way to F1. Filled bars are drawn in the text colour, black on the Canvas and white on dark, over a rounded track in the quiet tint. Each bar fills from its upper end down the lean, and the next starts only when the one before is full.</p>
           <div class="scrub"><label for="scrub">Drag</label><input id="scrub" type="range" min="0" max="100" step="0.1" value="57"><span id="sv">57%</span></div>
           <div class="stages3">
             <div><b>FKL</b>0 to 33 %, the bottom bar</div>
@@ -2182,6 +2114,13 @@ table.vx td:first-child{width:18%}
             <div><b>F1</b>67 to 100 %, the top bar</div>
           </div>
         </div>
+      </div>
+      <div class="kit" style="margin-top:64px">
+        <div class="cell wide"><h3 class="ch" id="progress-the-loader" data-anchor="progress-the-loader">The loader<button class="hlink" type="button" aria-label="Copy link to The loader"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
+          <div class="row ldrs" role="img" aria-label="The loader at 16, 24 and 42 px"><svg class="loader" viewBox="-0.9 -1 56 86" aria-hidden="true" style="width:11px;height:16px"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></svg><svg class="loader" viewBox="-0.9 -1 56 86" aria-hidden="true" style="width:16px;height:24px"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></svg><svg class="loader" viewBox="-0.9 -1 56 86" aria-hidden="true" style="width:28px;height:42px"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></svg><span class="ldrd sg-surface sg-dark"><svg class="loader" viewBox="-0.9 -1 56 86" aria-hidden="true" style="width:16px;height:24px"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></svg></span></div>
+          <p class="note">For waits without a known length: the three bars brighten in turn, bottom to top, in the text colour. It is the one loop the system allows. With reduced motion the bars hold still.</p></div>
+        <div class="cell"><h3 class="ch" id="progress-when-to-use-it" data-anchor="progress-when-to-use-it">When to use it<button class="hlink" type="button" aria-label="Copy link to When to use it"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
+          <p class="note" style="margin-top:0">The gauge shows progress along the driver pathway only. For a task with a known length use a progress bar; for steps use the steps pattern. Label the value in words and as a percentage.</p></div>
       </div>
     </div></section>
 
@@ -2632,33 +2571,25 @@ table.vx td:first-child{width:18%}
   var pts=[];for(var i=0;i<=60;i++){var t=i/60,y=1-Math.pow(1-t,5);pts.push((30+t*310).toFixed(1)+','+(170-y*150).toFixed(1))}
   document.getElementById('ecurve').setAttribute('d','M'+pts.join(' L'));
 
-  // gauge
-  var d=[0.5746,0.8184], ANG=Math.atan2(d[1],d[0])*180/Math.PI;
+  // gauge: the logo's three bars as a progress track (BARS, at and fr are shared with the TalentID sample and the mini glyph)
+  var d=[0.5746,0.8184];
   var BARS=[[[5.8,42.8],[32.6,81.0]],[[7.0,13.2],[47.3,70.8]],[[21.6,3.0],[48.6,41.3]]].map(function(b){return [[b[0][0]-d[0]*.5,b[0][1]-d[1]*.5],[b[1][0]+d[0]*.5,b[1][1]+d[1]*.5]]});
   function at(b,f){return [b[0][0]+(b[1][0]-b[0][0])*f,b[0][1]+(b[1][1]-b[0][1])*f]}
   function fr(p,i){return Math.max(0,Math.min(1,p*3-i))}
-  var g=document.getElementById('g'), defs=mk('defs',{},g);
-  // one tread pattern per bar, lined up across its width, running along it
-  var NRM=[-d[1],d[0]];
-  BARS.forEach(function(b,i){var c=b[0][0]*NRM[0]+b[0][1]*NRM[1];
-    var pat=mk('pattern',{id:'tread'+i,patternUnits:'userSpaceOnUse',width:6.5,height:14.2,y:(c-7.1).toFixed(3),patternTransform:'rotate('+ANG+')'},defs);
-    pat.innerHTML='<g transform="scale(1.0000 0.9103)"><mask id="'+'tm'+i+'" maskUnits="userSpaceOnUse" x="-20" y="-5" width="60" height="30"><rect x="-20" y="-5" width="60" height="30" fill="#fff"/><path d="M-5.50 -0.2 L-5.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 15.80 L-1.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 0.9 L-1.95 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M1.00 14.70 L1.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M-2.90 7.55 Q-4.20 5.3 -6.30 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M0.35 8.05 Q-0.95 10.30 -3.05 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M-1.50 6.3 Q-2.30 5.0 -3.30 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.75 9.30 Q0.95 10.60 -0.05 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.00 -0.2 L1.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 15.80 L4.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 0.9 L4.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M7.50 14.70 L7.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M3.60 7.55 Q2.30 5.3 0.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M6.85 8.05 Q5.55 10.30 3.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M5.00 6.3 Q4.20 5.0 3.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M8.25 9.30 Q7.45 10.60 6.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M7.50 -0.2 L8.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 15.80 L11.25 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 0.9 L11.05 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M14.00 14.70 L14.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M10.10 7.55 Q8.80 5.3 6.70 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M13.35 8.05 Q12.05 10.30 9.95 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M11.50 6.3 Q10.70 5.0 9.70 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.75 9.30 Q13.95 10.60 12.95 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.00 -0.2 L14.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 15.80 L17.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 0.9 L17.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M20.50 14.70 L20.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M16.60 7.55 Q15.30 5.3 13.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M19.85 8.05 Q18.55 10.30 16.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M18.00 6.3 Q17.20 5.0 16.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M21.25 9.30 Q20.45 10.60 19.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><rect x="-20" y="3.19" width="60" height="0.72" fill="#000"/><rect x="-20" y="11.69" width="60" height="0.72" fill="#000"/><rect x="-20" y="7.58" width="60" height="0.45" fill="#000"/></mask><rect x="0" y="0.35" width="6.5" height="14.9" fill="rgba(205,207,212,.14)" mask="url(#'+'tm'+i+')"/></g>';});
-  var ST=['FKL','F4','F1'];
+  var g=document.getElementById('g'), ST=['FKL','F4','F1'];
+  // rounded ends: each track is pulled in by half its width, so the round caps keep the bar's length
   var parts=BARS.map(function(b,i){
-    mk('line',{x1:b[0][0],y1:b[0][1],x2:b[1][0],y2:b[1][1],stroke:'rgba(205,207,212,.06)','stroke-width':14.2},g);
-    mk('line',{x1:b[0][0],y1:b[0][1],x2:b[1][0],y2:b[1][1],stroke:'url(#tread'+i+')','stroke-width':14.2},g);
-    var fill=mk('line',{x1:b[0][0],y1:b[0][1],x2:b[0][0],y2:b[0][1],stroke:'#fff','stroke-width':14.2},g);
-    var halo=mk('line',{stroke:'#fff','stroke-width':18,'stroke-opacity':.16,opacity:0},g);
-    var edge=mk('line',{stroke:'#fff','stroke-width':14.2,opacity:0},g);
+    var L=Math.hypot(b[1][0]-b[0][0],b[1][1]-b[0][1]), k=7.1/L, r=[at(b,k),at(b,1-k)];
+    mk('line',{x1:r[0][0],y1:r[0][1],x2:r[1][0],y2:r[1][1],class:'gtr'},g);
+    var fill=mk('line',{x1:r[0][0],y1:r[0][1],x2:r[0][0],y2:r[0][1],class:'gfl',opacity:0},g);
     var e=b[1], lbl=mk('text',{x:(e[0]+4.2).toFixed(2),y:(e[1]+1.4).toFixed(2),class:'lbl','font-size':4.4},g); lbl.textContent=ST[i];
     var pct=mk('text',{x:(e[0]+4.2).toFixed(2),y:(e[1]+6.6).toFixed(2),class:'pct','font-size':3.4},g);
-    return {b:b,fill:fill,halo:halo,edge:edge,lbl:lbl,pct:pct};
+    return {r:r,fill:fill,lbl:lbl,pct:pct};
   });
   var sc=document.getElementById('scrub');
   function setG(p){
-    parts.forEach(function(o,i){var f=fr(p,i),hd=at(o.b,f),tl=at(o.b,Math.max(0,f-.06)),live=f>0&&f<1;
-      o.fill.setAttribute('x2',hd[0].toFixed(3));o.fill.setAttribute('y2',hd[1].toFixed(3));
-      [o.halo,o.edge].forEach(function(l){l.setAttribute('x1',tl[0].toFixed(3));l.setAttribute('y1',tl[1].toFixed(3));l.setAttribute('x2',hd[0].toFixed(3));l.setAttribute('y2',hd[1].toFixed(3));l.setAttribute('opacity',live?1:0)});
+    parts.forEach(function(o,i){var f=fr(p,i),hd=at(o.r,f);
+      o.fill.setAttribute('x2',hd[0].toFixed(3));o.fill.setAttribute('y2',hd[1].toFixed(3));o.fill.setAttribute('opacity',f>0?1:0);
       o.lbl.setAttribute('class','lbl'+(f>0?'':' off')); o.pct.textContent=Math.round(f*100)+'%';});
     var v=Math.round(p*100); document.getElementById('gv').textContent=v; document.getElementById('sv').textContent=v+'%'; g.setAttribute('aria-valuenow',v); sc.value=(p*100).toFixed(1);
   }
