@@ -209,12 +209,6 @@ for (const name of BROWSERS) {
       await page.keyboard.press('Enter'); await page.waitForTimeout(800);
       return (await page.evaluate(() => location.hash)).length > 1 || 'no jump';
     });
-    await step('showcase opens and closes the lightbox', async () => {
-      const s = page.locator('.scb').first(); await s.scrollIntoViewIfNeeded(); await s.click(); await page.waitForTimeout(300);
-      if (!(await page.evaluate(() => document.querySelector('dialog.lbx').open))) return 'did not open';
-      await page.keyboard.press('Escape'); await page.waitForTimeout(200);
-      return !(await page.evaluate(() => document.querySelector('dialog.lbx').open)) || 'did not close';
-    });
     await step('theme switch reaches the page and the hero', async () => {
       await page.locator('.themes button[data-t=light]').click(); await page.waitForTimeout(400);
       const t = await page.evaluate(() => [document.documentElement.dataset.theme, document.querySelector('.cover iframe').contentDocument.documentElement.dataset.theme]);
@@ -273,7 +267,7 @@ for (const name of BROWSERS) {
         bad.length ? W(where, 'posts that fail to draw: ' + bad.join(', ')) : ok('every post type and layout draws in every format and ground');
         // the photo field takes a dropped file, and a row moves by its handle from the keyboard
         await page.click('#type [data-k="photo"]');
-        const dt = await page.evaluateHandle(async () => { const b = await (await fetch('../assets/showcase/race-suit-800.webp')).blob(); const d = new DataTransfer(); d.items.add(new File([b], 'suit.webp', { type: 'image/webp' })); return d; });
+        const dt = await page.evaluateHandle(async () => { const b = await (await fetch('../assets/og.png')).blob(); const d = new DataTransfer(); d.items.add(new File([b], 'og.png', { type: 'image/png' })); return d; });
         await page.locator('.drop').dispatchEvent('drop', { dataTransfer: dt });
         await page.waitForSelector('.pic .thumb img', { timeout: 5000 }).catch(() => {});
         (await page.evaluate(() => !!document.querySelector('#frame svg image'))) ? ok('a dropped photo lands in the post') : W(where, 'a dropped photo did not reach the post');

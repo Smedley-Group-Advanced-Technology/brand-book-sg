@@ -52,9 +52,8 @@ Preview through a local server, for example `python3 -m http.server`, rather tha
 opening the file directly: browsers block the page from talking to the animation
 over `file://`, so the theme switch and Replay only reach it over HTTP.
 
-Photographs go in as WebP with the JPEG kept as a fallback: a showcase image needs
-`name.jpg`, `name.webp` (1600 px) and `name-800.webp`, wired up with `<picture>`
-like the existing ones.
+Photographs go in as WebP with the JPEG kept as a fallback: `name.jpg`, `name.webp`
+(1600 px) and `name-800.webp`, wired up with `<picture>`.
 
 ## Checks
 
