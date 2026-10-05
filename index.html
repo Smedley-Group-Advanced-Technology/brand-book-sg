@@ -94,7 +94,7 @@
   --sg-tracking:-0.024em;
   color-scheme:light;
 }
-:root[data-theme="dark"], .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh, .ux{
+:root[data-theme="dark"], .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh{
   --sg-text:#FFFFFF;
   --sg-inv:#000000;
   --sg-ground:#10141A;
@@ -119,8 +119,8 @@
 /* The signature surface: the 45 degree gradient with the edge light, a 1 px stroke pale at the top and dark at the foot. */
 .sg-surface{border:1px solid transparent;background:var(--sg-surface) padding-box,var(--sg-edge) border-box;color:var(--sg-text)}
 /* The book's short names for the tokens, so every section reads from the one palette */
-:root, .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh, .ux{--ink:var(--sg-text);--inv:var(--sg-inv);--dim:var(--sg-dim);--faint:var(--sg-faint);--rule:var(--sg-rule);--bg1:var(--sg-ground);--surf:var(--sg-ground);--pop:var(--sg-panel);--red:var(--sg-deep-navy);--blue:var(--sg-accent);--line:var(--sg-accent);--flame:var(--sg-accent);--pale:var(--sg-accent);--amber:var(--sg-negative);--green:var(--sg-positive);--steel:var(--sg-steel);--alloy:var(--sg-mist);--cloud2:var(--sg-dim);--product:var(--sg-product-blue);--mono:var(--sg-font);--t:68,84,106}
-:root[data-theme="dark"], .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh, .ux{--t:171,192,228}
+:root, .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh{--ink:var(--sg-text);--inv:var(--sg-inv);--dim:var(--sg-dim);--faint:var(--sg-faint);--rule:var(--sg-rule);--bg1:var(--sg-ground);--surf:var(--sg-ground);--pop:var(--sg-panel);--red:var(--sg-deep-navy);--blue:var(--sg-accent);--line:var(--sg-accent);--flame:var(--sg-accent);--pale:var(--sg-accent);--amber:var(--sg-negative);--green:var(--sg-positive);--steel:var(--sg-steel);--alloy:var(--sg-mist);--cloud2:var(--sg-dim);--product:var(--sg-product-blue);--mono:var(--sg-font);--t:68,84,106}
+:root[data-theme="dark"], .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh{--t:171,192,228}
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--brake:cubic-bezier(.16,1,.3,1)}
 @media print{
   :root, :root[data-theme]{--sg-text:#000000;--sg-inv:#FFFFFF;--sg-ground:#F0F0F0;--sg-panel:#F3F2F2;--sg-dim:#333F50;--sg-faint:#44546A;--sg-rule:#ABC0E4;--sg-field:#FFFFFF;--sg-border:rgba(68,84,106,.45);--sg-accent:#44546A;--sg-positive:#007A3D;--sg-positive-tint:#E2F0D9;--sg-negative:#C00000;--sg-negative-tint:#FBE5D6;--sg-quiet-tint:#D6DCE5;--sg-selected:linear-gradient(135deg,#000000 0%,#222A35 100%);--sg-selected-hover:linear-gradient(135deg,#222A35 0%,#333F50 100%);--sg-selected-edge:linear-gradient(180deg,#8497B0 0%,#ABC0E4 53%,#333F50 100%);--sg-on-selected:#FFFFFF;--t:68,84,106;color-scheme:light}
@@ -161,15 +161,16 @@ code, .mono{font-variant-numeric:tabular-nums;color:var(--ink)}
 code{font-family:var(--mono);font-size:.92em}
 h3 + .sub{font-family:var(--mono);font-size:11.5px;letter-spacing:.01em}
 a.btn{text-decoration:none}
-a.dlb{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 14px 0 12px;text-decoration:none;color:var(--ink);background:rgba(var(--t),.07);transition:background .2s,color .2s}
-a.dlb:hover{background:rgba(47,128,255,.16)}
-a.dlb:hover .dli{color:var(--line)}
+a.dlb{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 14px 0 12px;border-radius:var(--sg-radius-control);text-decoration:none;color:var(--sg-text);background:var(--sg-quiet-tint);transition:background .2s,color .2s}
+a.dlb:hover{background:var(--sg-cloud)}
+:root[data-theme="dark"] a.dlb:hover{background:rgba(171,192,228,.24)}
+a.dlb:hover .dli{color:var(--sg-accent)}
 a.dlb:focus-visible{outline:2px solid var(--sg-accent);outline-offset:2px}
-a.ricon{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:74px;background:var(--pop);color:var(--ink);text-decoration:none;font-size:10px}
+a.ricon{position:relative;border-radius:var(--sg-radius-tile);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:74px;background:var(--pop);color:var(--ink);text-decoration:none;font-size:10px}
 a.ricon > svg:first-child{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 a.ricon span{color:var(--dim);font-size:9.5px;white-space:nowrap}
-a.ricon .dli{position:absolute;right:6px;top:6px;width:13px;height:13px;opacity:0;color:var(--line);transition:opacity .2s}
-a.ricon:hover{background:rgba(47,128,255,.1)}
+a.ricon .dli{position:absolute;right:6px;top:6px;width:13px;height:13px;opacity:0;color:var(--sg-accent);transition:opacity .2s}
+a.ricon:hover{background:var(--sg-quiet-tint)}
 a.ricon:hover .dli, a.ricon:focus-visible .dli{opacity:1}
 a.ricon:focus-visible{outline:2px solid var(--sg-accent);outline-offset:-2px}
 a.btn:focus-visible{outline:0;box-shadow:inset 0 0 0 2px var(--bg1),inset 0 0 0 4px var(--ink)}
@@ -203,7 +204,7 @@ input[type=date], input[type=time]{color-scheme:inherit}
 main{min-width:0}
 section.s{border-bottom:0.75px solid var(--rule)}
 /* the checker is the separator: the section before it drops its hairline */
-section.s:has(+ .finish){border-bottom:0}
+
 .inner{max-width:1120px}
 .intro{margin:20px 0 0;color:var(--dim);font-size:16px}
 .hair{position:relative;height:1px;background:linear-gradient(90deg,var(--sg-rule) 0 83%,transparent)}
@@ -240,9 +241,8 @@ table.spec td:first-child{font-weight:600;width:38%;padding-right:16px;color:var
 .tb{display:grid;margin:0}
 .tb > div{padding:6px 12px 7px;border-left:0.75px solid rgba(var(--t),.3)}
 .tb > div:first-child{border-left:0}
-.tb dt{font-family:var(--mono);font-size:9.5px}
-.tb dd{margin:1px 0 0;font-family:var(--mono);font-size:11.5px;color:var(--ink);white-space:nowrap}
-.hair{height:12px}
+.tb dt{font-size:10px}
+.tb dd{margin:1px 0 0;font-size:11.5px;font-variant-numeric:tabular-nums;color:var(--sg-text);white-space:nowrap}
 .lap{margin-top:30px;font-family:var(--mono);font-size:11px;color:var(--dim);display:flex;justify-content:space-between}
 .lap b{color:var(--ink);font-weight:500}
 .lapbar{margin-top:8px;height:5px;border-radius:var(--sg-radius-chip)}
@@ -250,21 +250,18 @@ table.spec td:first-child{font-weight:600;width:38%;padding-right:16px;color:var
 .index nav{margin-top:18px}
 .index nav a span{display:grid;font-family:var(--mono);font-size:10.5px;background:rgba(var(--t),.07);color:var(--dim)}
 .index nav a::before{content:"";position:absolute;left:auto}
-.finish .chq{margin-top:0}
+
 .colophon .mono{color:var(--faint)}
 @media (max-width:820px){
-  .finish{padding:0 20px}
+
   .lap, .lapbar{display:none}
   .index nav a{border-top:0}
 }
-.hair{opacity:.8;-webkit-mask:linear-gradient(90deg,#000 0,#000 83%,transparent);mask:linear-gradient(90deg,#000 0,#000 83%,transparent);position:relative;background:linear-gradient(var(--blue),var(--blue)) left bottom/100% 1px no-repeat,
-  repeating-linear-gradient(90deg,var(--blue) 0 1px,transparent 1px 40px) left bottom/100% 11px no-repeat,
-  repeating-linear-gradient(90deg,rgba(127,178,255,.55) 0 1px,transparent 1px 8px) left bottom/100% 5px no-repeat}
 .hair::before{content:none}
 .num{font-variant-numeric:tabular-nums;align-items:center;letter-spacing:-.03em;background:var(--sg-selected);color:var(--sg-on-selected)}
 .tb{grid-template-columns:repeat(3,auto);border:0.75px solid rgba(var(--t),.3)}
-.tb > div{min-width:74px;border-color:rgba(47,128,255,.45)}
-.tb dt{color:rgba(127,178,255,.7)}
+.tb > div{min-width:74px;border-color:var(--sg-rule)}
+.tb dt{color:var(--sg-faint)}
 .index nav a.on span{font-weight:600;background:var(--sg-selected);color:var(--sg-on-selected)}
 .index nav a::before{background:var(--sg-text);border-radius:2px}
 .lapbar{background:var(--sg-quiet-tint)}
@@ -290,8 +287,7 @@ main{background:none}
 .index nav a{gap:10px}
 .lapbar i{transition:width .6s var(--brake);border-radius:var(--sg-radius-chip)}
 #principles{border-bottom:0}
-.finish{padding:0;overflow:hidden}
-.hair::before{content:"";position:absolute;left:0;bottom:0;width:70px}
+
 .inner :is(p, td) > a:not([class]){color:var(--ink);text-decoration-color:var(--sg-rule);text-decoration-thickness:2px;text-underline-offset:3px}
 section.s{padding:84px 64px 72px}
 .sh{flex-wrap:wrap;justify-content:flex-start;align-items:center;gap:16px}
@@ -389,7 +385,7 @@ section.s{overflow-x:clip}
 }
 @media print{
   .layout{display:block}
-  .index, .mbtn, .hlink, .copied, .srch, .finish{display:none !important}
+  .index, .mbtn, .hlink, .copied, .srch{display:none !important}
   .part{break-before:page;background:none;padding:10mm 0;border:0}
   section.s{padding:8mm 0 10mm;border:0;overflow:visible}
   section.s h2{font-size:30pt;break-after:avoid}
@@ -511,10 +507,10 @@ ol.seq li p{margin:6px 0 0;font-size:13px;color:var(--sg-dim)}
 .prod{place-items:center start;padding:36px 32px}
 .prod .lk{--lk:.5px !important}
 .prod .pn{margin:22px 0 0;font-size:34px;font-weight:600;line-height:1;letter-spacing:-0.024em;color:var(--sg-product-blue)}
-.leadk{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--sg-dim);white-space:nowrap}
-.leadk i{width:3px;height:12px;border-radius:2px}
-.leadk i.b{background:var(--sg-accent)}
-.leadk i.r{background:var(--sg-deep-navy)}
+
+
+
+
 .fklnote{padding:22px 24px;border-radius:var(--sg-radius-card);background:var(--sg-panel);box-shadow:inset 0 0 0 1px var(--sg-rule)}
 .fklnote h3{margin:0 0 10px}
 @media (max-width:820px){
@@ -1042,13 +1038,13 @@ svg.ch text{fill:var(--sg-dim);font-family:var(--sg-font);font-size:10px;font-va
 .email p{margin:0 0 16px;color:var(--sg-slate);line-height:1.55}
 .email .cta{display:inline-flex;align-items:center;height:42px;padding:0 18px;border:1px solid transparent;border-radius:var(--sg-radius-control);background:var(--sg-surface) padding-box,var(--sg-edge) border-box;color:#fff;font-weight:600;text-decoration:none}
 .email .ef{padding:16px 26px;border-top:1px solid var(--sg-cloud);font-size:11px;color:var(--sg-steel)}
-dialog.lbx{padding:0;border:0;background:transparent;max-width:min(96vw,1600px);max-height:92vh}
-dialog.lbx::backdrop{background:rgba(0,0,0,.88)}
-dialog.lbx img{display:block;max-width:100%;max-height:86vh;height:auto}
-dialog.lbx p{margin:12px 110px 0 0;color:#fff;font-size:13px}
-dialog.lbx .x{position:absolute;right:0;bottom:-4px}
+
+
+
+
+
 @media print{
-  dialog.lbx{display:none}
+
   .phone, .browser{break-inside:avoid}
 }
 @media (max-width:820px){
@@ -1065,9 +1061,9 @@ svg.tel{touch-action:none;cursor:crosshair}
 svg.tel:focus-visible{outline:2px solid var(--sg-accent);outline-offset:4px}
 .telhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px;font-size:12px;color:var(--sg-dim)}
 .telhead b{font-weight:600;font-variant-numeric:tabular-nums;color:var(--sg-text)}
-.imgd .qz{fill:rgba(255,255,255,.08);stroke:rgba(255,255,255,.5);stroke-dasharray:4 3}
-.imgd .mv{stroke:#fff;stroke-width:3;fill:none}
-.imgd .mvh{fill:#fff}
+
+
+
 @media (max-width:820px){
   #chTel{min-width:640px}
 }
@@ -1075,7 +1071,7 @@ svg.tel:focus-visible{outline:2px solid var(--sg-accent);outline-offset:4px}
   #chTel, #chFit{min-width:0}
 }
 /* ============ Page structure ============ */
-.finish .chq{height:16px;background-size:16px 16px;margin:0 -24px 0 -12px;transform:none;transform-origin:0 100%}
+
 /* ============ Page structure ============ */
 :root[data-theme="light"] .tb > div{border-color:rgba(31,102,224,.4)}
 /* ============ Drawings ============ */
@@ -1192,7 +1188,7 @@ table.timing tr.lead .p, .place.lead{background:var(--sg-selected) padding-box,v
 .readouts b{font-weight:600;font-size:22px;letter-spacing:var(--sg-tracking);font-variant-numeric:tabular-nums}
 .readouts b.gain{color:var(--sg-positive)}
 .readouts em{font-style:normal;font-size:11px;color:var(--sg-dim);margin-left:4px}
-.board{display:inline-flex;align-items:center;justify-content:center;height:26px;padding:0 12px;border-radius:var(--sg-radius-chip);background:var(--sg-quiet-tint);color:var(--sg-text);font-weight:600;font-size:13px;font-variant-numeric:tabular-nums}
+
 .limit{position:relative;height:8px;border-radius:4px;background:var(--sg-quiet-tint)}
 .limit i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--sg-text)}
 .limit u{position:absolute;top:-5px;bottom:-5px;width:2px;margin-left:-1px;border-radius:1px;background:var(--sg-accent)}
@@ -1231,19 +1227,19 @@ table.ctx td{padding-right:18px}
 .gx .li .tag{white-space:nowrap}
 .gxl{color:var(--sg-text)}
 .gxk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding-top:14px;border-top:1px solid var(--sg-rule)}
-.ux{color:var(--ink);background:var(--sg-ground)}
-.uxp{container-type:inline-size;background:#000;color:#fff;font-size:13px}
-.uxn{display:flex;align-items:center;gap:28px;padding:18px 28px;border-bottom:.75px solid var(--rule)}
-.uxn nav{display:flex;gap:22px;margin-left:auto;font-size:13px;color:var(--dim)}
-.uxn nav a{position:relative;cursor:pointer}
-.uxn nav a.on{color:#fff;font-weight:600}
-.uxn nav a.on::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:3px;transform:none}
-.uxs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:.75px solid rgba(47,128,255,.4);border-bottom:.75px solid var(--rule)}
-.uxs div{padding:18px 28px;border-left:.75px solid var(--rule)}
-.uxs div:first-child{border-left:0}
-.uxs span{display:block;font-family:var(--mono);font-size:10px;color:#7FB2FF}
-.uxs b{font-family:var(--mono);font-weight:500;font-size:26px;letter-spacing:-.02em}
-.uxs em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--dim);margin-left:4px}
+
+
+
+
+
+
+
+
+
+
+
+
+
 @container (max-width:720px){
   .uxs{grid-template-columns:minmax(0,1fr)}
   .uxs div{border-left:0;border-top:.75px solid var(--rule);padding-left:20px}
@@ -1329,9 +1325,6 @@ table.ctx td{padding-right:18px}
 .tid .tbar{position:relative;height:6px;border-radius:3px;background:var(--sg-quiet-tint)}
 .tid .tbar i{display:block;height:100%;border-radius:3px;background:var(--sg-text);transition:width .8s var(--brake)}
 .tid .tbar em{position:absolute;top:-4px;bottom:-4px;width:2px;margin-left:-1px;border-radius:1px;background:var(--sg-accent)}
-/* Until the old ".sig" demo rules in Colour and surfaces are removed, keep them off the signal chips here */
-.tid .sig, #components .sig{height:auto;box-shadow:none}
-.tid .sig.pos, #components .sig.pos{background:var(--sg-positive-tint)}
 .tid .sigs{gap:8px}
 .tid .sig{min-height:36px;padding:6px 10px;font-size:11px}
 .tid svg.ch{margin-top:4px}
@@ -1566,8 +1559,6 @@ table.vx td:first-child{width:18%}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="glyph" viewBox="0 0 56 86" overflow="visible"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></symbol>
-    
-    <pattern id="wetTyre" patternUnits="userSpaceOnUse" width="26" height="62.4"><rect width="26.000" height="62.400" fill="#07080A"/><g transform="scale(4.0000 4.0000)"><mask id="wtm" maskUnits="userSpaceOnUse" x="-20" y="-5" width="60" height="30"><rect x="-20" y="-5" width="60" height="30" fill="#fff"/><path d="M-5.50 -0.2 L-5.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 15.80 L-1.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 0.9 L-1.95 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M1.00 14.70 L1.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M-2.90 7.55 Q-4.20 5.3 -6.30 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M0.35 8.05 Q-0.95 10.30 -3.05 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M-1.50 6.3 Q-2.30 5.0 -3.30 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.75 9.30 Q0.95 10.60 -0.05 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.00 -0.2 L1.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 15.80 L4.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 0.9 L4.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M7.50 14.70 L7.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M3.60 7.55 Q2.30 5.3 0.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M6.85 8.05 Q5.55 10.30 3.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M5.00 6.3 Q4.20 5.0 3.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M8.25 9.30 Q7.45 10.60 6.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M7.50 -0.2 L8.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 15.80 L11.25 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 0.9 L11.05 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M14.00 14.70 L14.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M10.10 7.55 Q8.80 5.3 6.70 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M13.35 8.05 Q12.05 10.30 9.95 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M11.50 6.3 Q10.70 5.0 9.70 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.75 9.30 Q13.95 10.60 12.95 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.00 -0.2 L14.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 15.80 L17.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 0.9 L17.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M20.50 14.70 L20.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M16.60 7.55 Q15.30 5.3 13.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M19.85 8.05 Q18.55 10.30 16.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M18.00 6.3 Q17.20 5.0 16.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M21.25 9.30 Q20.45 10.60 19.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><rect x="-20" y="3.19" width="60" height="0.72" fill="#000"/><rect x="-20" y="11.69" width="60" height="0.72" fill="#000"/><rect x="-20" y="7.58" width="60" height="0.45" fill="#000"/></mask><rect x="0" y="0.35" width="6.5" height="14.9" fill="#2C323B" mask="url(#wtm)"/></g></pattern><pattern id="wetPrint" patternUnits="userSpaceOnUse" width="26" height="62.4"><rect width="26" height="62.4" style="fill:rgba(var(--t),.05)"/><g transform="scale(4.0000 4.0000)"><mask id="wpm" maskUnits="userSpaceOnUse" x="-20" y="-5" width="60" height="30"><rect x="-20" y="-5" width="60" height="30" fill="#fff"/><path d="M-5.50 -0.2 L-5.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 15.80 L-1.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 0.9 L-1.95 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M1.00 14.70 L1.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M-2.90 7.55 Q-4.20 5.3 -6.30 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M0.35 8.05 Q-0.95 10.30 -3.05 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M-1.50 6.3 Q-2.30 5.0 -3.30 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.75 9.30 Q0.95 10.60 -0.05 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.00 -0.2 L1.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 15.80 L4.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 0.9 L4.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M7.50 14.70 L7.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M3.60 7.55 Q2.30 5.3 0.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M6.85 8.05 Q5.55 10.30 3.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M5.00 6.3 Q4.20 5.0 3.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M8.25 9.30 Q7.45 10.60 6.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M7.50 -0.2 L8.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 15.80 L11.25 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 0.9 L11.05 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M14.00 14.70 L14.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M10.10 7.55 Q8.80 5.3 6.70 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M13.35 8.05 Q12.05 10.30 9.95 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M11.50 6.3 Q10.70 5.0 9.70 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.75 9.30 Q13.95 10.60 12.95 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.00 -0.2 L14.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 15.80 L17.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 0.9 L17.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M20.50 14.70 L20.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M16.60 7.55 Q15.30 5.3 13.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M19.85 8.05 Q18.55 10.30 16.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M18.00 6.3 Q17.20 5.0 16.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M21.25 9.30 Q20.45 10.60 19.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><rect x="-20" y="3.19" width="60" height="0.72" fill="#000"/><rect x="-20" y="11.69" width="60" height="0.72" fill="#000"/><rect x="-20" y="7.58" width="60" height="0.45" fill="#000"/></mask><rect x="0" y="0.35" width="6.5" height="14.9" style="fill:rgba(var(--t),.55)" mask="url(#wpm)"/></g></pattern><linearGradient id="bkCurve" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".0"/><stop offset=".22" stop-color="#000" stop-opacity=".0"/><stop offset=".25" stop-color="#000" stop-opacity=".5"/><stop offset=".3" stop-color="#000" stop-opacity=".1"/><stop offset=".7" stop-color="#000" stop-opacity=".1"/><stop offset=".75" stop-color="#000" stop-opacity=".5"/><stop offset=".78" stop-color="#000" stop-opacity="0"/></linearGradient><pattern id="treadP" patternUnits="userSpaceOnUse" width="14.17" height="34"><g transform="scale(2.1800 2.1795)"><mask id="tpp" maskUnits="userSpaceOnUse" x="-20" y="-5" width="60" height="30"><rect x="-20" y="-5" width="60" height="30" fill="#fff"/><path d="M-5.50 -0.2 L-5.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 15.80 L-1.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M-2.25 0.9 L-1.95 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M1.00 14.70 L1.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M-2.90 7.55 Q-4.20 5.3 -6.30 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M0.35 8.05 Q-0.95 10.30 -3.05 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M-1.50 6.3 Q-2.30 5.0 -3.30 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.75 9.30 Q0.95 10.60 -0.05 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M1.00 -0.2 L1.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 15.80 L4.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M4.25 0.9 L4.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M7.50 14.70 L7.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M3.60 7.55 Q2.30 5.3 0.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M6.85 8.05 Q5.55 10.30 3.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M5.00 6.3 Q4.20 5.0 3.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M8.25 9.30 Q7.45 10.60 6.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M7.50 -0.2 L8.00 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 15.80 L11.25 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M10.75 0.9 L11.05 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M14.00 14.70 L14.30 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M10.10 7.55 Q8.80 5.3 6.70 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M13.35 8.05 Q12.05 10.30 9.95 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M11.50 6.3 Q10.70 5.0 9.70 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.75 9.30 Q13.95 10.60 12.95 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M14.00 -0.2 L14.50 3.3" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 15.80 L17.75 12.30" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/><path d="M17.25 0.9 L17.55 2.6" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M20.50 14.70 L20.80 13.00" fill="none" stroke="#000" stroke-width="0.26" stroke-linecap="round"/><path d="M16.60 7.55 Q15.30 5.3 13.20 3.6" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M19.85 8.05 Q18.55 10.30 16.45 12.00" fill="none" stroke="#000" stroke-width="0.72" stroke-linecap="round"/><path d="M18.00 6.3 Q17.20 5.0 16.20 3.9" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><path d="M21.25 9.30 Q20.45 10.60 19.45 11.70" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/><rect x="-20" y="3.19" width="60" height="0.72" fill="#000"/><rect x="-20" y="11.69" width="60" height="0.72" fill="#000"/><rect x="-20" y="7.58" width="60" height="0.45" fill="#000"/></mask><rect x="0" y="0.35" width="6.5" height="14.9" mask="url(#tpp)" style="fill:rgba(var(--t),.24)"/></g></pattern>
   </defs>
 </svg>
 
@@ -1600,7 +1591,7 @@ table.vx td:first-child{width:18%}
       <a href="#charts-sec"><span>15</span>Data and charts</a>
       <a href="#calendar-sec"><span>16</span>Calendar and scheduling</a>
       <a href="#apps-sec"><span>17</span>Overlays and apps</a>
-      <div class="grp">In practice</div>
+      <div class="grp">Application</div>
       <a href="#layout-sec"><span>18</span>Layout</a>
       <a href="#application"><span>19</span>In use</a>
       <a href="#showcase"><span>20</span>Brand showcase</a>
@@ -2028,7 +2019,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 09 RACE ENGINEERING -->
     <section class="s" id="engineering"><div class="inner">
-      <div class="sh"><div class="num">09</div><span class="chap">In practice</span></div>
+      <div class="sh"><div class="num">09</div><span class="chap">At work</span></div>
       <h2 data-anchor="engineering">Drawings and data<button class="hlink" type="button" aria-label="Copy link to Drawings and data"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Where something is measured, built or read, the system draws it plainly. Technical drawings sit on the Canvas in ink, measured in Steel; values are Sora with tabular figures; and green and red appear only where a number has gone up or down. The same rules serve a kart, a sensor housing and a results table.</p>
       <div class="hair"></div>
@@ -2105,7 +2096,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 10 USAGE CONTEXT -->
     <section class="s" id="context"><div class="inner">
-      <div class="sh"><div class="num">10</div><span class="chap">In practice</span></div>
+      <div class="sh"><div class="num">10</div><span class="chap">At work</span></div>
       <h2 data-anchor="context">Across the group<button class="hlink" type="button" aria-label="Copy link to Across the group"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">One system serves the whole group. Smedley Group, Advanced Technology, Insight Labs and FAT Racing share the same palette, the same surface and the same type; only the division name in the lockup changes. FAT Karting League keeps its own brand.</p>
       <div class="hair"></div>
@@ -2169,7 +2160,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 11 MOTION -->
     <section class="s" id="motion"><div class="inner">
-      <div class="sh"><div class="num">11</div><span class="chap">In practice</span></div>
+      <div class="sh"><div class="num">11</div><span class="chap">At work</span></div>
       <h2 data-anchor="motion">Motion<button class="hlink" type="button" aria-label="Copy link to Motion"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Motion brakes: fast in, hard stop, like a car arriving on its marks. Each view has one moment and no more. The logo's moment is the hero: three bars drawn in turn on the signature surface, then the lockup and the divider.</p>
       <div class="hair"></div>
@@ -2202,7 +2193,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 12 GLYPH AS PROGRESS -->
     <section class="s" id="progress"><div class="inner">
-      <div class="sh"><div class="num">12</div><span class="chap">In practice</span></div>
+      <div class="sh"><div class="num">12</div><span class="chap">At work</span></div>
       <h2 data-anchor="progress">The glyph as progress<button class="hlink" type="button" aria-label="Copy link to The glyph as progress"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">The three bars are the three rungs of the ladder: FAT Karting League, Formula 4, Formula 1. One value runs through them in order, so a driver completes the whole mark only on reaching F1. The same three bars are the loader.</p>
       <div class="hair"></div>
@@ -2481,7 +2472,7 @@ table.vx td:first-child{width:18%}
     </div></section>
 
     <!-- PART 4 IN PRACTICE -->
-    <div class="part" id="part-4"><div class="pn">Part 4 of 4</div><div class="pb"><p class="pt">In practice</p><p class="pl">How it comes together on screens, in documents and with partners, the rules that hold it, and the files to start from.</p></div><ol class="pi"><li><a href="#layout-sec"><span>18</span>Layout</a></li><li><a href="#application"><span>19</span>In use</a></li><li><a href="#showcase"><span>20</span>Brand showcase</a></li><li><a href="#cobrand"><span>21</span>Co-branding</a></li><li><a href="#principles"><span>22</span>Principles</a></li><li><a href="#resources"><span>23</span>Resources</a></li></ol></div>
+    <div class="part" id="part-4"><div class="pn">Part 4 of 4</div><div class="pb"><p class="pt">Application</p><p class="pl">How it comes together on screens, in documents and with partners, the rules that hold it, and the files to start from.</p></div><ol class="pi"><li><a href="#layout-sec"><span>18</span>Layout</a></li><li><a href="#application"><span>19</span>In use</a></li><li><a href="#showcase"><span>20</span>Brand showcase</a></li><li><a href="#cobrand"><span>21</span>Co-branding</a></li><li><a href="#principles"><span>22</span>Principles</a></li><li><a href="#resources"><span>23</span>Resources</a></li></ol></div>
 
     <!-- 18 LAYOUT -->
     <section class="s" id="layout-sec"><div class="inner">
@@ -2669,7 +2660,7 @@ table.vx td:first-child{width:18%}
       <div class="hair"></div>
       <div class="rhero">
         <div class="rhl"><span class="rk">Brand kit</span><h3 id="resources-everything-in-one-file" data-anchor="resources-everything-in-one-file">Everything in one file<button class="hlink" type="button" aria-label="Copy link to Everything in one file"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3><p>Monochrome logos for every business, the glyph and app icons, the colour tokens, the icon library, and the slide, document, signature and social templates.</p>
-          <div class="rstat"><span><b>163</b>files</span><span><b>525 KB</b>ZIP</span><span><b>v3.0</b>version</span></div></div>
+          <div class="rstat"><span><b>163</b>files</span><span><b>524 KB</b>ZIP</span><span><b>v3.0</b>version</span></div></div>
         <a class="btn p lg rzip" href="assets/smedley-group-brand-assets.zip" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg>Download the brand kit</a>
       </div>
       <h3 class="subhead" id="resources-logos" data-anchor="resources-logos">Logos<button class="hlink" type="button" aria-label="Copy link to Logos"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h3>
@@ -2691,7 +2682,7 @@ table.vx td:first-child{width:18%}
       <div class="rgrid r3">
         <article class="rtok"><div class="rsw"><i style="background:#000000"></i><i style="background:#222A35"></i><i style="background:#333F50"></i><i style="background:#44546A"></i><i style="background:#8497B0"></i><i style="background:#ABC0E4"></i><i style="background:#D6DCE5"></i><i style="background:#BFBFBF"></i><i style="background:#F0F0F0"></i><i style="background:#F3F2F2"></i></div><div class="rbody"><h4 id="resources-colour-tokens" data-anchor="resources-colour-tokens">Colour tokens<button class="hlink" type="button" aria-label="Copy link to Colour tokens"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>The near-monochrome palette, the signal pairs, both themes, the signature surface, its edge light and the four radii, as custom properties or data.</p><div class="rbtns"><a class="dlb" href="assets/tokens.css" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg><span class="dlt"><b>CSS</b><span>custom properties, 1 KB</span></span></a><a class="dlb" href="assets/tokens.json" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg><span class="dlt"><b>JSON</b><span>for tools and code, 1 KB</span></span></a></div></div></article>
         <article class="rtype"><div class="rspec sg-surface sg-dark"><span class="s1">Aa</span><span class="s2">1:02.418</span></div><div class="rbody"><h4 id="resources-typefaces" data-anchor="resources-typefaces">Typefaces<button class="hlink" type="button" aria-label="Copy link to Typefaces"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>Sora only, in Light, Regular and SemiBold, with tabular figures for measured values. Open licence; the book and the skill self-host it.</p><div class="rbtns"><a class="dlb" href="https://fonts.google.com/specimen/Sora" target="_blank" rel="noopener"><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="external"><path d="M14 4H20V10"/><path d="M20 4L11 13"/><path d="M18 14V18A2 2 0 0 1 16 20H6A2 2 0 0 1 4 18V8A2 2 0 0 1 6 6H10"/></svg><span class="dlt"><b>Sora</b><span>Google Fonts</span></span></a></div></div></article>
-        <article class="ricons"><div class="rig"><a class="ricon" href="assets/icons/calliper.svg" download aria-label="Download calliper icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="calliper"><path d="M12 4.5H3.5V8H12M16.5 4.5H20.5V8H16.5"/><rect x="12" y="3" width="4.5" height="6.5" rx="1"/><path d="M4.5 8V19L7.5 16V8"/><path d="M13 9.5V17L15.5 14.5V9.5"/></svg><span>Calliper</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/data-logger.svg" download aria-label="Download data logger icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="data-logger"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M6.5 13L9.5 10L11.5 11.5L14.5 8L17.5 10"/><path d="M12 16.5V19.5M8.5 19.5H15.5"/></svg><span>Data logger</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/hex-key.svg" download aria-label="Download hex key icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="hex-key"><path d="M6.5 3.5H9.5V16a1 1 0 0 0 1 1H18V20H9.5A3 3 0 0 1 6.5 17Z"/></svg><span>Hex key</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/ratchet.svg" download aria-label="Download ratchet icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="ratchet"><path d="M3.8 18.4L12.1 10.1M5.6 20.2L13.9 11.9"/><path d="M3.8 18.4a1.27 1.27 0 0 0 1.8 1.8"/><circle cx="16.5" cy="7.5" r="4.3"/><rect x="15" y="6" width="3" height="3" rx="0.6"/></svg><span>Ratchet</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/spanner.svg" download aria-label="Download spanner icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="spanner"><path d="M4.3 17.8L12.7 9.4M6.2 19.7L14.6 11.3"/><path d="M4.3 17.8a1.35 1.35 0 0 0 1.9 1.9"/><path d="M12.7 9.4a4.6 4.6 0 0 1 6.2-6.1L16.2 6L16.8 8.2L19 8.8L21.7 6.1a4.6 4.6 0 0 1-6.1 6.2"/></svg><span>Spanner</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/stopwatch.svg" download aria-label="Download stopwatch icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="stopwatch"><circle cx="12" cy="13.5" r="7"/><path d="M10 2.5H14M12 2.5V6.5"/><path d="M17.5 7L19 5.5"/><path d="M8 13.5H9.8L11 11L13 16L14.2 13.5H16"/></svg><span>Stopwatch</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/torque-wrench.svg" download aria-label="Download torque wrench icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="torque-wrench"><circle cx="16.6" cy="7.4" r="3"/><path d="M14.4 9.5L6.4 17.5a1.41 1.41 0 0 0 2 2L16.4 11.6"/><path d="M9.4 14.5L11.4 16.5"/></svg><span>Torque wrench</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/tyre-gauge.svg" download aria-label="Download tyre gauge icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="tyre-gauge"><circle cx="12" cy="10" r="6.5"/><path d="M12 10L14.5 7.5"/><path d="M12 16.5V21M9.5 21H14.5"/></svg><span>Tyre gauge</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a></div><div class="rbody"><h4 id="resources-tool-icons" data-anchor="resources-tool-icons">Icon library<button class="hlink" type="button" aria-label="Copy link to Icon library"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>134 icons in one monoline style: a 24 px grid, 1.5 px stroke, rounded ends and joins. The workshop tools are here to download; the whole library is one click away.</p><div class="rbtns"><a class="btn p rmk" href="icons/"><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="arrow-up-right"><path d="M7 17L17 7"/><path d="M8.5 7H17V15.5"/></svg>Open the icon library</a></div></div></article><article class="rskill"><div class="rbody"><h4 id="resources-claude-skill" data-anchor="resources-claude-skill">Claude skill<button class="hlink" type="button" aria-label="Copy link to Claude skill"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>A skill that teaches Claude this brand book and how Back Office is built, so it can design, build and review screens on the brand. It gives a step-by-step procedure; the Back Office component library, with its full API and which component to use for each job; screen templates and measurements; how the apps share one desk, with window management and drag and drop; and the brand rules, from the near-monochrome palette, the Canvas ground and the signature surface to rounded parts, Sora, signal colours as labels, icons, motion and words, with a review checklist. It carries the book's own stylesheet, tokens, icon sprite and fonts.</p><div class="rbtns"><a class="dlb" href="assets/skills/smedley-group-ui.zip" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg><span class="dlt"><b>Download the skill</b><span>ZIP, 164 KB</span></span></a></div><ol class="rsteps"><li><b>Claude</b><span>Settings, Capabilities, Skills: upload the ZIP.</span></li><li><b>Claude Code</b><span>Unzip into <code>~/.claude/skills/</code>, or into <code>.claude/skills/</code> in a project.</span></li><li><b>Then ask</b><span>“Design the results page for FAT Racing” or “Review this screen against the brand book”.</span></li></ol></div></article>
+        <article class="ricons"><div class="rig"><a class="ricon" href="assets/icons/calliper.svg" download aria-label="Download calliper icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="calliper"><path d="M12 4.5H3.5V8H12M16.5 4.5H20.5V8H16.5"/><rect x="12" y="3" width="4.5" height="6.5" rx="1"/><path d="M4.5 8V19L7.5 16V8"/><path d="M13 9.5V17L15.5 14.5V9.5"/></svg><span>Calliper</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/data-logger.svg" download aria-label="Download data logger icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="data-logger"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M6.5 13L9.5 10L11.5 11.5L14.5 8L17.5 10"/><path d="M12 16.5V19.5M8.5 19.5H15.5"/></svg><span>Data logger</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/hex-key.svg" download aria-label="Download hex key icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="hex-key"><path d="M6.5 3.5H9.5V16a1 1 0 0 0 1 1H18V20H9.5A3 3 0 0 1 6.5 17Z"/></svg><span>Hex key</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/ratchet.svg" download aria-label="Download ratchet icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="ratchet"><path d="M3.8 18.4L12.1 10.1M5.6 20.2L13.9 11.9"/><path d="M3.8 18.4a1.27 1.27 0 0 0 1.8 1.8"/><circle cx="16.5" cy="7.5" r="4.3"/><rect x="15" y="6" width="3" height="3" rx="0.6"/></svg><span>Ratchet</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/spanner.svg" download aria-label="Download spanner icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="spanner"><path d="M4.3 17.8L12.7 9.4M6.2 19.7L14.6 11.3"/><path d="M4.3 17.8a1.35 1.35 0 0 0 1.9 1.9"/><path d="M12.7 9.4a4.6 4.6 0 0 1 6.2-6.1L16.2 6L16.8 8.2L19 8.8L21.7 6.1a4.6 4.6 0 0 1-6.1 6.2"/></svg><span>Spanner</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/stopwatch.svg" download aria-label="Download stopwatch icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="stopwatch"><circle cx="12" cy="13.5" r="7"/><path d="M10 2.5H14M12 2.5V6.5"/><path d="M17.5 7L19 5.5"/><path d="M8 13.5H9.8L11 11L13 16L14.2 13.5H16"/></svg><span>Stopwatch</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/torque-wrench.svg" download aria-label="Download torque wrench icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="torque-wrench"><circle cx="16.6" cy="7.4" r="3"/><path d="M14.4 9.5L6.4 17.5a1.41 1.41 0 0 0 2 2L16.4 11.6"/><path d="M9.4 14.5L11.4 16.5"/></svg><span>Torque wrench</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a><a class="ricon" href="assets/icons/tyre-gauge.svg" download aria-label="Download tyre gauge icon, SVG"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="tyre-gauge"><circle cx="12" cy="10" r="6.5"/><path d="M12 10L14.5 7.5"/><path d="M12 16.5V21M9.5 21H14.5"/></svg><span>Tyre gauge</span><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg></a></div><div class="rbody"><h4 id="resources-tool-icons" data-anchor="resources-tool-icons">Icon library<button class="hlink" type="button" aria-label="Copy link to Icon library"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>134 icons in one monoline style: a 24 px grid, 1.5 px stroke, rounded ends and joins. The workshop tools are here to download; the whole library is one click away.</p><div class="rbtns"><a class="btn p rmk" href="icons/"><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="arrow-up-right"><path d="M7 17L17 7"/><path d="M8.5 7H17V15.5"/></svg>Open the icon library</a></div></div></article><article class="rskill"><div class="rbody"><h4 id="resources-claude-skill" data-anchor="resources-claude-skill">Claude skill<button class="hlink" type="button" aria-label="Copy link to Claude skill"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h4><p>A skill that teaches Claude this brand book and how Back Office is built, so it can design, build and review screens on the brand. It gives a step-by-step procedure; the Back Office component library, with its full API and which component to use for each job; screen templates and measurements; how the apps share one desk, with window management and drag and drop; and the brand rules, from the near-monochrome palette, the Canvas ground and the signature surface to rounded parts, Sora, signal colours as labels, icons, motion and words, with a review checklist. It carries the book's own stylesheet, tokens, icon sprite and fonts.</p><div class="rbtns"><a class="dlb" href="assets/skills/smedley-group-ui.zip" download><svg class="dli" viewBox="0 0 24 24" aria-hidden="true" data-icon="download"><path d="M12 4V15"/><path d="M7 10L12 15L17 10"/><path d="M4 15V18A2 2 0 0 0 6 20H18A2 2 0 0 0 20 18V15"/></svg><span class="dlt"><b>Download the skill</b><span>ZIP, 106 KB</span></span></a></div><ol class="rsteps"><li><b>Claude</b><span>Settings, Capabilities, Skills: upload the ZIP.</span></li><li><b>Claude Code</b><span>Unzip into <code>~/.claude/skills/</code>, or into <code>.claude/skills/</code> in a project.</span></li><li><b>Then ask</b><span>“Design the results page for FAT Racing” or “Review this screen against the brand book”.</span></li></ol></div></article>
       </div>
 
       <div class="two" style="margin-top:64px" id="versions">
@@ -2714,7 +2705,6 @@ table.vx td:first-child{width:18%}
       </div>
     </div></section>
 
-    <div class="finish" aria-hidden="true"><div class="chq"></div></div>
     <footer class="colophon">
       <span class="lk" style="--lk:0.3px;color:var(--ink);opacity:.85" role="img" aria-label="Smedley Group, Advanced Technology"><svg viewBox="-0.9 -1 56 86" aria-hidden="true"><g stroke="currentColor" stroke-width="14.2"><line x1="21.31" y1="2.59" x2="48.89" y2="41.71"/><line x1="6.71" y1="12.79" x2="47.59" y2="71.21"/><line x1="5.51" y1="42.39" x2="32.89" y2="81.41"/></g></svg><span class="w" aria-hidden="true"><span>Smedley<br>Group</span><i></i><span>Advanced<br>Technology</span></span></span>
       <span>© 2026 Smedley Group. All rights reserved.</span>

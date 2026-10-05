@@ -47,7 +47,7 @@
   --sg-tracking:-0.024em;
   color-scheme:light;
 }
-:root[data-theme="dark"], .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh, .ux{
+:root[data-theme="dark"], .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh{
   --sg-text:#FFFFFF;
   --sg-inv:#000000;
   --sg-ground:#10141A;

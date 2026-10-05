@@ -25,9 +25,6 @@ const vOf = t => variantOf(t, state.variant[t]);
 const dataFor = t => Object.assign(defaults(t, vOf(t)), state.data[t] || {});
 const setData = (k, v) => { (state.data[state.type] ||= {})[k] = v; draw(); save(); };
 
-// ---------- the book's buttons: a streak runs through on click ----------
-document.addEventListener('click', e => { const b = e.target.closest?.('.btn:not(.t)'); if (!b || b.disabled) return; b.style.setProperty('--bw', (b.offsetWidth + 20) + 'px'); b.classList.remove('flash'); void b.offsetWidth; b.classList.add('flash'); });
-document.addEventListener('animationend', e => { if (e.animationName === 'streak') e.target.classList.remove('flash'); });
 
 // ---------- field editors ----------
 const labelled = (k, label, control) => { const f = el('div', { class: 'field' }); f.append(el('label', { class: 'lab', for: 'f-' + k }, label), control); return f; };

@@ -6,22 +6,20 @@ body{margin:0;background:var(--bg1);color:var(--ink);font:14px/1.5 Sora,system-u
 /* the lockup: the glyph and wordmark, the divider, then Brand book set like a business name */
 .top .lk{display:inline-flex;color:var(--ink);line-height:0}
 .top .lk svg{height:36px;width:auto}
-.top .lk:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
-.top span{font-family:var(--mono);font-size:12px;color:var(--dim);padding-left:18px;border-left:.75px solid var(--rule)}
+.top .lk:focus-visible{outline:2px solid var(--sg-accent);outline-offset:4px}
+.top span{font-size:12px;color:var(--dim);padding-left:18px;border-left:1px solid var(--sg-rule)}
 /* footer: the checker at 55°, then the lockup, the way back into the book and the small print, as in the book */
 /* the checker is the separator: nothing else sits above or below it */
-.finish{overflow:hidden}
-.finish .chq{height:16px;margin:0 -24px 0 -12px;background:conic-gradient(var(--ink) 25%,transparent 0 50%,var(--ink) 0 75%,transparent 0) 0 0/16px 16px;transform:skewX(35deg);transform-origin:0 100%}
 .colophon{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:20px 40px;padding:36px 32px 48px;font-size:12px;color:var(--faint)}
 .colophon .lk{display:inline-flex;line-height:0;color:var(--ink);opacity:.85;transition:opacity .2s}
 .colophon .lk:hover{opacity:1}
 .colophon .lk svg{height:30px;width:auto}
-.colophon .lk:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.colophon .lk:focus-visible{outline:2px solid var(--sg-accent);outline-offset:4px}
 .colophon nav{display:flex;flex-wrap:wrap;gap:0 6px}
 .colophon nav .btn.t{--h:36px;color:var(--dim);font-size:13px}
 .colophon nav .btn.t:hover{color:var(--ink)}
 .colophon .fine{display:flex;flex-direction:column;gap:4px;margin:0;text-align:right}
-.colophon .mono{font-family:var(--mono);font-size:11px}
+.colophon .mono{font-size:11px;font-variant-numeric:tabular-nums}
 .colophon .fine a{color:var(--dim)}
 .colophon .fine a:hover{color:var(--ink)}
 [hidden]{display:none !important}

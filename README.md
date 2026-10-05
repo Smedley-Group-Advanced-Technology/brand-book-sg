@@ -8,7 +8,7 @@ Published via GitHub Pages from `index.html` on the `main` branch.
 ## Editing
 
 The brand book is [`index.html`](index.html). Styles and artwork are inline, and it loads
-nothing from other sites: Sora and IBM Plex Mono are served from [`assets/fonts`](assets/fonts)
+nothing from other sites: Sora is served from [`assets/fonts`](assets/fonts)
 (Latin and Latin Extended, SIL Open Font Licence).
 Edit the file directly and push to `main` to publish. The stylesheet is grouped by
 component, with a list of the groups at its top; put new rules in the group they

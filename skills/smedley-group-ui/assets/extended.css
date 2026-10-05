@@ -196,13 +196,8 @@ svg.ch text{fill:var(--sg-dim);font-family:var(--sg-font);font-size:10px;font-va
 .email p{margin:0 0 16px;color:var(--sg-slate);line-height:1.55}
 .email .cta{display:inline-flex;align-items:center;height:42px;padding:0 18px;border:1px solid transparent;border-radius:var(--sg-radius-control);background:var(--sg-surface) padding-box,var(--sg-edge) border-box;color:#fff;font-weight:600;text-decoration:none}
 .email .ef{padding:16px 26px;border-top:1px solid var(--sg-cloud);font-size:11px;color:var(--sg-steel)}
-dialog.lbx{padding:0;border:0;background:transparent;max-width:min(96vw,1600px);max-height:92vh}
-dialog.lbx::backdrop{background:rgba(0,0,0,.88)}
-dialog.lbx img{display:block;max-width:100%;max-height:86vh;height:auto}
-dialog.lbx p{margin:12px 110px 0 0;color:#fff;font-size:13px}
-dialog.lbx .x{position:absolute;right:0;bottom:-4px}
 @media print{
-  dialog.lbx{display:none}
+
   .phone, .browser{break-inside:avoid}
 }
 @media (max-width:820px){
@@ -218,9 +213,6 @@ svg.tel{touch-action:none;cursor:crosshair}
 svg.tel:focus-visible{outline:2px solid var(--sg-accent);outline-offset:4px}
 .telhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px;font-size:12px;color:var(--sg-dim)}
 .telhead b{font-weight:600;font-variant-numeric:tabular-nums;color:var(--sg-text)}
-.imgd .qz{fill:rgba(255,255,255,.08);stroke:rgba(255,255,255,.5);stroke-dasharray:4 3}
-.imgd .mv{stroke:#fff;stroke-width:3;fill:none}
-.imgd .mvh{fill:#fff}
 @media (max-width:820px){
   #chTel{min-width:640px}
 }
