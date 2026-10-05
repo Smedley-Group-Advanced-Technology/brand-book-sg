@@ -1,6 +1,6 @@
 // The Smedley Group icon library: one drawing style for every icon in the book, the post maker and the kit.
-// 24 x 24 grid, 1.5 px stroke, no fill, square line ends and sharp corners; diagonals lean at 55° like the
-// glyph (0.7 across for every 1 down). npm run kit writes assets/icons from this file and keeps the book's
+// 24 x 24 grid, 1.5 px stroke, no fill, rounded line ends and joins: one monoline set. The drawings keep the
+// glyph's 55° diagonals (0.7 across for every 1 down) from the earlier identity; only the strokes changed. npm run kit writes assets/icons from this file and keeps the book's
 // tool icons in step; the icon library page reads it directly.
 
 // a 55° arrowhead: arms 0.7 back for every 1 out, so the head is as sharp as the glyph
@@ -170,6 +170,6 @@ export const ICONS = [
 ];
 
 export const svgOf = ([name, label, , , body], extra = '') =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"${extra}><title>${label}</title>${body}</svg>`;
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"${extra}><title>${label}</title>${body}</svg>`;
 export const bodyOf = name => (ICONS.find(i => i[0] === name) || [])[4] || '';
 export const sprite = () => `<svg xmlns="http://www.w3.org/2000/svg" style="display:none">${ICONS.map(([n, l, , , b]) => `<symbol id="sg-${n}" viewBox="0 0 24 24"><title>${l}</title>${b}</symbol>`).join('')}</svg>`;

@@ -1,5 +1,5 @@
 // The icon library page: search and filter the library, pick an icon, copy or download it.
-import { ICONS, FAMILIES, svgOf, bodyOf } from './library.js?v=4d617bed0d';
+import { ICONS, FAMILIES, svgOf, bodyOf } from './library.js?v=8376433e7a';
 
 const $ = s => document.querySelector(s);
 const svg = (body, size, extra = '') => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true"${extra}>${body}</svg>`;

@@ -1,8 +1,8 @@
 # Layouts for Back Office screens
 
 How to arrange a screen. Pick one template below, build it from `library.md`, and keep the order of its
-regions. The brand book's rules apply throughout: a flat ground, lines rather than boxes, one bold element
-per view, calmer content around it.
+regions. The brand book's rules apply throughout: the Canvas ground, lines rather than boxes, one bold element
+per view, calmer content around it, and only things you pick up drawn dark.
 
 ## Design for the window, not the device
 
@@ -34,14 +34,15 @@ Use only these.
 | Spacing steps | 4, 8, 12, 16, 24, 32, 48 px (`Stack gap` takes 8, 12, 16, 24, 32) |
 | App padding | 24 px, 16 px under 480 px (`AppScreen` sets it) |
 | Page gutter | 32 px, 16 px on phones (`Container` sets it); page width at most 1200 px |
-| Between sections | 32 px and one hairline (`Section` sets both) |
+| Between sections | 32 px, each opening with its section header and the fading divider (`Section` sets both) |
 | Between a heading and its content | 16 to 24 px |
 | Between fields in a form | 16 px; between groups of fields, a new `Section` |
 | Form and reading width | at most 720 px |
 | Control heights | 44 px default, 34 px small, 52 px large; never under 44 px on touch |
-| Hairline | 0.75 px in the rule colour |
+| Hairline | 1 px in the rule colour (Pale Blue; 28 % Pale Blue on dark) |
+| Radii | controls 8 px, chips 6 px, tiles 10 px, cards and windows 12 px |
 | Paragraph measure | at most 76 characters |
-| Type | page title 34, figure 28, section title 14, body 13, label 11 to 12 in dim, readouts 11 to 14 mono |
+| Type | page title 32, figure 28, dialog title 20, section title 15, body 13, field label 12 SemiBold, help 12, caption 11 (the floor); measured values in tabular figures |
 
 ## The order of a screen
 
@@ -54,17 +55,20 @@ AppScreen
 ├─ Hint ─── only while the app waits for a drop
 ├─ Metrics ─── 2 or 4 headline numbers, when the screen has them
 ├─ The lead ─── the one chart, table, list or form that answers the screen's question
-└─ Sections ─── calmer supporting content, separated by hairlines and space
+├─ Sections ─── calmer supporting content, each opened by its section header and divider
+└─ Strapline ─── at most one, the view's conclusion, when it needs one
 ```
 
 - **Heading.** `PageHeader` with a noun `title` ("Driver pool") and a `context` line with the period, count or
   place ("Season 2026, 248 drivers in 12 hubs"). Controls on the right: a `SegmentedControl` for the period
   or view, a search, one action. They drop under the heading when narrow.
 - **Metrics.** Two or four `Metric`s, never three, never more than four. Each has a unit; a change is green
-  when good, yellow when not.
+  when good, negative red when not, as short bold text, never a fill.
 - **The lead.** One per view, given the full main column. Lit by space, not boxed.
-- **Sections.** `Section` with a noun title and, when useful, a one-line description. Hairlines and space
-  between them; `Card` only for something a person picks up or opens (a download, a pinned record).
+- **Sections.** `Section` with a noun title and, when useful, a one-line description, opened by the section
+  header and its fading divider; space between them. `Card` (dark) only for something a person picks up or opens
+  (a download, a pinned record).
+- **Strapline.** One `Strapline` at most, the conclusion, not a caption that restates the title.
 
 ## Templates
 
@@ -95,7 +99,7 @@ Lead              DataTable (it stacks its rows when narrow)
 - State: `useCollectionState` (`url: true` on a page, off in a desk app).
 
 - The first column is the record as a `RecordChip` (or its name with an `Avatar`), then attributes, status
-  as a `Badge` last. Numbers right-aligned in mono, with units.
+  as a `Badge` last. Numbers right-aligned in tabular figures, with units.
 - A row opens its record on click or Enter. Row actions: one `IconButton` or a `Dropdown align="end"` at the
   end of the row, never a row of buttons.
 - No results: an `EmptyState`, passed as `DataTable empty`, that repeats the search and offers to clear it.
@@ -111,7 +115,7 @@ Heading      RecordChip large · "Member, FKL Łódź"                    [Dropd
 Tabs         Details · Sessions · Account · History
 Lead         <form>, one column, max 720 px
                Section "Details"   Full name · Email · Hub (Select)
-               Section "Licence"   Number (mono) · Expires (DateInput)
+               Section "Licence"   Number (tabular) · Expires (DateInput)
              FormActions [Save changes] [Cancel]
 ```
 
@@ -145,17 +149,18 @@ Lead      WeekSchedule (wide, desk) or Agenda (narrow, half)
 Side      Calendar (range), then the selected session
 ```
 
-- The next or leading session is the one red event (`leading`); booked time is blue.
+- The next or leading session is the one event in the selected fill (`leading`); booked time is the quiet
+  tint with an accent bar.
 
-### F. Analysis (Engineering: blue leads)
+### F. Analysis
 
 ```
 Heading   "Telemetry" · "Maja Kowalczyk, best lap 58.412 s"          [lap Select]
 Lead      TelemetryChart linked to TrackMap by one cursor state
-Sections  sector table with gains green and losses yellow
+Sections  sector table with gains green and losses negative red, as text
 ```
 
-- The subject is Flame, the reference blue, the delta ink. The legend says so.
+- The subject is the text colour, the reference the accent, comparisons Mist. The legend says so.
 
 ### G. Settings (a page, not an app)
 
@@ -169,19 +174,20 @@ Container  SideNavigation (wide) · Sections of Switches and Fields
 
 One per view, for the lead.
 
-- **The pace to beat.** `LineChart` with `referenceValue`: the subject in Flame, the target the blue line.
+- **The pace to beat.** `LineChart` with `referenceValue`: the subject in the text colour, the target the
+  accent line.
 - **A number board.** One `Metric` alone as the lead, with a `Sparkline` of the season.
-- **Kerbs for limits.** `KerbProgress` for a value against a limit: budget spent, track hours used.
 - **A podium for the top three.** `Podium` when only the first three matter.
-- **A scale rule opener.** `Separator scale` above the lead on an engineering page.
+- **Strengths and risks.** `SignalChips`, four of one tone, beside the record they describe.
+- **Capabilities as cards.** A row of up to four `ContentCard`s, each one idea with its `IconTile`.
+- **A conclusion.** One `Strapline` under the lead that says what it means.
 - **Hold for the irreversible.** `HoldToConfirm` for a quick, final action.
-- **Start lights for going live.** `StartLights` to start a session or a timer, nothing else.
-- **A checker at the finish.** `FinishSeparator` once, after a finished result.
 
 ## Never
 
 - Two primary buttons in one view.
-- Cards inside cards, a card around a whole screen, boxes around sections.
+- Cards inside cards, a card around a whole screen, boxes around sections, dark surfaces for the working area.
+- Two straplines, or a strapline that restates the title.
 - A grid of equal cards with nothing leading.
 - Three metrics, or more than four.
 - Viewport breakpoints inside an app, or sideways scrolling of the whole screen.

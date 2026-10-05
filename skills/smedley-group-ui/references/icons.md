@@ -1,6 +1,6 @@
 # Icon catalogue
 
-Generated from the brand book's icon library by npm run kit: 134 icons, 24 px grid, 1.5 px stroke, square ends, sharp corners, diagonals at 55 degrees. Use `assets/sprite.svg`: `<svg viewBox="0 0 24 24"><use href="sprite.svg#sg-NAME"/></svg>`.
+Generated from the brand book's icon library by npm run kit: 134 icons, 24 px grid, 1.5 px stroke, rounded ends and joins, no fill. Use `assets/sprite.svg`: `<svg viewBox="0 0 24 24"><use href="sprite.svg#sg-NAME"/></svg>`.
 
 | Name | Label | Family | Search words |
 |---|---|---|---|

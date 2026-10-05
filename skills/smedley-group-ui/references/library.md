@@ -95,11 +95,14 @@ Pick from this table before writing any markup. The left column is the need; use
 | Progress through a multi-step flow | `Steps` | numbered headings |
 | Many pages of results | `Pagination` | "Load more" without a count |
 | A group of content with a title | `Section` | a `Card` |
-| Something a person picks up or opens (a download, a pinned item) | `Card` | `Section` |
+| Something a person picks up or opens (a download, a pinned item) | `Card` (dark, the signature surface) | `Section` |
+| One idea with an icon, a title and a caption (an app, a capability) | `ContentCard` | a `Card` you lay out yourself |
+| An icon that stands for an idea | `IconTile` | a loose `Icon` |
+| The one conclusion of a view | `Strapline` (at most one per view) | a `Heading` or an `Alert` |
+| Four strengths or four risks at a glance | `SignalChips` (one tone, 2 by 2) | `Badge`s in a row |
 | A focused decision | `Dialog` | a new page |
 | Space between items | `Stack` | margins on children |
 | The page width and gutters | `Container` | fixed widths |
-| The end of a page | `FinishSeparator` | a hairline |
 
 ## Rules that apply to every component
 
@@ -110,7 +113,7 @@ Pick from this table before writing any markup. The left column is the need; use
 - `Field` connects the label, `hint` and `error` to the control through the render prop. Always spread the
   props it gives you onto the control: `{(props) => <Input {...props} />}`.
 - Errors are sentences that say what is wrong and how to fix it, passed as `error` to `Field` (they show in
-  yellow). Never colour anything red to mean wrong.
+  the negative pair, #C00000 on #FBE5D6). Never show an error in any other colour.
 - `id` is optional on `Field`, `SearchField`, `Select`, `Combobox`, `DateInput` and `FileDrop`: without one the
   control makes its own with `useId`, so the same app can be open in two windows. Pass one only where something
   else must link to the control (an `ErrorSummary` to its field). Any id you do pass, and option and tab ids,
@@ -118,7 +121,7 @@ Pick from this table before writing any markup. The left column is the need; use
 - Dates in and out of components are local `YYYY-MM-DD` strings.
 - Controlled components (`value` plus `onValueChange`) need both. Keep the state in the screen.
 - Pass `className` only for layout (margins, grid placement, width). Never for colour, font, border or radius.
-  The one exception: `className="mono"` on `Input`, for codes, phone numbers, licences and times.
+  The one exception: `className="mono"` on `Input` (tabular figures), for codes, phone numbers, licences and times.
 
 ## Records and drops
 
@@ -142,8 +145,8 @@ For the application's own persistence the barrel also exports **restore**`(text,
 `{ id, app }`), plus the `DeskState` type. They have no client directive, so a route handler can validate a
 layout before saving it.
 
-**DeskAppDefinition** `{ id, name, owner, icon, description?, context?: "engineering" | "racing" | "group",
-render() }`. `owner` is the business shown in mono in the window bar ("Advanced Technology").
+**DeskAppDefinition** `{ id, name, owner, icon, description?, render() }`. `owner` is the business shown
+quietly in the window bar ("Advanced Technology").
 
 **useDeskApp** `({ accepts?(record), receive?(record) })`, called inside the app. `record` is `{ type, id,
 name, context?, rec? }`; `accepts` returns `{ verb, icon }` or nothing. Each window registers separately,
@@ -203,10 +206,12 @@ dropped.
 
 ## Actions
 
-**Button** `variant?: "primary" | "secondary" | "text" | "engineering" | "warning"` (default `primary`),
+**Button** `variant?: "primary" | "secondary" | "text" | "warning"` (default `primary`),
 `size?: "small" | "medium" | "large"` (34, 44, 52 px; default `medium`), `loading?: boolean`, plus every
-native button prop. `type` defaults to `"button"`; set `type="submit"` in forms. `engineering` is the blue fill
-for the lead action in an Engineering context; `warning` is the yellow action for destructive confirmation.
+native button prop. `type` defaults to `"button"`; set `type="submit"` in forms. `primary` wears the selected
+fill (the signature gradient with white type on light, Pale Blue with black type on dark), `secondary` a Steel
+hairline, `text` a Pale Blue underline that turns to the accent on hover, and `warning` the negative pair
+(#C00000 on #FBE5D6) for destructive confirmation.
 While `loading` the button keeps its label and its focus and ignores presses (`aria-busy`, `aria-disabled`);
 it is not `disabled`, so focus does not fall to the page while the work runs.
 
@@ -215,7 +220,7 @@ it is not `disabled`, so focus does not fall to the page while the work runs.
 **IconButton** `icon: IconName`, `label: string` (the accessible name, required), plus native button props.
 `aria-pressed` makes it a toggle.
 
-**ButtonGroup** `label: string`. Buttons inside touch, their cuts parallel. Put the primary first.
+**ButtonGroup** `label: string`. Buttons inside sit 8 px apart. Put the primary first.
 
 **Chip** `pressed: boolean`, `onPressedChange(pressed)`, children as the label.
 
@@ -224,9 +229,6 @@ it is not `disabled`, so focus does not fall to the page while the work runs.
 The person holds for 1.1 s; letting go early drains the fill and nothing happens. Assistive technology
 cannot hold: a click that arrives without a press (a screen reader's activate, iOS double tap) arms the button
 with `armedLabel` for four seconds, and a second such click confirms.
-
-**StartLights** `label?` (default "Start session"), `onStart()`, `onReset?()`. Only for starting something
-live (a session, a timer).
 
 **Dropdown** `label` (the trigger text), `align?: "start" | "end"`, children: `<button>` and `<a>` elements,
 `<hr />` between groups, `className="neg"` on a destructive one. The open panel is placed against the
@@ -283,14 +285,14 @@ whole "or choose a file" line), `hint?` (types and limits, for example "PDF or D
 can go no further disables, after moving focus to the other one.
 
 **FormActions** `submitLabel` (what happens: "Save changes", "Add Maja to FKL Łódź"), `pending?`,
-`disabled?`, `submitVariant?: "primary" | "engineering"`, `cancelHref?` or `onCancel?`, `cancelLabel?`
+`disabled?`, `cancelHref?` or `onCancel?`, `cancelLabel?`
 (default "Cancel"), `status?` (one short line: "Unsaved changes"). The submit is the view's primary.
 
 **ErrorSummary** `errors: { id, message }[]` (the field ids), `title?`. It takes focus when errors arrive and
 links to each field. Renders nothing without errors.
 
-**FactList** `items: { label, value, measure? }[]`. Read-only facts, a mono label above each value;
-`measure` for codes, licences and amounts. An empty value reads "Not set".
+**FactList** `items: { label, value, measure? }[]`. Read-only facts, a quiet 12 px label above each value;
+`measure` (tabular figures) for codes, licences and amounts. An empty value reads "Not set".
 
 **UnsavedChangesGuard** `when` (the form is dirty), `title?`, `description?`, `leaveLabel?`, `stayLabel?`.
 Asks before a tab close or a link discards the work. Navigation the screen starts itself is not
@@ -325,8 +327,7 @@ notify("Session archived", "info", { label: "Undo", onClick: restore });
 
 **Spinner** `label?` (default "Loading"; pass `""` only inside a button). **Skeleton** size it with
 `className` (for example `className="h-4 w-2/3"`). **Progress** `value`, `max?`, `label`.
-**LinearProgress** `label`, `value?` (omit for unknown progress). **KerbProgress** `label`, `value`,
-`limitStart`, `max?`, `valueLabel?`: a value against a limit band.
+**LinearProgress** `label`, `value?` (omit for unknown progress).
 
 **EmptyState** `title`, children (what will appear and why it is empty), `action?` (usually a `Button`).
 
@@ -357,8 +358,8 @@ cannot be dismissed, closes on success and shows the error on failure; a close t
 busy is undone by showing it again.
 
 **Tooltip** `label` (a short note, one or two lines), `placement?: "top" | "bottom"`, `icon?: "help" |
-"info"`, children (the trigger text, or with `icon` the mark's accessible name). It reads as an annotation:
-the raised surface with a hairline and a Line Blue leader at 55 degrees to the trigger. In a form use
+"info"`, children (the trigger text, or with `icon` the mark's accessible name). The note is the signature
+surface with 12 px text, up to 260 px wide; the trigger is ink text with a dotted rule in the accent. In a form use
 `Field tip` rather than placing one yourself.
 **Popover** `title`, children: a static explanation surface.
 
@@ -367,7 +368,7 @@ Place it once, in the app bar; on phones it may move into the `UserMenu`. Switch
 
 **WorkspaceBar** `navigation: { label, href, current? }[]`, `actions?` (the `ThemeSwitch` and `UserMenu`),
 `homeHref?`, `mainId?` (the skip link's target, default "main"), `linkAs?` (the app's router link for the logo
-and destinations, so they navigate without a reload). The current destination has the red lead; on phones the
+and destinations, so they navigate without a reload). The current destination is SemiBold ink with a 2 px rounded ink underline; on phones the
 destinations take a second row. **UserMenu** `name`, `detail?` (the role), children (links,
 and a sign-out form).
 
@@ -376,11 +377,13 @@ and a sign-out form).
 **Container** the page width with gutters (32 px, 16 px on phones), at most 1200 px. Use it for pages
 outside an app (sign-in, the catalogue); inside an app use `AppScreen`. **Stack** `gap?: 8 | 12 | 16 | 24 | 32`
 (default 16), `direction?: "row" | "column"` (row wraps). **Section** `title`, `description?`, `actions?`
-(buttons at the right of the heading), children, `id?`: a hairline above, space around.
-**Card** an `<article>` with a hairline border, for one thing a person picks up or opens. **Separator** `scale?` (the red-into-blue scale rule for a
-section opener). **FinishSeparator** the checker: the last thing before the footer, nothing next to it.
-**Heading** `level?: 1 | 2 | 3 | 4` (34, 14, 14, 13 px). **Text** `as?: "p" | "span"`, `muted?`, `measure?`
-(IBM Plex Mono, for values). **Kbd** a key. **Avatar** `name`, `src?`, `size?: 32 | 36 | 40 | 48`.
+(buttons at the right of the heading), children, `id?`: it opens with the section header (the title, a quiet
+description) and the divider beneath it, with space around.
+**Card** an `<article>` on the signature surface with its edge light, carrying the dark theme for what sits inside,
+for one thing a person picks up or opens. **Separator** `scale?` (the divider on its own: Pale Blue solid to 83 %
+of its length, then fading; without `scale` a plain hairline).
+**Heading** `level?: 1 | 2 | 3 | 4` (32, 15, 14, 13 px). **Text** `as?: "p" | "span"`, `muted?`, `measure?`
+(SemiBold with tabular figures, for values). **Kbd** a key. **Avatar** `name`, `src?`, `size?: 32 | 36 | 40 | 48`.
 **BrandLogo** the Smedley Group logo for the theme. **AppIcon** `size?`, `theme?`.
 
 **Table** `caption` (required, names the table), children `<thead>`, `<tbody>` with native `<tr>`, `<th>`,
@@ -448,15 +451,42 @@ const rows = pageRows(sortRows(drivers, state.sort, (d, key) => d[key]), state.p
   onPageChange={state.setPage} />
 ```
 
+## Identity
+
+The book's own pieces. Each sits on the signature surface or its own tint; none takes colour props.
+
+**IconTile** `name: IconName`, `size?: "small" | "medium"` (32 by 34 px with a 16 px icon, or 44 by 46 px with
+24 px), `label?` (only when the tile alone carries meaning; without it the tile is hidden from assistive
+technology). One white icon on the signature surface, 10 px corners. One icon per idea.
+
+**ContentCard** `icon?: IconName`, `title` (set uppercase, 12 px SemiBold), `caption?` (Light, up to two lines),
+plus native `div` props. An icon tile, the title and the caption on the signature surface; it carries the dark
+theme. The desk's app tiles are content cards.
+
+**Strapline** `tone?: "dark" | "light"` (default `dark`), children: one sentence that concludes the view, with no
+punctuation beyond a full stop. At most one per view. `light` (black on Cloud) when the area above is already dense
+with dark cards.
+
+**SignalChips** `tone: "positive" | "negative"`, `items` (exactly four strings), `label` (names the block): short
+bold labels on their own tint in a 2 by 2 grid. One tone per block; green and red never share one.
+
+```tsx
+<ContentCard icon="data-logger" title="Telemetry" caption="Lap traces and sector deltas for every session" />
+<SignalChips tone="positive" label="Strengths" items={["Braking", "Consistency", "Racecraft", "Feedback"]} />
+<Strapline>Maja is 0.18 s off the F4 cut and closing.</Strapline>
+```
+
 ## Data and charts
 
 Every chart takes a `label` that names it for screen readers; write it as the finding ("Sessions per week,
-rising from 212 to 312"). Colours are fixed by the components: do not pass colours.
+rising from 212 to 312"). Colours are fixed by the components: do not pass colours. Charts are monochrome: the
+subject in the text colour, the reference in the accent, comparisons in Mist, and the one ramp (speed, temperature)
+Pale Blue to Mist to Slate. Gains and losses are told by the numbers, never by green or red fills.
 
 - **Metric** `label`, `value` (a formatted string), `change?: { label, positive }`, `values?` (a sparkline).
 - **Stat** `label`, `value`, `unit?`. **Sparkline** `values`, `label`.
 - **LineChart** `label`, `series: { label, values }[]` (the first is the subject), `labels` (x axis),
-  `domain?`, `referenceValue?` (the blue line to beat), `invert?` (lower is better, as for lap times),
+  `domain?`, `referenceValue?` (the line to beat, in the accent), `invert?` (lower is better, as for lap times),
   `formatValue?`.
 - **BarChart**, **ActivityChart** `label`, `data: { label, value }[]`, `max?`. **DivergingChart** `data`,
   `scale?`: gains and losses around zero. **RingChart** `data`, `center?`, `unit?`: parts of a whole, up to 4.
@@ -470,7 +500,7 @@ rising from 212 to 312"). Colours are fixed by the components: do not pass colou
   the booked bar), `today?`, `note?` (range calendars show the book's guiding note; `false` hides it). The grid
   follows `value` when the screen changes it; booked days and days inside the range say so in their labels.
 - **WeekSchedule** `days: { label, date, today? }[]`, `events: { id, day, hour, duration, title, detail?,
-  leading? }[]`, `startHour?`, `endHour?`, `onEventClick?`. `leading` marks the one event that leads (red).
+  leading? }[]`, `startHour?`, `endHour?`, `onEventClick?`. `leading` marks the one event that leads (the selected fill).
 
 ## Icons
 
@@ -483,7 +513,8 @@ Inside buttons use 16. Never draw an inline SVG icon.
 1. Compose existing components (a `Section` of `List`s, a `Card` holding a `Metric` and a `Button`).
 2. Lay them out with `Stack`, `Container` and Tailwind layout utilities (`grid`, `grid-cols-*`, `gap-*`,
    `flex`, `min-w-0`) and the theme utilities `bg-background`, `text-foreground`, `text-muted`,
-   `text-subtle`, `text-reference`, `text-warning`, `text-success`, `border-rule`, `font-sans`, `font-mono`.
+   `text-subtle`, `text-accent`, `text-warning`, `text-success`, `border-rule`, `font-sans`. There is no mono
+   utility.
 3. Only if a real control is missing, build it in `frontend/design-system/components` from the book's classes
-   in `ui.css` (see `components.md`), export it from `index.ts`, add it to the catalogue, and say so in your
+   in `ui.css` and `extended.css` (see `components.md`), export it from `index.ts`, add it to the catalogue, and say so in your
    reply. Never build a one-off control inside a screen.

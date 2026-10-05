@@ -10,20 +10,23 @@ for anyone building or changing the shell itself.
 
 ## A1. The desk
 
-- The desk holds **spaces**. A space is one window showing one app. Two windows of the same app may be open
+- The desk sits on the Canvas ground and holds **spaces**. A space is one window showing one app. A window is
+  an Off-white panel with 12 px corners and a Pale Blue edge. Two windows of the same app may be open
   at once, each with its own state.
 - The windows form a tree of splits: a split lays its children side by side (`row`) or stacked (`col`), each
   with a share (`fr`). A window is never narrower or shorter than **260 px**.
 - An empty space shows "What goes here?" with the line "Pick an app for this space. Hover any gap to open
   another." ("Tap any gap for its +" on touch) and a grid of every app. Picking one fills it.
+- Each app in a grid is a tile: a content card on the signature surface with the app's icon tile, its name and a
+  one-line description.
 - With no windows the desk shows the launcher: "Good to see you. Where to?", the app grid, and what is coming.
 
 ## A2. Gaps and the +
 
 - Windows sit with a **12 px gap** around them (16 px on touch). Every gap is live: along the desk edges and
   between windows.
-- Hovering a gap widens it to **120 px** at once, shows a blue 55° hatch and a 48 px **+** that grows in
-  (red while hovered). It closes 140 ms after the pointer leaves.
+- Hovering a gap widens it to **120 px** at once, shows a quiet tinted panel with a dashed edge and 10 px
+  corners, and a 48 px ink **+** that grows in. It closes 140 ms after the pointer leaves.
 - Keyboard: every gap is a button ("Open a new space here"); focus opens it, Enter or Space inserts.
 - Touch: the first tap opens a gap ("Tap the + to open a new space here"), the second inserts. The right edge
   shows a faint + at rest.
@@ -54,18 +57,18 @@ for anyone building or changing the shell itself.
 ## A5. Focus
 
 - Pressing inside a window focuses it (a finger focuses on release, unless it was part of a gesture). The
-  focused window shows a **36 × 3 px red lead** at its top left and a stronger rule.
+  focused window shows a **36 × 3 px ink bar** at its top left and a stronger edge (Steel).
 - The space in focus decides where "Apps" and "Open in a new space" insert: beside it, on its right.
 
 ## A6. The window bar
 
-- 44 px tall (52 px on touch): the app's icon, its name (13 px semibold), its owner in mono ("Advanced
+- 44 px tall (52 px on touch): the app's icon, its name (13 px SemiBold), its owner in quiet text ("Advanced
   Technology"), and three buttons: **Column width** (Scroll only), **Swap app** (the window becomes an empty
   space to choose again), **Close**.
 - **Drag the bar** (or tap and hold it on touch) onto another window and the two swap places: "Swap places with
   {name}". Sizes stay with the positions.
 - The **window menu** (right-click the bar, hold and release, or Shift F10 in the bar): "Swap places with" each
-  other window, the column width presets (Scroll), Swap app, Overview, and Close (in yellow).
+  other window, the column width presets (Scroll), Swap app, Overview, and Close (in negative red).
 - Closing: the window fades behind the others as they slide in; focus goes to its neighbour. "Window closed".
 
 ## A7. Overview
@@ -77,8 +80,8 @@ for anyone building or changing the shell itself.
 
 ## A8. Narrow screens (under 760 px)
 
-- One window at a time, inset 12 px, with a **tab for each space** at the bottom and a red **+** tab to add
-  one. The incoming space slides in 24 px from its tab's side.
+- One window at a time, inset 12 px, with a **tab for each space** at the bottom (the current one ringed in
+  Steel) and a **+** tab in the selected fill to add one. The incoming space slides in 24 px from its tab's side.
 - Swipe along the tabs, across a window's bar, or with two fingers to change space. Menus become bottom sheets.
 
 ## A9. Keys
@@ -101,7 +104,7 @@ for anyone building or changing the shell itself.
 | Gesture | Does |
 |---|---|
 | Tap | everything a click does; on a gap, the first tap opens it, the second opens a space |
-| Tap and hold, 0.45 s | a record or a window's bar lifts (a red rule fills while you hold, with a short vibration); move to carry it, or let go for its menu. Moving 10 px before the hold fires cancels it and scrolls |
+| Tap and hold, 0.45 s | a record or a window's bar lifts (a 2 px ink rule fills while you hold, with a short vibration); move to carry it, or let go for its menu. Moving 10 px before the hold fires cancels it and scrolls |
 | Two fingers sideways | in Scroll the strip follows the fingers, glides on with a flick and settles on a column; elsewhere, the next space |
 | Pinch in, spread out | the overview, following the fingers; it commits past 40 %, or on a flick |
 | Two- or three-finger tap | the Apps sheet |
@@ -125,8 +128,9 @@ The overview and hover state are not.
 
 - A **record** is a driver, a venue, a session or a range of dates. Anything that shows a record can be picked
   up and dropped into any app, and every app says what it would do with it.
-- Records keep one look everywhere: `RecordChip` (in `library.md`). People on red initials, sessions on a blue
-  stopwatch, venues on an ink pin, dates on a grey calendar, then the name and one mono line of context.
+- Records keep one look everywhere: `RecordChip` (in `library.md`). A small tile leads: people's initials on the
+  signature surface, sessions on a Steel stopwatch, venues on a Pale Blue pin, dates on a calendar in the quiet
+  tint, then the name and one quiet line of context.
 - A record is identified by its drag key: `person:{id}`, `venue:{id}`, `session:{id}`, or
   `range:YYYY-MM-DD..YYYY-MM-DD`. Window bars use `window:{id}`.
 
@@ -137,14 +141,14 @@ The overview and hover state are not.
   event) needs a **0.45 s hold**, so a swipe still scrolls the list.
 - Presses on inputs, selects, textareas and on buttons in the window bar never start a drag.
 - While dragging, the source dims to 40 %, the cursor is a closed hand, and a **ghost** of the record follows
-  the pointer 14 px below and right (flipping near the edges). Its bottom rule turns red and runs full width
+  the pointer 14 px below and right (flipping near the edges). Its bottom rule turns ink and runs full width
   over anything that will take it. "Picked up {name}. Drop it on an app, or on a gap for a new space."
 
 ## B3. Every app says what it would do
 
-- As a drag starts, every other window shows an overlay below its bar: a blue 55° hatch, the app's icon, and
+- As a drag starts, every other window shows an overlay below its bar: a quiet tinted panel with a hairline ring, the app's icon, and
   the **verb**, what the app would do with this record ("See Maja’s laps"), with the app's name below.
-- Under the pointer the overlay goes **hot**: a 2 px red outline, the icon red and a little larger.
+- Under the pointer the overlay goes **hot**: a 2 px ink ring, the icon ink and a little larger.
 - An app that has nothing for the record says so: "Nothing for a driver here" (a session, a venue, these dates).
 - **Gaps are targets too:** hovering one opens it with "{Home app} in a new space": People for a person,
   Venues for a venue, Booking for a session, the Calendar for dates. An empty space offers "Open in {Home app}".
@@ -198,7 +202,7 @@ An app takes part by calling `useDeskApp({ accepts, receive })` inside itself (t
    range appended after a comma. "Book a session for Maja", "See the week at Heyford Park", "Pin Cadet
    qualifying to the dashboard", "See what was invoiced, 22 Sep to 28 Sep", "Open Maja’s record".
 4. **Receive it.** `receive(record)` changes the app's state, redraws, and marks the region that changed with the
-   landing mark (a red bar drawing across its top and fading over 1.1 s), scrolled into view.
+   landing mark (an accent bar drawing across its top and fading over 1.1 s), scrolled into view.
 5. **Show a dropped range as a `FilterBar`**, with the range as a `RecordChip` that can be picked up again and a
    cross that clears it. Never filter silently. One bar per filter.
 6. **Invite drops while waiting** with a `Hint` that names what to drop and what it will do. Remove it once
@@ -224,7 +228,8 @@ An app takes part by calling `useDeskApp({ accepts, receive })` inside itself (t
 | Narrowest window | 260 px |
 | Resize threshold | 5 px |
 | Column width presets | 1/3, 1/2, 2/3, Full; new columns 1/2 |
-| Window bar | 44 px (52 on touch); buttons 32 px (40 on touch); focus lead 36 × 3 px red |
+| Window | Off-white panel, 12 px corners, 1 px Pale Blue edge (Steel when focused) |
+| Window bar | 44 px (52 on touch); buttons 32 px (40 on touch); focus lead 36 × 3 px ink bar |
 | Window moves and resizes | 0.38 s `cubic-bezier(.16, 1, .3, 1)`; overview transform 0.42 s |
 | New window | fades in 0.3 s, content 0.34 s after 0.12 s, grown from the gap or tile |
 | Closing window | 0.17 s `cubic-bezier(.5, 0, 1, 1)` to opacity 0 and scale 0.97, behind the others |
@@ -233,11 +238,11 @@ An app takes part by calling `useDeskApp({ accepts, receive })` inside itself (t
 | Drag threshold, mouse | 6 px |
 | Touch hold | 0.45 s (Calendar days 0.38 s); cancelled by 10 px of movement; 12 ms vibration |
 | Ghost | offset 14 px; at most 300 px wide; arrives 0.22 s from scale 0.85 |
-| Drop overlay | from 44 px below the window's top; fades in 0.25 s; hot outline 2 px red; icon 34 px, scaled 1.12 when hot |
+| Drop overlay | from 44 px below the window's top; fades in 0.25 s; a quiet tinted panel inset 10 px; hot ring 2 px ink; icon 34 px, scaled 1.12 when hot |
 | Auto-scroll | 56 px from the strip's edge, 48 px from a list's edge; a third of the distance per frame |
 | Ghost flight | to target 0.2 s ease-in to scale 0.6; back 0.3 s braking |
 | Overlays leave | 0.15 s ease-in |
-| Landing mark | 3 px red bar, 1.1 s braking |
+| Landing mark | 3 px accent bar (Steel on light, Pale Blue on dark), 1.1 s braking |
 | Send to menu | at most 340 px wide; items at least 48 px; arrives 0.4 s; closes 0.14 s; phone bottom sheet at most 78 % high |
 | Gestures | mode decided after 12 px of movement or 8 % of scale; flicks at 0.45 px per ms; overview commits past 40 %; swipes commit past 25 % of the width |
 | Reduced motion | every animation above removed; the end state shows at once |

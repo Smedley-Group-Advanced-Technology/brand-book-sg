@@ -47,7 +47,7 @@
   --sg-tracking:-0.024em;
   color-scheme:light;
 }
-:root[data-theme="dark"], .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh{
+:root[data-theme="dark"], .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh, .ux{
   --sg-text:#FFFFFF;
   --sg-inv:#000000;
   --sg-ground:#10141A;
@@ -70,8 +70,8 @@
   color-scheme:dark;
 }
 .sg-surface{border:1px solid transparent;background:var(--sg-surface) padding-box,var(--sg-edge) border-box;color:var(--sg-text)}
-:root, .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh{--ink:var(--sg-text);--inv:var(--sg-inv);--dim:var(--sg-dim);--faint:var(--sg-faint);--rule:var(--sg-rule);--bg1:var(--sg-ground);--surf:var(--sg-ground);--pop:var(--sg-panel);--red:var(--sg-deep-navy);--blue:var(--sg-accent);--line:var(--sg-accent);--flame:var(--sg-accent);--pale:var(--sg-accent);--amber:var(--sg-negative);--green:var(--sg-positive);--steel:var(--sg-steel);--alloy:var(--sg-mist);--cloud2:var(--sg-dim);--product:var(--sg-product-blue);--mono:var(--sg-font);--t:68,84,106}
-:root[data-theme="dark"], .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh{--t:171,192,228}
+:root, .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh, .ux{--ink:var(--sg-text);--inv:var(--sg-inv);--dim:var(--sg-dim);--faint:var(--sg-faint);--rule:var(--sg-rule);--bg1:var(--sg-ground);--surf:var(--sg-ground);--pop:var(--sg-panel);--red:var(--sg-deep-navy);--blue:var(--sg-accent);--line:var(--sg-accent);--flame:var(--sg-accent);--pale:var(--sg-accent);--amber:var(--sg-negative);--green:var(--sg-positive);--steel:var(--sg-steel);--alloy:var(--sg-mist);--cloud2:var(--sg-dim);--product:var(--sg-product-blue);--mono:var(--sg-font);--t:68,84,106}
+:root[data-theme="dark"], .sg-dark, .toast, .tip, .menu, .pop, .modal, .tabs2, .email .eh, .ux{--t:171,192,228}
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--brake:cubic-bezier(.16,1,.3,1)}
 @property --lead{syntax:'<length>';inherits:false;initial-value:0px}
 @property --run{syntax:'<percentage>';inherits:false;initial-value:0%}
