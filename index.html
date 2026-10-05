@@ -196,7 +196,6 @@ input[type=date], input[type=time]{color-scheme:inherit}
 .index .t{margin-top:22px;font-weight:600;font-size:15px;color:var(--dim)}
 .index nav{display:flex;flex-direction:column}
 .index nav a{position:relative;display:flex;align-items:center;color:var(--dim);font-size:13px}
-.index nav a span{font-variant-numeric:tabular-nums}
 .index nav a:hover{color:var(--ink)}
 .index nav a::before{width:4px;height:14px;margin-top:-7px;transform:scaleY(0);transition:transform .35s var(--brake)}
 .index nav a.on{color:var(--ink);font-weight:600}
@@ -237,39 +236,33 @@ table.spec td:first-child{font-weight:600;width:38%;padding-right:16px;color:var
 .subhead:first-of-type{margin-top:0}
 .sub{font-family:var(--mono);font-size:11.5px;letter-spacing:.01em}
 .sh{display:flex}
-.num{display:inline-flex;height:34px;padding:0 22px;font-size:19px;font-weight:700;border-radius:var(--sg-radius-chip)}
 .tb{display:grid;margin:0}
 .tb > div{padding:6px 12px 7px;border-left:0.75px solid rgba(var(--t),.3)}
 .tb > div:first-child{border-left:0}
 .tb dt{font-size:10px}
 .tb dd{margin:1px 0 0;font-size:11.5px;font-variant-numeric:tabular-nums;color:var(--sg-text);white-space:nowrap}
-.lap{margin-top:30px;font-family:var(--mono);font-size:11px;color:var(--dim);display:flex;justify-content:space-between}
-.lap b{color:var(--ink);font-weight:500}
 .lapbar{margin-top:8px;height:5px;border-radius:var(--sg-radius-chip)}
 .lapbar i{display:block;height:100%}
 .index nav{margin-top:18px}
-.index nav a span{display:grid;font-family:var(--mono);font-size:10.5px;background:rgba(var(--t),.07);color:var(--dim)}
 .index nav a::before{content:"";position:absolute;left:auto}
 
 .colophon .mono{color:var(--faint)}
 @media (max-width:820px){
 
-  .lap, .lapbar{display:none}
+  .lapbar{display:none}
   .index nav a{border-top:0}
 }
 .hair::before{content:none}
-.num{font-variant-numeric:tabular-nums;align-items:center;letter-spacing:-.03em;background:var(--sg-selected);color:var(--sg-on-selected)}
 .tb{grid-template-columns:repeat(3,auto);border:0.75px solid rgba(var(--t),.3)}
 .tb > div{min-width:74px;border-color:var(--sg-rule)}
 .tb dt{color:var(--sg-faint)}
-.index nav a.on span{font-weight:600;background:var(--sg-selected);color:var(--sg-on-selected)}
 .index nav a::before{background:var(--sg-text);border-radius:2px}
 .lapbar{background:var(--sg-quiet-tint)}
 .lapbar i{width:0;background:var(--sg-text)}
 @media (min-width:821px){
   .two > .group + .group{margin-top:0}
 }
-.num, .index nav a.on span{color:#fff}
+.num, 
 .themes{display:inline-flex;margin-top:18px;padding:3px;background:rgba(var(--t),.08);transform:none;margin-left:8px;align-self:flex-start}
 .themes button{border:0;background:transparent;color:var(--dim);font-size:12px;padding:0 14px;line-height:30px;cursor:pointer}
 .themes button span{display:block;transform:none}
@@ -279,8 +272,7 @@ table.spec td:first-child{font-weight:600;width:38%;padding-right:16px;color:var
 }
 .themes{border-radius:var(--sg-radius-tile)}
 .themes button{border-radius:7px}
-.index nav a span{place-items:center;width:38px;height:19px;padding:0 0 0 1px;border-radius:var(--sg-radius-chip)}
-.index nav a::before{top:50%;right:4px;display:none}
+.index nav a::before{top:50%;left:4px;right:auto;width:3px;height:16px;margin-top:-8px}
 main{background:none}
 .tb, .tb > div{border-color:rgba(47,128,255,.28) !important}
 .tb dt{opacity:.8}
@@ -291,15 +283,15 @@ main{background:none}
 .inner :is(p, td) > a:not([class]){color:var(--ink);text-decoration-color:var(--sg-rule);text-decoration-thickness:2px;text-underline-offset:3px}
 section.s{padding:84px 64px 72px}
 .sh{flex-wrap:wrap;justify-content:flex-start;align-items:center;gap:16px}
-.chap{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.chap{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--sg-faint)}
 section.s h2{margin-top:22px}
 .intro{max-width:64ch}
 .subhead{margin:64px 0 20px}
 .index nav .grp{margin:18px 0 6px;font-family:var(--mono);font-size:10px;color:var(--faint)}
 .index nav .grp:first-child{margin-top:0}
-.index nav a{text-decoration:none;padding-left:0;border-top:0;min-height:28px}
+.index nav a{text-decoration:none;padding-left:14px;border-top:0;min-height:30px;border-radius:var(--sg-radius-control)}
+.index nav a.on{background:var(--sg-quiet-tint)}
 .part{display:grid;grid-template-columns:minmax(0,160px) minmax(0,1fr) minmax(0,280px);gap:32px;align-items:start;padding:64px 64px 60px;border-bottom:.75px solid var(--rule)}
-.part .pn{font-family:var(--mono);font-size:11px;color:var(--dim);padding-top:10px}
 .part .pt{margin:0;font-weight:600;font-size:clamp(28px,3.2vw,40px);letter-spacing:-.04em;line-height:1}
 .part .pl{margin:12px 0 0;max-width:48ch;color:var(--dim);font-size:15px}
 .part .pi{list-style:none;margin:0;padding:6px 0 0;display:flex;flex-direction:column}
@@ -309,7 +301,6 @@ section.s h2{margin-top:22px}
 .part .pi span{font-family:var(--mono);font-size:10.5px;color:var(--faint);width:20px}
 @media (max-width:1100px){
   .part{grid-template-columns:minmax(0,1fr) minmax(0,240px)}
-  .part .pn{grid-column:1/-1;padding:0}
 }
 @media (max-width:820px){
   section.s{overflow-x:clip;padding:56px 20px 52px}
@@ -325,7 +316,7 @@ section.s{overflow-x:clip}
 @media (max-width:820px){
   .index{border-right:0;position:sticky;top:0;z-index:60;overflow:visible;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;padding:10px 16px;background:var(--bg1);border-bottom:.75px solid var(--rule)}
   .index > .lk{--lk:.28px !important}
-  .index .t, .index .themes, .index .lap, .index nav{display:none}
+  .index .t, .index .themes, .index nav{display:none}
   .index .lapbar{display:block;position:absolute;left:0;right:0;bottom:-1px;height:2px;margin:0;clip-path:none}
   .mcur{display:block;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-family:var(--mono);font-size:11px;color:var(--dim);padding-left:12px;border-left:.75px solid var(--rule)}
   .mcur b{color:var(--ink);font-weight:500;margin-right:4px}
@@ -333,7 +324,8 @@ section.s{overflow-x:clip}
   .index.open nav{display:flex;flex-direction:column;position:fixed;left:0;right:0;bottom:0;margin:0;padding:20px 20px 110px;overflow-y:auto;overscroll-behavior:contain;background:var(--bg1);z-index:59}
   .index.open nav .grp{display:block;margin:22px 0 4px}
   .index.open nav .grp:first-child{margin-top:0}
-  .index.open nav a{min-height:46px;padding:0;white-space:normal;font-size:15px;border-top:.75px solid var(--rule)}
+  .index.open nav a{min-height:46px;padding:0 0 0 16px;white-space:normal;font-size:15px;border-top:1px solid var(--sg-rule)}
+.index.open nav a.on, .index.open nav a.on + a{border-top-color:transparent}
   .index.open nav .grp + a{border-top:0}
   .index.open::after{content:"";position:fixed;left:0;right:0;bottom:0;height:84px;background:var(--bg1);border-top:.75px solid var(--rule);z-index:60}
   .index.open .themes{display:inline-flex;position:fixed;left:28px;bottom:24px;z-index:61;margin:0}
@@ -1568,36 +1560,36 @@ table.vx td:first-child{width:18%}
     <span class="mcur" id="mcur" aria-live="polite"></span><button class="btn g sm mbtn" type="button" id="mbtn" aria-expanded="false" aria-controls="toc">Menu</button>
     <div class="t">Brand book</div>
     <div class="themes" role="group" aria-label="Theme"><button type="button" data-t="light" aria-pressed="false"><span>Light</span></button><button type="button" data-t="dark" aria-pressed="false"><span>Dark</span></button></div>
-    <div class="lap"><span>Chapter <b id="lapN">01</b>/<span id="lapT">16</span></span><span>SG-BB</span></div><div class="lapbar"><i id="lapBar"></i></div>
+    <div class="lapbar"><i id="lapBar"></i></div>
     <div class="srch" role="search"><input class="inp" id="srch" type="search" placeholder="Search the book" aria-label="Search the book" autocomplete="off"><ol id="srchr" class="srchr" hidden></ol></div>
     <nav id="toc" aria-label="Sections">
       <div class="grp">Foundations</div>
-      <a href="#logo"><span>01</span>Logo</a>
-      <a href="#lockups"><span>02</span>Business lockups</a>
-      <a href="#colour"><span>03</span>Colour</a>
-      <a href="#type"><span>04</span>Typography</a>
-      <a href="#voice"><span>05</span>Voice</a>
-      <a href="#surfaces"><span>06</span>Gradients and surfaces</a>
-      <a href="#imagery"><span>07</span>Imagery</a>
-      <a href="#slant"><span>08</span>Layout and grid</a>
+      <a href="#logo">Logo</a>
+      <a href="#lockups">Business lockups</a>
+      <a href="#colour">Colour</a>
+      <a href="#type">Typography</a>
+      <a href="#voice">Voice</a>
+      <a href="#surfaces">Gradients and surfaces</a>
+      <a href="#imagery">Imagery</a>
+      <a href="#slant">Layout and grid</a>
       <div class="grp">At work</div>
-      <a href="#engineering"><span>09</span>Drawings and data</a>
-      <a href="#context"><span>10</span>Across the group</a>
-      <a href="#motion"><span>11</span>Motion</a>
-      <a href="#progress"><span>12</span>The glyph as progress</a>
+      <a href="#engineering">Drawings and data</a>
+      <a href="#context">Across the group</a>
+      <a href="#motion">Motion</a>
+      <a href="#progress">The glyph as progress</a>
       <div class="grp">Interface</div>
-      <a href="#components"><span>13</span>Controls</a>
-      <a href="#nav-sec"><span>14</span>Navigation and feedback</a>
-      <a href="#charts-sec"><span>15</span>Data and charts</a>
-      <a href="#calendar-sec"><span>16</span>Calendar and scheduling</a>
-      <a href="#apps-sec"><span>17</span>Overlays and apps</a>
+      <a href="#components">Controls</a>
+      <a href="#nav-sec">Navigation and feedback</a>
+      <a href="#charts-sec">Data and charts</a>
+      <a href="#calendar-sec">Calendar and scheduling</a>
+      <a href="#apps-sec">Overlays and apps</a>
       <div class="grp">Application</div>
-      <a href="#layout-sec"><span>18</span>Layout</a>
-      <a href="#application"><span>19</span>In use</a>
-      <a href="#showcase"><span>20</span>Brand showcase</a>
-      <a href="#cobrand"><span>21</span>Co-branding</a>
-      <a href="#principles"><span>22</span>Principles</a>
-      <a href="#resources"><span>23</span>Resources</a>
+      <a href="#layout-sec">Layout</a>
+      <a href="#application">In use</a>
+      <a href="#showcase">Brand showcase</a>
+      <a href="#cobrand">Co-branding</a>
+      <a href="#principles">Principles</a>
+      <a href="#resources">Resources</a>
     </nav>
   </aside>
 
@@ -1610,11 +1602,11 @@ table.vx td:first-child{width:18%}
     </header>
 
     <!-- PART 1 FOUNDATIONS -->
-    <div class="part" id="part-1"><div class="pn">Part 1 of 4</div><div class="pb"><p class="pt">Foundations</p><p class="pl">The mark and its lockups, colour, type, voice, the one surface, pictures and the grid everything sits on.</p></div><ol class="pi"><li><a href="#logo"><span>01</span>Logo</a></li><li><a href="#lockups"><span>02</span>Business lockups</a></li><li><a href="#colour"><span>03</span>Colour</a></li><li><a href="#type"><span>04</span>Typography</a></li><li><a href="#voice"><span>05</span>Voice</a></li><li><a href="#surfaces"><span>06</span>Gradients and surfaces</a></li><li><a href="#imagery"><span>07</span>Imagery</a></li><li><a href="#slant"><span>08</span>Layout and grid</a></li></ol></div>
+    <div class="part" id="part-1"><div class="pb"><p class="pt">Foundations</p><p class="pl">The mark and its lockups, colour, type, voice, the one surface, pictures and the grid everything sits on.</p></div><ol class="pi"><li><a href="#logo">Logo</a></li><li><a href="#lockups">Business lockups</a></li><li><a href="#colour">Colour</a></li><li><a href="#type">Typography</a></li><li><a href="#voice">Voice</a></li><li><a href="#surfaces">Gradients and surfaces</a></li><li><a href="#imagery">Imagery</a></li><li><a href="#slant">Layout and grid</a></li></ol></div>
 
     <!-- 01 LOGO -->
     <section class="s" id="logo"><div class="inner">
-      <div class="sh"><div class="num">01</div><span class="chap">Foundations</span></div>
+      <div class="sh"><span class="chap">Foundations</span></div>
       <h2 data-anchor="logo">The logo<button class="hlink" type="button" aria-label="Copy link to The logo"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">A single drawn lockup in one colour, placed in the same corner at the same size every time. Its consistency is what lets everything else in the system move.</p>
       <div class="hair"></div>
@@ -1692,7 +1684,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 02 BUSINESS LOCKUPS -->
     <section class="s" id="lockups"><div class="inner">
-      <div class="sh"><div class="num">02</div><span class="chap">Foundations</span></div>
+      <div class="sh"><span class="chap">Foundations</span></div>
       <h2 data-anchor="lockups">Business lockups<button class="hlink" type="button" aria-label="Copy link to Business lockups"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">One mark for the group and one lockup per business. The glyph, the wordmark and the divider never change; only the name after the divider does. Every lockup is monochrome: ink on Canvas, white on the surface.</p>
       <div class="hair"></div>
@@ -1720,7 +1712,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 03 COLOUR -->
     <section class="s" id="colour"><div class="inner">
-      <div class="sh"><div class="num">03</div><span class="chap">Foundations</span></div>
+      <div class="sh"><span class="chap">Foundations</span></div>
       <h2 data-anchor="colour">Colour<button class="hlink" type="button" aria-label="Copy link to Colour"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">A near-monochrome palette: ink and navy for structure, one pale blue for light, and a tightly rationed green and red that carry meaning rather than decoration.</p>
       <div class="hair"></div>
@@ -1747,7 +1739,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 04 TYPOGRAPHY -->
     <section class="s" id="type"><div class="inner">
-      <div class="sh"><div class="num">04</div><span class="chap">Foundations</span></div>
+      <div class="sh"><span class="chap">Foundations</span></div>
       <h2 data-anchor="type">Typography<button class="hlink" type="button" aria-label="Copy link to Typography"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Sora in three weights, tracked tight at display sizes. The weight does the work that colour and rules do in other systems. No italics, no fourth weight, no second family.</p>
       <div class="hair"></div>
@@ -1809,7 +1801,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 05 VOICE -->
     <section class="s" id="voice"><div class="inner">
-      <div class="sh"><div class="num">05</div><span class="chap">Foundations</span></div>
+      <div class="sh"><span class="chap">Foundations</span></div>
       <h2 data-anchor="voice">Voice<button class="hlink" type="button" aria-label="Copy link to Voice"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">We write the way a good engineer explains a result: the point first, specific, calm. Plain words, full sentences, and numbers that mean something.</p>
       <div class="hair"></div>
@@ -1854,7 +1846,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 06 GRADIENTS AND SURFACES -->
     <section class="s" id="surfaces"><div class="inner">
-      <div class="sh"><div class="num">06</div><span class="chap">Foundations</span></div>
+      <div class="sh"><span class="chap">Foundations</span></div>
       <h2 data-anchor="surfaces">Gradients and surfaces<button class="hlink" type="button" aria-label="Copy link to Gradients and surfaces"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Everything dark in this system is the same 45° gradient with the same edge light. That single decision is what makes cards, tiles, circles and bands read as one object. The ground stays flat Canvas.</p>
       <div class="hair"></div>
@@ -1912,7 +1904,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 07 IMAGERY -->
     <section class="s" id="imagery"><div class="inner">
-      <div class="sh"><div class="num">07</div><span class="chap">Foundations</span></div>
+      <div class="sh"><span class="chap">Foundations</span></div>
       <h2 data-anchor="imagery">Imagery<button class="hlink" type="button" aria-label="Copy link to Imagery"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Documentary photography of the real environment: track-side, in the paddock, in the seat. Real people doing real work, in available light, with no filters and no stock gloss.</p>
       <div class="hair"></div>
@@ -1935,7 +1927,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 08 LAYOUT AND GRID -->
     <section class="s" id="slant"><div class="inner">
-      <div class="sh"><div class="num">08</div><span class="chap">Foundations</span></div>
+      <div class="sh"><span class="chap">Foundations</span></div>
       <h2 data-anchor="slant">Layout and grid<button class="hlink" type="button" aria-label="Copy link to Layout and grid"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">A 16:9 canvas with fixed margins, a fixed title position, a four-column field and a full-bleed conclusion band. Every slide is a variation on this frame, and every screen keeps its order.</p>
       <div class="hair"></div>
@@ -2015,11 +2007,11 @@ table.vx td:first-child{width:18%}
     </div></section>
 
     <!-- PART 2 TWO WORLDS -->
-    <div class="part" id="part-2"><div class="pn">Part 2 of 4</div><div class="pb"><p class="pt">At work</p><p class="pl">Drawings and data, the same system across every business, and how the mark moves.</p></div><ol class="pi"><li><a href="#engineering"><span>09</span>Drawings and data</a></li><li><a href="#context"><span>10</span>Across the group</a></li><li><a href="#motion"><span>11</span>Motion</a></li><li><a href="#progress"><span>12</span>The glyph as progress</a></li></ol></div>
+    <div class="part" id="part-2"><div class="pb"><p class="pt">At work</p><p class="pl">Drawings and data, the same system across every business, and how the mark moves.</p></div><ol class="pi"><li><a href="#engineering">Drawings and data</a></li><li><a href="#context">Across the group</a></li><li><a href="#motion">Motion</a></li><li><a href="#progress">The glyph as progress</a></li></ol></div>
 
     <!-- 09 RACE ENGINEERING -->
     <section class="s" id="engineering"><div class="inner">
-      <div class="sh"><div class="num">09</div><span class="chap">At work</span></div>
+      <div class="sh"><span class="chap">At work</span></div>
       <h2 data-anchor="engineering">Drawings and data<button class="hlink" type="button" aria-label="Copy link to Drawings and data"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Where something is measured, built or read, the system draws it plainly. Technical drawings sit on the Canvas in ink, measured in Steel; values are Sora with tabular figures; and green and red appear only where a number has gone up or down. The same rules serve a kart, a sensor housing and a results table.</p>
       <div class="hair"></div>
@@ -2096,7 +2088,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 10 USAGE CONTEXT -->
     <section class="s" id="context"><div class="inner">
-      <div class="sh"><div class="num">10</div><span class="chap">At work</span></div>
+      <div class="sh"><span class="chap">At work</span></div>
       <h2 data-anchor="context">Across the group<button class="hlink" type="button" aria-label="Copy link to Across the group"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">One system serves the whole group. Smedley Group, Advanced Technology, Insight Labs and FAT Racing share the same palette, the same surface and the same type; only the division name in the lockup changes. FAT Karting League keeps its own brand.</p>
       <div class="hair"></div>
@@ -2160,7 +2152,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 11 MOTION -->
     <section class="s" id="motion"><div class="inner">
-      <div class="sh"><div class="num">11</div><span class="chap">At work</span></div>
+      <div class="sh"><span class="chap">At work</span></div>
       <h2 data-anchor="motion">Motion<button class="hlink" type="button" aria-label="Copy link to Motion"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Motion brakes: fast in, hard stop, like a car arriving on its marks. Each view has one moment and no more. The logo's moment is the hero: three bars drawn in turn on the signature surface, then the lockup and the divider.</p>
       <div class="hair"></div>
@@ -2193,7 +2185,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 12 GLYPH AS PROGRESS -->
     <section class="s" id="progress"><div class="inner">
-      <div class="sh"><div class="num">12</div><span class="chap">At work</span></div>
+      <div class="sh"><span class="chap">At work</span></div>
       <h2 data-anchor="progress">The glyph as progress<button class="hlink" type="button" aria-label="Copy link to The glyph as progress"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">The three bars are the three rungs of the ladder: FAT Karting League, Formula 4, Formula 1. One value runs through them in order, so a driver completes the whole mark only on reaching F1. The same three bars are the loader.</p>
       <div class="hair"></div>
@@ -2220,11 +2212,11 @@ table.vx td:first-child{width:18%}
     </div></section>
 
     <!-- PART 3 INTERFACE -->
-    <div class="part" id="part-3"><div class="pn">Part 3 of 4</div><div class="pb"><p class="pt">Interface</p><p class="pl">Every control, screen and chart, built from the foundations.</p></div><ol class="pi"><li><a href="#components"><span>13</span>Controls</a></li><li><a href="#nav-sec"><span>14</span>Navigation and feedback</a></li><li><a href="#charts-sec"><span>15</span>Data and charts</a></li><li><a href="#calendar-sec"><span>16</span>Calendar and scheduling</a></li><li><a href="#apps-sec"><span>17</span>Overlays and apps</a></li></ol></div>
+    <div class="part" id="part-3"><div class="pb"><p class="pt">Interface</p><p class="pl">Every control, screen and chart, built from the foundations.</p></div><ol class="pi"><li><a href="#components">Controls</a></li><li><a href="#nav-sec">Navigation and feedback</a></li><li><a href="#charts-sec">Data and charts</a></li><li><a href="#calendar-sec">Calendar and scheduling</a></li><li><a href="#apps-sec">Overlays and apps</a></li></ol></div>
 
     <!-- 13 CONTROLS -->
     <section class="s" id="components"><div class="inner">
-      <div class="sh"><div class="num">13</div><span class="chap">Interface</span></div>
+      <div class="sh"><span class="chap">Interface</span></div>
       <h2 data-anchor="components">Controls<button class="hlink" type="button" aria-label="Copy link to Controls"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Everything a person presses, types into or chooses. Controls are rounded and sit on the Canvas. What is chosen, checked or current takes the selected fill, the signature surface with its edge light (Pale Blue in the dark theme). Everything else is a hairline and weight.</p>
       <div class="hair"></div>
@@ -2319,7 +2311,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 14 NAVIGATION -->
     <section class="s" id="nav-sec"><div class="inner">
-      <div class="sh"><div class="num">14</div><span class="chap">Interface</span></div>
+      <div class="sh"><span class="chap">Interface</span></div>
       <h2 data-anchor="nav-sec">Navigation and feedback<button class="hlink" type="button" aria-label="Copy link to Navigation and feedback"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Where you are, where you can go, and what just happened. The current place is marked the same way everywhere: a 2 px rounded underline for tabs, a 3 by 16 px rounded marker for side navigation, the selected fill for the current page.</p>
       <div class="hair"></div>
@@ -2352,7 +2344,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 15 DATA AND CHARTS -->
     <section class="s" id="charts-sec"><div class="inner">
-      <div class="sh"><div class="num">15</div><span class="chap">Interface</span></div>
+      <div class="sh"><span class="chap">Interface</span></div>
       <h2 data-anchor="charts-sec">Data and charts<button class="hlink" type="button" aria-label="Copy link to Data and charts"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Structure in ink, navy and Pale Blue. The subject is the text colour, the reference and the line to beat are the accent, the field is Mist. Bars are upright with a 2 px radius, points are small circles, and readouts are Sora with tabular figures. Speed runs one ramp, Pale Blue to Mist to Slate. Gains and losses are told by the numbers in the signal colours, never by green or red fills.</p>
       <div class="hair"></div>
@@ -2400,7 +2392,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 16 CALENDAR -->
     <section class="s" id="calendar-sec"><div class="inner">
-      <div class="sh"><div class="num">16</div><span class="chap">Interface</span></div>
+      <div class="sh"><span class="chap">Interface</span></div>
       <h2 data-anchor="calendar-sec">Calendar and scheduling<button class="hlink" type="button" aria-label="Copy link to Calendar and scheduling"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Dates are chosen the way everything else is: the selected fill marks the pick, a Steel edge marks today, the quiet tint joins a range, and a small dot under a day means something is booked. Dates are written in full.</p>
       <div class="hair"></div>
@@ -2425,7 +2417,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 17 OVERLAYS AND APPS -->
     <section class="s" id="apps-sec"><div class="inner">
-      <div class="sh"><div class="num">17</div><span class="chap">Interface</span></div>
+      <div class="sh"><span class="chap">Interface</span></div>
       <h2 data-anchor="apps-sec">Overlays and apps<button class="hlink" type="button" aria-label="Copy link to Overlays and apps"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Layers that sit above the page, and the system carried into a phone app, an app icon, a browser tab and an email.</p>
       <div class="hair"></div>
@@ -2472,11 +2464,11 @@ table.vx td:first-child{width:18%}
     </div></section>
 
     <!-- PART 4 IN PRACTICE -->
-    <div class="part" id="part-4"><div class="pn">Part 4 of 4</div><div class="pb"><p class="pt">Application</p><p class="pl">How it comes together on screens, in documents and with partners, the rules that hold it, and the files to start from.</p></div><ol class="pi"><li><a href="#layout-sec"><span>18</span>Layout</a></li><li><a href="#application"><span>19</span>In use</a></li><li><a href="#showcase"><span>20</span>Brand showcase</a></li><li><a href="#cobrand"><span>21</span>Co-branding</a></li><li><a href="#principles"><span>22</span>Principles</a></li><li><a href="#resources"><span>23</span>Resources</a></li></ol></div>
+    <div class="part" id="part-4"><div class="pb"><p class="pt">Application</p><p class="pl">How it comes together on screens, in documents and with partners, the rules that hold it, and the files to start from.</p></div><ol class="pi"><li><a href="#layout-sec">Layout</a></li><li><a href="#application">In use</a></li><li><a href="#showcase">Brand showcase</a></li><li><a href="#cobrand">Co-branding</a></li><li><a href="#principles">Principles</a></li><li><a href="#resources">Resources</a></li></ol></div>
 
     <!-- 18 LAYOUT -->
     <section class="s" id="layout-sec"><div class="inner">
-      <div class="sh"><div class="num">18</div><span class="chap">Application</span></div>
+      <div class="sh"><span class="chap">Application</span></div>
       <h2 data-anchor="layout-sec">Layout<button class="hlink" type="button" aria-label="Copy link to Layout"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Two layouts as built: the TalentID dashboard and the slide template. Both follow the same order: a title, readouts, one lead element in a dark card with quieter content on the Canvas around it, and one strapline as the conclusion. They are examples, not a grid to obey.</p>
       <div class="hair"></div>
@@ -2502,7 +2494,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 19 IN USE -->
     <section class="s" id="application"><div class="inner">
-      <div class="sh"><div class="num">19</div><span class="chap">Application</span></div>
+      <div class="sh"><span class="chap">Application</span></div>
       <h2 data-anchor="application">In use<button class="hlink" type="button" aria-label="Copy link to In use"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">TalentID, the Advanced Technology scouting dashboard, built from the components in this book: readouts in dark content cards on the Canvas, a ranking led by the selected fill, the driver in one dark card with the glyph as progress, signal chips, the reference line to beat, one primary action and one strapline. Pick a driver in the ranking.</p>
       <div class="hair"></div>
@@ -2537,7 +2529,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 20 BRAND SHOWCASE -->
     <section class="s" id="showcase"><div class="inner">
-      <div class="sh"><div class="num">20</div><span class="chap">Application</span></div>
+      <div class="sh"><span class="chap">Application</span></div>
       <h2 data-anchor="showcase">Brand showcase<button class="hlink" type="button" aria-label="Copy link to Brand showcase"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">The system on the things we send out: slides, apps, documents, mail and posts. Every one is the same few decisions: a Canvas ground, one dark surface, Sora in three weights and the logo fixed in its corner.</p>
       <div class="hair"></div>
@@ -2595,7 +2587,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 21 CO-BRANDING -->
     <section class="s" id="cobrand"><div class="inner">
-      <div class="sh"><div class="num">21</div><span class="chap">Application</span></div>
+      <div class="sh"><span class="chap">Application</span></div>
       <h2 data-anchor="cobrand">Co-branding<button class="hlink" type="button" aria-label="Copy link to Co-branding"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">With a partner, both marks share one line in one colour, equal in weight and separated by the divider. When a business has its own identity, the group steps back to a quiet endorsement.</p>
       <div class="hair"></div>
@@ -2631,7 +2623,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 22 PRINCIPLES -->
     <section class="s" id="principles"><div class="inner">
-      <div class="sh"><div class="num">22</div><span class="chap">Application</span></div>
+      <div class="sh"><span class="chap">Application</span></div>
       <h2 data-anchor="principles">Principles<button class="hlink" type="button" aria-label="Copy link to Principles"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">The handful of rules that hold the system together when someone new builds the next screen, deck or post.</p>
       <div class="hair"></div>
@@ -2654,7 +2646,7 @@ table.vx td:first-child{width:18%}
 
     <!-- 23 RESOURCES -->
     <section class="s" id="resources"><div class="inner">
-      <div class="sh"><div class="num">23</div><span class="chap">Application</span></div>
+      <div class="sh"><span class="chap">Application</span></div>
       <h2 data-anchor="resources">Resources<button class="hlink" type="button" aria-label="Copy link to Resources"><svg viewBox="0 0 24 24" aria-hidden="true" data-icon="link"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></button></h2>
       <p class="intro">Everything in this book, ready to build with, in the TalentID identity. Logo files are outlined, so they need no fonts installed; the templates are set in Sora, so install it first.</p>
       <div class="hair"></div>
@@ -2969,9 +2961,8 @@ table.vx td:first-child{width:18%}
   })();
 
   // lap counter in the timing tower
-  (function(){var secs=[].slice.call(document.querySelectorAll('section.s')),n=secs.length,lap=$('#lapN'),bar=$('#lapBar');if(!lap)return;
-    $('#lapT').textContent=String(n).padStart(2,'0');
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=secs.indexOf(e.target)+1;lap.textContent=String(i).padStart(2,'0');bar.style.width=(i/n*100)+'%'}})},{rootMargin:'-40% 0px -55% 0px'});
+  (function(){var secs=[].slice.call(document.querySelectorAll('section.s')),n=secs.length,bar=$('#lapBar');if(!bar)return;
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=secs.indexOf(e.target)+1;bar.style.width=(i/n*100)+'%'}})},{rootMargin:'-40% 0px -55% 0px'});
     secs.forEach(function(s){io.observe(s)});
   })();
 
@@ -3026,7 +3017,7 @@ table.vx td:first-child{width:18%}
   // ===== mobile: the header names where you are, and the menu opens the index =====
   (function(){var ix=document.querySelector('.index'),mb=$('#mbtn'),mc=$('#mcur');if(!mb)return;
     var secs=[].slice.call(document.querySelectorAll('section.s')),links={};$$('#toc a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
-    function name(id){var a=links[id];if(!a)return;mc.innerHTML='<b>'+a.querySelector('span').textContent+'</b> '+a.lastChild.textContent}
+    function name(id){var a=links[id];if(!a)return;mc.textContent=a.textContent}
     var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)name(e.target.id)})},{rootMargin:'-30% 0px -65% 0px'});secs.forEach(function(s){io2.observe(s)});
     var shut,calm=matchMedia('(prefers-reduced-motion: reduce)');[].forEach.call(ix.querySelectorAll('nav > *'),function(e,i){e.style.setProperty('--i',Math.min(i,24))});
     function set(o){clearTimeout(shut);ix.classList.remove('closing');document.documentElement.classList.toggle('menu-open',o);mb.setAttribute('aria-expanded',o);mb.textContent=o?'Close':'Menu';
@@ -3043,9 +3034,9 @@ table.vx td:first-child{width:18%}
   (function(){var secs=[].slice.call(document.querySelectorAll('section.s')),last=secs[secs.length-1],n=secs.length;
     function foot(){if(innerHeight+scrollY<document.documentElement.scrollHeight-4)return;
       $$('#toc a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+last.id)});
-      var ln=$('#lapN'),lb=$('#lapBar'),mc=$('#mcur'),a=document.querySelector('#toc a[href="#'+last.id+'"]');
-      if(ln)ln.textContent=String(n).padStart(2,'0');if(lb)lb.style.width='100%';
-      if(mc&&a)mc.innerHTML='<b>'+a.querySelector('span').textContent+'</b> '+a.lastChild.textContent}
+      var lb=$('#lapBar'),mc=$('#mcur'),a=document.querySelector('#toc a[href="#'+last.id+'"]');
+      if(lb)lb.style.width='100%';
+      if(mc&&a)mc.textContent=a.textContent}
     addEventListener('scroll',function(){requestAnimationFrame(foot)},{passive:true});
   })();
 
