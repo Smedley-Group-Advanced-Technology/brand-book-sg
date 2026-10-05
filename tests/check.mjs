@@ -181,9 +181,10 @@ for (const name of BROWSERS) {
     const { ctx, page, errors } = await open('dark', 1440, { reducedMotion: 'no-preference' });
     const step = async (label, fn) => { try { const r = await fn(); r === true ? ok(label) : W(where, `${label}: ${r}`); } catch (e) { W(where, `${label}: ${e.message.split('\n')[0]}`); } };
 
-    await step('primary button runs its highlight on click', async () => {
-      const b = page.locator('#components .kit .cell .btn.p').first(); await b.scrollIntoViewIfNeeded(); await b.click();
-      return (await b.evaluate(x => x.classList.contains('flash'))) || 'no flash class';
+    await step('primary button scales to 98 % on press', async () => {
+      const b = page.locator('#components .kit .cell .btn.p').first(); await b.scrollIntoViewIfNeeded(); await b.hover(); await page.mouse.down(); await page.waitForTimeout(200);
+      const t = await b.evaluate(x => getComputedStyle(x).transform); await page.mouse.up();
+      return /^matrix\(0\.98,/.test(t) || `transform ${t}`;
     });
     await step('hold to confirm completes', async () => {
       const b = page.locator('#holdBtn'); await b.scrollIntoViewIfNeeded(); const before = await b.textContent();
