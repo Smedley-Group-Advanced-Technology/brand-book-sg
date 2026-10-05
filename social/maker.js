@@ -2,7 +2,7 @@
 // Every control is the book's own, from assets/ui.css; the few behaviours they need are wired up here.
 import { FORMATS, TYPES, BUSINESSES, GROUNDS, FONTS, ROWS, defaults, variantOf, fieldsFor, render, loadLogos, fontCSS, toPNG } from './posts.js?v=b22dc69188';
 
-import { bodyOf } from '../icons/library.js?v=5d97a6a608';
+import { bodyOf } from '../icons/library.js?v=9cd3e1d8f4';
 import { picto, formatPicto, groundPicto } from './pictos.js?v=7e8a7453fd';
 
 const $ = s => document.querySelector(s);
