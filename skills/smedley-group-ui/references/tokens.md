@@ -6,49 +6,83 @@ Generated from the brand book's tokens.json by npm run kit. Use the CSS in `asse
 
 | Token | Value |
 |---|---|
-| `--sg-race-red` | #D8231A |
-| `--sg-ember` | #6E0F0B |
-| `--sg-engineering-blue` | #2F80FF |
-| `--sg-blueprint` | #0B2D63 |
-| `--sg-carbon` | #0B0C0E |
-| `--sg-graphite` | #1C1E22 |
-| `--sg-gunmetal` | #2E3137 |
-| `--sg-steel` | #4A4F57 |
-| `--sg-alloy` | #8A9099 |
-| `--sg-silver` | #C9CCD1 |
+| `--sg-ink` | #000000 |
+| `--sg-deep-navy` | #222A35 |
+| `--sg-slate` | #333F50 |
+| `--sg-steel` | #44546A |
+| `--sg-mist` | #8497B0 |
+| `--sg-pale-blue` | #ABC0E4 |
+| `--sg-cloud` | #D6DCE5 |
+| `--sg-plate` | #BFBFBF |
 | `--sg-canvas` | #F0F0F0 |
-| `--sg-cloud` | #DCDDE0 |
+| `--sg-off-white` | #F3F2F2 |
+| `--sg-white` | #FFFFFF |
+| `--sg-caption` | #9AA0A8 |
+| `--sg-signal-positive` | #00B050 |
+| `--sg-signal-positive-tint` | #E2F0D9 |
+| `--sg-signal-negative` | #C00000 |
+| `--sg-signal-negative-tint` | #FBE5D6 |
+| `--sg-product-blue` | #ADB9CA |
 
-## Dark theme (the default)
-
-| Token | Value |
-|---|---|
-| `--sg-ink` | #FFFFFF |
-| `--sg-inv` | #000000 |
-| `--sg-ground` | #000000 |
-| `--sg-dim` | #9DA1A8 |
-| `--sg-faint` | #777B82 |
-| `--sg-rule` | rgba(205,207,212,.14) |
-| `--sg-flame` | #FF4B3E |
-| `--sg-line` | #7FB2FF |
-| `--sg-green` | #3DDC84 |
-| `--sg-amber` | #FFB547 |
-
-## Light theme
+## Light theme (the default)
 
 | Token | Value |
 |---|---|
-| `--sg-ink` | #0B0C0E |
+| `--sg-text` | #000000 |
 | `--sg-inv` | #FFFFFF |
-| `--sg-ground` | #FFFFFF |
-| `--sg-dim` | #585D65 |
-| `--sg-faint` | #686B71 |
-| `--sg-rule` | rgba(28,30,34,.13) |
-| `--sg-flame` | #D8231A |
-| `--sg-line` | #1F66E0 |
-| `--sg-green` | #007A38 |
-| `--sg-amber` | #9C6300 |
+| `--sg-ground` | #F0F0F0 |
+| `--sg-panel` | #F3F2F2 |
+| `--sg-dim` | #333F50 |
+| `--sg-faint` | #44546A |
+| `--sg-rule` | #ABC0E4 |
+| `--sg-field` | #FFFFFF |
+| `--sg-border` | rgba(68,84,106,.45) |
+| `--sg-accent` | #44546A |
+| `--sg-positive` | #007A3D |
+| `--sg-positive-tint` | #E2F0D9 |
+| `--sg-negative` | #C00000 |
+| `--sg-negative-tint` | #FBE5D6 |
+| `--sg-quiet-tint` | #D6DCE5 |
+| `--sg-selected` | linear-gradient(135deg,#000000 0%,#222A35 100%) |
+| `--sg-selected-hover` | linear-gradient(135deg,#222A35 0%,#333F50 100%) |
+| `--sg-selected-edge` | linear-gradient(180deg,#8497B0 0%,#ABC0E4 53%,#333F50 100%) |
+| `--sg-on-selected` | #FFFFFF |
 
-## The cut
+## Dark theme, and anything inside `.sg-dark`
 
-55 degrees; the cut is the height x 0.7. Type: Sora and IBM Plex Mono.
+| Token | Value |
+|---|---|
+| `--sg-text` | #FFFFFF |
+| `--sg-inv` | #000000 |
+| `--sg-ground` | #10141A |
+| `--sg-panel` | #171C24 |
+| `--sg-dim` | #D6DCE5 |
+| `--sg-faint` | #8497B0 |
+| `--sg-rule` | rgba(171,192,228,.28) |
+| `--sg-field` | rgba(255,255,255,.04) |
+| `--sg-border` | rgba(171,192,228,.38) |
+| `--sg-accent` | #ABC0E4 |
+| `--sg-positive` | #4CD98A |
+| `--sg-positive-tint` | rgba(0,176,80,.16) |
+| `--sg-negative` | #FF8A8A |
+| `--sg-negative-tint` | rgba(192,0,0,.24) |
+| `--sg-quiet-tint` | rgba(171,192,228,.14) |
+| `--sg-selected` | linear-gradient(#ABC0E4,#ABC0E4) |
+| `--sg-selected-hover` | linear-gradient(#C7D5EE,#C7D5EE) |
+| `--sg-selected-edge` | linear-gradient(#ABC0E4,#ABC0E4) |
+| `--sg-on-selected` | #000000 |
+
+## The signature surface
+
+`--sg-surface`: 45 degrees, #000000 to #222A35. `--sg-edge`: a 1 px stroke, #8497B0 0%, #ABC0E4 53%, #333F50 100%, top to foot. `.sg-surface` applies both.
+
+## Radii
+
+| Token | Value |
+|---|---|
+| `--sg-radius-control` | 8px |
+| `--sg-radius-chip` | 6px |
+| `--sg-radius-tile` | 10px |
+| `--sg-radius-card` | 12px |
+
+Type: Sora only, weights 300, 400, 600, display sizes tracked -0.024em.

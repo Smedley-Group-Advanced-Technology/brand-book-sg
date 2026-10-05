@@ -14,14 +14,22 @@ export const ROOT = fileURLToPath(new URL('..', import.meta.url));
 export const A = join(ROOT, 'assets');
 export const ZIP = join(A, 'smedley-group-brand-assets.zip');
 
+// The light theme is the default; the dark theme applies only when chosen. The dark surfaces in tokens.json (.sg-dark,
+// menus, dialogs, toasts) carry the dark theme wherever they sit, so what is inside them reads on the gradient.
 export function tokensCss(t) {
   const block = (o, pad) => Object.entries(o).map(([k, v]) => `${pad}--sg-${k}:${v};\n`).join('');
-  return '/* Smedley Group colour tokens. Fixed colours never change; the rest follow the theme. */\n'
-    + ':root{\n' + block(t.fixed, '  ') + block(t.dark, '  ') + '}\n'
-    + '@media (prefers-color-scheme: light){\n  :root:not([data-theme="dark"]){\n' + block(t.light, '    ') + '  }\n}\n'
-    + ':root[data-theme="light"]{\n' + block(t.light, '  ') + '}\n'
-    + `/* The cut: every accent end leans at ${t.angle.degrees} degrees. cut = height x ${t.angle.cutPerHeight} */\n`
-    + `.sg-cut{clip-path:polygon(0 0,calc(100% - var(--sg-h,44px) * ${String(t.angle.cutPerHeight).replace(/^0/, '')}) 0,100% 100%,calc(var(--sg-h,44px) * ${String(t.angle.cutPerHeight).replace(/^0/, '')}) 100%)}\n`;
+  const s = t.surface, r = t.radius;
+  return '/* Smedley Group tokens. Fixed colours never change; the rest follow the theme. */\n'
+    + ':root{\n' + block(t.fixed, '  ') + block(t.light, '  ')
+    + `  --sg-surface:linear-gradient(${s.angle}deg,${s.from} 0%,${s.to} 100%);\n`
+    + `  --sg-surface-hover:linear-gradient(${s.angle}deg,${s['hover-from']} 0%,${s['hover-to']} 100%);\n`
+    + `  --sg-edge:linear-gradient(180deg,${s.edge.join(',')});\n`
+    + Object.entries(r).map(([k, v]) => `  --sg-radius-${k}:${v};\n`).join('')
+    + `  --sg-font:'${t.type.family}',system-ui,sans-serif;\n  --sg-tracking:${t.type['display-tracking']};\n`
+    + '  color-scheme:light;\n}\n'
+    + `:root[data-theme="dark"], ${s['dark-surfaces'].join(', ')}{\n` + block(t.dark, '  ') + '  color-scheme:dark;\n}\n'
+    + `/* The signature surface: the ${s.angle - 90} degree gradient with the edge light, a 1 px stroke pale at the top and dark at the foot. */\n`
+    + '.sg-surface{border:1px solid transparent;background:var(--sg-surface) padding-box,var(--sg-edge) border-box;color:var(--sg-text)}\n';
 }
 
 // the book's tool figures draw from the icon library: this puts each library drawing into its figure
@@ -65,13 +73,14 @@ export async function downloadLabels(html) {
   return { html: out, wrong };
 }
 
-// ---------- the book's controls as a stylesheet other pages can use ----------
-// assets/ui.css is cut from the book: its tokens and themes, the animated properties and keyframes the
-// controls need, and the whole Controls group. The social post maker links it; the check keeps it current.
-export function uiCss(html) {
+// ---------- the book's controls as stylesheets other pages can use ----------
+// assets/ui.css is cut from the book: its tokens and themes, the animated properties the controls need, and the
+// whole Controls group. assets/extended.css is the interface groups after it (navigation and feedback, data and
+// charts, the calendar, overlays and apps). The social post maker links ui.css; the back office copies both; the
+// check keeps them current.
+function cutCss(html, keep) {
   const css = html.slice(html.indexOf('<style>') + 7, html.indexOf('</style>'));
-  const out = [], KEEP_BASE = /^(select\.inp|button, input, select, textarea|::selection)/;
-  let group = '', i = 0;
+  const out = []; let group = '', i = 0, last = '';
   while (i < css.length) {
     const ws = css.slice(i).match(/^\s+/); if (ws) { i += ws[0].length; continue; }
     if (css.startsWith('/*', i)) { const e = css.indexOf('*/', i) + 2, c = css.slice(i, e); const g = c.match(/\/\* =+ (.*?) =+ \*\//); if (g) group = g[1]; i = e; continue; }
@@ -79,13 +88,22 @@ export function uiCss(html) {
     let j = css.indexOf('{', i), depth = 0, k = j;
     for (; k < css.length; k++) { if (css[k] === '{') depth++; else if (css[k] === '}' && --depth === 0) break; }
     const stmt = css.slice(i, k + 1).trim(), head = css.slice(i, j).trim(); i = k + 1;
-    const keep = group === 'Controls'
-      || (group === 'Tokens and themes' && (/^:root/.test(head) || (/^@media \(prefers-color-scheme/.test(head) && stmt.includes(':root')) || /^@property/.test(head) || /^@keyframes (ld|pop|popk|streak)\b/.test(head)))
-      || (group === 'Base' && KEEP_BASE.test(head));
-    if (keep) out.push(stmt);
+    const g = keep(group, head, stmt);
+    if (g) { if (typeof g === 'string' && g !== last) { out.push(`\n/* ============ ${g} ============ */`); last = g; } out.push(stmt); }
   }
+  return out.join('\n').trim();
+}
+const KEEP_BASE = /^(button, input, select, textarea|::selection)/;
+export function uiCss(html) {
   return '/* Smedley Group controls, cut from the brand book by npm run kit. Do not edit: change the book and rebuild. */\n'
-    + out.join('\n') + '\n';
+    + cutCss(html, (group, head, stmt) => group === 'Controls'
+      || (group === 'Tokens and themes' && (/^(:root|\.sg-surface)/.test(head) || /^@property/.test(head)))
+      || (group === 'Base' && KEEP_BASE.test(head))) + '\n';
+}
+export const EXTENDED = ['Navigation and feedback', 'Data and charts', 'Calendar', 'Overlays and apps'];
+export function extendedCss(html) {
+  return '/* Smedley Group interface patterns, cut from the brand book by npm run kit. Do not edit: change the book and rebuild. */\n'
+    + cutCss(html, group => EXTENDED.includes(group) && group) + '\n';
 }
 
 // ---------- cache stamps for the post maker ----------
@@ -119,10 +137,12 @@ export const SKILL_ZIP = join(A, 'skills/smedley-group-ui.zip');
 export async function skillGenerated(html) {
   const t = JSON.parse(await readFile(join(A, 'tokens.json'), 'utf8')), g = new Map();
   const rows = o => Object.entries(o).map(([k, v]) => `| \`--sg-${k}\` | ${v} |`).join('\n');
-  g.set('references/tokens.md', `# Colour and theme tokens\n\nGenerated from the brand book's tokens.json by npm run kit. Use the CSS in \`assets/tokens.css\`.\n\n## Fixed colours, the same in both themes\n\n| Token | Value |\n|---|---|\n${rows(t.fixed)}\n\n## Dark theme (the default)\n\n| Token | Value |\n|---|---|\n${rows(t.dark)}\n\n## Light theme\n\n| Token | Value |\n|---|---|\n${rows(t.light)}\n\n## The cut\n\n${t.angle.degrees} degrees; the cut is the height x ${t.angle.cutPerHeight}. Type: ${t.type.display} and ${t.type.readout}.\n`);
+  const s = t.surface;
+  g.set('references/tokens.md', `# Colour and theme tokens\n\nGenerated from the brand book's tokens.json by npm run kit. Use the CSS in \`assets/tokens.css\`.\n\n## Fixed colours, the same in both themes\n\n| Token | Value |\n|---|---|\n${rows(t.fixed)}\n\n## Light theme (the default)\n\n| Token | Value |\n|---|---|\n${rows(t.light)}\n\n## Dark theme, and anything inside \`.sg-dark\`\n\n| Token | Value |\n|---|---|\n${rows(t.dark)}\n\n## The signature surface\n\n\`--sg-surface\`: ${s.angle - 90} degrees, ${s.from} to ${s.to}. \`--sg-edge\`: a 1 px stroke, ${s.edge.join(', ')}, top to foot. \`.sg-surface\` applies both.\n\n## Radii\n\n| Token | Value |\n|---|---|\n${Object.entries(t.radius).map(([k, v]) => `| \`--sg-radius-${k}\` | ${v} |`).join('\n')}\n\nType: ${t.type.family} only, weights ${t.type.weights.join(', ')}, display sizes tracked ${t.type['display-tracking']}.\n`);
   const fam = Object.fromEntries((await import('../icons/library.js')).FAMILIES);
   g.set('references/icons.md', `# Icon catalogue\n\nGenerated from the brand book's icon library by npm run kit: ${ICONS.length} icons, 24 px grid, 1.5 px stroke, square ends, sharp corners, diagonals at 55 degrees. Use \`assets/sprite.svg\`: \`<svg viewBox="0 0 24 24"><use href="sprite.svg#sg-NAME"/></svg>\`.\n\n| Name | Label | Family | Search words |\n|---|---|---|---|\n${ICONS.map(i => `| \`${i[0]}\` | ${i[1]} | ${fam[i[2]]} | ${i[3]} |`).join('\n')}\n`);
   g.set('assets/ui.css', uiCss(html));
+  g.set('assets/extended.css', extendedCss(html));
   g.set('assets/tokens.css', tokensCss(t));
   g.set('assets/sprite.svg', sprite());
   for (const f of (await readdir(join(A, 'fonts'))).sort()) g.set(`assets/fonts/${f}`, await readFile(join(A, 'fonts', f)));
@@ -179,6 +199,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   html = syncIcons(html);
   for (const f of ICON_PAGES.slice(1)) await writeFile(join(ROOT, f), syncIcons(await readFile(join(ROOT, f), 'utf8')));
   await writeFile(join(A, 'ui.css'), uiCss(html));
+  await writeFile(join(A, 'extended.css'), extendedCss(html));
   for (const [f, s] of Object.entries(await pageStamps())) await writeFile(join(ROOT, f), s);
   await writeFile(htmlPath, html);
   console.log(`kit: ${files.size} files, ${Math.round(zip.length / 1024)} KB, v${v}`);

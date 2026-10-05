@@ -10,7 +10,7 @@ import { join, extname, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import * as pw from 'playwright';
-import { kitFiles, readZip, tokensCss, bookVersion, kitStat, STAT, ZIP, downloadLabels, uiCss, pageStamps, syncBookTools, iconCount, syncIcons, ICON_PAGES, skillGenerated, skillFiles, SKILL, SKILL_ZIP } from '../tools/kit.mjs';
+import { kitFiles, readZip, tokensCss, bookVersion, kitStat, STAT, ZIP, downloadLabels, uiCss, extendedCss, pageStamps, syncBookTools, iconCount, syncIcons, ICON_PAGES, skillGenerated, skillFiles, SKILL, SKILL_ZIP } from '../tools/kit.mjs';
 import { ICONS } from '../icons/library.js';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
@@ -47,28 +47,15 @@ console.log('kit');
   const tokens = JSON.parse(await readFile(join(ROOT, 'assets/tokens.json'), 'utf8'));
   const K = msg => fail('kit', msg);
   let bad = failures.length;
-  // the book's own theme variables, outside print and other media queries except the system light theme
+  // the book's tokens are tokens.json, generated the same way as assets/tokens.css
   const css = html.slice(html.indexOf('<style>'), html.indexOf('</style>'));
-  const topLevel = []; let depth = 0, media = '', start = 0;
-  for (let i = 0; i < css.length; i++) {
-    if (css[i] === '{') { const pre = css.slice(start, i).trim(); if (pre.startsWith('@')) { media = pre; depth++; start = i + 1; continue; } topLevel.push({ media: depth ? media : '', sel: pre.replace(/^.*[}]/s, '').trim(), i }); }
-    if (css[i] === '}') { const last = topLevel[topLevel.length - 1]; if (last && last.end === undefined && last.i < i && !css.slice(last.i + 1, i).includes('{')) last.end = i; else if (depth) { depth--; media = ''; } }
-    if (css[i] === '{' || css[i] === '}') start = i + 1;
-  }
-  const vars = (sel, med = '') => { const r = topLevel.find(b => b.sel === sel && b.media === med && /--ink:/.test(css.slice(b.i, b.end))); if (!r) return null;
-    return Object.fromEntries([...css.slice(r.i + 1, r.end).matchAll(/(--[\w-]+):([^;}]+)/g)].map(m => [m[1], m[2].trim()])); };
-  const MAP = { ink: '--ink', inv: '--inv', ground: '--bg1', dim: '--dim', faint: '--faint', rule: '--rule', flame: '--flame', line: '--line', green: '--green', amber: '--amber' };
-  const cmp = (label, v, want) => { for (const [k, p] of Object.entries(MAP)) if (!v || (v[p] || '').toUpperCase() !== want[k].toUpperCase()) K(`${label} ${p} is ${v && v[p]}, tokens.json says ${want[k]}`); };
-  cmp('dark theme', vars(':root'), tokens.dark);
-  cmp('light theme', vars(':root[data-theme="light"]'), tokens.light);
-  cmp('system light theme', vars(':root:not([data-theme="dark"])', '@media (prefers-color-scheme:light)') || vars(':root:not([data-theme="dark"])', '@media (prefers-color-scheme: light)'), tokens.light);
-  const root = vars(':root') || {};
-  if ((root['--red'] || '').toUpperCase() !== tokens.fixed['race-red']) K(`--red is ${root['--red']}, tokens.json says ${tokens.fixed['race-red']}`);
-  if ((root['--blue'] || '').toUpperCase() !== tokens.fixed['engineering-blue']) K(`--blue is ${root['--blue']}, tokens.json says ${tokens.fixed['engineering-blue']}`);
+  if (!css.includes(tokensCss(tokens).split('\n').slice(1).join('\n').trim())) K('the tokens in the book differ from tokens.json; paste the output of tokensCss into the Tokens and themes group');
+  // every fixed colour has a swatch in the colour section, named as in the PDF (Positive tint for signal-positive-tint)
+  const norm = n => n.toLowerCase().replace(/[^a-z]/g, '');
+  const swatches = new Map([...html.matchAll(/\['([^']+)','(#[0-9A-Fa-f]{6})'/g)].map(m => [norm(m[1]), m[2]]));
   for (const [k, hex] of Object.entries(tokens.fixed)) {
-    const name = k.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
-    const m = html.match(new RegExp(`\\['${name}','(#[0-9A-Fa-f]{6})'`));
-    if (!m) K(`no swatch named ${name} in the colour section`); else if (m[1].toUpperCase() !== hex.toUpperCase()) K(`swatch ${name} shows ${m[1]}, tokens.json says ${hex}`);
+    const got = swatches.get(norm(k.replace(/^signal-/, '')));
+    if (!got) K(`no swatch named ${k} in the colour section`); else if (got.toUpperCase() !== hex.toUpperCase()) K(`swatch ${k} shows ${got}, tokens.json says ${hex}`);
   }
   // generated files, the ZIP and the download card
   const want = await kitFiles();
@@ -83,6 +70,7 @@ console.log('kit');
   if (!bv) K('no "Version x.y, d Month yyyy." line in the book');
   else if (stat !== kitStat(have.size, zipBuf.length, bv.v)) K(`download card reads ${stat.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()}, expected ${have.size} files, ${Math.round(zipBuf.length / 1024)} KB, v${bv.v}; run npm run kit`);
   { let ui = ''; try { ui = await readFile(join(ROOT, 'assets/ui.css'), 'utf8'); } catch {} if (ui !== uiCss(html)) K('assets/ui.css no longer matches the book\'s controls, run npm run kit'); }
+  { let ext = ''; try { ext = await readFile(join(ROOT, 'assets/extended.css'), 'utf8'); } catch {} if (ext !== extendedCss(html)) K('assets/extended.css no longer matches the book\'s interface groups, run npm run kit'); }
   for (const [f, s] of Object.entries(await pageStamps())) if (s !== await readFile(join(ROOT, f), 'utf8')) K(`${f} has out-of-date cache stamps, run npm run kit`);
   if (syncBookTools(html) !== html) K('the book\'s tool icons differ from the icon library, run npm run kit');
   if (iconCount(html) !== html) K('the book gives the wrong number of icons, run npm run kit');
