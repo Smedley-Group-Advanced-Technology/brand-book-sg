@@ -1,9 +1,9 @@
 // The post maker: settings on the left, the post drawn live on the right, downloads at the post's real size.
 // Every control is the book's own, from assets/ui.css; the few behaviours they need are wired up here.
-import { FORMATS, TYPES, BUSINESSES, GROUNDS, FONTS, ROWS, defaults, variantOf, fieldsFor, render, loadLogos, fontCSS, toPNG } from './posts.js?v=b22dc69188';
+import { FORMATS, TYPES, BUSINESSES, GROUNDS, FONTS, ROWS, defaults, variantOf, fieldsFor, render, loadLogos, fontCSS, toPNG } from './posts.js?v=21d40ddf6a';
 
 import { bodyOf } from '../icons/library.js?v=9cd3e1d8f4';
-import { picto, formatPicto, groundPicto } from './pictos.js?v=7e8a7453fd';
+import { picto, formatPicto, groundPicto } from './pictos.js?v=1e1e9556a7';
 
 const $ = s => document.querySelector(s);
 const el = (tag, attrs = {}, html = '') => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) v === true ? e.setAttribute(k, '') : v !== false && v != null && e.setAttribute(k, v); if (html) e.innerHTML = html; return e; };
@@ -11,12 +11,14 @@ const ICON = {
   grip: `<svg viewBox="0 0 24 24" aria-hidden="true">${bodyOf('drag')}</svg>`,
   remove: `<svg viewBox="0 0 24 24" aria-hidden="true">${bodyOf('close')}</svg>`,
   add: `<svg class="bi" viewBox="0 0 24 24" aria-hidden="true">${bodyOf('plus')}</svg>`,
-  photo: `<svg viewBox="0 0 24 24" aria-hidden="true">${bodyOf('camera')}</svg>`,
+  photo: `<svg viewBox="0 0 24 24" aria-hidden="true">${bodyOf('image')}</svg>`,
 };
 
 const KEY = 'sg-social-maker';
-let state = { format: 'square', type: 'headline', business: 'smedley-group', ground: 'dark', guides: false, data: {}, variant: {} };
+let state = { format: 'square', type: 'headline', business: 'smedley-group', ground: 'light', guides: false, data: {}, variant: {} };
 try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s && FORMATS[s.format] && TYPES[s.type]) state = Object.assign(state, s, { variant: s.variant || {}, data: s.data || {} }); } catch {}
+// grounds and layouts from an earlier edition of the maker fall back to the defaults
+if (!GROUNDS[state.ground]) state.ground = 'light';
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {} };
 let photo = null, focus = { x: 0.5, y: 0.5 }, logos = {}, embedded = null;
 const vOf = t => variantOf(t, state.variant[t]);

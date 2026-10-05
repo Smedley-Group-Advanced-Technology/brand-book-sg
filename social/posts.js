@@ -1,5 +1,7 @@
-// Social posts on the Smedley Group brand. One renderer for the post maker and for the SVG frames in
+// Social posts on the Smedley Group brand, in the TalentID identity. One renderer for the post maker and for the SVG frames in
 // assets/templates, so both always draw the same thing. Runs in a browser: text is measured with canvas.
+
+import { bodyOf } from '../icons/library.js';
 
 export const FORMATS = {
   square: { w: 1080, h: 1080, m: 96, top: 96, bottom: 96, u: 1, big: 1, label: 'Square', ratio: '1:1', note: '1080 × 1080. Instagram, LinkedIn and X feeds.' },
@@ -9,25 +11,25 @@ export const FORMATS = {
 };
 
 export const BUSINESSES = [
-  { key: 'smedley-group', name: 'Smedley Group', lean: 'balance' },
-  { key: 'advanced-technology', name: 'Advanced Technology', lean: 'blue' },
-  { key: 'insight-labs', name: 'Insight Labs', lean: 'blue' },
-  { key: 'fat-racing', name: 'FAT Racing', lean: 'red' },
+  { key: 'smedley-group', name: 'Smedley Group' },
+  { key: 'advanced-technology', name: 'Advanced Technology' },
+  { key: 'insight-labs', name: 'Insight Labs' },
+  { key: 'fat-racing', name: 'FAT Racing' },
 ];
 
-// red never touches blue: on the blueprint ground every red accent turns white
+// two grounds: the Canvas, or the signature surface (the 45 degree gradient from #000000 to #222A35).
+// sel is the selected fill (the surface on the Canvas, Pale Blue on the surface); band is the strapline band
 export const GROUNDS = {
-  dark: { label: 'Black', bg: '#000000', ink: '#FFFFFF', dim: '#9DA1A8', rule: 'rgba(205,207,212,.24)', line: '#2F80FF', lineText: '#7FB2FF', accent: '#D8231A', onAccent: '#FFFFFF', board: '#2E3137', onBoard: '#FFFFFF', track: '#1C1E22', logo: 'white', grid: 'rgba(47,128,255,' },
-  light: { label: 'White', bg: '#FFFFFF', ink: '#0B0C0E', dim: '#585D65', rule: 'rgba(28,30,34,.16)', line: '#1F66E0', lineText: '#1F66E0', accent: '#D8231A', onAccent: '#FFFFFF', board: '#0B0C0E', onBoard: '#FFFFFF', track: '#E6E7EA', logo: 'ink', grid: 'rgba(31,102,224,' },
-  blueprint: { label: 'Blueprint', bg: '#0B2D63', ink: '#FFFFFF', dim: 'rgba(255,255,255,.72)', rule: 'rgba(255,255,255,.26)', line: '#FFFFFF', lineText: '#A9CCFF', accent: '#FFFFFF', onAccent: '#0B2D63', board: '#0E3673', onBoard: '#FFFFFF', track: '#0E3673', logo: 'white', blueprint: true },
+  light: { label: 'Canvas', bg: '#F0F0F0', ink: '#000000', dim: '#333F50', quiet: '#44546A', eyebrow: '#44546A', rule: '#ABC0E4', track: '#D6DCE5', board: '#D6DCE5', onBoard: '#000000', sel: 'surface', onSel: '#FFFFFF', band: 'surface', onBand: '#FFFFFF', ph: '#D6DCE5', logo: 'ink' },
+  dark: { label: 'Surface', bg: 'surface', ink: '#FFFFFF', dim: '#D6DCE5', quiet: '#9AA0A8', eyebrow: '#ABC0E4', rule: '#ABC0E4', track: 'rgba(171,192,228,.22)', board: 'rgba(171,192,228,.16)', onBoard: '#FFFFFF', sel: '#ABC0E4', onSel: '#000000', band: '#D6DCE5', onBand: '#000000', ph: 'rgba(255,255,255,.07)', logo: 'white' },
 };
 
 const HANDLE = ['handle', 'Handle or website', 'smedleygroup.com'];
 // fields: [key, label, default, kind, the layouts that use it (all when left out)]
 export const TYPES = {
   headline: { label: 'Headline', hint: 'News and announcements. One idea, said in the headline.',
-    variants: [['seam', 'Seam'], ['stripes', 'Stripes'], ['plain', 'Plain']],
-    fields: [['kicker', 'Label', 'News'], ['headline', 'Headline', 'Four drivers promoted to F4 for 2027', 'area'], ['support', 'Supporting line', 'Chosen on the TalentID index, funded by FAT Racing'], HANDLE] },
+    variants: [['band', 'Strapline'], ['card', 'Card'], ['plain', 'Plain']],
+    fields: [['kicker', 'Label', 'News'], ['headline', 'Headline', 'Four drivers promoted to F4 for 2027', 'area'], ['support', 'Supporting line', 'Chosen on the index, not on one weekend'], HANDLE] },
   figure: { label: 'Figure', hint: 'One number worth stopping for, with its unit and its source.',
     variants: [['big', 'Big'], ['progress', 'Progress'], ['compare', 'Before and after']],
     fields: [['from', 'Before', '+0.62', '', ['compare']], ['fromLabel', 'Before, label', 'Session 1', '', ['compare']], ['figure', 'Figure', '57'], ['unit', 'Unit', '%'], ['toLabel', 'Figure, label', 'Session 12', '', ['compare']],
@@ -39,7 +41,7 @@ export const TYPES = {
   photo: { label: 'Photo', hint: 'The picture runs to the edge or sits in the margins. The words sit beside or below it, never on it.',
     variants: [['below', 'Below'], ['split', 'Split'], ['frame', 'Framed']],
     fields: [['photo', 'Photo', '', 'file'], ['kicker', 'Label', 'Race report'], ['headline', 'Headline', 'A first F4 podium at Donington Park', 'area'], HANDLE] },
-  results: { label: 'Results', hint: 'The leader goes red. The table takes five rows, the podium three.',
+  results: { label: 'Results', hint: 'The leader is marked in the selected fill. The table takes five rows, the podium three.',
     variants: [['table', 'Table'], ['podium', 'Podium']],
     fields: [['title', 'Title', 'Qualifying, round 7'], ['event', 'Event', 'British F4, Donington Park'], ['rows', 'Results', 'Maja Kowalczyk; FAT Racing; 1:02.418\nLeo Hartmann; FAT Racing; +0.103\nAarav Mehta; Hitech; +0.559\nElin Berg; Rodin; +0.611\nTomás Duarte; Virtuosi; +0.774', 'area'], HANDLE],
     variantDefaults: { podium: { title: 'Race 2, round 7' } } },
@@ -74,7 +76,7 @@ const measure = (text, size, weight = 400, family = 'Sora', ls = 0) => {
   ctx.font = `${weight} ${size}px "${family}"`;
   return ctx.measureText(text).width + ls * size * Math.max(0, [...text].length - 1);
 };
-export const FONTS = ['300 40px Sora', '400 40px Sora', '600 40px Sora', '400 40px "IBM Plex Mono"', '500 40px "IBM Plex Mono"'];
+export const FONTS = ['300 40px Sora', '400 40px Sora', '600 40px Sora'];
 
 // words into lines no wider than max; blank input gives no lines
 function wrap(text, max, size, weight, family, ls) {
@@ -99,59 +101,65 @@ function fit(text, { max, start, min, lines: maxLines, height = Infinity, lh = 1
 }
 const textBlock = (lines, x, y, size, lh, attrs, anchor = 'start') => lines.length
   ? `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${attrs}>${lines.map((l, i) => `<tspan x="${x}" dy="${i ? size * lh : 0}">${esc(l)}</tspan>`).join('')}</text>` : '';
-const SEMI = 'font-family="Sora" font-weight="600"', REG = 'font-family="Sora" font-weight="400"', LIGHT = 'font-family="Sora" font-weight="300"', MONO = 'font-family="IBM Plex Mono" font-weight="400"', MONOM = 'font-family="IBM Plex Mono" font-weight="500"';
-
-// a board cut at 55° both ends, leaning like the glyph (top left to bottom right): the offset is 0.7 of its height
-const board = (x, y, h, text, fill, color, size) => {
-  const w = measure(text, size, 600) + h * 1.6, c = h * 0.7;
-  return { w, svg: `<polygon points="${x},${y} ${x + w - c},${y} ${x + w},${y + h} ${x + c},${y + h}" fill="${fill}"/><text x="${x + w / 2}" y="${y + h / 2 + size * 0.36}" font-size="${size}" text-anchor="middle" ${SEMI} fill="${color}">${esc(text)}</text>` };
-};
+// Sora only, in three weights; measured values take tabular figures
+const SEMI = 'font-family="Sora" font-weight="600"', REG = 'font-family="Sora" font-weight="400"', LIGHT = 'font-family="Sora" font-weight="300"';
+const NUM = `${REG} style="font-variant-numeric:tabular-nums"`, NUMS = `${SEMI} style="font-variant-numeric:tabular-nums"`;
 
 export function render(o, env) {
-  const f = FORMATS[o.format], g = GROUNDS[o.ground], biz = BUSINESSES.find(b => b.key === o.business) || BUSINESSES[0];
+  const f = FORMATS[o.format], g = GROUNDS[o.ground] || GROUNDS.light, biz = BUSINESSES.find(b => b.key === o.business) || BUSINESSES[0];
   const { w: W, h: H, m, top, bottom, u, big } = f, ub = u * big, x0 = m, x1 = W - m, y1 = H - bottom, TW = x1 - x0;
   const d = o.data || {}, parts = [], defs = [];
   const land = o.format === 'landscape';
 
+  // the signature surface: a 45 degree gradient fitted to each shape, so it runs corner to corner as in CSS (135deg)
+  let gid = 0;
+  const surf = (x, y, w, h) => { const id = 'sf' + gid++, k = (w + h) / 2;
+    defs.push(`<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${x}" y1="${y}" x2="${x + k}" y2="${y + k}"><stop offset="0" stop-color="#000000"/><stop offset="1" stop-color="#222A35"/></linearGradient>`);
+    return `url(#${id})`; };
+  const paint = (c, x, y, w, h) => c === 'surface' ? surf(x, y, w, h) : c;
+  // the edge light: one light source above, Mist at the top, Pale Blue at 53 %, Slate at the foot; and the fading divider
+  defs.push('<linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8497B0"/><stop offset=".53" stop-color="#ABC0E4"/><stop offset="1" stop-color="#333F50"/></linearGradient>',
+    `<linearGradient id="fade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${g.rule}"/><stop offset=".83" stop-color="${g.rule}"/><stop offset="1" stop-color="${g.rule}" stop-opacity="0"/></linearGradient>`);
+  const R = { chip: 10 * u, tile: 16 * u, card: 22 * u };
+  const rect = (x, y, w, h, fill, r = 0, extra = '') => w > 0 && h > 0 && parts.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${paint(fill, x, y, w, h)}" ${extra}/>`);
+  // a card in the signature surface with its edge light
+  const card = (x, y, w, h, r = R.card) => parts.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${surf(x, y, w, h)}" stroke="url(#edge)" stroke-width="${2 * u}"/>`);
+  // a filled field: selected fill on the Canvas carries the edge light too
+  const fill = (x, y, w, h, c, r) => c === 'surface' ? card(x, y, w, h, r) : rect(x, y, w, h, c, r);
+  const fade = (x, y, w) => rect(x, y, w, Math.max(1.5, 2 * u), 'url(#fade)');
+
   // ground
-  parts.push(`<rect width="${W}" height="${H}" fill="${g.bg}"/>`);
-  if (g.blueprint) {
-    defs.push(`<pattern id="bpm" width="${8 * u * 2}" height="${8 * u * 2}" patternUnits="userSpaceOnUse"><path d="M${16 * u} 0H0V${16 * u}" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1"/></pattern>`,
-      `<pattern id="bpM" width="${80 * u}" height="${80 * u}" patternUnits="userSpaceOnUse"><path d="M${80 * u} 0H0V${80 * u}" fill="none" stroke="rgba(255,255,255,.11)" stroke-width="1.5"/></pattern>`);
-    parts.push(`<rect width="${W}" height="${H}" fill="url(#bpm)"/><rect width="${W}" height="${H}" fill="url(#bpM)"/>`);
-  }
+  parts.push(`<rect width="${W}" height="${H}" fill="${paint(g.bg, 0, 0, W, H)}"/>`);
 
-  // the seam in the top corner, leaning to the business: a blue grid cut at 55° with a red wedge
-  const seam = () => {
-    if (g.blueprint) return 0;
-    const gw = Math.round(Math.min(W, H) * 0.29 * (land ? 1.25 : big)), th = gw / 0.7, rw = gw * { balance: 0.45, blue: 0.2, red: 0.72 }[biz.lean];
-    defs.push(`<pattern id="sg" width="${80 * u}" height="${80 * u}" patternUnits="userSpaceOnUse"><path d="M${80 * u} 0H0V${80 * u}" fill="none" stroke="${g.grid}.45)" stroke-width="2"/><path d="M${40 * u} 0V${80 * u}M0 ${40 * u}H${80 * u}" fill="none" stroke="${g.grid}.16)" stroke-width="1"/></pattern>`);
-    parts.push(`<polygon points="${W - gw},0 ${W},0 ${W},${th}" fill="url(#sg)"/><line x1="${W - gw}" y1="0" x2="${W}" y2="${th}" stroke="${g.line}" stroke-width="${3 * u}"/><polygon points="${W - rw},0 ${W},0 ${W},${rw / 0.7}" fill="${g.accent}"/>`);
-    return th;
-  };
-
-  // lockup, top left
+  // lockup, top left, monochrome
   const logo = (x, y, h, tone = g.logo) => {
     const l = env.logos[`${biz.key}-${tone}`]; if (!l) return 0;
     const lw = h * l.ratio; parts.push(`<svg x="${x}" y="${y}" width="${lw}" height="${h}" viewBox="${l.viewBox}">${l.inner}</svg>`); return lw;
   };
-  // footer: the scale rule with its red lead, the handle below, an optional right-hand readout
+  // footer: the fading Pale Blue divider, the handle below it, an optional right-hand readout
   const footer = (right = '', xa = x0, xb = x1) => {
     const ry = y1 - 46 * u;
-    parts.push(`<rect x="${xa}" y="${ry}" width="${xb - xa}" height="${2 * u}" fill="${g.line}"/>`);
-    for (let t = xa; t <= xb; t += 40 * u) parts.push(`<rect x="${t}" y="${ry - 10 * u}" width="${1.5 * u}" height="${10 * u}" fill="${g.line}"/>`);
-    parts.push(`<polygon points="${xa},${ry - 7 * u} ${xa + 110 * u},${ry - 7 * u} ${xa + 110 * u + 7 * u * 0.7},${ry + 2 * u} ${xa},${ry + 2 * u}" fill="${g.accent}"/>`);
-    parts.push(`<text x="${xa}" y="${y1}" font-size="${26 * u}" ${MONO} fill="${g.lineText}">${esc(d.handle)}</text>`);
-    if (right) parts.push(`<text x="${xb}" y="${y1}" font-size="${26 * u}" ${MONOM} fill="${g.ink}" text-anchor="end">${esc(right)}</text>`);
+    fade(xa, ry, xb - xa);
+    parts.push(`<text x="${xa}" y="${y1}" font-size="${26 * u}" ${REG} fill="${g.dim}">${esc(d.handle)}</text>`);
+    if (right) parts.push(`<text x="${xb}" y="${y1}" font-size="${26 * u}" ${NUMS} fill="${g.ink}" text-anchor="end">${esc(right)}</text>`);
     return ry - 40 * u; // the lowest point content may reach
   };
   const logoH = 60 * u, below = top + logoH;
 
   const v = variantOf(o.type, o.variant);
-  const semi = (lines, x, y, size, lh, fill = g.ink) => parts.push(textBlock(lines, x, y + size * 0.86, size, lh, `${SEMI} fill="${fill}" letter-spacing="-0.02em"`));
-  const mono = (text, x, y, size, fill = g.dim, extra = '') => text && parts.push(`<text x="${x}" y="${y}" font-size="${size}" ${MONO} fill="${fill}" ${extra}>${esc(text)}</text>`);
-  const cut = h => h * 0.7;
-  const bar = (x, y, w, h, fill) => w > cut(h) && parts.push(`<polygon points="${x},${y} ${x + w - cut(h)},${y} ${x + w},${y + h} ${x + cut(h)},${y + h}" fill="${fill}"/>`);
+  const semi = (lines, x, y, size, lh, fillC = g.ink) => parts.push(textBlock(lines, x, y + size * 0.86, size, lh, `${SEMI} fill="${fillC}" letter-spacing="-0.024em"`));
+  const num = (text, x, y, size, fillC = g.dim, extra = '') => text && parts.push(`<text x="${x}" y="${y}" font-size="${size}" ${NUM} fill="${fillC}" ${extra}>${esc(text)}</text>`);
+  // an eyebrow over a title: uppercase SemiBold, tracked wide
+  const eyebrow = (text, x, y, size, fillC = g.eyebrow) => text && parts.push(`<text x="${x}" y="${y}" font-size="${size}" ${SEMI} letter-spacing="0.2em" fill="${fillC}">${esc(String(text).toUpperCase())}</text>`);
+  // a rounded label tile with centred text; returns its width
+  const chipTile = (x, y, h, text, c, color, size) => {
+    const w = Math.max(h * 1.3, measure(text, size, 600) + h * 0.9);
+    fill(x, y, w, h, c, R.chip);
+    parts.push(`<text x="${x + w / 2}" y="${y + h / 2 + size * 0.36}" font-size="${size}" text-anchor="middle" ${NUMS} fill="${color}">${esc(text)}</text>`);
+    return w;
+  };
+  // a rounded bar
+  const bar = (x, y, w, h, c) => fill(x, y, Math.max(h, w), h, c, h / 2);
   let clip = 0;
   const photoBox = (px, py, pw, ph) => {
     const id = 'pc' + clip++;
@@ -162,43 +170,61 @@ export function render(o, env) {
       const dx = px + Math.min(0, Math.max(pw - dw, pw / 2 - fx * dw)), dy = py + Math.min(0, Math.max(ph - dh, ph / 2 - fy * dh));
       parts.push(`<image href="${env.photo}" x="${dx}" y="${dy}" width="${dw}" height="${dh}" preserveAspectRatio="none" clip-path="url(#${id})"/>`);
     } else if (env.photo) parts.push(`<image href="${env.photo}" x="${px}" y="${py}" width="${pw}" height="${ph}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${id})"/>`);
-    else parts.push(`<rect x="${px}" y="${py}" width="${pw}" height="${ph}" fill="${o.ground === 'light' ? '#F0F0F0' : g.blueprint ? '#0E3673' : '#1C1E22'}"/><text x="${px + pw / 2}" y="${py + ph / 2}" font-size="${28 * u}" ${MONO} fill="${g.dim}" text-anchor="middle">Add a photo</text>`);
+    else parts.push(`<rect x="${px}" y="${py}" width="${pw}" height="${ph}" fill="${g.ph}"/><text x="${px + pw / 2}" y="${py + ph / 2}" font-size="${28 * u}" ${REG} fill="${g.dim}" text-anchor="middle">Add a photo</text>`);
+  };
+  // the strapline band: full bleed, the conclusion in one sentence; dark on the Canvas, light on the surface
+  const strap = (text, yBottom) => {
+    if (!text) return yBottom;
+    const pad = land ? 36 : 64, t = fit(text, { max: W - 2 * pad * u, start: 34 * ub, min: 22 * u, lines: 2, lh: 1.25 });
+    const h = Math.max(84 * u, t.h + 40 * u), y = yBottom - h;
+    rect(0, y, W, h, g.band);
+    parts.push(textBlock(t.lines, W / 2, y + (h - t.h) / 2 + t.size * 0.9, t.size, t.lh, `${SEMI} fill="${g.onBand}"`, 'middle'));
+    return y;
+  };
+  // an icon from the library, white in an icon tile
+  const iconTile = (x, y, s, name) => {
+    card(x, y, s, s * 1.04, R.tile);
+    const k = s * 0.56 / 24;
+    parts.push(`<g transform="translate(${x + s * 0.22} ${y + s * 0.24}) scale(${k})" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${bodyOf(name)}</g>`);
   };
 
-  // a band of 55° stripes inside the margins: whole stripes only, blue for engineering, red for racing,
-  // one stripe's worth of ground between the two groups
-  const stripes = (y, h) => {
-    const sw = 16 * ub, per = 38 * ub, k = cut(h), n = Math.floor((TW - sw - k) / per) + 1;
-    const blue = Math.max(1, Math.min(n - 3, Math.round((n - 1) * { balance: 0.5, blue: 0.68, red: 0.32 }[biz.lean])));
-    const x = x0 + (TW - sw - k - (n - 1) * per) / 2;
-    for (let i = 0; i < n; i++) {
-      if (i === blue) continue;
-      const sx = x + i * per, c = i < blue ? g.line : g.blueprint ? g.line : g.accent;
-      parts.push(`<polygon points="${sx},${y} ${sx + sw},${y} ${sx + sw + k},${y + h} ${sx + k},${y + h}" fill="${c}"/>`);
-    }
-    return y + h;
-  };
-
-  const headlineStack = ({ kicker, headline, support, counter }, deco = 'seam') => {
-    let ceiling = below + 40 * u, maxW = TW;
-    if (deco === 'seam') { const th = seam(); if (land) maxW = TW - Math.min(W, H) * 0.29 * 1.25 - 20; else ceiling = Math.max(ceiling, th + 40 * u); }
+  const headlineStack = ({ kicker, headline, support, counter }, deco = 'plain') => {
+    let ceiling = below + 40 * u;
     logo(x0, top, logoH);
-    if (deco === 'stripes') ceiling = stripes(below + (land ? 36 : 60) * ub, (land ? 90 : 150) * ub) + 50 * u;
-    const floor = footer(counter);
-    const sup = fit(support, { max: maxW, start: 36 * ub, min: 24 * u, lines: 3, weight: 300, lh: 1.3 });
+    let floor = footer(counter);
+    if (deco === 'band') {
+      // the band sits just above the footer; the headline stands on it
+      floor = strap(support, floor + 10 * u) - 40 * u;
+      const kick = kicker ? 58 * ub : 0;
+      const hl = fit(headline, { max: TW, start: (land ? 112 : 104) * ub, min: 44 * u, lines: land ? 3 : 6, height: floor - ceiling - kick, ls: -0.024 });
+      const y = floor - hl.h;
+      eyebrow(kicker, x0, y - 28 * ub, 26 * ub);
+      semi(hl.lines, x0, y, hl.size, hl.lh);
+      return;
+    }
+    let cx = x0, cw = TW, ink = g.ink, dim = g.dim, eb = g.eyebrow;
+    if (deco === 'card') {
+      // the headline in a card in the signature surface, with an icon tile
+      const ct = ceiling + (land ? 0 : 20 * u), pad = (land ? 40 : 56) * u;
+      card(x0, ct, TW, floor - ct);
+      iconTile(x0 + pad, ct + pad, (land ? 64 : 88) * u, 'megaphone');
+      cx = x0 + pad; cw = TW - 2 * pad; ceiling = ct + pad + (land ? 64 : 88) * u * 1.04 + 30 * u; floor -= pad - 20 * u;
+      ink = '#FFFFFF'; dim = '#D6DCE5'; eb = '#ABC0E4';
+    }
+    const sup = fit(support, { max: cw, start: 36 * ub, min: 24 * u, lines: 3, weight: 300, lh: 1.3 });
     const kick = kicker ? 58 * ub : 0;
-    const hl = fit(headline, { max: maxW, start: (land ? 118 : 104) * ub * (deco === 'plain' ? 1.2 : 1), min: 44 * u, lines: land ? 3 : 6, height: floor - ceiling - sup.h - kick - 30 * u, ls: -0.02 });
+    const hl = fit(headline, { max: cw, start: (land ? 112 : 104) * ub * (deco === 'plain' ? 1.15 : 0.9), min: 40 * u, lines: land ? 3 : 6, height: floor - ceiling - sup.h - kick - 30 * u, ls: -0.024 });
     let y = floor - sup.h - (sup.lines.length ? 26 * u : 0) - hl.h;
-    if (kicker) mono(kicker, x0, y - 28 * ub, 28 * ub, g.lineText);
-    semi(hl.lines, x0, y, hl.size, hl.lh);
+    eyebrow(kicker, cx, y - 28 * ub, 26 * ub, eb);
+    semi(hl.lines, cx, y, hl.size, hl.lh, ink);
     y += hl.h + 26 * u;
-    parts.push(textBlock(sup.lines, x0, y + sup.size * 0.9, sup.size, sup.lh, `${LIGHT} fill="${g.dim}"`));
+    parts.push(textBlock(sup.lines, cx, y + sup.size * 0.9, sup.size, sup.lh, `${LIGHT} fill="${dim}"`));
   };
 
   // a figure with its unit tucked against it; returns its width
-  const figureAt = (text, unit, x, y, size, fill = g.ink, unitFill = g.accent) => {
+  const figureAt = (text, unit, x, y, size, fillC = g.ink, unitFill = g.quiet) => {
     const fw = measure(text || '', size, 600) - size * 0.04 * ([...(text || '')].length + 1), us = size * 0.34;
-    parts.push(`<text x="${x - size * 0.04}" y="${y}" font-size="${size}" ${SEMI} fill="${fill}" letter-spacing="-0.04em">${esc(text)}</text>`);
+    parts.push(`<text x="${x - size * 0.04}" y="${y}" font-size="${size}" ${NUMS} fill="${fillC}" letter-spacing="-0.04em">${esc(text)}</text>`);
     if (unit) parts.push(`<text x="${x + fw + us * 0.06}" y="${y}" font-size="${us}" ${SEMI} fill="${unitFill}">${esc(unit)}</text>`);
     return fw + (unit ? measure(unit, us, 600) + us * 0.06 : 0);
   };
@@ -207,23 +233,23 @@ export function render(o, env) {
     const cap = fit(d.caption, { max: w, start: capStart, min: 26 * u, lines: 4, weight: 400, lh: 1.3 });
     const srcH = d.source ? 64 * u : 0, top_ = floor - srcH - cap.h;
     parts.push(textBlock(cap.lines, x, top_ + cap.size * 0.9, cap.size, cap.lh, `${REG} fill="${g.ink}"`));
-    if (d.source) { parts.push(`<rect x="${x}" y="${top_ + cap.h + 22 * u}" width="${w}" height="${1.5 * u}" fill="${g.rule}"/>`); mono('Source: ' + d.source, x, top_ + cap.h + 60 * u, 24 * u); }
+    if (d.source) { fade(x, top_ + cap.h + 22 * u, w); num('Source: ' + d.source, x, top_ + cap.h + 60 * u, 24 * u); }
     return top_;
   };
   // big figure, a place, a title: the date and countdown share this layout
   const dayLayout = (big_, under) => {
-    seam(); logo(x0, top, logoH);
+    logo(x0, top, logoH);
     const floor = footer();
     const cx = land ? x0 + TW * 0.46 : x0, cw = land ? TW * 0.54 : TW;
-    const pl = fit(d.place, { max: cw, start: 32 * ub, min: 22 * u, lines: 2, weight: 400, family: 'IBM Plex Mono', lh: 1.3 });
-    const ti = fit(d.title, { max: cw, start: 72 * ub, min: 38 * u, lines: 3, ls: -0.02 });
+    const pl = fit(d.place, { max: cw, start: 32 * ub, min: 22 * u, lines: 2, weight: 400, lh: 1.3 });
+    const ti = fit(d.title, { max: cw, start: 72 * ub, min: 38 * u, lines: 3, ls: -0.024 });
     const y = floor - pl.h - 24 * ub - ti.h;
     semi(ti.lines, cx, y, ti.size, ti.lh);
-    parts.push(textBlock(pl.lines, cx, y + ti.h + 24 * ub + pl.size * 0.9, pl.size, pl.lh, `${MONO} fill="${g.dim}"`));
+    parts.push(textBlock(pl.lines, cx, y + ti.h + 24 * ub + pl.size * 0.9, pl.size, pl.lh, `${NUM} fill="${g.dim}"`));
     const daySize = figureSize(big_, '', (land ? 300 : 340) * ub, land ? TW * 0.42 : TW), dayBase = land ? floor - 50 * u : y - 90 * ub;
     figureAt(big_, '', x0, dayBase, daySize);
-    parts.push(`<text x="${x0}" y="${dayBase + 50 * ub}" font-size="${34 * ub}" ${MONOM} fill="${g.lineText}">${esc(under)}</text>`);
-    if (d.kicker) parts.push(board(x0, dayBase - daySize * 0.72 - 110 * ub, 60 * ub, d.kicker, g.accent, g.onAccent, 28 * ub).svg);
+    parts.push(`<text x="${x0}" y="${dayBase + 50 * ub}" font-size="${34 * ub}" ${SEMI} fill="${g.dim}">${esc(under)}</text>`);
+    eyebrow(d.kicker, x0, dayBase - daySize * 0.72 - 50 * ub, 28 * ub);
   };
   const lines = s => String(s || '').split('\n').map(r => r.split(';').map(x => x.trim())).filter(r => r[0]);
 
@@ -236,9 +262,9 @@ export function render(o, env) {
     logo(x0, top, logoH);
     const n = String(d.page).padStart(2, '0'), last = Number(d.page) >= Number(d.total);
     const floor = footer(`${n} / ${String(d.total || 1).padStart(2, '0')}${last ? '' : '  →'}`);
-    parts.push(board(x0, below + 70 * u, 64 * u, n, g.accent, g.onAccent, 34 * u).svg);
+    chipTile(x0, below + 70 * u, 64 * u, n, g.sel, g.onSel, 32 * u);
     let y = below + 70 * u + 64 * u + 56 * u;
-    const hl = fit(d.headline, { max: TW, start: 76 * ub, min: 40 * u, lines: 3, ls: -0.02 });
+    const hl = fit(d.headline, { max: TW, start: 76 * ub, min: 40 * u, lines: 3, ls: -0.024 });
     semi(hl.lines, x0, y, hl.size, hl.lh);
     y += hl.h + 34 * u;
     const bd = fit(d.body, { max: land ? TW * 0.8 : TW, start: 40 * ub, min: 24 * u, lines: 12, height: floor - y, weight: 400, lh: 1.4 });
@@ -251,23 +277,23 @@ export function render(o, env) {
     if (land) {
       const colW = TW * 0.3, s1 = figureSize(d.from, d.unit, 150 * ub, colW), s2 = figureSize(d.figure, d.unit, 300 * ub, TW * 0.5);
       const base = below + (floor - below) * 0.62;
-      mono(d.fromLabel, x0, base - s2 * 0.8, 26 * u); figureAt(d.from, d.unit, x0, base - s2 * 0.8 + s1 * 0.9, s1, g.dim, g.dim);
-      mono(d.toLabel, x0 + TW * 0.36, base - s2 * 0.8, 26 * u, g.lineText); figureAt(d.figure, d.unit, x0 + TW * 0.36, base, s2);
-      parts.push(`<rect x="${x0 + TW * 0.36 - 40 * u}" y="${base - s2 * 0.9}" width="${1.5 * u}" height="${s2 * 0.95}" fill="${g.rule}"/>`);
+      num(d.fromLabel, x0, base - s2 * 0.8, 26 * u); figureAt(d.from, d.unit, x0, base - s2 * 0.8 + s1 * 0.9, s1, g.quiet, g.quiet);
+      eyebrow(d.toLabel, x0 + TW * 0.36, base - s2 * 0.8, 22 * u); figureAt(d.figure, d.unit, x0 + TW * 0.36, base, s2);
+      rect(x0 + TW * 0.36 - 40 * u, base - s2 * 0.9, 2 * u, s2 * 0.95, g.rule);
       const cap = fit(d.caption, { max: TW * 0.9, start: 30 * u * 1.2, min: 22 * u, lines: 1, weight: 400 });
       parts.push(textBlock(cap.lines, x0, base + 60 * u, cap.size, 1.2, `${REG} fill="${g.ink}"`));
-      mono(d.source && 'Source: ' + d.source, x0, base + 100 * u, 22 * u);
+      num(d.source && 'Source: ' + d.source, x0, base + 100 * u, 22 * u);
     } else {
       const capTop = captionAndSource(floor, x0, TW);
       const room = capTop - 60 * ub - (below + 80 * u) - 146 * ub;
       const s2 = Math.min(figureSize(d.figure, d.unit, 330 * ub, TW), room / 1.11), s1 = s2 * 0.42;
       const base2 = capTop - 60 * ub;
-      mono(d.toLabel, x0, base2 - s2 * 0.78, 28 * ub, g.lineText);
+      eyebrow(d.toLabel, x0, base2 - s2 * 0.78, 24 * ub);
       figureAt(d.figure, d.unit, x0, base2, s2);
       const base1 = base2 - s2 * 0.78 - 70 * ub;
-      parts.push(`<rect x="${x0}" y="${base1 + 34 * ub}" width="${TW}" height="${1.5 * u}" fill="${g.rule}"/>`);
-      figureAt(d.from, d.unit, x0, base1, s1, g.dim, g.dim);
-      mono(d.fromLabel, x0, base1 - s1 * 0.78 - 20 * ub, 28 * ub);
+      fade(x0, base1 + 34 * ub, TW);
+      figureAt(d.from, d.unit, x0, base1, s1, g.quiet, g.quiet);
+      num(d.fromLabel, x0, base1 - s1 * 0.78 - 20 * ub, 28 * ub);
     }
   }
 
@@ -275,18 +301,18 @@ export function render(o, env) {
     logo(x0, top, logoH);
     const floor = footer();
     const prog = v === 'progress', pct = Math.max(0, Math.min(1, parseFloat(String(d.figure).replace(/[^\d.-]/g, '')) / (parseFloat(d.max) || 100))) || 0;
-    const trackH = 40 * ub, trackBlock = prog ? trackH + 70 * u : 0;
+    const trackH = 32 * ub, trackBlock = prog ? trackH + 70 * u : 0;
     let size = figureSize(d.figure, d.unit, (land ? 330 : prog ? 330 : 400) * ub, TW * (land ? 0.55 : 1)), y;
     const track = (ty) => {
-      bar(x0, ty, TW, trackH, g.track); bar(x0, ty, Math.max(cut(trackH) * 2, TW * pct), trackH, g.accent);
-      mono('0', x0, ty + trackH + 36 * u, 22 * ub); mono(d.max || '100', x1, ty + trackH + 36 * u, 22 * ub, g.dim, 'text-anchor="end"');
+      bar(x0, ty, TW, trackH, g.track); bar(x0, ty, TW * pct, trackH, g.sel);
+      num('0', x0, ty + trackH + 36 * u, 22 * ub); num(d.max || '100', x1, ty + trackH + 36 * u, 22 * ub, g.dim, 'text-anchor="end"');
     };
     if (land) {
       y = below + (floor - trackBlock - below) / 2 + size * 0.36;
       const cx = x0 + TW * 0.56;
       const cap = fit(d.caption, { max: TW * 0.42, start: 44 * ub, min: 26 * u, lines: 4, weight: 400, lh: 1.3 });
       parts.push(textBlock(cap.lines, cx, y - size * 0.36 - cap.h / 2 + cap.size * 0.9, cap.size, cap.lh, `${REG} fill="${g.ink}"`));
-      mono(d.source && 'Source: ' + d.source, cx, y - size * 0.36 + cap.h / 2 + 50 * u, 22 * u);
+      num(d.source && 'Source: ' + d.source, cx, y - size * 0.36 + cap.h / 2 + 50 * u, 22 * u);
       if (prog) track(floor - trackH - 40 * u);
     } else {
       const capTop = captionAndSource(floor, x0, TW);
@@ -306,11 +332,11 @@ export function render(o, env) {
     const attrH = (d.name ? 44 * ub : 0) + (d.role ? 38 * ub : 0);
     const q = fit(d.quote ? `“${d.quote.replace(/^[“"]|[”"]$/g, '')}”` : '', { max: qw, start: (land ? 64 : 68) * ub * (v === 'photo' ? 0.8 : 1), min: 28 * u, lines: land ? 5 : 8, height: floor - qTop - attrH - 50 * u, weight: 300, lh: 1.22, ls: -0.01 });
     let y = floor - attrH - 50 * u - q.h;
-    parts.push(`<rect x="${qx}" y="${y - 56 * u}" width="${110 * u}" height="${8 * u}" fill="${g.accent}"/>`);
+    rect(qx, y - 56 * u, 110 * u, 6 * u, g.rule, 3 * u);
     parts.push(textBlock(q.lines, qx - q.size * 0.3, y + q.size * 0.86, q.size, q.lh, `${LIGHT} fill="${g.ink}" letter-spacing="-0.01em"`).replace(/<tspan x="[^"]+" dy="([^"]+)">/g, (s, dy) => dy === '0' ? s : `<tspan x="${qx}" dy="${dy}">`));
     y += q.h + 50 * u;
     if (d.name) { parts.push(`<text x="${qx}" y="${y + 30 * ub}" font-size="${32 * ub}" ${SEMI} fill="${g.ink}">${esc(d.name)}</text>`); y += 44 * ub; }
-    mono(d.role, qx, y + 28 * ub, 24 * ub);
+    num(d.role, qx, y + 28 * ub, 24 * ub);
   }
 
   else if (t === 'photo') {
@@ -323,13 +349,13 @@ export function render(o, env) {
     } else if (split) {
       const pw = Math.round(W * (land ? 0.5 : 0.44)); photoBox(W - pw, 0, pw, H); lmax = W - pw - 2 * m + 20 * u; colR = x0 + lmax; textTop = below + 60 * u; logo(x0, top, logoH * (land ? 1 : 0.8));
     } else {
-      const ph = Math.round(H * (story ? 0.5 : 0.58)); photoBox(0, 0, W, ph); textTop = ph - 38 * u;
+      const ph = Math.round(H * (story ? 0.5 : 0.58)); photoBox(0, 0, W, ph); textTop = ph + 30 * u;
     }
     const floor = footer('', x0, colR);
     let y = textTop;
-    if (d.kicker) parts.push(board(x0, y, 64 * u, d.kicker, g.accent, g.onAccent, 30 * u).svg);
-    y += 64 * u + 44 * u;
-    const hl = fit(d.headline, { max: lmax, start: (split ? 76 : 80) * ub, min: 30 * u, lines: split ? 7 : 3, height: floor - y, ls: -0.02 });
+    eyebrow(d.kicker, x0, y + 30 * u, 26 * u);
+    y += (d.kicker ? 64 : 0) * u + 20 * u;
+    const hl = fit(d.headline, { max: lmax, start: (split ? 76 : 80) * ub, min: 30 * u, lines: split ? 7 : 3, height: floor - y, ls: -0.024 });
     semi(hl.lines, x0, y, hl.size, hl.lh);
     if (!split && v !== 'frame') { const lw = env.logos[`${biz.key}-${g.logo}`]?.ratio * 44 * u || 0; logo(x1 - lw, y1 - 44 * u + 4 * u, 44 * u); }
   }
@@ -338,39 +364,40 @@ export function render(o, env) {
     logo(x0, top, logoH);
     const floor = footer();
     let y = below + 90 * u;
-    const tt = fit(d.title, { max: TW, start: 72 * ub, min: 46 * u, lines: 1, ls: -0.02 });
-    parts.push(textBlock(tt.lines, x0, y, tt.size, tt.lh, `${SEMI} fill="${g.ink}" letter-spacing="-0.02em"`));
+    const tt = fit(d.title, { max: TW, start: 72 * ub, min: 46 * u, lines: 1, ls: -0.024 });
+    parts.push(textBlock(tt.lines, x0, y, tt.size, tt.lh, `${SEMI} fill="${g.ink}" letter-spacing="-0.024em"`));
     y += 50 * ub;
-    if (d.event) { mono(d.event, x0, y, 26 * ub, g.lineText); y += 44 * ub; }
+    if (d.event) { parts.push(`<text x="${x0}" y="${y}" font-size="${26 * ub}" ${REG} fill="${g.dim}">${esc(d.event)}</text>`); y += 44 * ub; }
     const rows = lines(d.rows);
     if (v === 'podium') {
       const top3 = rows.slice(0, 3), gap = 20 * u, cw = (TW - 2 * gap) / 3, order = [1, 0, 2];
       const nameBlock = 150 * ub, area = floor - y - nameBlock - 20 * u, hs = [0.62, 0.44, 0.3];
       order.forEach((i, col) => {
         const r = top3[i]; if (!r) return;
-        const x = x0 + col * (cw + gap), hb = area * hs[i], yt = floor - hb, c = cw * 0.16;
-        parts.push(`<polygon points="${x},${yt} ${x + cw - c},${yt} ${x + cw},${yt + c / 0.7} ${x + cw},${floor} ${x},${floor}" fill="${i === 0 ? g.accent : g.board}"/>`);
+        const x = x0 + col * (cw + gap), hb = area * hs[i], yt = floor - hb;
+        // rounded at the top, standing on the floor
+        if (i === 0 && g.sel === 'surface') { parts.push(`<path d="M${x} ${floor}V${yt + R.card}Q${x} ${yt} ${x + R.card} ${yt}H${x + cw - R.card}Q${x + cw} ${yt} ${x + cw} ${yt + R.card}V${floor}Z" fill="${surf(x, yt, cw, hb)}" stroke="url(#edge)" stroke-width="${2 * u}"/>`); }
+        else parts.push(`<path d="M${x} ${floor}V${yt + R.card}Q${x} ${yt} ${x + R.card} ${yt}H${x + cw - R.card}Q${x + cw} ${yt} ${x + cw} ${yt + R.card}V${floor}Z" fill="${i === 0 ? g.sel : g.board}"/>`);
         const ns = Math.min(hb * 0.55, 150 * ub);
-        parts.push(`<text x="${x + 24 * u}" y="${yt + ns * 0.95 + 14 * u}" font-size="${ns}" ${SEMI} fill="${i === 0 ? g.onAccent : g.onBoard}" letter-spacing="-0.04em">${i + 1}</text>`);
+        parts.push(`<text x="${x + 24 * u}" y="${yt + ns * 0.95 + 14 * u}" font-size="${ns}" ${NUMS} fill="${i === 0 ? g.onSel : g.onBoard}" letter-spacing="-0.04em">${i + 1}</text>`);
         const nm = fit(r[0], { max: cw - 8 * u, start: 38 * ub, min: 22 * u, lines: 2, lh: 1.08 });
         let ty = yt - 24 * u - (r[2] ? 40 * ub : 0) - (r[1] ? 34 * ub : 0) - nm.h;
         semi(nm.lines, x, ty, nm.size, nm.lh); ty += nm.h + 30 * ub;
-        if (r[1]) { mono(r[1], x, ty, 22 * ub); ty += 36 * ub; }
-        if (r[2]) parts.push(`<text x="${x}" y="${ty + 4 * u}" font-size="${30 * ub}" ${MONOM} fill="${g.ink}">${esc(r[2])}</text>`);
+        if (r[1]) { num(r[1], x, ty, 22 * ub); ty += 36 * ub; }
+        if (r[2]) parts.push(`<text x="${x}" y="${ty + 4 * u}" font-size="${30 * ub}" ${NUMS} fill="${g.ink}">${esc(r[2])}</text>`);
       });
     } else {
       const show = rows.slice(0, land ? 3 : 5);
       const rh = Math.min(128 * ub * (big > 1 ? 1.25 : 1), (floor - y) / Math.max(show.length, 1));
       show.forEach((r, i) => {
         const ry = y + i * rh, mid = ry + rh / 2, bh = Math.min(56 * ub, rh * 0.5);
-        parts.push(`<rect x="${x0}" y="${ry + rh}" width="${TW}" height="${1.5 * u}" fill="${g.rule}"/>`);
-        const b = board(x0, mid - bh / 2, bh, String(i + 1), i === 0 ? g.accent : g.board, i === 0 ? g.onAccent : g.onBoard, bh * 0.5);
-        parts.push(b.svg);
-        const nx = x0 + b.w + 28 * ub, vs = 38 * ub, vw = measure(r[2] || '', vs, 500, 'IBM Plex Mono');
+        rect(x0, ry + rh, TW, Math.max(1.5, 1.5 * u), g.rule);
+        const bw = chipTile(x0, mid - bh / 2, bh, String(i + 1), i === 0 ? g.sel : g.board, i === 0 ? g.onSel : g.onBoard, bh * 0.5);
+        const nx = x0 + bw + 28 * ub, vs = 38 * ub, vw = measure(r[2] || '', vs, 600);
         const ns = fit(r[0], { max: x1 - vw - 30 * u - nx, start: 40 * ub, min: 24 * u, lines: 1 }).size;
         parts.push(`<text x="${nx}" y="${r[1] ? mid - 4 * ub : mid + ns * 0.36}" font-size="${ns}" ${SEMI} fill="${g.ink}">${esc(r[0])}</text>`);
-        mono(r[1], nx, mid + 34 * ub, 24 * ub);
-        if (r[2]) parts.push(`<text x="${x1}" y="${mid + vs * 0.36}" font-size="${vs}" ${MONOM} fill="${g.ink}" text-anchor="end">${esc(r[2])}</text>`);
+        num(r[1], nx, mid + 34 * ub, 24 * ub);
+        if (r[2]) parts.push(`<text x="${x1}" y="${mid + vs * 0.36}" font-size="${vs}" ${NUMS} fill="${g.ink}" text-anchor="end">${esc(r[2])}</text>`);
       });
     }
   }
@@ -378,21 +405,21 @@ export function render(o, env) {
   else if (t === 'date' && v === 'schedule') {
     logo(x0, top, logoH);
     const floor = footer();
-    const cx = land ? x0 : x0, colW = land ? TW * 0.42 : TW;
+    const cx = x0, colW = land ? TW * 0.42 : TW;
     let y = below + 80 * u;
-    const ti = fit(d.title, { max: colW, start: 72 * ub, min: 38 * u, lines: 3, ls: -0.02 });
+    const ti = fit(d.title, { max: colW, start: 72 * ub, min: 38 * u, lines: 3, ls: -0.024 });
     semi(ti.lines, cx, y, ti.size, ti.lh); y += ti.h + 26 * ub;
-    const pl = fit(d.place, { max: colW, start: 30 * ub, min: 22 * u, lines: 2, weight: 400, family: 'IBM Plex Mono', lh: 1.3 });
-    parts.push(textBlock(pl.lines, cx, y + pl.size * 0.9, pl.size, pl.lh, `${MONO} fill="${g.lineText}"`)); y += pl.h + 40 * ub;
+    const pl = fit(d.place, { max: colW, start: 30 * ub, min: 22 * u, lines: 2, weight: 400, lh: 1.3 });
+    parts.push(textBlock(pl.lines, cx, y + pl.size * 0.9, pl.size, pl.lh, `${NUM} fill="${g.dim}"`)); y += pl.h + 40 * ub;
     const rows = lines(d.rows).slice(0, land ? 5 : 7), rx = land ? x0 + TW * 0.5 : x0, rw = land ? TW * 0.5 : TW;
     const ry0 = land ? below + 40 * u : y, rh = Math.min(110 * ub * (big > 1 ? 1.3 : 1), (floor - ry0) / Math.max(rows.length, 1));
-    const ts = 36 * ub, bh = 50 * ub, tw = Math.max(0, ...rows.map(r => measure(r[0], ts, 500, 'IBM Plex Mono'))) + 2 * cut(bh) + 12 * ub, nx = rx + tw + 30 * ub;
+    const ts = 34 * ub, bh = 50 * ub, tw = Math.max(0, ...rows.map(r => measure(r[0], ts, 600))) + bh * 0.9, nx = rx + tw + 30 * ub;
     rows.forEach((r, i) => {
       const ry = ry0 + i * rh, mid = ry + rh / 2, lead = i === rows.length - 1;
-      parts.push(`<rect x="${rx}" y="${ry}" width="${rw}" height="${1.5 * u}" fill="${g.rule}"/>`);
-      if (lead) bar(rx, mid - bh / 2, tw, bh, g.accent);
-      parts.push(`<text x="${rx + tw / 2}" y="${mid + ts * 0.36}" font-size="${ts}" ${MONOM} fill="${lead ? g.onAccent : g.lineText}" text-anchor="middle">${esc(r[0])}</text>`);
-      const nm = fit(r[1] || '', { max: x0 + (land ? TW : TW) - nx, start: 40 * ub, min: 24 * u, lines: 1 });
+      rect(rx, ry, rw, Math.max(1.5, 1.5 * u), g.rule);
+      if (lead) fill(rx, mid - bh / 2, tw, bh, g.sel, R.chip);
+      parts.push(`<text x="${rx + tw / 2}" y="${mid + ts * 0.36}" font-size="${ts}" ${NUMS} fill="${lead ? g.onSel : g.ink}" text-anchor="middle">${esc(r[0])}</text>`);
+      const nm = fit(r[1] || '', { max: x0 + TW - nx, start: 40 * ub, min: 24 * u, lines: 1 });
       parts.push(`<text x="${nx}" y="${mid + nm.size * 0.36}" font-size="${nm.size}" ${SEMI} fill="${g.ink}">${esc(r[1] || '')}</text>`);
     });
   }
@@ -413,19 +440,19 @@ export function render(o, env) {
     ms.forEach((r, i) => {
       const mid = msTop + i * rowH + rowH / 2, val = Math.max(0, Math.min(100, parseFloat(r[1]) || 0));
       parts.push(`<text x="${cx}" y="${mid + 11 * ub}" font-size="${30 * ub}" ${REG} fill="${g.dim}">${esc(r[0])}</text>`);
-      bar(bx, mid - 14 * ub, bw, 28 * ub, g.track); bar(bx, mid - 14 * ub, Math.max(cut(28 * ub) * 2, bw * val / 100), 28 * ub, g.ink);
-      parts.push(`<text x="${cx + cw}" y="${mid + 13 * ub}" font-size="${36 * ub}" ${MONOM} fill="${g.ink}" text-anchor="end">${esc(r[1] || '')}</text>`);
+      bar(bx, mid - 12 * ub, bw, 24 * ub, g.track); bar(bx, mid - 12 * ub, bw * val / 100, 24 * ub, g.ink);
+      parts.push(`<text x="${cx + cw}" y="${mid + 13 * ub}" font-size="${36 * ub}" ${NUMS} fill="${g.ink}" text-anchor="end">${esc(r[1] || '')}</text>`);
     });
-    const tm = fit(d.team, { max: cw, start: 30 * ub, min: 22 * u, lines: 2, weight: 400, family: 'IBM Plex Mono', lh: 1.3 });
-    const nm = fit(d.name, { max: cw, start: (v === 'photo' ? 84 : 110) * ub, min: 40 * u, lines: 2, height: msTop - 60 * ub - tm.h - contentTop - 100 * ub, ls: -0.02 });
+    const tm = fit(d.team, { max: cw, start: 30 * ub, min: 22 * u, lines: 2, weight: 400, lh: 1.3 });
+    const nm = fit(d.name, { max: cw, start: (v === 'photo' ? 84 : 110) * ub, min: 40 * u, lines: 2, height: msTop - 60 * ub - tm.h - contentTop - 100 * ub, ls: -0.024 });
     let y = msTop - 60 * ub - tm.h - 26 * ub - nm.h;
-    if (d.kicker) parts.push(board(cx, y - 100 * ub, 60 * ub, d.kicker, g.accent, g.onAccent, 28 * ub).svg);
+    eyebrow(d.kicker, cx, y - 40 * ub, 26 * ub);
     semi(nm.lines, cx, y, nm.size, nm.lh); y += nm.h + 26 * ub;
-    parts.push(textBlock(tm.lines, cx, y + tm.size * 0.9, tm.size, tm.lh, `${MONO} fill="${g.lineText}"`));
+    parts.push(textBlock(tm.lines, cx, y + tm.size * 0.9, tm.size, tm.lh, `${REG} fill="${g.dim}"`));
   }
 
   // safe area, for the frames only
-  if (o.guides) parts.push(`<g id="guides"><rect x="${x0}" y="${top}" width="${TW}" height="${y1 - top}" fill="none" stroke="#2F80FF" stroke-width="2" stroke-dasharray="12 8" opacity=".7"/>${o.format === 'story' ? `<rect width="${W}" height="${top}" fill="#2F80FF" opacity=".12"/><rect y="${y1}" width="${W}" height="${H - y1}" fill="#2F80FF" opacity=".12"/>` : ''}</g>`);
+  if (o.guides) parts.push(`<g id="guides"><rect x="${x0}" y="${top}" width="${TW}" height="${y1 - top}" fill="none" stroke="#8497B0" stroke-width="2" stroke-dasharray="12 8"/>${o.format === 'story' ? `<rect width="${W}" height="${top}" fill="#8497B0" opacity=".16"/><rect y="${y1}" width="${W}" height="${H - y1}" fill="#8497B0" opacity=".16"/>` : ''}</g>`);
 
   const style = env.fontCSS ? `<style>${env.fontCSS}</style>` : '';
   const title = { headline: d.headline, carousel: d.headline, figure: `${d.figure}${d.unit} ${d.caption}`, quote: d.quote, photo: d.headline, results: d.title, date: d.title, profile: d.name }[t] || '';
@@ -444,9 +471,9 @@ export async function loadLogos(base) {
   return out;
 }
 
-// the fonts as data URLs, so an exported SVG or PNG renders the same anywhere
+// the fonts as data URLs, so an exported SVG or PNG renders the same anywhere: Sora only
 export async function fontCSS(base) {
-  const faces = [['Sora', '300 700', 'sora-latin'], ['Sora', '300 700', 'sora-latin-ext'], ['IBM Plex Mono', 400, 'ibm-plex-mono-400-latin'], ['IBM Plex Mono', 400, 'ibm-plex-mono-400-latin-ext'], ['IBM Plex Mono', 500, 'ibm-plex-mono-500-latin'], ['IBM Plex Mono', 500, 'ibm-plex-mono-500-latin-ext']];
+  const faces = [['Sora', '300 700', 'sora-latin'], ['Sora', '300 700', 'sora-latin-ext']];
   const css = await Promise.all(faces.map(async ([fam, w, f]) => {
     const buf = new Uint8Array(await (await fetch(`${base}${f}.woff2`)).arrayBuffer()); let bin = '';
     for (let i = 0; i < buf.length; i += 0x8000) bin += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
