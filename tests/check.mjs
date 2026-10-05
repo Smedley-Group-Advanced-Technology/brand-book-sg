@@ -139,8 +139,9 @@ for (const name of BROWSERS) {
     await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += innerHeight) { scrollTo(0, y); await new Promise(r => setTimeout(r, 40)); } scrollTo(0, 0); });
     await page.waitForTimeout(800);
 
-    const got = await page.evaluate(() => document.documentElement.dataset.theme);
-    got === theme ? ok(`${where} theme follows the system`) : W(where, `theme is ${got}, expected ${theme}`);
+    // the book is light until the reader picks dark, whatever the system prefers
+    const got = await page.evaluate(() => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+    got === 'light' ? ok(`${where} the book starts light`) : W(where, `theme is ${got}, expected light`);
 
     const sw = await page.evaluate(() => [document.documentElement.scrollWidth, innerWidth]);
     sw[0] <= sw[1] ? ok(`${where} no horizontal overflow`) : W(where, `page is ${sw[0]} px wide in a ${sw[1]} px viewport`);
