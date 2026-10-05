@@ -101,6 +101,7 @@ The library applies these for you through the `--sg-*` tokens in `assets/tokens.
 | Secondary text | Slate #333F50 | Cloud #D6DCE5 |
 | Quiet text and labels | Steel #44546A | Mist #8497B0 |
 | Hairline | Black at 14 % (about #CECECE) | Pale Blue at 28 % |
+| Quiet tint (current item, chips, hovers, tracks) | Canvas #F0F0F0 | Pale Blue at 14 % |
 | Field | White with a Steel edge | 4 % white with a Pale Blue edge |
 | Accent (focus, references) | Steel #44546A | Pale Blue #ABC0E4 |
 | Selected (primary, checked, current) | the signature surface, white type | Pale Blue, black type |
@@ -164,6 +165,17 @@ The full rules and templates are in `references/layouts.md`. The essentials:
 - **No more than four columns.** Nothing but full-bleed imagery and the strapline touches the edge.
 - Keep the logo's clear space (the cap height of the wordmark on every side), its size and its corner steady within
   one product. The logo is monochrome: ink on white, white on dark. Never recolour it, box it or separate the glyph.
+- **The logo is the drawn asset, never redrawn.** Use `assets/logo/*.svg` (or `BrandLogo`). If the glyph has to be
+  drawn in code (a loader, a progress gauge, an animation), copy the three bars exactly as they are in the asset
+  (`21.31 2.59 48.89 41.71`, `6.71 12.79 47.59 71.21`, `5.51 42.39 32.89 81.41`, stroke 14.2, square ends): no
+  approximate coordinates, no rounded caps, no lengthened or shortened bars. To draw a bar on, give each line
+  `pathLength="1"` and animate `stroke-dashoffset` from 1 to 0; a shared dash length cuts the long bar short.
+- **The page shell** (the component library and the brand book share it): a top bar that runs edge to edge, 72 px
+  (60 on phones), the white ground and a hairline at its foot; its contents keep the page's container and gutters,
+  so the lockup lines up with the sidebar and content below. On the right a quiet label, the theme switch and, on
+  phones, the menu. Under it a sidebar about 220 px wide: the search field, then the chapters with small tracked
+  uppercase group labels, the current one in the quiet tint and SemiBold, all inside a `ScrollArea`. No chapter
+  or section numbers.
 - A 16 px side gutter on phones, no sideways scrolling, targets at least 44 px.
 
 ## 7. Controls
@@ -176,6 +188,9 @@ Use the library's components, chosen with the table in `references/library.md`. 
 - Fields are white, rounded, with a Steel edge and a SemiBold label above. Focus turns the edge ink and adds a Pale
   Blue halo; an error turns the edge and the message negative.
 - Checked, pressed and current states take the selected fill. Focus rings are 2 px in the accent.
+- Anything that scrolls inside the page (a sidebar, a long menu, a panel) is a `ScrollArea`: native scrolling with a
+  thin rounded overlay thumb that shows on hover or scroll and fades, never a browser scrollbar. Its styles are part
+  of `assets/ui.css` (`.sg-scroll`, `.sg-scroll-viewport`, `.sg-scroll-bar`, `.sg-scroll-thumb`).
 
 ## 8. Icons
 
@@ -194,6 +209,8 @@ Every icon comes from the icon library (catalogue in `references/icons.md`; `Ico
 - A press scales the control to 98 % for 80 ms. The primary action's hover gradient fades in over its resting one in 0.45 s; nothing moves. Nothing else has hover choreography.
 - Window and drag motion has exact values in `references/ux.md` Part C.
 - One moment per view. No loops outside loaders (the logo's three bars, the gliding progress segment).
+- The cover's moment is the lockup drawing itself, flat, ink on white (white on dark), large and centred, with no
+  tile, box or glow: the bars in turn, the group name, the divider from its centre, the division, then stillness.
 - With reduced motion, show the end state at once. The library already does for its own components.
 
 ## 10. Words

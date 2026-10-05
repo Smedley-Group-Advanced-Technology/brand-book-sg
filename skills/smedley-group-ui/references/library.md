@@ -397,7 +397,9 @@ as a `ul` of `li`.
 
 **ScrollArea** `orientation?: "vertical" | "horizontal" | "both"`, `type?: "hover" | "scroll" | "always"`,
 `label?` (makes it a focusable region; pass it when the content is not otherwise reachable by keyboard), and
-a size through `style` or `className` (for example `style={{ height: 320 }}`).
+a size through `style` or `className` (for example `style={{ height: 320 }}`). The bar's look comes from the
+brand book's `ui.css` (`.sg-scroll*`); the component measures, fades and drags it. Use it for anything that scrolls
+inside the page, never a browser scrollbar.
 
 **AppShell** `title`, `actions?`, `navigation`, children: a phone app frame. **BrowserFrame** and
 **EmailPreview** are for showing designs inside the catalogue, not for product screens.

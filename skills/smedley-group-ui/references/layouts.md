@@ -25,6 +25,20 @@ narrow as 260 px. So an app is laid out by **the width of its own window**:
 Nothing scrolls sideways except inside a `Table`, a chart that says so, or a
 `ScrollArea orientation="horizontal"`.
 
+## The page shell
+
+Pages outside the desk (the component library, the brand book, settings pages) share one shell:
+
+| Part | Rule |
+|---|---|
+| Top bar | Sticky, edge to edge, 72 px (60 on phones), the white ground, a hairline at its foot. Its contents keep the page's container width and gutters, so the lockup lines up with the sidebar and content below |
+| Lockup | Left in the bar, about 40 px high (34 on phones), linking back to the top |
+| Bar tools | Right: a quiet 12 px label, the theme switch, and on phones the menu button |
+| Progress | Optional: a 2 px ink line along the bar's foot, for long reading pages |
+| Sidebar | About 220 px, sticky under the bar: the search field (40 px), then the chapters in a `ScrollArea` |
+| Chapter list | Small tracked uppercase group labels (11 px SemiBold, Steel); items 13 px, 32 px tall, 8 px radius; the current one in the quiet tint and SemiBold; no numbers |
+| Phones | The sidebar opens as a full panel under the bar from the menu button; items grow to 44 px |
+
 ## The measurements
 
 Use only these.

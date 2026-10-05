@@ -128,6 +128,18 @@ Fields are white (4 % white on dark) with a Steel edge, 8 px corners and a SemiB
 - `.sg-surface` applies the signature surface (the 45 degree gradient from #000 to #222A35) inside its 1 px edge
   light. Add `.sg-dark` so the contents take the dark theme.
 
+## Scroll area
+
+Native scrolling with a thin overlay thumb. The book's script (or the library's `ScrollArea`) writes
+`--sa-y-size` and `--sa-y-pos`, sets `data-state="visible"` on hover or scroll and back to `hidden` after a moment.
+
+```html
+<div class="sg-scroll" data-state="hidden" style="height:320px">
+  <div class="sg-scroll-viewport" data-axes="vertical">…content…</div>
+  <div class="sg-scroll-bar sg-scroll-y" aria-hidden="true"><div class="sg-scroll-thumb"></div></div>
+</div>
+```
+
 ## Focus and accessibility
 
 - Focus is a 2 px outline in the accent (Steel on light, Pale Blue on dark), 2 px out. Inputs turn their edge ink and
